@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="hi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>हमारे बारे में - भक्ति अमृत</title>
+    <meta
+      name="description"
+      content="भक्ति अमृत का उद्देश्य सरल हिंदी में विश्वसनीय भक्ति सामग्री देना है। हमारे मिशन, सामग्री और दृष्टि के बारे में जानें।"
+    />
+    <link rel="canonical" href="https://bhaktiamrit.com/html/about.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Bhakti Amrit" />
+    <meta property="og:locale" content="hi_IN" />
+    <meta property="og:title" content="हमारे बारे में - भक्ति अमृत" />
+    <meta
+      property="og:description"
+      content="भक्ति अमृत का मिशन: आरती, चालीसा, मंत्र और कथा को आधुनिक पाठकों के लिए सरल बनाना।"
+    />
+    <meta property="og:url" content="https://bhaktiamrit.com/html/about.html" />
+    <meta property="og:image" content="https://bhaktiamrit.com/icons/logo.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="हमारे बारे में - भक्ति अमृत" />
+    <meta
+      name="twitter:description"
+      content="भक्ति अमृत का मिशन और हमारी सामग्री दृष्टि।"
+    />
+    <meta
+      name="twitter:image"
+      content="https://bhaktiamrit.com/icons/logo.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="../icons/favicon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../icons/favicon.png"
+    />
+    <link rel="shortcut icon" href="../icons/favicon.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:ital@0;1&family=Cinzel+Decorative:wght@400;700;900&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <script src="../js/theme.js"></script>
+    <link rel="stylesheet" href="../css/styles.css" />
+    <style>
+      .about-page {
+        max-width: 1080px;
+        margin: 0 auto;
+        display: grid;
+        gap: 16px;
+      }
+
+      .about-hero {
+        border: 1px solid rgba(var(--gold-rgb), 0.32);
+        border-radius: 22px;
+        background: linear-gradient(
+          145deg,
+          rgba(var(--dark-rgb), 0.86),
+          rgba(var(--maroon-rgb), 0.66)
+        );
+        padding: clamp(20px, 4vw, 36px);
+        box-shadow: 0 18px 34px rgba(var(--shadow-rgb), 0.35);
+      }
+
+      .about-eyebrow {
+        display: inline-block;
+        color: var(--gold);
+        font-size: 0.8rem;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+      }
+
+      .about-hero h2 {
+        font-size: clamp(1.4rem, 4vw, 2.4rem);
+        color: var(--cream);
+        line-height: 1.28;
+      }
+
+      .about-hero p {
+        margin-top: 12px;
+        color: rgba(var(--cream-rgb), 0.9);
+        line-height: 1.8;
+      }
+
+      .about-metrics {
+        margin-top: 18px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+        gap: 10px;
+      }
+
+      .about-metric {
+        border: 1px solid rgba(var(--cream-rgb), 0.2);
+        border-radius: 12px;
+        background: rgba(var(--cream-rgb), 0.06);
+        padding: 12px;
+      }
+
+      .about-metric strong {
+        display: block;
+        color: var(--gold);
+        font-size: 1.04rem;
+      }
+
+      .about-metric span {
+        color: rgba(var(--cream-rgb), 0.82);
+        font-size: 0.9rem;
+      }
+
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        gap: 12px;
+      }
+
+      .about-card {
+        border: 1px solid rgba(var(--gold-rgb), 0.3);
+        border-radius: 18px;
+        background: rgba(var(--dark-rgb), 0.72);
+        padding: 18px;
+      }
+
+      .about-card h3 {
+        color: var(--cream);
+        font-size: clamp(1.08rem, 2.8vw, 1.4rem);
+      }
+
+      .about-card p {
+        margin-top: 10px;
+        color: rgba(var(--cream-rgb), 0.86);
+        line-height: 1.75;
+      }
+
+      .about-points {
+        margin-top: 12px;
+        display: grid;
+        gap: 8px;
+      }
+
+      .about-point {
+        border: 1px solid rgba(var(--saffron-light-rgb), 0.28);
+        background: rgba(var(--saffron-rgb), 0.08);
+        border-radius: 12px;
+        padding: 10px;
+      }
+
+      .about-point strong {
+        color: var(--saffron-light);
+        display: block;
+        margin-bottom: 4px;
+      }
+
+      .about-point span {
+        color: rgba(var(--cream-rgb), 0.84);
+        font-size: 0.92rem;
+      }
+
+      .about-actions {
+        margin-top: 14px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .about-btn {
+        text-decoration: none;
+        padding: 9px 14px;
+        border-radius: 999px;
+        font-size: 0.9rem;
+        font-weight: 700;
+      }
+
+      .about-btn-primary {
+        color: var(--text);
+        background: var(--action-gradient);
+      }
+
+      .about-btn-secondary {
+        color: var(--cream);
+        border: 1px solid rgba(var(--cream-rgb), 0.36);
+        background: rgba(var(--cream-rgb), 0.08);
+      }
+
+      @media (max-width: 840px) {
+        .about-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="siteHeaderMount"></div>
+    <script src="../js/header.js"></script>
+
+    <main class="main-container">
+      <section class="about-page">
+        <article class="about-hero">
+          <span class="about-eyebrow">About Bhakti Amrit</span>
+          <h2>आधुनिक भक्तों के लिए सरल, स्पष्ट और विश्वसनीय भक्ति अनुभव</h2>
+          <p>
+            भक्ति अमृत का उद्देश्य पारंपरिक आध्यात्मिक सामग्री को डिजिटल रूप में
+            इस तरह प्रस्तुत करना है कि हर उम्र का उपयोगकर्ता इसे सहजता से पढ़,
+            समझ और अपनी दैनिक साधना में शामिल कर सके।
+          </p>
+
+          <div class="about-metrics">
+            <div class="about-metric">
+              <strong>एक मंच</strong>
+              <span>आरती, चालीसा, मंत्र, कथा और देव परिचय</span>
+            </div>
+            <div class="about-metric">
+              <strong>सरल उपयोग</strong>
+              <span>तेज नेविगेशन और स्पष्ट प्रस्तुति</span>
+            </div>
+            <div class="about-metric">
+              <strong>भक्ति केंद्रित</strong>
+              <span>अनावश्यक जटिलता से मुक्त अनुभव</span>
+            </div>
+          </div>
+        </article>
+
+        <div class="about-grid">
+          <article class="about-card">
+            <h3>हमारा मिशन</h3>
+            <p>
+              हमारा फोकस एक ऐसे मंच पर है जहां भक्तों को विश्वसनीय सामग्री और
+              अच्छा उपयोग अनुभव दोनों मिलें। हम आध्यात्मिक गहराई को बनाए रखते
+              हुए सामग्री को व्यवस्थित और सुलभ बनाते हैं।
+            </p>
+
+            <div class="about-points">
+              <div class="about-point">
+                <strong>सटीकता</strong>
+                <span>शुद्ध, सुव्यवस्थित और पढ़ने में सरल सामग्री।</span>
+              </div>
+              <div class="about-point">
+                <strong>दैनिक साधना अनुकूल</strong>
+                <span>सुबह-शाम के पाठ के लिए त्वरित उपयोग।</span>
+              </div>
+              <div class="about-point">
+                <strong>सुलभता</strong>
+                <span>मोबाइल और डेस्कटॉप दोनों पर संतुलित अनुभव।</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="about-card">
+            <h3>हमारे मूल्य</h3>
+            <p>
+              श्रद्धा, सरलता और विश्वसनीयता हमारे हर निर्णय का आधार हैं। हम
+              मानते हैं कि अच्छा आध्यात्मिक मंच वही है जो ध्यान भटकाए नहीं,
+              बल्कि साधना को केंद्र में रखे।
+            </p>
+
+            <div class="about-actions">
+              <a class="about-btn about-btn-primary" href="contact.html"
+                >सुझाव भेजें</a
+              >
+              <a class="about-btn about-btn-secondary" href="../index.html"
+                >मुख्य पृष्ठ</a
+              >
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <div id="siteFooterMount" data-footer-path="sub"></div>
+    <script src="../js/footer.js"></script>
+  </body>
+</html>

@@ -1,0 +1,63 @@
+{
+    "rewrites": [
+        {
+            "source": "/lander",
+            "destination": "/index.html"
+        },
+        {
+            "source": "/temples",
+            "destination": "/index.html"
+        },
+        {
+            "source": "/temples/:slug",
+            "destination": "/index.html"
+        },
+        {
+            "source": "/festivals",
+            "destination": "/index.html"
+        },
+        {
+            "source": "/festivals/:slug",
+            "destination": "/index.html"
+        },
+        {
+            "source": "/:deity/css/:path*",
+            "destination": "/css/:path*"
+        },
+        {
+            "source": "/:deity/js/:path*",
+            "destination": "/js/:path*"
+        },
+        {
+            "source": "/:deity/icons/:path*",
+            "destination": "/icons/:path*"
+        },
+        {
+            "source": "/:deity/:tab/css/:path*",
+            "destination": "/css/:path*"
+        },
+        {
+            "source": "/:deity/:tab/js/:path*",
+            "destination": "/js/:path*"
+        },
+        {
+            "source": "/:deity/:tab/icons/:path*",
+            "destination": "/icons/:path*"
+        },
+        {
+            "source": "/:deity/:tab/:slug",
+            "destination": "/index.html"
+        },
+        {
+            "source": "/:deity/:tab",
+            "destination": "/index.html"
+        }
+    ],
+    "redirects": [
+        {
+            "source": "/index.html",
+            "destination": "/",
+            "permanent": true
+        }
+    ]
+}

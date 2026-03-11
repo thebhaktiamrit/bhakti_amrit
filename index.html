@@ -1,0 +1,594 @@
+<!doctype html>
+<html lang="hi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>भक्ति अमृत - Bhakti Amrit</title>
+    <meta
+      name="description"
+      content="भक्ति अमृत पर देवी-देवताओं की आरती, चालीसा, मंत्र, कथा और प्रसिद्ध मंदिर एक ही स्थान पर पढ़ें। सरल हिंदी में विश्वसनीय भक्ति सामग्री।"
+    />
+    <link rel="canonical" href="https://bhaktiamrit.com/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Bhakti Amrit" />
+    <meta property="og:locale" content="hi_IN" />
+    <meta property="og:title" content="भक्ति अमृत - Bhakti Amrit" />
+    <meta
+      property="og:description"
+      content="देवी-देवताओं की आरती, चालीसा, मंत्र, कथा और प्रसिद्ध मंदिर की जानकारी सरल हिंदी में।"
+    />
+    <meta property="og:url" content="https://bhaktiamrit.com/" />
+    <meta
+      property="og:image"
+      content="https://bhaktiamrit.com/icons/logo.png"
+    />
+    <meta property="og:image:width" content="500" />
+    <meta property="og:image:height" content="500" />
+    <meta property="og:image:alt" content="Bhakti Amrit Logo" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="भक्ति अमृत - Bhakti Amrit" />
+    <meta
+      name="twitter:description"
+      content="देवी-देवताओं की आरती, चालीसा, मंत्र, कथा और प्रसिद्ध मंदिर की जानकारी।"
+    />
+    <meta
+      name="twitter:image"
+      content="https://bhaktiamrit.com/icons/logo.png"
+    />
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon.png" />
+    <link rel="shortcut icon" href="icons/favicon.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:ital@0;1&family=Cinzel+Decorative:wght@400;700;900&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <script src="js/theme.js"></script>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+
+  <body>
+    <!-- Loader -->
+    <div class="loader" id="loader">
+      <div class="loader-om">
+        <img class="loader-logo" src="icons/logo.png" alt="Bhakti Amrit logo" />
+      </div>
+      <div class="loader-text">भक्ति अमृत में आपका स्वागत है...</div>
+    </div>
+
+    <!-- Mandala SVG -->
+    <svg
+      class="mandala-bg"
+      viewBox="0 0 400 400"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <circle class="mandala-stroke-primary" cx="200" cy="200" r="190" stroke-width="1" />
+      <circle class="mandala-stroke-primary" cx="200" cy="200" r="160" stroke-width="0.5" />
+      <circle class="mandala-stroke-secondary" cx="200" cy="200" r="130" stroke-width="0.5" />
+      <circle class="mandala-stroke-primary" cx="200" cy="200" r="100" stroke-width="1" />
+      <circle class="mandala-stroke-primary" cx="200" cy="200" r="70" stroke-width="0.5" />
+      <circle class="mandala-stroke-secondary" cx="200" cy="200" r="40" stroke-width="1" />
+      <line
+        class="mandala-stroke-primary"
+        x1="10"
+        y1="200"
+        x2="390"
+        y2="200"
+        stroke-width="0.5"
+      />
+      <line
+        class="mandala-stroke-primary"
+        x1="200"
+        y1="10"
+        x2="200"
+        y2="390"
+        stroke-width="0.5"
+      />
+      <line
+        class="mandala-stroke-primary"
+        x1="55"
+        y1="55"
+        x2="345"
+        y2="345"
+        stroke-width="0.3"
+      />
+      <line
+        class="mandala-stroke-primary"
+        x1="345"
+        y1="55"
+        x2="55"
+        y2="345"
+        stroke-width="0.3"
+      />
+      <polygon
+        class="mandala-stroke-secondary"
+        points="200,20 230,180 380,200 230,220 200,380 170,220 20,200 170,180"
+        stroke-width="0.5"
+        fill="none"
+      />
+      <polygon
+        class="mandala-stroke-primary"
+        points="200,50 225,175 350,200 225,225 200,350 175,225 50,200 175,175"
+        stroke-width="0.3"
+        fill="none"
+      />
+    </svg>
+
+    <!-- Floating particles -->
+    <div id="particles"></div>
+
+    <div id="siteHeaderMount"></div>
+    <script src="js/header.js"></script>
+
+    <nav id="mainNav">
+      <button
+        id="mainHomeButton"
+        class="nav-btn nav-btn-home active"
+        onclick="showHomeByType('all', 'home')"
+        data-page="home"
+      >
+        <span class="nav-icon-emoji">🏠</span> मुख्य पृष्ठ
+      </button>
+      <div class="nav-primary" id="navInner">
+        <button
+          class="nav-btn"
+          onclick="showHomeByType('देव', 'type-dev')"
+          data-page="type-dev"
+        >
+          <span class="nav-icon-emoji">🕉️</span> देव
+        </button>
+        <button
+          class="nav-btn"
+          onclick="showHomeByType('देवी', 'type-devi')"
+          data-page="type-devi"
+        >
+          <span class="nav-icon-emoji">🌺</span> देवी
+        </button>
+        <div class="nav-overflow" id="navOverflow">
+          <button
+            id="navMoreButton"
+            class="nav-btn nav-more-btn"
+            type="button"
+            aria-label="More menu"
+            aria-controls="navMoreMenu"
+            aria-expanded="false"
+          >
+            <span class="nav-more-icon" aria-hidden="true">
+              <span></span>
+              <span></span>
+              <span></span>
+            </span>
+            <span class="sr-only">More menu</span>
+          </button>
+          <div class="nav-overflow-menu" id="navMoreMenu">
+            <button
+              class="nav-btn"
+              onclick="showHomeByType('अवतार', 'type-avatar')"
+              data-page="type-avatar"
+            >
+              <span class="nav-icon-emoji">🏹</span> अवतार
+            </button>
+            <button
+              class="nav-btn"
+              onclick="showHomeByType('ग्रह देव', 'type-grah-dev')"
+              data-page="type-grah-dev"
+            >
+              <span class="nav-icon-emoji">🪐</span> ग्रह देव
+            </button>
+            <button
+              class="nav-btn"
+              onclick="showHomeByType('लोक देव', 'type-lok-dev')"
+              data-page="type-lok-dev"
+            >
+              <span class="nav-icon-emoji">🎠</span> लोक देव
+            </button>
+            <button
+              class="nav-btn"
+              onclick="showTemplesMenuPage()"
+              data-page="temples"
+            >
+              <span class="nav-icon-emoji">🛕</span> प्रसिद्ध मंदिर
+            </button>
+            <button
+              class="nav-btn"
+              onclick="showFestivalsMenuPage()"
+              data-page="festivals"
+            >
+              <span class="nav-icon-emoji">🎉</span> प्रसिद्ध त्योहार
+            </button>
+            <button
+              class="nav-btn"
+              onclick="showScripturesMenuPage()"
+              data-page="scriptures"
+            >
+              <span class="nav-icon-emoji">📚</span> प्रसिद्ध धर्मग्रन्थ
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="main-container">
+      <!-- HOME PAGE -->
+      <div id="page-home" class="page active">
+        <div class="home-title-row">
+          <div class="section-title">
+            <span class="diya" id="homeSectionIcon" aria-hidden="true">🪔</span>
+            <span id="homeSectionTitleText">देव-देवी संग्रह</span>
+          </div>
+        </div>
+        <div class="home-hero-row">
+          <div class="section-subtitle" id="homeSectionSubtitle">
+            किसी भी देव-देवी का नाम चुनें और उनकी आरती, चालीसा व मंत्र पढ़ें
+          </div>
+          <div class="home-search-wrap">
+            <div class="home-search-controls">
+              <div class="home-search-input-wrap">
+                <span class="home-search-icon" aria-hidden="true">🔎</span>
+                <input
+                  id="homeSearchInput"
+                  class="home-search-input"
+                  type="search"
+                  placeholder="देवता का नाम लिखें..."
+                  autocomplete="off"
+                />
+                <button
+                  id="homeSearchClear"
+                  class="home-search-clear"
+                  type="button"
+                  aria-label="Clear search"
+                  title="Clear search"
+                >
+                  ✕
+                </button>
+              </div>
+              <div
+                class="home-view-toggle"
+                id="homeViewToggle"
+                role="group"
+                aria-label="Choose home layout"
+              >
+                <button
+                  id="homeViewCardBtn"
+                  class="home-view-btn active"
+                  type="button"
+                  aria-pressed="true"
+                  title="Card view"
+                >
+                  कार्ड
+                </button>
+                <button
+                  id="homeViewTableBtn"
+                  class="home-view-btn"
+                  type="button"
+                  aria-pressed="false"
+                  title="Table view"
+                >
+                  टेबल
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="home-grid" id="homeGrid"></div>
+      </div>
+
+      <!-- DEITY PAGES (generated dynamically) -->
+      <div id="page-deity" class="page">
+        <button
+          id="deityBackButton"
+          class="back-btn"
+          onclick="showHomeByType(activeHomeType, activeHomeNavId)"
+        >
+          ← वापस जाएं
+        </button>
+        <div class="content-header" id="deityHeader"></div>
+        <div class="tabs" id="deityTabs"></div>
+        <div id="deityContent"></div>
+      </div>
+
+      <!-- TEMPLES PAGE -->
+      <div id="page-temples" class="page">
+        <div class="temples-header">
+          <div class="section-title">
+            <span class="diya">🛕</span> प्रसिद्ध हिंदू मंदिर
+          </div>
+          <div class="section-subtitle">
+            भारत के प्रसिद्ध तीर्थ स्थल — मानचित्र पर देखें और जानिए विस्तार से
+          </div>
+          <div class="temple-controls">
+            <div class="temple-filters" id="templeFilters"></div>
+            <div class="home-search-wrap temple-search-wrap">
+              <div class="home-search-controls temple-search-controls">
+                <div class="home-search-input-wrap">
+                  <span class="home-search-icon" aria-hidden="true">🔎</span>
+                  <input
+                    id="templeSearchInput"
+                    class="home-search-input"
+                    type="search"
+                    placeholder="मंदिर, देवता, स्थान या प्रकार खोजें..."
+                    autocomplete="off"
+                  />
+                  <button
+                    id="templeSearchClear"
+                    class="home-search-clear"
+                    type="button"
+                    aria-label="Clear temple search"
+                    title="Clear temple search"
+                  >
+                    ✕
+                  </button>
+                </div>
+                <div
+                  class="home-view-toggle"
+                  id="templeViewToggle"
+                  role="group"
+                  aria-label="Choose temple layout"
+                >
+                  <button
+                    id="templeViewCardBtn"
+                    class="home-view-btn active"
+                    type="button"
+                    aria-pressed="true"
+                    title="Card view"
+                  >
+                    कार्ड
+                  </button>
+                  <button
+                    id="templeViewTableBtn"
+                    class="home-view-btn"
+                    type="button"
+                    aria-pressed="false"
+                    title="Table view"
+                  >
+                    टेबल
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="temples-grid" id="templesGrid"></div>
+      </div>
+
+      <!-- TEMPLE DETAIL PAGE -->
+      <div id="page-temple-detail" class="page">
+        <div class="temple-detail-shell">
+          <div class="temple-modal-header" id="templeDetailHeader"></div>
+          <div class="temple-modal-body temple-detail-body">
+            <div class="temple-modal-info" id="templeDetailInfo"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FESTIVALS PAGE -->
+      <div id="page-festivals" class="page">
+        <div class="temples-header">
+          <div class="section-title">
+            <span class="diya">🎉</span> प्रसिद्ध हिंदू त्योहार
+          </div>
+          <div class="section-subtitle">
+            प्रमुख पर्व, उनका महत्व और मुख्य अनुष्ठान
+          </div>
+          <div class="temple-filters" id="festivalFilters"></div>
+        </div>
+        <div class="temples-grid" id="festivalsGrid"></div>
+      </div>
+
+      <!-- FESTIVAL DETAIL PAGE -->
+      <div id="page-festival-detail" class="page">
+        <div class="temple-detail-shell">
+          <div class="temple-modal-header" id="festivalDetailHeader"></div>
+          <div class="temple-modal-body temple-detail-body">
+            <div class="temple-modal-info" id="festivalDetailInfo"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SCRIPTURES PAGE -->
+      <div id="page-scriptures" class="page">
+        <div class="temples-header">
+          <div class="section-title">
+            <span class="diya">📚</span> प्रसिद्ध धर्मग्रन्थ
+          </div>
+          <div class="section-subtitle">
+            वैदिक और सनातन परंपरा के प्रमुख ग्रंथों का संक्षिप्त परिचय
+          </div>
+        </div>
+        <div class="temples-grid" id="scripturesGrid"></div>
+      </div>
+
+      <!-- SCRIPTURE DETAIL PAGE -->
+      <div id="page-scripture-detail" class="page">
+        <div class="temple-detail-shell">
+          <div class="temple-modal-header" id="scriptureDetailHeader"></div>
+          <div class="temple-modal-body temple-detail-body">
+            <div class="temple-modal-info" id="scriptureDetailInfo"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Temple Map Modal -->
+    <div
+      id="templeMapModal"
+      class="temple-modal-overlay"
+      onclick="closeTempleModal(event)"
+    >
+      <div class="temple-modal">
+        <button class="temple-modal-close" onclick="closeTempleModal()">
+          ✕
+        </button>
+        <div class="temple-modal-header" id="templeModalHeader"></div>
+        <div class="temple-modal-body">
+          <div class="temple-modal-info" id="templeModalInfo"></div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      id="readingModeDialog"
+      class="reading-mode-overlay"
+      onclick="closeReadingMode(event)"
+    >
+      <div class="reading-mode-dialog">
+        <button
+          class="reading-mode-close"
+          type="button"
+          onclick="closeReadingMode()"
+          aria-label="पठन मोड बंद करें"
+          title="पठन मोड बंद करें"
+        >
+          ✕
+        </button>
+        <div class="reading-mode-body" id="readingModeBody"></div>
+      </div>
+    </div>
+
+    <div
+      id="mantraMalaDialog"
+      class="mantra-mala-overlay"
+      onclick="closeMantraMalaDialog(event)"
+      aria-hidden="true"
+    >
+      <div
+        class="mantra-mala-dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="mantraMalaTitle"
+      >
+        <button
+          class="mantra-mala-close"
+          type="button"
+          onclick="closeMantraMalaDialog()"
+          aria-label="जाप माला बंद करें"
+          title="जाप माला बंद करें"
+        >
+          ✕
+        </button>
+        <div class="mantra-mala-shell">
+          <div class="mantra-mala-hero">
+            <div class="mantra-mala-kicker">जाप साधना</div>
+            <h2 id="mantraMalaTitle">जाप माला</h2>
+            <p id="mantraMalaSubtitle"></p>
+            <div class="mantra-mala-meta">
+              <span class="mantra-mala-meta-chip" id="mantraMalaTarget"></span>
+              <span class="mantra-mala-meta-chip" id="mantraMalaProgressMeta"></span>
+            </div>
+          </div>
+          <div class="mantra-mala-body">
+            <div class="mantra-mala-stage">
+              <div class="mantra-mala-orbit-glow" aria-hidden="true"></div>
+              <div class="mantra-mala-track" id="mantraMalaTrack"></div>
+              <div class="mantra-mala-center">
+                <div class="mantra-mala-center-om" aria-hidden="true">ॐ</div>
+                <div class="mantra-mala-center-label">पूर्ण जाप</div>
+                <div class="mantra-mala-center-count" id="mantraMalaCenterCount">
+                  ० / ०
+                </div>
+                <div class="mantra-mala-center-progress" id="mantraMalaPercent">
+                  ०%
+                </div>
+              </div>
+            </div>
+            <div class="mantra-mala-footer">
+              <div
+                class="mantra-mala-status"
+                id="mantraMalaStatus"
+                aria-live="polite"
+              ></div>
+              <button
+                id="mantraMalaIncrementBtn"
+                class="mantra-mala-cta"
+                type="button"
+                onclick="advanceMantraMalaCount()"
+              >
+                एक जाप पूरा करें
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      id="chalisaNavControls"
+      class="chalisa-nav-controls"
+      aria-hidden="true"
+    >
+      <button
+        id="chalisaPrevBtn"
+        class="chalisa-nav-btn chalisa-nav-btn-prev"
+        type="button"
+        onclick="moveChalisaSelection(-1)"
+        aria-label="ऊपर की पंक्ति"
+        title="ऊपर की पंक्ति"
+        disabled
+      >
+        <span class="chalisa-nav-icon" aria-hidden="true">↑</span>
+        <span class="chalisa-nav-label">ऊपर</span>
+      </button>
+      <button
+        id="chalisaNextBtn"
+        class="chalisa-nav-btn chalisa-nav-btn-next"
+        type="button"
+        onclick="moveChalisaSelection(1)"
+        aria-label="नीचे की पंक्ति"
+        title="नीचे की पंक्ति"
+        disabled
+      >
+        <span class="chalisa-nav-icon" aria-hidden="true">↓</span>
+        <span class="chalisa-nav-label">नीचे</span>
+      </button>
+    </div>
+
+    <div id="siteFooterMount" data-footer-path="root"></div>
+    <script src="js/footer.js"></script>
+
+    <div class="accessibility-controls">
+      <button
+        class="quick-nav-btn"
+        type="button"
+        onclick="scrollDirectTop()"
+        data-tooltip="पेज की शुरुआत पर जाएं"
+        title="पेज की शुरुआत पर जाएं"
+        aria-label="पेज की शुरुआत पर जाएं"
+      >
+        ↑
+      </button>
+      <button
+        class="font-size-btn"
+        type="button"
+        onclick="cycleFontSize()"
+        title="पाठ का आकार बदलें"
+        aria-label="पाठ का आकार बदलें"
+      >
+        <span class="font-size-btn-mark" aria-hidden="true">A+</span>
+        <span class="label">अक्षर आकार</span>
+      </button>
+      <button
+        class="quick-nav-btn"
+        type="button"
+        onclick="scrollDirectBottom()"
+        data-tooltip="पेज के अंत में जाएं"
+        title="पेज के अंत में जाएं"
+        aria-label="पेज के अंत में जाएं"
+      >
+        ↓
+      </button>
+    </div>
+
+    <script src="js/about.js"></script>
+    <script src="js/aarti.js"></script>
+    <script src="js/chalisa.js"></script>
+    <script src="js/katha.js"></script>
+    <script src="js/mantra.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/extra-content.js"></script>
+    <script src="js/deity-aliases.js"></script>
+    <script src="js/temples.js"></script>
+    <script src="js/festivals.js"></script>
+    <script src="js/scriptures.js"></script>
+    <script src="js/script.js"></script>
+  </body>
+</html>
