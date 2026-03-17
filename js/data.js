@@ -352,7 +352,6 @@ const deities = {
     desc: 'रेवा माता, पुण्यदायिनी',
     img: 'icons/narmada.webp',
   },
-
   shakambhari: {
     name: 'श्री शाकम्भरी',
     english: 'Shri Shakambhari',
