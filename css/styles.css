@@ -1214,6 +1214,110 @@ body.reduced-effects .deity-card:hover {
   transform: scale(0.95);
 }
 
+/* Print Styles */
+@media print {
+  body.printing-deity-content > *:not(.main-container):not(#page-deity) {
+    display: none !important;
+  }
+  
+  body.printing-deity-content #siteHeaderMount {
+    display: none !important;
+  }
+  
+  body.printing-deity-content #mainNav {
+    display: none !important;
+  }
+  
+  body.printing-deity-content #deityBackButton {
+    display: none !important;
+  }
+  
+  body.printing-deity-content #deityTabs {
+    display: none !important;
+  }
+  
+  body.printing-deity-content .deity-tab-actions {
+    display: none !important;
+  }
+  
+  body.printing-deity-content .deity-favorite-btn {
+    display: none !important;
+  }
+  
+  body.printing-deity-content .tag {
+    display: none !important;
+  }
+  
+  body.printing-deity-content #deityContent {
+    display: block !important;
+  }
+  
+  body.printing-deity-content #deityContent > .text-content:not(.active) {
+    display: none !important;
+  }
+  
+  body.printing-deity-content #deityContent > .text-content.active {
+    display: block !important;
+  }
+  
+  body.printing-deity-content .mandala-bg {
+    display: none !important;
+  }
+  
+  body.printing-deity-content #particles {
+    display: none !important;
+  }
+  
+  body.printing-deity-content .accessibility-controls {
+    display: none !important;
+  }
+  
+  body.printing-deity-content #siteFooterMount {
+    display: none !important;
+  }
+  
+  body.printing-deity-content {
+    background: white !important;
+    color: black !important;
+  }
+  
+  body.printing-deity-content .lyrics-box {
+    background: white !important;
+    color: black !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+  
+  body.printing-deity-content .deity-tab-wrap {
+    background: white !important;
+    color: black !important;
+  }
+  
+  /* Hide copy button in mantra print view */
+  body.printing-deity-content .copy-btn {
+    display: none !important;
+  }
+  
+  /* Hide bell icon in aarti print view */
+  body.printing-deity-content .aarti-bell-icon {
+    display: none !important;
+  }
+  
+  body.printing-deity-content .aarti-floating-bell-wrap {
+    display: none !important;
+  }
+  
+  /* Hide katha selection tabs in print view */
+  body.printing-deity-content .katha-list {
+    display: none !important;
+  }
+  
+  /* Hide bhajan selection tabs in print view */
+  body.printing-deity-content .katha-list {
+    display: none !important;
+  }
+}
+
 
 .deity-img-fallback {
   width: 100%;

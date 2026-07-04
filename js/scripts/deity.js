@@ -287,6 +287,10 @@ function getSectionMetaHtml({
       <span class="section-reading-label">पठन मोड</span>
     </button>`
       : '',
+    `<button class="section-action-btn section-print-btn" type="button" onclick="printDeityContent()" title="प्रिंट करें" aria-label="प्रिंट करें">
+      <span class="section-print-icon" aria-hidden="true">🖨️</span>
+      <span class="section-print-label">प्रिंट</span>
+    </button>`,
   ].filter(Boolean);
   const isSingleControl = controlItems.length === 1;
   const actionsClassName = `deity-tab-actions${
@@ -994,5 +998,15 @@ function copyMantra(btn, idx, key) {
         btn.classList.remove('copied');
       }, 2000);
     });
+}
+
+if (typeof window !== 'undefined') {
+  window.printDeityContent = printDeityContent;
+}
+
+function printDeityContent() {
+  document.body.classList.add('printing-deity-content');
+  window.print();
+  document.body.classList.remove('printing-deity-content');
 }
 
