@@ -235,9 +235,12 @@ if (typeof window !== 'undefined') {
 
 function toggleFavoritesView() {
   showFavoritesOnly = !showFavoritesOnly;
+  // Show all deities like home menu, but highlight favorites button
+  activeHomeNavId = showFavoritesOnly ? 'favorites' : 'home';
+  activeHomeType = 'all';
   syncFavoritesToggle();
   renderHomeGrid(activeHomeType, activeHomeSearchQuery);
-  syncNav(showFavoritesOnly ? 'favorites' : activeHomeNavId);
+  syncNav(activeHomeNavId);
 }
 
 function toggleFavorite(deityKey) {
