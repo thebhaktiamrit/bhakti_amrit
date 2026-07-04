@@ -1185,6 +1185,36 @@ body.reduced-effects .deity-card:hover {
   filter: none;
 }
 
+.deity-favorite-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(var(--dark-rgb), 0.7);
+  border: 1px solid rgba(var(--gold-rgb), 0.3);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 10;
+  backdrop-filter: blur(4px);
+}
+
+.deity-favorite-btn:hover {
+  background: rgba(var(--gold-rgb), 0.3);
+  border-color: var(--gold);
+  transform: scale(1.1);
+}
+
+.deity-favorite-btn:active {
+  transform: scale(0.95);
+}
+
+
 .deity-img-fallback {
   width: 100%;
   aspect-ratio: 1 / 1;

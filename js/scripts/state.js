@@ -80,6 +80,7 @@ let activeExtraIndex = 0;
 let activeTempleDetailId = '';
 let activeFestivalDetailId = '';
 let activeScriptureDetailId = '';
+let showFavoritesOnly = false;
 const HOME_BATCH_SIZE = 60;
 const HOME_VISIBLE_TAG_COUNT = 4;
 const HOME_CARD_IMG_SIZE = 240;
@@ -87,6 +88,7 @@ const HOME_TABLE_IMG_SIZE = 64;
 const HOME_VIEW_MODE_STORAGE_KEY = 'bhaktiHomeViewMode';
 const TEMPLE_VIEW_MODE_STORAGE_KEY = 'bhaktiTempleViewMode';
 const MANTRA_PROGRESS_STORAGE_KEY = 'bhaktiMantraJapProgress';
+const FAVORITE_DEITIES_STORAGE_KEY = 'bhaktiFavoriteDeities';
 const MOBILE_NAV_BREAKPOINT = 600;
 const COMPACT_NAV_BREAKPOINT = 1180;
 const WIDE_TABLET_NAV_BREAKPOINT = 768;
@@ -857,5 +859,43 @@ function applyUrlState() {
   }
 
   showHomeByType(typeId, navId, { skipUrl: true });
+}
+
+function loadFavoriteDeities() {
+  try {
+    const saved = localStorage.getItem(FAVORITE_DEITIES_STORAGE_KEY);
+    return saved ? JSON.parse(saved) : [];
+  } catch (error) {
+    return [];
+  }
+}
+
+function saveFavoriteDeities(favorites) {
+  try {
+    localStorage.setItem(FAVORITE_DEITIES_STORAGE_KEY, JSON.stringify(favorites));
+  } catch (error) {
+    // Ignore storage errors
+  }
+}
+
+function isDeityFavorite(deityKey) {
+  const favorites = loadFavoriteDeities();
+  return favorites.includes(deityKey);
+}
+
+function toggleDeityFavorite(deityKey) {
+  const favorites = loadFavoriteDeities();
+  const index = favorites.indexOf(deityKey);
+  if (index > -1) {
+    favorites.splice(index, 1);
+  } else {
+    favorites.push(deityKey);
+  }
+  saveFavoriteDeities(favorites);
+  return favorites.includes(deityKey);
+}
+
+function getFavoriteDeities() {
+  return loadFavoriteDeities();
 }
 

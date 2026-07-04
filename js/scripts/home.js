@@ -138,8 +138,10 @@ function setupTempleViewToggle() {
 
 function getFilteredHomeDeities(filter = activeHomeType, searchQuery = '') {
   const normalizedQuery = searchQuery.trim().toLowerCase();
+  const favorites = getFavoriteDeities();
   return Object.entries(deities).filter(
     ([key, deity]) =>
+      (showFavoritesOnly ? favorites.includes(key) : true) &&
       (filter === 'all' ? true : getDeityType(key) === filter) &&
       (!normalizedQuery ||
         `${key} ${deity.name} ${deity.desc} ${getDeityType(key)}`
@@ -227,6 +229,32 @@ function toggleHomeTags(event, key) {
 
 if (typeof window !== 'undefined') {
   window.toggleHomeTags = toggleHomeTags;
+  window.toggleFavorite = toggleFavorite;
+  window.toggleFavoritesView = toggleFavoritesView;
+}
+
+function toggleFavoritesView() {
+  showFavoritesOnly = !showFavoritesOnly;
+  syncFavoritesToggle();
+  renderHomeGrid(activeHomeType, activeHomeSearchQuery);
+  syncNav(showFavoritesOnly ? 'favorites' : activeHomeNavId);
+}
+
+function toggleFavorite(deityKey) {
+  if (!deities[deityKey]) return;
+  const isNowFavorite = toggleDeityFavorite(deityKey);
+  
+  // Update all favorite buttons for this deity
+  document.querySelectorAll(`.deity-favorite-btn[onclick*="'${deityKey}'"]`).forEach(btn => {
+    btn.textContent = isNowFavorite ? '❤️' : '🤍';
+    btn.setAttribute('aria-label', isNowFavorite ? 'Remove from favorites' : 'Add to favorites');
+    btn.setAttribute('title', isNowFavorite ? 'Remove from favorites' : 'Add to favorites');
+  });
+
+  // If in favorites-only mode, re-render the grid
+  if (showFavoritesOnly) {
+    renderHomeGrid(activeHomeType, activeHomeSearchQuery);
+  }
 }
 
 function getHomeCardHtml(key, deity, index) {
@@ -236,6 +264,8 @@ function getHomeCardHtml(key, deity, index) {
   const safeName = escapeHtml(deity?.name || 'श्री देव');
   const safeDesc = escapeHtml(deity?.desc || 'भक्ति सामग्री उपलब्ध');
   const safeEmoji = escapeHtml(deity?.emoji || '🪔');
+  const isFavorite = isDeityFavorite(key);
+  const favoriteIcon = isFavorite ? '❤️' : '🤍';
   const imgHtml = imgSrc
     ? `<img class="deity-img" src="${imgSrc}" alt="${safeName}" loading="${isPriorityImage ? 'eager' : 'lazy'}" fetchpriority="${isPriorityImage ? 'high' : 'low'}" width="${HOME_CARD_IMG_SIZE}" height="${HOME_CARD_IMG_SIZE}" decoding="async" onerror="this.parentNode.querySelector('.deity-img-fallback').style.display='flex'; this.style.display='none';">
      <div class="deity-img-fallback" style="display:none">${safeEmoji}</div>`
@@ -251,6 +281,9 @@ function getHomeCardHtml(key, deity, index) {
       <span class="deity-meta">${safeDesc}</span>
       ${getHomeTagsHtml(key, deity)}
     </div>
+    <button class="deity-favorite-btn" type="button" onclick="event.stopPropagation(); toggleFavorite('${key}')" aria-label="${isFavorite ? 'Remove from favorites' : 'Add to favorites'}" title="${isFavorite ? 'Remove from favorites' : 'Add to favorites'}">
+      ${favoriteIcon}
+    </button>
     </div>`;
 }
 
@@ -261,6 +294,8 @@ function getHomeTableHtml(key, deity, index) {
   const safeName = escapeHtml(deity?.name || 'श्री देव');
   const safeDesc = escapeHtml(deity?.desc || 'भक्ति सामग्री उपलब्ध');
   const safeEmoji = escapeHtml(deity?.emoji || '🪔');
+  const isFavorite = isDeityFavorite(key);
+  const favoriteIcon = isFavorite ? '❤️' : '🤍';
   const imgHtml = imgSrc
     ? `<img class="deity-img" src="${imgSrc}" alt="${safeName}" loading="${isPriorityImage ? 'eager' : 'lazy'}" fetchpriority="${isPriorityImage ? 'high' : 'low'}" width="${HOME_TABLE_IMG_SIZE}" height="${HOME_TABLE_IMG_SIZE}" decoding="async" onerror="this.parentNode.querySelector('.deity-img-fallback').style.display='flex'; this.style.display='none';">
      <div class="deity-img-fallback" style="display:none">${safeEmoji}</div>`
@@ -277,6 +312,9 @@ function getHomeTableHtml(key, deity, index) {
       <span class="deity-meta">${safeDesc}</span>
       ${getHomeTagsHtml(key, deity)}
     </div>
+    <button class="deity-favorite-btn" type="button" onclick="event.stopPropagation(); toggleFavorite('${key}')" aria-label="${isFavorite ? 'Remove from favorites' : 'Add to favorites'}" title="${isFavorite ? 'Remove from favorites' : 'Add to favorites'}">
+      ${favoriteIcon}
+    </button>
     </div>`;
 }
 
@@ -373,6 +411,7 @@ function showHomeByType(typeId = 'all', navId = 'home', options = {}) {
   activeTempleDetailId = '';
   activeFestivalDetailId = '';
   activeScriptureDetailId = '';
+  showFavoritesOnly = false;
   updateHomeSectionHeader(safeType);
   showPage('home', safeNavId);
   const grid = document.getElementById('homeGrid');
@@ -382,6 +421,7 @@ function showHomeByType(typeId = 'all', navId = 'home', options = {}) {
   }
   if (!grid) return;
   applyHomeViewMode(activeHomeViewMode);
+  syncFavoritesToggle();
   if (homeRenderTimer) {
     clearTimeout(homeRenderTimer);
     homeRenderTimer = null;
@@ -438,5 +478,37 @@ function setupHomeSearch() {
       syncClearButton();
       searchInput.focus();
     });
+  }
+}
+
+function syncFavoritesToggle() {
+  const navFavoritesBtn = document.getElementById('navFavoritesBtn');
+  if (!navFavoritesBtn) return;
+  
+  const favoritesIcon = navFavoritesBtn.querySelector('.favorites-nav-icon');
+  const favorites = getFavoriteDeities();
+  
+  if (showFavoritesOnly) {
+    navFavoritesBtn.classList.add('active');
+    navFavoritesBtn.setAttribute('aria-label', 'Show all deities');
+    navFavoritesBtn.setAttribute('title', 'Show all deities');
+    if (favoritesIcon) favoritesIcon.textContent = '❤️';
+  } else {
+    navFavoritesBtn.classList.remove('active');
+    navFavoritesBtn.setAttribute('aria-label', 'Show favorites');
+    navFavoritesBtn.setAttribute('title', 'Show favorites');
+    if (favoritesIcon) favoritesIcon.textContent = favorites.length > 0 ? '❤️' : '🤍';
+  }
+  
+  // Update section header based on favorites mode
+  if (showFavoritesOnly) {
+    const iconEl = document.getElementById('homeSectionIcon');
+    const titleText = document.getElementById('homeSectionTitleText');
+    const subtitleText = document.getElementById('homeSectionSubtitle');
+    if (iconEl) iconEl.textContent = '❤️';
+    if (titleText) titleText.textContent = 'पसंदीदा देव-देवी';
+    if (subtitleText) subtitleText.textContent = 'आपके पसंदीदा देव-देवी की सूची';
+  } else {
+    updateHomeSectionHeader(activeHomeType);
   }
 }
