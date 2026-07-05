@@ -961,6 +961,203 @@ body.reading-mode-open .aarti-floating-bell-wrap {
     transform 0.2s ease;
 }
 
+.home-grid.favorites-page-grid {
+  grid-template-columns: 1fr;
+  align-items: start;
+  gap: 24px;
+}
+
+.home-grid.favorites-page-grid.table-view {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  grid-auto-flow: row;
+  gap: 24px;
+  align-items: start;
+}
+
+.home-grid.favorites-page-grid.table-view .favorites-section {
+  align-self: start;
+  min-width: 0;
+  width: 100%;
+  padding-top: 0;
+  border-top: none;
+}
+
+@media (max-width: 900px) {
+  .home-grid.favorites-page-grid.table-view {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+.home-grid.favorites-page-grid .favorites-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+  padding-top: 18px;
+  border-top: 1px solid rgba(var(--gold-rgb), 0.22);
+}
+
+.home-grid.favorites-page-grid .favorites-section:first-of-type {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.home-grid.favorites-page-grid .favorites-section-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: 4px;
+}
+
+.home-grid.favorites-page-grid .favorites-section-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  align-items: stretch;
+}
+
+.home-grid.favorites-page-grid .favorites-section-grid .deity-card {
+  width: 100%;
+  min-height: 100%;
+}
+
+.home-grid.favorites-page-grid.table-view .favorites-section-grid {
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.home-grid.favorites-page-grid.table-view .favorites-section-grid .deity-card {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr);
+  align-items: center;
+  min-height: 78px;
+  border-radius: 12px;
+}
+
+.home-grid.favorites-page-grid.table-view
+  .favorites-section-grid
+  .deity-card:hover {
+  transform: translateY(-2px) scale(1.002);
+}
+
+.home-grid.favorites-page-grid.table-view .favorites-section-grid .deity-img,
+.home-grid.favorites-page-grid.table-view
+  .favorites-section-grid
+  .deity-img-fallback {
+  width: 64px;
+  min-width: 64px;
+  height: 64px;
+  aspect-ratio: 1 / 1;
+  border-radius: 10px;
+  margin-left: 7px;
+  filter: none;
+}
+
+.home-grid.favorites-page-grid.table-view .favorites-section-grid .deity-info {
+  width: 100%;
+  padding: 8px 10px 8px 16px;
+  background: transparent;
+}
+
+.home-grid.favorites-page-grid.table-view
+  .favorites-section-grid
+  .deity-title-row {
+  margin-bottom: 2px;
+}
+
+.home-grid.favorites-page-grid.table-view .favorites-section-grid .deity-name {
+  font-size: 0.97rem;
+}
+
+.home-grid.favorites-page-grid.table-view
+  .favorites-section-grid
+  .deity-type-badge {
+  font-size: 0.6rem;
+  padding: 3px 8px;
+}
+
+.home-grid.favorites-page-grid.table-view .favorites-section-grid .deity-meta {
+  font-size: 0.72rem;
+  margin-top: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.home-grid.favorites-page-grid.table-view .favorites-section-grid .deity-tags {
+  margin-top: 4px;
+  padding-top: 0;
+  gap: 4px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.home-grid.favorites-page-grid.table-view
+  .favorites-section-grid
+  .deity-tags.is-expanded {
+  flex-wrap: wrap;
+  overflow-x: visible;
+}
+
+.home-grid.favorites-page-grid.table-view
+  .favorites-section-grid
+  .deity-tags::-webkit-scrollbar {
+  display: none;
+}
+
+.home-grid.favorites-page-grid.table-view .favorites-section-grid .tag {
+  font-size: 0.64rem;
+  padding: 2px 8px;
+}
+
+@media (max-width: 600px) {
+  .home-grid.favorites-page-grid .favorites-section-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .home-grid.favorites-page-grid .favorites-section-grid .deity-card {
+    min-height: auto;
+  }
+
+  .home-grid.favorites-page-grid.table-view
+    .favorites-section-grid
+    .deity-card {
+    min-height: 66px;
+  }
+
+  .home-grid.favorites-page-grid.table-view .favorites-section-grid .deity-img,
+  .home-grid.favorites-page-grid.table-view
+    .favorites-section-grid
+    .deity-img-fallback {
+    width: 52px;
+    min-width: 52px;
+    height: 52px;
+    margin-left: 6px;
+  }
+
+  .home-grid.favorites-page-grid.table-view
+    .favorites-section-grid
+    .deity-info {
+    padding: 6px 8px 6px 12px;
+  }
+
+  .home-grid.favorites-page-grid.table-view
+    .favorites-section-grid
+    .deity-name {
+    font-size: 0.9rem;
+  }
+
+  .home-grid.favorites-page-grid.table-view
+    .favorites-section-grid
+    .deity-meta {
+    font-size: 0.68rem;
+  }
+}
+
 .home-grid.table-view {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 10px;
@@ -1013,6 +1210,7 @@ body.reading-mode-open .aarti-floating-bell-wrap {
   margin-top: 0;
   display: -webkit-box;
   -webkit-line-clamp: 1;
+  line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -1219,105 +1417,104 @@ body.reduced-effects .deity-card:hover {
   body.printing-deity-content > *:not(.main-container):not(#page-deity) {
     display: none !important;
   }
-  
+
   body.printing-deity-content #siteHeaderMount {
     display: none !important;
   }
-  
+
   body.printing-deity-content #mainNav {
     display: none !important;
   }
-  
+
   body.printing-deity-content #deityBackButton {
     display: none !important;
   }
-  
+
   body.printing-deity-content #deityTabs {
     display: none !important;
   }
-  
+
   body.printing-deity-content .deity-tab-actions {
     display: none !important;
   }
-  
+
   body.printing-deity-content .deity-favorite-btn {
     display: none !important;
   }
-  
+
   body.printing-deity-content .tag {
     display: none !important;
   }
-  
+
   body.printing-deity-content #deityContent {
     display: block !important;
   }
-  
+
   body.printing-deity-content #deityContent > .text-content:not(.active) {
     display: none !important;
   }
-  
+
   body.printing-deity-content #deityContent > .text-content.active {
     display: block !important;
   }
-  
+
   body.printing-deity-content .mandala-bg {
     display: none !important;
   }
-  
+
   body.printing-deity-content #particles {
     display: none !important;
   }
-  
+
   body.printing-deity-content .accessibility-controls {
     display: none !important;
   }
-  
+
   body.printing-deity-content #siteFooterMount {
     display: none !important;
   }
-  
+
   body.printing-deity-content {
     background: white !important;
     color: black !important;
   }
-  
+
   body.printing-deity-content .lyrics-box {
     background: white !important;
     color: black !important;
     box-shadow: none !important;
     border: none !important;
   }
-  
+
   body.printing-deity-content .deity-tab-wrap {
     background: white !important;
     color: black !important;
   }
-  
+
   /* Hide copy button in mantra print view */
   body.printing-deity-content .copy-btn {
     display: none !important;
   }
-  
+
   /* Hide bell icon in aarti print view */
   body.printing-deity-content .aarti-bell-icon {
     display: none !important;
   }
-  
+
   body.printing-deity-content .aarti-floating-bell-wrap {
     display: none !important;
   }
-  
+
   /* Hide katha selection tabs in print view */
   body.printing-deity-content .katha-list {
     display: none !important;
   }
-  
+
   /* Hide bhajan selection tabs in print view */
   body.printing-deity-content .katha-list {
     display: none !important;
   }
 }
-
 
 .deity-img-fallback {
   width: 100%;
@@ -2058,8 +2255,18 @@ body.reduced-effects .deity-card:hover {
 
 #tab-aarti .lyrics-box > .title-line + * > .refrain,
 #tab-aarti .lyrics-box > .title-line + * > .stanza,
-#tab-aarti .lyrics-box > .title-line + .lyrics-flow > .lyrics-block:first-child > .refrain,
-#tab-aarti .lyrics-box > .title-line + .lyrics-flow > .lyrics-block:first-child > .stanza {
+#tab-aarti
+  .lyrics-box
+  > .title-line
+  + .lyrics-flow
+  > .lyrics-block:first-child
+  > .refrain,
+#tab-aarti
+  .lyrics-box
+  > .title-line
+  + .lyrics-flow
+  > .lyrics-block:first-child
+  > .stanza {
   margin-top: 0;
 }
 
@@ -2499,6 +2706,15 @@ footer {
     height: 140px;
   }
 
+  /* Ensure favorites page uses the same compact card sizing on mobile */
+  .home-grid.favorites-page-grid .favorites-section-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+
+  .home-grid.favorites-page-grid .favorites-section-grid .deity-img,
+  .home-grid.favorites-page-grid .favorites-section-grid .deity-img-fallback {
+    height: 140px;
+  }
   .home-grid.table-view {
     grid-template-columns: 1fr;
   }

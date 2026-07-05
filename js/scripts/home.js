@@ -53,7 +53,15 @@ function setHomeViewMode(mode = 'card') {
 
   applyHomeViewMode(safeMode);
   syncHomeViewToggleButtons();
-  renderHomeGrid(activeHomeType, activeHomeSearchQuery);
+  if (showFavoritesOnly) {
+    if (typeof window !== 'undefined' && window.showUnifiedFavoritesPage) {
+      window.showUnifiedFavoritesPage(activeHomeSearchQuery);
+    } else {
+      renderHomeGrid(activeHomeType, activeHomeSearchQuery);
+    }
+  } else {
+    renderHomeGrid(activeHomeType, activeHomeSearchQuery);
+  }
 }
 
 function setupHomeViewToggle() {
@@ -235,28 +243,42 @@ if (typeof window !== 'undefined') {
 
 function toggleFavoritesView() {
   showFavoritesOnly = !showFavoritesOnly;
-  // Show all deities like home menu, but highlight favorites button
-  activeHomeNavId = showFavoritesOnly ? 'favorites' : 'home';
-  activeHomeType = 'all';
-  syncFavoritesToggle();
-  renderHomeGrid(activeHomeType, activeHomeSearchQuery);
-  syncNav(activeHomeNavId);
+  // Show dedicated favorites page instead of filtering home grid
+  if (showFavoritesOnly) {
+    showUnifiedFavoritesPage(activeHomeSearchQuery);
+  } else {
+    showHomeByType('all', 'home');
+  }
 }
 
 function toggleFavorite(deityKey) {
   if (!deities[deityKey]) return;
   const isNowFavorite = toggleDeityFavorite(deityKey);
-  
-  // Update all favorite buttons for this deity
-  document.querySelectorAll(`.deity-favorite-btn[onclick*="'${deityKey}'"]`).forEach(btn => {
-    btn.textContent = isNowFavorite ? '❤️' : '🤍';
-    btn.setAttribute('aria-label', isNowFavorite ? 'Remove from favorites' : 'Add to favorites');
-    btn.setAttribute('title', isNowFavorite ? 'Remove from favorites' : 'Add to favorites');
-  });
 
-  // If in favorites-only mode, re-render the grid
+  // Update all favorite buttons for this deity
+  document
+    .querySelectorAll(`.deity-favorite-btn[onclick*="'${deityKey}'"]`)
+    .forEach((btn) => {
+      btn.textContent = isNowFavorite ? '❤️' : '🤍';
+      btn.setAttribute(
+        'aria-label',
+        isNowFavorite ? 'Remove from favorites' : 'Add to favorites',
+      );
+      btn.setAttribute(
+        'title',
+        isNowFavorite ? 'Remove from favorites' : 'Add to favorites',
+      );
+    });
+
+  // If the favorites view is active, re-render that page immediately.
   if (showFavoritesOnly) {
-    renderHomeGrid(activeHomeType, activeHomeSearchQuery);
+    if (typeof window !== 'undefined' && window.showUnifiedFavoritesPage) {
+      window.showUnifiedFavoritesPage(activeHomeSearchQuery);
+    } else {
+      renderHomeGrid(activeHomeType, activeHomeSearchQuery);
+    }
+  } else {
+    syncFavoritesToggle();
   }
 }
 
@@ -418,6 +440,9 @@ function showHomeByType(typeId = 'all', navId = 'home', options = {}) {
   updateHomeSectionHeader(safeType);
   showPage('home', safeNavId);
   const grid = document.getElementById('homeGrid');
+  if (grid) {
+    grid.classList.remove('favorites-page-grid');
+  }
   const searchInput = document.getElementById('homeSearchInput');
   if (searchInput) {
     searchInput.placeholder = getHomeSearchPlaceholder(safeType);
@@ -465,7 +490,15 @@ function setupHomeSearch() {
       homeRenderTimer = null;
     }
     activeHomeSearchQuery = event.target.value;
-    renderHomeGrid(activeHomeType, activeHomeSearchQuery);
+    if (
+      showFavoritesOnly &&
+      typeof window !== 'undefined' &&
+      window.showUnifiedFavoritesPage
+    ) {
+      window.showUnifiedFavoritesPage(activeHomeSearchQuery);
+    } else {
+      renderHomeGrid(activeHomeType, activeHomeSearchQuery);
+    }
     syncClearButton();
   });
 
@@ -477,7 +510,15 @@ function setupHomeSearch() {
       }
       activeHomeSearchQuery = '';
       searchInput.value = '';
-      renderHomeGrid(activeHomeType, activeHomeSearchQuery);
+      if (
+        showFavoritesOnly &&
+        typeof window !== 'undefined' &&
+        window.showUnifiedFavoritesPage
+      ) {
+        window.showUnifiedFavoritesPage(activeHomeSearchQuery);
+      } else {
+        renderHomeGrid(activeHomeType, activeHomeSearchQuery);
+      }
       syncClearButton();
       searchInput.focus();
     });
@@ -487,10 +528,10 @@ function setupHomeSearch() {
 function syncFavoritesToggle() {
   const navFavoritesBtn = document.getElementById('navFavoritesBtn');
   if (!navFavoritesBtn) return;
-  
+
   const favoritesIcon = navFavoritesBtn.querySelector('.favorites-nav-icon');
   const favorites = getFavoriteDeities();
-  
+
   if (showFavoritesOnly) {
     navFavoritesBtn.classList.add('active');
     navFavoritesBtn.setAttribute('aria-label', 'Show all deities');
@@ -500,9 +541,10 @@ function syncFavoritesToggle() {
     navFavoritesBtn.classList.remove('active');
     navFavoritesBtn.setAttribute('aria-label', 'Show favorites');
     navFavoritesBtn.setAttribute('title', 'Show favorites');
-    if (favoritesIcon) favoritesIcon.textContent = favorites.length > 0 ? '❤️' : '🤍';
+    if (favoritesIcon)
+      favoritesIcon.textContent = favorites.length > 0 ? '❤️' : '🤍';
   }
-  
+
   // Update section header based on favorites mode
   if (showFavoritesOnly) {
     const iconEl = document.getElementById('homeSectionIcon');
@@ -510,7 +552,8 @@ function syncFavoritesToggle() {
     const subtitleText = document.getElementById('homeSectionSubtitle');
     if (iconEl) iconEl.textContent = '❤️';
     if (titleText) titleText.textContent = 'पसंदीदा देव-देवी';
-    if (subtitleText) subtitleText.textContent = 'आपके पसंदीदा देव-देवी की सूची';
+    if (subtitleText)
+      subtitleText.textContent = 'आपके पसंदीदा देव-देवी की सूची';
   } else {
     updateHomeSectionHeader(activeHomeType);
   }

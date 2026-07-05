@@ -129,6 +129,10 @@ function showDeityPage(key, options = {}) {
             readTimeLabel: aartiReadTime,
             showLyricsMeaningToggle: hasLyricsHindiMeanings(deity.aarti),
             showReadingMode: true,
+            deityKey: resolvedKey,
+            contentType: 'aarti',
+            contentSlug: '',
+            contentTitle: deity.aarti?.title || `${deity.name} आरती`,
           })}
           <div class="aarti-floating-bell-wrap">
             <button
@@ -155,6 +159,10 @@ function showDeityPage(key, options = {}) {
             readTimeLabel: chalisaReadTime,
             showLyricsMeaningToggle: hasLyricsHindiMeanings(deity.chalisa),
             showReadingMode: true,
+            deityKey: resolvedKey,
+            contentType: 'chalisa',
+            contentSlug: '',
+            contentTitle: deity.chalisa?.title || `${deity.name} चालीसा`,
           })}
           ${renderLyrics(deity.chalisa, { enableStepNavigation: true })}
         </div>
@@ -168,6 +176,10 @@ function showDeityPage(key, options = {}) {
           ${getSectionMetaHtml({
             readTimeLabel: kathaReadTime,
             showReadingMode: true,
+            deityKey: resolvedKey,
+            contentType: 'katha',
+            contentSlug: activeKathaSlug,
+            contentTitle: selectedKatha?.title || `${deity.name} कथा`,
           })}
           ${renderKatha(resolvedKey, deity.katha)}
         </div>
@@ -181,6 +193,10 @@ function showDeityPage(key, options = {}) {
           ${getSectionMetaHtml({
             readTimeLabel: bhajanReadTime,
             showReadingMode: true,
+            deityKey: resolvedKey,
+            contentType: 'bhajan',
+            contentSlug: activeBhajanSlug,
+            contentTitle: selectedBhajan?.title || `${deity.name} भजन`,
           })}
           ${renderBhajan(resolvedKey, deity.bhajan)}
         </div>
@@ -205,6 +221,11 @@ function showDeityPage(key, options = {}) {
             readTimeLabel: extraReadTime,
             showLyricsMeaningToggle: hasLyricsHindiMeanings(selectedExtraEntry),
             showReadingMode: true,
+            deityKey: resolvedKey,
+            contentType: 'extra',
+            contentSlug:
+              selectedExtraEntry?.slug || `extra-${activeExtraIndex}`,
+            contentTitle: selectedExtraEntry?.title || `${deity.name} अतिरिक्त`,
           })}
           ${renderExtraContent(extraData)}
         </div>
@@ -264,10 +285,26 @@ function getSectionMetaHtml({
   readTimeLabel = '',
   showReadingMode = false,
   showLyricsMeaningToggle = false,
+  deityKey = '',
+  contentType = '',
+  contentSlug = '',
+  contentTitle = '',
 } = {}) {
-  if (!readTimeLabel && !showReadingMode && !showLyricsMeaningToggle) {
+  if (
+    !readTimeLabel &&
+    !showReadingMode &&
+    !showLyricsMeaningToggle &&
+    !deityKey
+  ) {
     return '';
   }
+
+  const isFavorite =
+    deityKey && contentType
+      ? isContentFavorite(deityKey, contentType, contentSlug)
+      : false;
+  const favoriteIcon = isFavorite ? '❤️' : '🤍';
+  const favoriteLabel = isFavorite ? 'पसंदीदा से हटाएं' : 'पसंदीदा में जोड़ें';
 
   const controlItems = [
     readTimeLabel
@@ -285,6 +322,12 @@ function getSectionMetaHtml({
       ? `<button class="section-action-btn section-reading-btn" type="button" onclick="openReadingModeFromSection(this)" title="पठन मोड" aria-label="पठन मोड">
       <span class="section-reading-icon" aria-hidden="true">📖</span>
       <span class="section-reading-label">पठन मोड</span>
+    </button>`
+      : '',
+    deityKey && contentType
+      ? `<button class="section-action-btn section-favorite-btn" type="button" onclick="handleToggleContentFavorite('${deityKey}', '${contentType}', '${contentSlug}', '${escapeHtml(contentTitle)}', this)" title="${favoriteLabel}" aria-label="${favoriteLabel}">
+      <span class="section-favorite-icon" aria-hidden="true">${favoriteIcon}</span>
+      <span class="section-favorite-label">${favoriteLabel}</span>
     </button>`
       : '',
     `<button class="section-action-btn section-print-btn" type="button" onclick="printDeityContent()" title="प्रिंट करें" aria-label="प्रिंट करें">
@@ -570,6 +613,50 @@ function renderExtraContent(data) {
 function openExtraEntry(deityKey, index) {
   if (!deities[deityKey]) return;
   showDeityPage(deityKey, { initialTab: 'extra', initialExtraIndex: index });
+}
+
+function handleToggleContentFavorite(
+  deityKey,
+  contentType,
+  contentSlug,
+  contentTitle,
+  button,
+) {
+  if (!deities[deityKey]) return;
+  const isNowFavorite = toggleContentFavorite(
+    deityKey,
+    contentType,
+    contentSlug,
+    contentTitle,
+  );
+
+  // Update the button state
+  const iconEl = button.querySelector('.section-favorite-icon');
+  const labelEl = button.querySelector('.section-favorite-label');
+
+  if (iconEl) iconEl.textContent = isNowFavorite ? '❤️' : '🤍';
+  if (labelEl) {
+    labelEl.textContent = isNowFavorite
+      ? 'पसंदीदा से हटाएं'
+      : 'पसंदीदा में जोड़ें';
+  }
+
+  button.setAttribute(
+    'title',
+    isNowFavorite ? 'पसंदीदा से हटाएं' : 'पसंदीदा में जोड़ें',
+  );
+  button.setAttribute(
+    'aria-label',
+    isNowFavorite ? 'पसंदीदा से हटाएं' : 'पसंदीदा में जोड़ें',
+  );
+
+  if (
+    showFavoritesOnly &&
+    typeof window !== 'undefined' &&
+    window.showUnifiedFavoritesPage
+  ) {
+    window.showUnifiedFavoritesPage();
+  }
 }
 
 function renderKatha(deityKey, data) {
@@ -904,6 +991,10 @@ function closeMantraMalaDialog(event, options = {}) {
   activeMantraMalaTrigger = null;
 }
 
+if (typeof window !== 'undefined') {
+  window.handleToggleContentFavorite = handleToggleContentFavorite;
+}
+
 function advanceMantraMalaCount() {
   if (!activeMantraMalaState) return;
 
@@ -1009,4 +1100,3 @@ function printDeityContent() {
   window.print();
   document.body.classList.remove('printing-deity-content');
 }
-

@@ -89,6 +89,7 @@ const HOME_VIEW_MODE_STORAGE_KEY = 'bhaktiHomeViewMode';
 const TEMPLE_VIEW_MODE_STORAGE_KEY = 'bhaktiTempleViewMode';
 const MANTRA_PROGRESS_STORAGE_KEY = 'bhaktiMantraJapProgress';
 const FAVORITE_DEITIES_STORAGE_KEY = 'bhaktiFavoriteDeities';
+const FAVORITE_CONTENT_STORAGE_KEY = 'bhaktiFavoriteContent';
 const MOBILE_NAV_BREAKPOINT = 600;
 const COMPACT_NAV_BREAKPOINT = 1180;
 const WIDE_TABLET_NAV_BREAKPOINT = 768;
@@ -899,3 +900,56 @@ function getFavoriteDeities() {
   return loadFavoriteDeities();
 }
 
+function loadFavoriteContent() {
+  try {
+    const saved = localStorage.getItem(FAVORITE_CONTENT_STORAGE_KEY);
+    return saved ? JSON.parse(saved) : [];
+  } catch (error) {
+    return [];
+  }
+}
+
+function saveFavoriteContent(favorites) {
+  try {
+    localStorage.setItem(FAVORITE_CONTENT_STORAGE_KEY, JSON.stringify(favorites));
+  } catch (error) {
+    // Ignore storage errors
+  }
+}
+
+function isContentFavorite(deityKey, contentType, contentSlug = '') {
+  const favorites = loadFavoriteContent();
+  return favorites.some(
+    fav => fav.deityKey === deityKey && 
+          fav.contentType === contentType && 
+          fav.contentSlug === contentSlug
+  );
+}
+
+function toggleContentFavorite(deityKey, contentType, contentSlug = '', title = '') {
+  const favorites = loadFavoriteContent();
+  const existingIndex = favorites.findIndex(
+    fav => fav.deityKey === deityKey && 
+          fav.contentType === contentType && 
+          fav.contentSlug === contentSlug
+  );
+  
+  if (existingIndex > -1) {
+    favorites.splice(existingIndex, 1);
+  } else {
+    favorites.push({
+      deityKey,
+      contentType,
+      contentSlug,
+      title,
+      addedAt: Date.now()
+    });
+  }
+  
+  saveFavoriteContent(favorites);
+  return existingIndex === -1;
+}
+
+function getFavoriteContent() {
+  return loadFavoriteContent();
+}
