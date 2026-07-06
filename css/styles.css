@@ -163,6 +163,7 @@ body {
   font-family: 'Tiro Devanagari Hindi', serif;
   overflow-x: hidden;
   min-height: 100vh;
+  min-height: 100dvh;
   position: relative;
 }
 
@@ -1414,6 +1415,17 @@ body.reduced-effects .deity-card:hover {
 
 /* Print Styles */
 @media print {
+  @page {
+    margin: 12mm;
+  }
+
+  html,
+  body {
+    width: 100% !important;
+    min-height: auto !important;
+    overflow: visible !important;
+  }
+
   body.printing-deity-content > *:not(.main-container):not(#page-deity) {
     display: none !important;
   }
@@ -1486,9 +1498,48 @@ body.reduced-effects .deity-card:hover {
     border: none !important;
   }
 
+  body.printing-deity-content .main-container {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  body.printing-deity-content #page-deity {
+    width: 100% !important;
+  }
+
+  body.printing-deity-content .content-header {
+    flex-direction: row !important;
+    align-items: center !important;
+    text-align: left !important;
+    padding: 18px 20px !important;
+    margin-bottom: 18px !important;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  body.printing-deity-content .content-header-text {
+    min-width: 0;
+  }
+
+  body.printing-deity-content .content-header-text h2 {
+    font-size: 1.8rem !important;
+  }
+
+  body.printing-deity-content .content-header-text p {
+    font-size: 0.98rem !important;
+  }
+
   body.printing-deity-content .deity-tab-wrap {
     background: white !important;
     color: black !important;
+  }
+
+  body.printing-deity-content .lyrics-box {
+    padding: 24px 28px !important;
+    font-size: 1.08rem !important;
+    line-height: 1.9 !important;
   }
 
   /* Hide copy button in mantra print view */
@@ -2880,6 +2931,26 @@ footer {
   .section-meaning-label {
     display: inline;
     white-space: nowrap;
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .main-container {
+    padding-bottom: calc(30px + 96px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .accessibility-controls {
+    bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+    right: calc(10px + env(safe-area-inset-right, 0px));
+  }
+
+  .chalisa-nav-controls,
+  .aarti-floating-bell-wrap {
+    right: calc(10px + env(safe-area-inset-right, 0px));
+  }
+
+  .home-grid.favorites-page-grid.table-view {
+    grid-template-columns: 1fr !important;
   }
 }
 

@@ -4,6 +4,11 @@ function showUnifiedFavoritesPage(searchQuery = '') {
 
   grid.classList.add('favorites-page-grid');
 
+  const isTouchLikeDevice =
+    typeof window !== 'undefined' &&
+    typeof window.matchMedia === 'function' &&
+    window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+
   const favoriteDeities = getFavoriteDeities();
   const favoriteContent = getFavoriteContent();
   const query = searchQuery.trim().toLowerCase();
@@ -74,6 +79,12 @@ function showUnifiedFavoritesPage(searchQuery = '') {
     syncNav('favorites');
     return;
   }
+
+  // Touch devices get a single-column favorites layout to avoid cramped split panes.
+  grid.classList.toggle(
+    'table-view',
+    activeHomeViewMode === 'table' && !isTouchLikeDevice,
+  );
 
   let html = '';
 

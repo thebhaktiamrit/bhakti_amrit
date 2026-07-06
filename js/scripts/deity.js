@@ -1093,10 +1093,34 @@ function copyMantra(btn, idx, key) {
 
 if (typeof window !== 'undefined') {
   window.printDeityContent = printDeityContent;
+  window.addEventListener('beforeprint', enterDeityPrintMode);
+  window.addEventListener('afterprint', exitDeityPrintMode);
+  window.addEventListener('focus', exitDeityPrintMode);
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') {
+      exitDeityPrintMode();
+    }
+  });
+}
+
+let isPrintingDeityContent = false;
+
+function enterDeityPrintMode() {
+  isPrintingDeityContent = true;
+  document.body.classList.add('printing-deity-content');
+}
+
+function exitDeityPrintMode() {
+  if (!isPrintingDeityContent) return;
+  isPrintingDeityContent = false;
+  document.body.classList.remove('printing-deity-content');
 }
 
 function printDeityContent() {
-  document.body.classList.add('printing-deity-content');
-  window.print();
-  document.body.classList.remove('printing-deity-content');
+  enterDeityPrintMode();
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      window.print();
+    });
+  });
 }
