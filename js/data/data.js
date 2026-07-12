@@ -95,6 +95,7 @@ const deities = {
     color: '#0000CD',
     desc: 'गोविन्द, मुरलीमनोहर, ब्रजबिहारी',
     img: 'icons/krishna.webp',
+    geeta: typeof geetaData !== 'undefined' ? geetaData.krishna : null,
   },
   khatu_shyam: {
     name: 'श्री खाटू श्याम',

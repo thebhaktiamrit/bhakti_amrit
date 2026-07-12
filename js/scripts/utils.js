@@ -43,7 +43,9 @@ function handleContentImageError(img) {
 }
 
 function isDocumentShort(extraSpace = 120) {
-  return document.documentElement.scrollHeight <= window.innerHeight + extraSpace;
+  return (
+    document.documentElement.scrollHeight <= window.innerHeight + extraSpace
+  );
 }
 
 function isNearDocumentBottom(offset = 600) {
@@ -362,6 +364,126 @@ function getSelectedExtraEntry(data) {
   return entries[safeIndex] || null;
 }
 
+function getGeetaContentData(deityKey = '') {
+  if (!deityKey || !deities[deityKey]) return null;
+  const geeta = deities[deityKey].geeta;
+  return geeta && typeof geeta === 'object' ? geeta : null;
+}
+
+function getGeetaEntries(data = null) {
+  if (!data || typeof data !== 'object') return [];
+  if (Array.isArray(data.chapters)) return data.chapters.filter(Boolean);
+  if (Array.isArray(data.items)) return data.items.filter(Boolean);
+  if (Array.isArray(data)) return data.filter(Boolean);
+  return [];
+}
+
+function getGeetaEntrySlug(entry, idx = 0) {
+  if (typeof entry?.slug === 'string' && entry.slug.trim().length > 0) {
+    return entry.slug.trim().toLowerCase();
+  }
+  if (Number.isInteger(entry?.chapter) && entry.chapter > 0) {
+    return `chapter-${entry.chapter}`;
+  }
+  return idx === 0 ? 'chapter-1' : `chapter-${idx + 1}`;
+}
+
+function getGeetaEntryLabel(entry, idx = 0) {
+  if (!entry || typeof entry !== 'object') {
+    return `अध्याय ${formatHindiNumber(idx + 1)}`;
+  }
+  if (typeof entry.title === 'string' && entry.title.trim().length > 0) {
+    return entry.title;
+  }
+  if (
+    typeof entry.chapterTitle === 'string' &&
+    entry.chapterTitle.trim().length > 0
+  ) {
+    const chapterLabel =
+      Number.isInteger(entry.chapter) && entry.chapter > 0
+        ? `अध्याय ${formatHindiNumber(entry.chapter)}`
+        : `अध्याय ${formatHindiNumber(idx + 1)}`;
+    return `${chapterLabel} - ${entry.chapterTitle}`;
+  }
+  if (Number.isInteger(entry.chapter) && entry.chapter > 0) {
+    return `अध्याय ${formatHindiNumber(entry.chapter)}`;
+  }
+  return `अध्याय ${formatHindiNumber(idx + 1)}`;
+}
+
+function getGeetaTabLabel(data = null) {
+  if (typeof data?.tag === 'string' && data.tag.trim().length > 0) {
+    return data.tag;
+  }
+  return 'गीता';
+}
+
+function getGeetaReadableText(data = null) {
+  if (typeof data === 'string') return data;
+  if (!data || typeof data !== 'object') return '';
+
+  const parts = [];
+  if (typeof data.title === 'string') parts.push(data.title);
+  if (typeof data.chapterTitle === 'string') parts.push(data.chapterTitle);
+  if (typeof data.subtitle === 'string') parts.push(data.subtitle);
+  if (typeof data.notes === 'string') parts.push(data.notes);
+  if (typeof data.content === 'string') parts.push(data.content);
+
+  const verses = Array.isArray(data.verses) ? data.verses : [];
+  verses.forEach((verse) => {
+    if (!verse || typeof verse !== 'object') return;
+    if (typeof verse.title === 'string') parts.push(verse.title);
+    if (typeof verse.content === 'string') parts.push(verse.content);
+    if (typeof verse.text === 'string') parts.push(verse.text);
+    if (typeof verse.hindiMeaning === 'string') parts.push(verse.hindiMeaning);
+    if (typeof verse.explanation === 'string') parts.push(verse.explanation);
+    if (Array.isArray(verse.lines)) {
+      verse.lines.forEach((line) => {
+        if (!line || typeof line !== 'object') return;
+        const hindiText = getLyricsLineHindiText(line);
+        if (hindiText) parts.push(hindiText);
+        if (typeof line.text === 'string') parts.push(line.text);
+        if (typeof line.hindiMeaning === 'string')
+          parts.push(line.hindiMeaning);
+        if (typeof line.englishMeaning === 'string')
+          parts.push(line.englishMeaning);
+        if (typeof line.explanation === 'string') parts.push(line.explanation);
+      });
+    }
+  });
+
+  return parts.join(' ');
+}
+
+function hasGeetaContent(data) {
+  return getGeetaEntries(data).length > 0;
+}
+
+function getSafeGeetaSlug(deityKey = '', requestedSlug = '') {
+  const entries = getGeetaEntries(getGeetaContentData(deityKey));
+  if (!entries.length) return '';
+  const raw = String(requestedSlug || '')
+    .trim()
+    .toLowerCase();
+  const selectedIndex = entries.findIndex(
+    (item, idx) => getGeetaEntrySlug(item, idx) === raw,
+  );
+  const safeIndex = selectedIndex >= 0 ? selectedIndex : 0;
+  return getGeetaEntrySlug(entries[safeIndex], safeIndex);
+}
+
+function getSelectedGeetaEntry(deityKey, data) {
+  const entries = getGeetaEntries(data);
+  if (!entries.length) return null;
+  const safeSlug = getSafeGeetaSlug(deityKey, activeGeetaSlug);
+  const selectedIndex = entries.findIndex(
+    (item, idx) => getGeetaEntrySlug(item, idx) === safeSlug,
+  );
+  const safeIndex = selectedIndex >= 0 ? selectedIndex : 0;
+  activeGeetaSlug = getGeetaEntrySlug(entries[safeIndex], safeIndex);
+  return entries[safeIndex] || null;
+}
+
 function getAvailableDeityTabs(key) {
   const deity = deities[key];
   if (!deity) return ['about', 'temples'];
@@ -370,6 +492,7 @@ function getAvailableDeityTabs(key) {
   const tabs = ['about'];
   if (hasLyricsContent(deity.aarti)) tabs.push('aarti');
   if (hasLyricsContent(deity.chalisa)) tabs.push('chalisa');
+  if (hasGeetaContent(deity.geeta)) tabs.push('geeta');
   if (hasLyricsContent(deity.katha)) tabs.push('katha');
   if (hasLyricsContent(deity.bhajan)) tabs.push('bhajan');
   if (hasMantrasContent(deity.mantras)) tabs.push('mantra');

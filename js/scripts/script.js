@@ -102,6 +102,7 @@ window.addEventListener('DOMContentLoaded', () => {
     typeId: activeHomeType,
     deityKey: activeDeityKey,
     tabId: activeDeityTab,
+    geetaSlug: activeGeetaSlug,
     kathaSlug: activeKathaSlug,
     bhajanSlug: activeBhajanSlug,
     pageId: activeDeityKey ? '' : activePageId,

@@ -170,6 +170,11 @@ function getHomeTagsHtml(key, deity) {
       `<span class="tag tag-chalisa" onclick="event.stopPropagation(); showDeityPage('${key}', { initialTab: 'chalisa' })">चालीसा</span>`,
     );
   }
+  if (hasGeetaContent(deity.geeta)) {
+    tags.push(
+      `<span class="tag tag-geeta" onclick="event.stopPropagation(); showDeityPage('${key}', { initialTab: 'geeta' })">गीता</span>`,
+    );
+  }
   if (hasMantrasContent(deity.mantras)) {
     tags.push(
       `<span class="tag tag-mantra" onclick="event.stopPropagation(); showDeityPage('${key}', { initialTab: 'mantra' })">मंत्र</span>`,

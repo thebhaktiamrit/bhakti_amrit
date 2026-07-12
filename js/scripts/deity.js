@@ -3,7 +3,9 @@ function showDeityPage(key, options = {}) {
   const deity = deities[resolvedKey];
   if (!deity) return;
   closeMantraMalaDialog(undefined, { restoreFocus: false });
+  const geetaData = getGeetaContentData(resolvedKey);
   const extraData = getExtraContentData(resolvedKey);
+  const geetaTag = escapeHtml(getGeetaTabLabel(geetaData));
   const extraTag = escapeHtml(getExtraTabLabel(extraData));
   const deityAboutData =
     typeof aboutData !== 'undefined' ? aboutData[resolvedKey] : null;
@@ -26,6 +28,10 @@ function showDeityPage(key, options = {}) {
   activeTempleDetailId = '';
   activeFestivalDetailId = '';
   activeScriptureDetailId = '';
+  activeGeetaSlug = getSafeGeetaSlug(
+    resolvedKey,
+    options.initialGeetaSlug || activeGeetaSlug,
+  );
   activeKathaSlug = getSafeKathaSlug(
     resolvedKey,
     options.initialKathaSlug || activeKathaSlug,
@@ -49,6 +55,10 @@ function showDeityPage(key, options = {}) {
   const chalisaReadTime = getHindiReadTimeLabelFromText(
     getLyricsReadableText(deity.chalisa),
   );
+  const selectedGeetaChapter = getSelectedGeetaEntry(resolvedKey, geetaData);
+  const geetaReadTime = getHindiReadTimeLabelFromText(
+    getGeetaReadableText(selectedGeetaChapter),
+  );
   const selectedKatha = getSelectedKathaEntry(resolvedKey, deity.katha);
   const kathaReadTime = getHindiReadTimeLabelFromText(
     getLyricsReadableText(selectedKatha),
@@ -67,6 +77,11 @@ function showDeityPage(key, options = {}) {
 
   // Build header
   const imgSrc = getValidDeityImage(deity.img);
+  const isDeityFav = isDeityFavorite(resolvedKey);
+  const deityFavoriteIcon = isDeityFav ? '❤️' : '🤍';
+  const deityFavoriteLabel = isDeityFav
+    ? 'पसंदीदा से हटाएं'
+    : 'पसंदीदा में जोड़ें';
   const imgHtml = imgSrc
     ? `<img class="deity-portrait" src="${imgSrc}" alt="${deity.name}" loading="eager" fetchpriority="high" width="100" height="100" decoding="async" onerror="this.nextElementSibling.style.display='flex'; this.style.display='none';">
    <div class="deity-portrait-emoji" style="display:none">${deity.emoji}</div>`
@@ -88,6 +103,9 @@ function showDeityPage(key, options = {}) {
       : '',
     hasLyricsContent(deity.chalisa)
       ? `<button class="tab-btn ${activeDeityTab === 'chalisa' ? 'active' : ''}" onclick="showTab('chalisa', this)">📖 चालीसा</button>`
+      : '',
+    hasGeetaContent(geetaData)
+      ? `<button class="tab-btn ${activeDeityTab === 'geeta' ? 'active' : ''}" onclick="showTab('geeta', this)">📘 ${geetaTag}</button>`
       : '',
     hasLyricsContent(deity.katha)
       ? `<button class="tab-btn ${activeDeityTab === 'katha' ? 'active' : ''}" onclick="showTab('katha', this)">📚 कथा</button>`
@@ -165,6 +183,24 @@ function showDeityPage(key, options = {}) {
             contentTitle: deity.chalisa?.title || `${deity.name} चालीसा`,
           })}
           ${renderLyrics(deity.chalisa, { enableStepNavigation: true })}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="tab-geeta" class="text-content ${activeDeityTab === 'geeta' ? 'active' : ''}">
+    <div class="deity-tab-wrap">
+      <div class="deity-tab-content">
+        <div class="lyrics-box">
+          ${getSectionMetaHtml({
+            readTimeLabel: geetaReadTime,
+            showReadingMode: true,
+            showLyricsMeaningToggle: true,
+            deityKey: resolvedKey,
+            contentType: 'geeta',
+            contentSlug: activeGeetaSlug,
+            contentTitle: geetaData?.title || `${deity.name} गीता`,
+          })}
+          ${renderGeeta(resolvedKey, geetaData)}
         </div>
       </div>
     </div>
@@ -709,6 +745,106 @@ function openBhajan(deityKey, slug) {
   showDeityPage(deityKey, { initialTab: 'bhajan', initialBhajanSlug: slug });
 }
 
+function renderGeeta(deityKey, data) {
+  const entries = getGeetaEntries(data);
+  if (!entries.length) return 'जल्द ही आ रहा है...';
+
+  const selected = getSelectedGeetaEntry(deityKey, data);
+  if (!selected) return 'जल्द ही आ रहा है...';
+
+  const navHtml =
+    entries.length > 1
+      ? `<div class="geeta-nav">${entries
+          .map((item, idx) => {
+            const safeSlug = getGeetaEntrySlug(item, idx);
+            const activeClass = safeSlug === activeGeetaSlug ? ' active' : '';
+            const label = escapeHtml(
+              Number.isInteger(item?.chapter) && item.chapter > 0
+                ? `अध्याय ${formatHindiNumber(item.chapter)}`
+                : `अध्याय ${formatHindiNumber(idx + 1)}`,
+            );
+            const title = escapeHtml(
+              item?.chapterTitle || item?.title || label,
+            );
+            return `<button class="tab-btn${activeClass}" title="${title}" onclick="openGeeta('${deityKey}', '${safeSlug}')">${label}</button>`;
+          })
+          .join('')}</div>`
+      : '';
+
+  const chapterTitle =
+    typeof selected.chapterTitle === 'string' &&
+    selected.chapterTitle.trim().length > 0
+      ? selected.chapterTitle
+      : typeof selected.title === 'string' && selected.title.trim().length > 0
+        ? selected.title
+        : '';
+  const chapterHeading = chapterTitle || data?.title || 'श्रीमद्भगवद्गीता';
+  const versesDescription =
+    typeof selected.versesDescription === 'string' &&
+    selected.versesDescription.trim().length > 0
+      ? selected.versesDescription
+      : '';
+  const finalVerse =
+    typeof selected.finalVerse === 'object' && selected.finalVerse !== null
+      ? selected.finalVerse
+      : null;
+  const heroNote =
+    typeof data?.notes === 'string' && data.notes.trim().length > 0
+      ? escapeHtml(data.notes)
+      : 'श्री कृष्ण और अर्जुन का दिव्य संवाद';
+  const chapterVerses = Array.isArray(selected.verses) ? selected.verses : [];
+  const versesHtml = chapterVerses
+    .map((verse) => {
+      if (!verse || typeof verse !== 'object') return '';
+      const verseTitle =
+        typeof verse.title === 'string' && verse.title.trim().length > 0
+          ? verse.title
+          : `श्लोक ${formatHindiNumber(verse.verse || 0)}`;
+      const verseData = {
+        title: verseTitle,
+        lines: Array.isArray(verse.lines) ? verse.lines : [],
+      };
+      if (
+        typeof verse.hindiMeaning === 'string' &&
+        verse.hindiMeaning.trim().length > 0 &&
+        verseData.lines.length > 0
+      ) {
+        verseData.lines = verseData.lines.map((line, lineIdx) =>
+          lineIdx === verseData.lines.length - 1
+            ? { ...line, hindiMeaning: verse.hindiMeaning }
+            : line,
+        );
+      }
+      return `<div class="geeta-verse-card">${renderLyrics(verseData)}</div>`;
+    })
+    .filter(Boolean)
+    .join('');
+
+  const versesDescriptionHtml = versesDescription
+    ? `<div class="geeta-verse-card"><div class="title-line">श्लोक सारांश</div><div class="geeta-section-text">${decorateContentHtml(versesDescription)}</div></div>`
+    : '';
+  const finalVerseHtml = finalVerse
+    ? `<div class="geeta-verse-card"><div class="title-line">अन्तिम श्लोक</div><div class="geeta-section-text">${decorateContentHtml(finalVerse.text || '')}</div></div>`
+    : '';
+
+  return `<div class="geeta-shell">
+    <div class="geeta-hero">
+      <div class="geeta-hero-title">${escapeHtml(chapterHeading)}</div>
+      ${navHtml}
+    </div>
+    <div class="geeta-chapter-card">
+      ${versesDescriptionHtml}
+      <div class="geeta-verses">${versesHtml || 'जल्द ही आ रहा है...'}</div>
+      ${finalVerseHtml}
+    </div>
+  </div>`;
+}
+
+function openGeeta(deityKey, slug) {
+  if (!deities[deityKey]) return;
+  showDeityPage(deityKey, { initialTab: 'geeta', initialGeetaSlug: slug });
+}
+
 function getMantraEntry(deityKey, mantraIndex) {
   const mantraList = deities[deityKey]?.mantras;
   if (!Array.isArray(mantraList)) return null;
@@ -1052,12 +1188,14 @@ function showTab(tabId, btn) {
   activeDeityTab = safeTab;
   if (safeTab !== 'katha') activeKathaSlug = '';
   if (safeTab !== 'bhajan') activeBhajanSlug = '';
+  if (safeTab !== 'geeta') activeGeetaSlug = '';
   if (safeTab !== 'extra') activeExtraIndex = 0;
   if (activeDeityKey) {
     updateUrlState({
       typeId: activeHomeType,
       deityKey: activeDeityKey,
       tabId: safeTab,
+      geetaSlug: safeTab === 'geeta' ? activeGeetaSlug : '',
       kathaSlug: safeTab === 'katha' ? activeKathaSlug : '',
       bhajanSlug: safeTab === 'bhajan' ? activeBhajanSlug : '',
       extraIndex: safeTab === 'extra' ? activeExtraIndex : 0,

@@ -34,6 +34,7 @@ function showUnifiedFavoritesPage(searchQuery = '') {
         const contentTypeLabels = {
           aarti: 'आरती',
           chalisa: 'चालीसा',
+          geeta: 'गीता',
           katha: 'कथा',
           bhajan: 'भजन',
           extra: 'अतिरिक्त',
@@ -172,6 +173,9 @@ function showUnifiedFavoritesPage(searchQuery = '') {
         slugValue = fav.contentSlug;
       } else if (fav.contentType === 'bhajan' && fav.contentSlug) {
         tabId = 'bhajan';
+        slugValue = fav.contentSlug;
+      } else if (fav.contentType === 'geeta' && fav.contentSlug) {
+        tabId = 'geeta';
         slugValue = fav.contentSlug;
       } else if (fav.contentType === 'extra' && fav.contentSlug) {
         tabId = 'extra';

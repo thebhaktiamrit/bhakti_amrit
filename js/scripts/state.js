@@ -76,6 +76,7 @@ let activeDeityKey = '';
 let activeDeityTab = 'about';
 let activeKathaSlug = '';
 let activeBhajanSlug = '';
+let activeGeetaSlug = '';
 let activeExtraIndex = 0;
 let activeTempleDetailId = '';
 let activeFestivalDetailId = '';
@@ -122,6 +123,7 @@ const validDeityTabs = [
   'about',
   'aarti',
   'chalisa',
+  'geeta',
   'katha',
   'bhajan',
   'mantra',
@@ -389,6 +391,18 @@ function getDeityTabPathSegment(
       return getExtraEntrySlug(entries[safeIndex], safeIndex);
     }
   }
+  if (safeTab === 'geeta') {
+    const geetaData = getGeetaContentData(deityKey);
+    const entries = getGeetaEntries(geetaData);
+    if (entries.length) {
+      const safeSlug = getSafeGeetaSlug(deityKey, activeGeetaSlug);
+      const selectedIndex = entries.findIndex(
+        (item, idx) => getGeetaEntrySlug(item, idx) === safeSlug,
+      );
+      const safeIndex = selectedIndex >= 0 ? selectedIndex : 0;
+      return getGeetaEntrySlug(entries[safeIndex], safeIndex);
+    }
+  }
   return safeTab;
 }
 
@@ -404,7 +418,9 @@ function getPathState() {
       templeId: segments[1],
       deityKey: '',
       tabId: 'about',
+      geetaSlug: '',
       kathaSlug: '',
+      bhajanSlug: '',
       extraIndex: 0,
     };
   }
@@ -417,7 +433,9 @@ function getPathState() {
       scriptureId: '',
       deityKey: '',
       tabId: 'about',
+      geetaSlug: '',
       kathaSlug: '',
+      bhajanSlug: '',
       extraIndex: 0,
     };
   }
@@ -430,7 +448,9 @@ function getPathState() {
       templeId: '',
       deityKey: '',
       tabId: 'about',
+      geetaSlug: '',
       kathaSlug: '',
+      bhajanSlug: '',
       extraIndex: 0,
     };
   }
@@ -441,7 +461,9 @@ function getPathState() {
       templeId: '',
       deityKey: '',
       tabId: 'about',
+      geetaSlug: '',
       kathaSlug: '',
+      bhajanSlug: '',
       extraIndex: 0,
     };
   }
@@ -454,7 +476,9 @@ function getPathState() {
       scriptureId: '',
       deityKey: '',
       tabId: 'about',
+      geetaSlug: '',
       kathaSlug: '',
+      bhajanSlug: '',
       extraIndex: 0,
     };
   }
@@ -467,7 +491,9 @@ function getPathState() {
       templeId: '',
       deityKey: '',
       tabId: 'about',
+      geetaSlug: '',
       kathaSlug: '',
+      bhajanSlug: '',
       extraIndex: 0,
     };
   }
@@ -488,6 +514,7 @@ function getPathState() {
         templeId: '',
         deityKey,
         tabId: safeTab,
+        geetaSlug: '',
         kathaSlug: slugValue,
         bhajanSlug: '',
         extraIndex,
@@ -503,8 +530,25 @@ function getPathState() {
         templeId: '',
         deityKey,
         tabId: safeTab,
+        geetaSlug: '',
         kathaSlug: '',
         bhajanSlug: slugValue,
+        extraIndex,
+      };
+    }
+    if (
+      deities[deityKey] &&
+      isValidDeityTabPathSegment(deityKey, tabId) &&
+      safeTab === 'geeta'
+    ) {
+      return {
+        pageId: '',
+        templeId: '',
+        deityKey,
+        tabId: safeTab,
+        geetaSlug: slugValue,
+        kathaSlug: '',
+        bhajanSlug: '',
         extraIndex,
       };
     }
@@ -522,7 +566,9 @@ function getPathState() {
         templeId: '',
         deityKey,
         tabId: safeTab,
+        geetaSlug: '',
         kathaSlug: '',
+        bhajanSlug: '',
         extraIndex,
       };
     }
@@ -535,7 +581,9 @@ function getPathState() {
     scriptureId: '',
     deityKey: '',
     tabId: 'about',
+    geetaSlug: '',
     kathaSlug: '',
+    bhajanSlug: '',
     extraIndex: 0,
   };
 }
@@ -684,6 +732,7 @@ function updateUrlState({
   typeId = activeHomeType,
   deityKey = '',
   tabId = activeDeityTab,
+  geetaSlug = activeGeetaSlug,
   kathaSlug = activeKathaSlug,
   bhajanSlug = activeBhajanSlug,
   pageId = '',
@@ -699,6 +748,10 @@ function updateUrlState({
   const safeDeity =
     resolvedDeity && deities[resolvedDeity] ? resolvedDeity : '';
   const safeTab = getSafeDeityTab(tabId);
+  const safeGeetaSlug =
+    safeDeity && safeTab === 'geeta'
+      ? getSafeGeetaSlug(safeDeity, geetaSlug)
+      : '';
   const safeKathaSlug =
     safeDeity && safeTab === 'katha'
       ? getSafeKathaSlug(safeDeity, kathaSlug)
@@ -718,12 +771,15 @@ function updateUrlState({
   );
 
   if (safeDeity) {
+    const basePath = `/${encodeURIComponent(safeDeity)}/${encodeURIComponent(safeTabPath)}`;
     url.pathname =
-      safeTab === 'katha' && safeKathaSlug
-        ? `/${encodeURIComponent(safeDeity)}/${encodeURIComponent(safeTabPath)}/${encodeURIComponent(safeKathaSlug)}`
-        : safeTab === 'bhajan' && safeBhajanSlug
-          ? `/${encodeURIComponent(safeDeity)}/${encodeURIComponent(safeTabPath)}/${encodeURIComponent(safeBhajanSlug)}`
-          : `/${encodeURIComponent(safeDeity)}/${encodeURIComponent(safeTabPath)}`;
+      safeTab === 'geeta' && safeGeetaSlug
+        ? `${basePath}/${encodeURIComponent(safeGeetaSlug)}`
+        : safeTab === 'katha' && safeKathaSlug
+          ? `${basePath}/${encodeURIComponent(safeKathaSlug)}`
+          : safeTab === 'bhajan' && safeBhajanSlug
+            ? `${basePath}/${encodeURIComponent(safeBhajanSlug)}`
+            : basePath;
     url.search = '';
   } else if (pageId === 'temple-detail') {
     const safeTempleId = templesData.some((t) => t.id === templeId)
@@ -770,6 +826,7 @@ function updateUrlState({
       typeId: safeType,
       deityKey: safeDeity || null,
       tabId: safeDeity ? safeTab : null,
+      geetaSlug: safeDeity && safeTab === 'geeta' ? safeGeetaSlug : null,
       kathaSlug: safeDeity && safeTab === 'katha' ? safeKathaSlug : null,
       bhajanSlug: safeDeity && safeTab === 'bhajan' ? safeBhajanSlug : null,
       extraIndex: safeDeity && safeTab === 'extra' ? safeExtraIndex : null,
@@ -788,6 +845,7 @@ function applyUrlState() {
   const pathScriptureId = pathState.scriptureId || '';
   const pathDeity = pathState.deityKey;
   const pathTab = pathState.tabId;
+  const pathGeetaSlug = pathState.geetaSlug || '';
   const pathKathaSlug = pathState.kathaSlug || '';
   const pathBhajanSlug = pathState.bhajanSlug || '';
   const pathExtraIndex = pathState.extraIndex ?? 0;
@@ -843,6 +901,7 @@ function applyUrlState() {
     showDeityPage(deityKey, {
       skipUrl: true,
       initialTab: tabId,
+      initialGeetaSlug: pathGeetaSlug,
       initialKathaSlug: kathaSlug,
       initialBhajanSlug: bhajanSlug,
       initialExtraIndex: pathExtraIndex,
@@ -851,6 +910,7 @@ function applyUrlState() {
       typeId: activeHomeType,
       deityKey,
       tabId,
+      geetaSlug: pathGeetaSlug,
       kathaSlug,
       bhajanSlug,
       extraIndex: tabId === 'extra' ? pathExtraIndex : 0,
