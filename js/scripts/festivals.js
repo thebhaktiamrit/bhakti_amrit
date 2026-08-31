@@ -16,6 +16,16 @@ let renderedFestivalCount = 0;
 
 function buildFestivalsPage() {
   const filtersEl = document.getElementById('festivalFilters');
+  const grid = document.getElementById('festivalsGrid');
+
+  if (typeof festivalsData === 'undefined') {
+    if (grid) grid.innerHTML = getContentLoadingHtml('त्योहारों की सूची लोड हो रही है...');
+    ensureDataModule('festivals').then(() => {
+      buildFestivalsPage();
+    });
+    return;
+  }
+
   if (!filtersEl || filtersEl.innerHTML !== '') return;
 
   filtersEl.innerHTML = festivalCategories
@@ -185,6 +195,14 @@ function getFestivalDetailInfoHtml(festival) {
 
 function showFestivalDetailsPage(festivalId, options = {}) {
   const { skipUrl = false } = options;
+
+  if (typeof festivalsData === 'undefined') {
+    ensureDataModule('festivals').then(() => {
+      showFestivalDetailsPage(festivalId, options);
+    });
+    return;
+  }
+
   const festival = festivalsData.find((f) => f.id === festivalId);
   if (!festival) {
     showFestivalsMenuPage({ skipUrl });

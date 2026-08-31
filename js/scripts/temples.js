@@ -117,6 +117,7 @@ function openTempleDeityByTempleId(templeId, event) {
 }
 
 function getRelatedTemples(deityKey) {
+  if (typeof templesData === 'undefined') return [];
   const deityNames = deityTempleMap[deityKey] || [];
   const deityTempleIds = deityTempleIdMap[deityKey] || [];
   return templesData.filter(
@@ -325,6 +326,15 @@ function getTempleTypeLabel(type = '') {
 }
 
 function buildTemplesPage() {
+  if (typeof templesData === 'undefined') {
+    const grid = document.getElementById('templesGrid');
+    if (grid) grid.innerHTML = getContentLoadingHtml('मंदिरों की जानकारी लोड हो रही है...');
+    ensureDataModule('temples').then(() => {
+      buildTemplesPage();
+    });
+    return;
+  }
+
   // Build filters
   const filtersEl = document.getElementById('templeFilters');
   if (!filtersEl) return;
@@ -612,6 +622,14 @@ function getTempleDetailInfoHtml(temple) {
 
 function showTempleDetailsPage(templeId, options = {}) {
   const { skipUrl = false } = options;
+
+  if (typeof templesData === 'undefined') {
+    ensureDataModule('temples').then(() => {
+      showTempleDetailsPage(templeId, options);
+    });
+    return;
+  }
+
   const temple = templesData.find((t) => t.id === templeId);
   if (!temple) {
     showTemplesMenuPage({ skipUrl });
@@ -639,6 +657,12 @@ function showTempleDetailsPage(templeId, options = {}) {
 }
 
 function openTempleModal(id) {
+  if (typeof templesData === 'undefined') {
+    ensureDataModule('temples').then(() => {
+      openTempleModal(id);
+    });
+    return;
+  }
   const temple = templesData.find((t) => t.id === id);
   if (!temple) return;
   document.getElementById('templeModalHeader').innerHTML =

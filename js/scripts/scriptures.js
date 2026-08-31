@@ -42,6 +42,14 @@ function buildScripturesPage() {
   const grid = document.getElementById('scripturesGrid');
   if (!grid || grid.dataset.ready === 'true') return;
 
+  if (typeof scripturesData === 'undefined') {
+    grid.innerHTML = getContentLoadingHtml('धर्म ग्रंथों की सूची लोड हो रही है...');
+    ensureDataModule('scriptures').then(() => {
+      buildScripturesPage();
+    });
+    return;
+  }
+
   const rootScriptures = scripturesData.filter((item) => !item.parentId);
   grid.innerHTML = rootScriptures
     .map((scripture, idx) => getScriptureCardHtml(scripture, idx))
@@ -231,6 +239,14 @@ function getScriptureDetailInfoHtml(scripture) {
 
 function showScriptureDetailsPage(scriptureId, options = {}) {
   const { skipUrl = false } = options;
+
+  if (typeof scripturesData === 'undefined') {
+    ensureDataModule('scriptures').then(() => {
+      showScriptureDetailsPage(scriptureId, options);
+    });
+    return;
+  }
+
   const scripture = scripturesData.find((item) => item.id === scriptureId);
   if (!scripture) {
     showScripturesMenuPage({ skipUrl });
@@ -257,19 +273,4 @@ function showScriptureDetailsPage(scriptureId, options = {}) {
   }
 }
 
-for (const key in aartiData) {
-  if (deities[key]) deities[key].aarti = aartiData[key];
-}
-for (const key in chalisaData) {
-  if (deities[key]) deities[key].chalisa = chalisaData[key];
-}
-for (const key in mantraData) {
-  if (deities[key]) deities[key].mantras = mantraData[key];
-}
-for (const key in kathaData) {
-  if (deities[key]) deities[key].katha = kathaData[key];
-}
-for (const key in bhajanData) {
-  if (deities[key]) deities[key].bhajan = bhajanData[key];
-}
 

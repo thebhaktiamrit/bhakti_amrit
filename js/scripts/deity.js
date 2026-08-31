@@ -1,14 +1,304 @@
+function getDeityTabAboutHtml(resolvedKey) {
+  const deityAboutData =
+    typeof aboutData !== 'undefined' ? aboutData[resolvedKey] : null;
+  const aboutReadTime = getHindiReadTimeLabelFromText(
+    getAboutReadableText(deityAboutData),
+  );
+  return `
+    <div class="deity-tab-wrap deity-tab-wrap-no-padding">
+      <div class="deity-tab-content">
+        <div class="lyrics-box about-content about-content-merged">
+          ${getSectionMetaHtml({ readTimeLabel: aboutReadTime })}
+          ${renderAbout(deityAboutData)}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function getDeityTabAartiHtml(resolvedKey) {
+  const deity = deities[resolvedKey];
+  if (!deity || !deity.aarti) return '';
+  const aartiReadTime = getHindiReadTimeLabelFromText(
+    getLyricsReadableText(deity.aarti),
+  );
+  return `
+    <div class="deity-tab-wrap">
+      <div class="deity-tab-content">
+        <div class="lyrics-box">
+          ${getSectionMetaHtml({
+            readTimeLabel: aartiReadTime,
+            showLyricsMeaningToggle: hasLyricsHindiMeanings(deity.aarti),
+            showReadingMode: true,
+            deityKey: resolvedKey,
+            contentType: 'aarti',
+            contentSlug: '',
+            contentTitle: deity.aarti?.title || `${deity.name} आरती`,
+          })}
+          <div class="aarti-floating-bell-wrap">
+            <button
+              class="aarti-bell-btn"
+              type="button"
+              onclick="playAartiBell(this)"
+              aria-label="घंटी बजाएं"
+              title="घंटी बजाएं"
+            >
+              <span class="chalisa-nav-icon aarti-bell-icon" aria-hidden="true">🔔</span>
+              <span class="chalisa-nav-label aarti-bell-label">घंटी</span>
+            </button>
+          </div>
+          ${renderLyrics(deity.aarti)}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function getDeityTabChalisaHtml(resolvedKey) {
+  const deity = deities[resolvedKey];
+  if (!deity || !deity.chalisa) return '';
+  const chalisaReadTime = getHindiReadTimeLabelFromText(
+    getLyricsReadableText(deity.chalisa),
+  );
+  return `
+    <div class="deity-tab-wrap">
+      <div class="deity-tab-content">
+        <div class="lyrics-box">
+          ${getSectionMetaHtml({
+            readTimeLabel: chalisaReadTime,
+            showLyricsMeaningToggle: hasLyricsHindiMeanings(deity.chalisa),
+            showReadingMode: true,
+            deityKey: resolvedKey,
+            contentType: 'chalisa',
+            contentSlug: '',
+            contentTitle: deity.chalisa?.title || `${deity.name} चालीसा`,
+          })}
+          ${renderLyrics(deity.chalisa, { enableStepNavigation: true })}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function getDeityTabGeetaHtml(resolvedKey) {
+  const deity = deities[resolvedKey];
+  if (!deity) return '';
+  const geetaData = getGeetaContentData(resolvedKey);
+  const selectedGeetaChapter = getSelectedGeetaEntry(resolvedKey, geetaData);
+  const geetaReadTime = getHindiReadTimeLabelFromText(
+    getGeetaReadableText(selectedGeetaChapter),
+  );
+  return `
+    <div class="deity-tab-wrap">
+      <div class="deity-tab-content">
+        <div class="lyrics-box">
+          ${getSectionMetaHtml({
+            readTimeLabel: geetaReadTime,
+            showReadingMode: true,
+            showLyricsMeaningToggle: true,
+            deityKey: resolvedKey,
+            contentType: 'geeta',
+            contentSlug: activeGeetaSlug,
+            contentTitle: geetaData?.title || `${deity.name} गीता`,
+          })}
+          ${renderGeeta(resolvedKey, geetaData)}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function getDeityTabKathaHtml(resolvedKey) {
+  const deity = deities[resolvedKey];
+  if (!deity) return '';
+  const selectedKatha = getSelectedKathaEntry(resolvedKey, deity.katha);
+  const kathaReadTime = getHindiReadTimeLabelFromText(
+    getLyricsReadableText(selectedKatha),
+  );
+  return `
+    <div class="deity-tab-wrap">
+      <div class="deity-tab-content">
+        <div class="lyrics-box">
+          ${getSectionMetaHtml({
+            readTimeLabel: kathaReadTime,
+            showReadingMode: true,
+            deityKey: resolvedKey,
+            contentType: 'katha',
+            contentSlug: activeKathaSlug,
+            contentTitle: selectedKatha?.title || `${deity.name} कथा`,
+          })}
+          ${renderKatha(resolvedKey, deity.katha)}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function getDeityTabBhajanHtml(resolvedKey) {
+  const deity = deities[resolvedKey];
+  if (!deity) return '';
+  const selectedBhajan = getSelectedBhajanEntry(resolvedKey, deity.bhajan);
+  const bhajanReadTime = getHindiReadTimeLabelFromText(
+    getLyricsReadableText(selectedBhajan),
+  );
+  return `
+    <div class="deity-tab-wrap">
+      <div class="deity-tab-content">
+        <div class="lyrics-box">
+          ${getSectionMetaHtml({
+            readTimeLabel: bhajanReadTime,
+            showReadingMode: true,
+            deityKey: resolvedKey,
+            contentType: 'bhajan',
+            contentSlug: activeBhajanSlug,
+            contentTitle: selectedBhajan?.title || `${deity.name} भजन`,
+          })}
+          ${renderBhajan(resolvedKey, deity.bhajan)}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function getDeityTabMantraHtml(resolvedKey) {
+  const deity = deities[resolvedKey];
+  if (!deity) return '';
+  const mantraReadTime = getHindiReadTimeLabelFromText(
+    getMantrasReadableText(deity.mantras),
+  );
+  return `
+    <div class="deity-tab-wrap">
+      <div class="deity-tab-content">
+        <div class="lyrics-box">
+          ${getSectionMetaHtml({ readTimeLabel: mantraReadTime })}
+          <div class="mantra-grid">${renderMantras(deity.mantras, resolvedKey)}</div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function getDeityTabExtraHtml(resolvedKey) {
+  const deity = deities[resolvedKey];
+  if (!deity) return '';
+  const extraData = getExtraContentData(resolvedKey);
+  const selectedExtraEntry = getSelectedExtraEntry(extraData);
+  const extraReadTime = getHindiReadTimeLabelFromText(
+    getLyricsReadableText(selectedExtraEntry),
+  );
+  return `
+    <div class="deity-tab-wrap">
+      <div class="deity-tab-content">
+        <div class="lyrics-box">
+          ${getSectionMetaHtml({
+            readTimeLabel: extraReadTime,
+            showLyricsMeaningToggle: hasLyricsHindiMeanings(selectedExtraEntry),
+            showReadingMode: true,
+            deityKey: resolvedKey,
+            contentType: 'extra',
+            contentSlug:
+              selectedExtraEntry?.slug || `extra-${activeExtraIndex}`,
+            contentTitle: selectedExtraEntry?.title || `${deity.name} अतिरिक्त`,
+          })}
+          ${renderExtraContent(extraData)}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function getDeityTabTemplesHtml(resolvedKey) {
+  return `
+    <div class="deity-tab-wrap">
+      <div class="deity-tab-content">
+        <div class="lyrics-box">
+          ${renderDeityTemples(resolvedKey)}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function ensureAndRenderDeityTab(resolvedKey, tabId) {
+  const tabEl = document.getElementById('tab-' + tabId);
+  if (!tabEl) return;
+
+  const tabLabels = {
+    aarti: 'आरती लोड हो रही है...',
+    chalisa: 'चालीसा लोड हो रही है...',
+    geeta: 'गीता लोड हो रही है...',
+    katha: 'कथा लोड हो रही है...',
+    bhajan: 'भजन लोड हो रहा है...',
+    mantra: 'मंत्र लोड हो रहे हैं...',
+    extra: 'स्तोत्र लोड हो रहा है...',
+    temples: 'मंदिरों की सूची लोड हो रही है...',
+  };
+
+  const renderMap = {
+    about: () => getDeityTabAboutHtml(resolvedKey),
+    aarti: () => getDeityTabAartiHtml(resolvedKey),
+    chalisa: () => getDeityTabChalisaHtml(resolvedKey),
+    geeta: () => getDeityTabGeetaHtml(resolvedKey),
+    katha: () => getDeityTabKathaHtml(resolvedKey),
+    bhajan: () => getDeityTabBhajanHtml(resolvedKey),
+    mantra: () => getDeityTabMantraHtml(resolvedKey),
+    extra: () => getDeityTabExtraHtml(resolvedKey),
+    temples: () => getDeityTabTemplesHtml(resolvedKey),
+  };
+
+  if (tabId === 'about') {
+    tabEl.innerHTML = renderMap.about();
+    return;
+  }
+
+  const isLoaded = isDataModuleLoaded(tabId);
+  if (isLoaded) {
+    tabEl.innerHTML = renderMap[tabId]();
+    if (tabId === 'chalisa') syncChalisaNavigationControls();
+    return;
+  }
+
+  tabEl.innerHTML = getContentLoadingHtml(
+    tabLabels[tabId] || 'सामग्री लोड हो रही है...',
+  );
+  ensureDataModule(tabId)
+    .then(() => {
+      if (
+        activeDeityKey === resolvedKey &&
+        document.getElementById('tab-' + tabId)
+      ) {
+        document.getElementById('tab-' + tabId).innerHTML = renderMap[tabId]();
+        if (tabId === 'chalisa') syncChalisaNavigationControls();
+      }
+    })
+    .catch((err) => {
+      if (
+        activeDeityKey === resolvedKey &&
+        document.getElementById('tab-' + tabId)
+      ) {
+        document.getElementById('tab-' + tabId).innerHTML = `
+          <div class="content-loading-box">
+            <p style="color: var(--accent-red, #ff5252);">सामग्री लोड करने में समस्या आई। कृपया पुनः प्रयास करें।</p>
+            <button class="temple-retry-btn" onclick="ensureAndRenderDeityTab('${resolvedKey}', '${tabId}')">पुनः लोड करें 🔄</button>
+          </div>
+        `;
+      }
+    });
+}
+
 function showDeityPage(key, options = {}) {
   const resolvedKey = resolveDeityKey(key);
   const deity = deities[resolvedKey];
   if (!deity) return;
   closeMantraMalaDialog(undefined, { restoreFocus: false });
+  const manifest =
+    typeof DEITY_CONTENT_MANIFEST !== 'undefined'
+      ? DEITY_CONTENT_MANIFEST[resolvedKey]
+      : null;
   const geetaData = getGeetaContentData(resolvedKey);
   const extraData = getExtraContentData(resolvedKey);
   const geetaTag = escapeHtml(getGeetaTabLabel(geetaData));
-  const extraTag = escapeHtml(getExtraTabLabel(extraData));
-  const deityAboutData =
-    typeof aboutData !== 'undefined' ? aboutData[resolvedKey] : null;
+  const extraTag = escapeHtml(getExtraTabLabel(extraData, resolvedKey));
 
   // Preserve where the user came from for back navigation.
   deityReturnHomeType = getSafeHomeType(activeHomeType);
@@ -46,42 +336,8 @@ function showDeityPage(key, options = {}) {
   );
   if (!availableTabs.includes(activeDeityTab)) activeDeityTab = 'about';
 
-  const aboutReadTime = getHindiReadTimeLabelFromText(
-    getAboutReadableText(deityAboutData),
-  );
-  const aartiReadTime = getHindiReadTimeLabelFromText(
-    getLyricsReadableText(deity.aarti),
-  );
-  const chalisaReadTime = getHindiReadTimeLabelFromText(
-    getLyricsReadableText(deity.chalisa),
-  );
-  const selectedGeetaChapter = getSelectedGeetaEntry(resolvedKey, geetaData);
-  const geetaReadTime = getHindiReadTimeLabelFromText(
-    getGeetaReadableText(selectedGeetaChapter),
-  );
-  const selectedKatha = getSelectedKathaEntry(resolvedKey, deity.katha);
-  const kathaReadTime = getHindiReadTimeLabelFromText(
-    getLyricsReadableText(selectedKatha),
-  );
-  const selectedBhajan = getSelectedBhajanEntry(resolvedKey, deity.bhajan);
-  const bhajanReadTime = getHindiReadTimeLabelFromText(
-    getLyricsReadableText(selectedBhajan),
-  );
-  const mantraReadTime = getHindiReadTimeLabelFromText(
-    getMantrasReadableText(deity.mantras),
-  );
-  const selectedExtraEntry = getSelectedExtraEntry(extraData);
-  const extraReadTime = getHindiReadTimeLabelFromText(
-    getLyricsReadableText(selectedExtraEntry),
-  );
-
   // Build header
   const imgSrc = getValidDeityImage(deity.img);
-  const isDeityFav = isDeityFavorite(resolvedKey);
-  const deityFavoriteIcon = isDeityFav ? '❤️' : '🤍';
-  const deityFavoriteLabel = isDeityFav
-    ? 'पसंदीदा से हटाएं'
-    : 'पसंदीदा में जोड़ें';
   const imgHtml = imgSrc
     ? `<img class="deity-portrait" src="${imgSrc}" alt="${deity.name}" loading="eager" fetchpriority="high" width="100" height="100" decoding="async" onerror="this.nextElementSibling.style.display='flex'; this.style.display='none';">
    <div class="deity-portrait-emoji" style="display:none">${deity.emoji}</div>`
@@ -98,25 +354,25 @@ function showDeityPage(key, options = {}) {
   const tabs = document.getElementById('deityTabs');
   const tabButtons = [
     `<button class="tab-btn ${activeDeityTab === 'about' ? 'active' : ''}" onclick="showTab('about', this)">🚩 परिचय</button>`,
-    hasLyricsContent(deity.aarti)
+    hasLyricsContent(deity.aarti) || manifest?.aarti
       ? `<button class="tab-btn ${activeDeityTab === 'aarti' ? 'active' : ''}" onclick="showTab('aarti', this)">🪔 आरती</button>`
       : '',
-    hasLyricsContent(deity.chalisa)
+    hasLyricsContent(deity.chalisa) || manifest?.chalisa
       ? `<button class="tab-btn ${activeDeityTab === 'chalisa' ? 'active' : ''}" onclick="showTab('chalisa', this)">📖 चालीसा</button>`
       : '',
-    hasGeetaContent(geetaData)
+    hasGeetaContent(geetaData) || manifest?.geeta
       ? `<button class="tab-btn ${activeDeityTab === 'geeta' ? 'active' : ''}" onclick="showTab('geeta', this)">📘 ${geetaTag}</button>`
       : '',
-    hasLyricsContent(deity.katha)
+    hasLyricsContent(deity.katha) || manifest?.katha
       ? `<button class="tab-btn ${activeDeityTab === 'katha' ? 'active' : ''}" onclick="showTab('katha', this)">📚 कथा</button>`
       : '',
-    hasLyricsContent(deity.bhajan)
+    hasLyricsContent(deity.bhajan) || manifest?.bhajan
       ? `<button class="tab-btn ${activeDeityTab === 'bhajan' ? 'active' : ''}" onclick="showTab('bhajan', this)">🎵 भजन</button>`
       : '',
-    hasMantrasContent(deity.mantras)
+    hasMantrasContent(deity.mantras) || manifest?.mantra
       ? `<button class="tab-btn ${activeDeityTab === 'mantra' ? 'active' : ''}" onclick="showTab('mantra', this)">🕉️ मंत्र</button>`
       : '',
-    hasLyricsContent(extraData)
+    hasLyricsContent(extraData) || manifest?.extra
       ? `<button class="tab-btn ${activeDeityTab === 'extra' ? 'active' : ''}" onclick="showTab('extra', this)">✨ ${extraTag}</button>`
       : '',
     `<button class="tab-btn ${activeDeityTab === 'temples' ? 'active' : ''}" onclick="showTab('temples', this)">🛕 मंदिर</button>`,
@@ -130,153 +386,19 @@ function showDeityPage(key, options = {}) {
 
   content.innerHTML = `
   <div id="tab-about" class="text-content ${activeDeityTab === 'about' ? 'active' : ''}">
-    <div class="deity-tab-wrap deity-tab-wrap-no-padding">
-      <div class="deity-tab-content">
-        <div class="lyrics-box about-content about-content-merged">
-          ${getSectionMetaHtml({ readTimeLabel: aboutReadTime })}
-          ${renderAbout(deityAboutData)}
-        </div>
-      </div>
-    </div>
+    ${getDeityTabAboutHtml(resolvedKey)}
   </div>
-  <div id="tab-aarti" class="text-content ${activeDeityTab === 'aarti' ? 'active' : ''}">
-    <div class="deity-tab-wrap">
-      <div class="deity-tab-content">
-        <div class="lyrics-box">
-          ${getSectionMetaHtml({
-            readTimeLabel: aartiReadTime,
-            showLyricsMeaningToggle: hasLyricsHindiMeanings(deity.aarti),
-            showReadingMode: true,
-            deityKey: resolvedKey,
-            contentType: 'aarti',
-            contentSlug: '',
-            contentTitle: deity.aarti?.title || `${deity.name} आरती`,
-          })}
-          <div class="aarti-floating-bell-wrap">
-            <button
-              class="aarti-bell-btn"
-              type="button"
-              onclick="playAartiBell(this)"
-              aria-label="घंटी बजाएं"
-              title="घंटी बजाएं"
-            >
-              <span class="chalisa-nav-icon aarti-bell-icon" aria-hidden="true">🔔</span>
-              <span class="chalisa-nav-label aarti-bell-label">घंटी</span>
-            </button>
-          </div>
-          ${renderLyrics(deity.aarti)}
-        </div>
-      </div>
-    </div>
-  </div>
-  <div id="tab-chalisa" class="text-content ${activeDeityTab === 'chalisa' ? 'active' : ''}">
-    <div class="deity-tab-wrap">
-      <div class="deity-tab-content">
-        <div class="lyrics-box">
-          ${getSectionMetaHtml({
-            readTimeLabel: chalisaReadTime,
-            showLyricsMeaningToggle: hasLyricsHindiMeanings(deity.chalisa),
-            showReadingMode: true,
-            deityKey: resolvedKey,
-            contentType: 'chalisa',
-            contentSlug: '',
-            contentTitle: deity.chalisa?.title || `${deity.name} चालीसा`,
-          })}
-          ${renderLyrics(deity.chalisa, { enableStepNavigation: true })}
-        </div>
-      </div>
-    </div>
-  </div>
-  <div id="tab-geeta" class="text-content ${activeDeityTab === 'geeta' ? 'active' : ''}">
-    <div class="deity-tab-wrap">
-      <div class="deity-tab-content">
-        <div class="lyrics-box">
-          ${getSectionMetaHtml({
-            readTimeLabel: geetaReadTime,
-            showReadingMode: true,
-            showLyricsMeaningToggle: true,
-            deityKey: resolvedKey,
-            contentType: 'geeta',
-            contentSlug: activeGeetaSlug,
-            contentTitle: geetaData?.title || `${deity.name} गीता`,
-          })}
-          ${renderGeeta(resolvedKey, geetaData)}
-        </div>
-      </div>
-    </div>
-  </div>
-  <div id="tab-katha" class="text-content ${activeDeityTab === 'katha' ? 'active' : ''}">
-    <div class="deity-tab-wrap">
-      <div class="deity-tab-content">
-        <div class="lyrics-box">
-          ${getSectionMetaHtml({
-            readTimeLabel: kathaReadTime,
-            showReadingMode: true,
-            deityKey: resolvedKey,
-            contentType: 'katha',
-            contentSlug: activeKathaSlug,
-            contentTitle: selectedKatha?.title || `${deity.name} कथा`,
-          })}
-          ${renderKatha(resolvedKey, deity.katha)}
-        </div>
-      </div>
-    </div>
-  </div>
-  <div id="tab-bhajan" class="text-content ${activeDeityTab === 'bhajan' ? 'active' : ''}">
-    <div class="deity-tab-wrap">
-      <div class="deity-tab-content">
-        <div class="lyrics-box">
-          ${getSectionMetaHtml({
-            readTimeLabel: bhajanReadTime,
-            showReadingMode: true,
-            deityKey: resolvedKey,
-            contentType: 'bhajan',
-            contentSlug: activeBhajanSlug,
-            contentTitle: selectedBhajan?.title || `${deity.name} भजन`,
-          })}
-          ${renderBhajan(resolvedKey, deity.bhajan)}
-        </div>
-      </div>
-    </div>
-  </div>
-  <div id="tab-mantra" class="text-content ${activeDeityTab === 'mantra' ? 'active' : ''}">
-    <div class="deity-tab-wrap">
-      <div class="deity-tab-content">
-        <div class="lyrics-box">
-          ${getSectionMetaHtml({ readTimeLabel: mantraReadTime })}
-          <div class="mantra-grid">${renderMantras(deity.mantras, resolvedKey)}</div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div id="tab-extra" class="text-content ${activeDeityTab === 'extra' ? 'active' : ''}">
-    <div class="deity-tab-wrap">
-      <div class="deity-tab-content">
-        <div class="lyrics-box">
-          ${getSectionMetaHtml({
-            readTimeLabel: extraReadTime,
-            showLyricsMeaningToggle: hasLyricsHindiMeanings(selectedExtraEntry),
-            showReadingMode: true,
-            deityKey: resolvedKey,
-            contentType: 'extra',
-            contentSlug:
-              selectedExtraEntry?.slug || `extra-${activeExtraIndex}`,
-            contentTitle: selectedExtraEntry?.title || `${deity.name} अतिरिक्त`,
-          })}
-          ${renderExtraContent(extraData)}
-        </div>
-      </div>
-    </div>
-  </div>
-  <div id="tab-temples" class="text-content ${activeDeityTab === 'temples' ? 'active' : ''}">
-    <div class="deity-tab-wrap">
-      <div class="deity-tab-content">
-        <div class="lyrics-box">
-          ${renderDeityTemples(resolvedKey)}
-        </div>
-      </div>
-    </div>
-  </div>`;
+  <div id="tab-aarti" class="text-content ${activeDeityTab === 'aarti' ? 'active' : ''}"></div>
+  <div id="tab-chalisa" class="text-content ${activeDeityTab === 'chalisa' ? 'active' : ''}"></div>
+  <div id="tab-geeta" class="text-content ${activeDeityTab === 'geeta' ? 'active' : ''}"></div>
+  <div id="tab-katha" class="text-content ${activeDeityTab === 'katha' ? 'active' : ''}"></div>
+  <div id="tab-bhajan" class="text-content ${activeDeityTab === 'bhajan' ? 'active' : ''}"></div>
+  <div id="tab-mantra" class="text-content ${activeDeityTab === 'mantra' ? 'active' : ''}"></div>
+  <div id="tab-extra" class="text-content ${activeDeityTab === 'extra' ? 'active' : ''}"></div>
+  <div id="tab-temples" class="text-content ${activeDeityTab === 'temples' ? 'active' : ''}"></div>`;
+
+  // Render active tab content
+  ensureAndRenderDeityTab(resolvedKey, activeDeityTab);
 
   showPage('deity', activeHomeNavId);
 
@@ -285,6 +407,7 @@ function showDeityPage(key, options = {}) {
       typeId: activeHomeType,
       deityKey: resolvedKey,
       tabId: activeDeityTab,
+      geetaSlug: activeDeityTab === 'geeta' ? activeGeetaSlug : '',
       kathaSlug: activeDeityTab === 'katha' ? activeKathaSlug : '',
       bhajanSlug: activeDeityTab === 'bhajan' ? activeBhajanSlug : '',
       extraIndex: activeDeityTab === 'extra' ? activeExtraIndex : 0,
@@ -1190,7 +1313,9 @@ function showTab(tabId, btn) {
   if (safeTab !== 'bhajan') activeBhajanSlug = '';
   if (safeTab !== 'geeta') activeGeetaSlug = '';
   if (safeTab !== 'extra') activeExtraIndex = 0;
+
   if (activeDeityKey) {
+    ensureAndRenderDeityTab(activeDeityKey, safeTab);
     updateUrlState({
       typeId: activeHomeType,
       deityKey: activeDeityKey,

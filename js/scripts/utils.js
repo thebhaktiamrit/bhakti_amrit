@@ -338,14 +338,20 @@ function getExtraEntryLabel(entry, idx = 0) {
   return `अतिरिक्त ${idx + 1}`;
 }
 
-function getExtraTabLabel(data) {
+function getExtraTabLabel(data, deityKey = '') {
+  const manifest =
+    typeof DEITY_CONTENT_MANIFEST !== 'undefined' && deityKey
+      ? DEITY_CONTENT_MANIFEST[deityKey]
+      : null;
   const entries = getExtraEntries(data);
-  if (!entries.length) return 'अतिरिक्त';
+  if (!entries.length) {
+    return manifest?.extraTag || 'अतिरिक्त';
+  }
   if (entries.length === 1) return getExtraEntryLabel(entries[0], 0);
   if (typeof data?.tag === 'string' && data.tag.trim().length > 0) {
     return data.tag;
   }
-  return 'अतिरिक्त';
+  return manifest?.extraTag || 'अतिरिक्त';
 }
 
 function getSafeExtraIndex(data, requestedIndex = 0) {
@@ -488,15 +494,19 @@ function getAvailableDeityTabs(key) {
   const deity = deities[key];
   if (!deity) return ['about', 'temples'];
 
+  const manifest =
+    typeof DEITY_CONTENT_MANIFEST !== 'undefined'
+      ? DEITY_CONTENT_MANIFEST[key]
+      : null;
   const extraData = getExtraContentData(key);
   const tabs = ['about'];
-  if (hasLyricsContent(deity.aarti)) tabs.push('aarti');
-  if (hasLyricsContent(deity.chalisa)) tabs.push('chalisa');
-  if (hasGeetaContent(deity.geeta)) tabs.push('geeta');
-  if (hasLyricsContent(deity.katha)) tabs.push('katha');
-  if (hasLyricsContent(deity.bhajan)) tabs.push('bhajan');
-  if (hasMantrasContent(deity.mantras)) tabs.push('mantra');
-  if (hasLyricsContent(extraData)) tabs.push('extra');
+  if (hasLyricsContent(deity.aarti) || manifest?.aarti) tabs.push('aarti');
+  if (hasLyricsContent(deity.chalisa) || manifest?.chalisa) tabs.push('chalisa');
+  if (hasGeetaContent(deity.geeta) || manifest?.geeta) tabs.push('geeta');
+  if (hasLyricsContent(deity.katha) || manifest?.katha) tabs.push('katha');
+  if (hasLyricsContent(deity.bhajan) || manifest?.bhajan) tabs.push('bhajan');
+  if (hasMantrasContent(deity.mantras) || manifest?.mantra) tabs.push('mantra');
+  if (hasLyricsContent(extraData) || manifest?.extra) tabs.push('extra');
   tabs.push('temples');
   return tabs;
 }

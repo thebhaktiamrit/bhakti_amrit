@@ -4851,3 +4851,38 @@ footer {
     justify-content: stretch;
   }
 }
+
+.content-loading-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  min-height: 200px;
+  text-align: center;
+  gap: 14px;
+}
+
+.content-loading-om {
+  font-size: 2.5rem;
+  animation: pulse 1.5s ease-in-out infinite, rotateSlow 8s linear infinite;
+  filter: drop-shadow(0 0 12px rgba(var(--gold-rgb), 0.6));
+}
+
+.content-loading-text {
+  font-size: 1.05rem;
+  color: rgba(var(--cream-rgb), 0.75);
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  letter-spacing: 0.5px;
+}
+
+@keyframes rotateSlow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+

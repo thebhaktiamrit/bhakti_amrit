@@ -160,35 +160,44 @@ function getFilteredHomeDeities(filter = activeHomeType, searchQuery = '') {
 
 function getHomeTagsHtml(key, deity) {
   const tags = [];
-  if (hasLyricsContent(deity.aarti)) {
+  const manifest =
+    typeof DEITY_CONTENT_MANIFEST !== 'undefined'
+      ? DEITY_CONTENT_MANIFEST[key]
+      : null;
+
+  if (hasLyricsContent(deity.aarti) || manifest?.aarti) {
     tags.push(
       `<span class="tag tag-aarti" onclick="event.stopPropagation(); showDeityPage('${key}', { initialTab: 'aarti' })">आरती</span>`,
     );
   }
-  if (hasLyricsContent(deity.chalisa)) {
+  if (hasLyricsContent(deity.chalisa) || manifest?.chalisa) {
     tags.push(
       `<span class="tag tag-chalisa" onclick="event.stopPropagation(); showDeityPage('${key}', { initialTab: 'chalisa' })">चालीसा</span>`,
     );
   }
-  if (hasGeetaContent(deity.geeta)) {
+  if (hasGeetaContent(deity.geeta) || manifest?.geeta) {
     tags.push(
       `<span class="tag tag-geeta" onclick="event.stopPropagation(); showDeityPage('${key}', { initialTab: 'geeta' })">गीता</span>`,
     );
   }
-  if (hasMantrasContent(deity.mantras)) {
+  if (hasMantrasContent(deity.mantras) || manifest?.mantra) {
     tags.push(
       `<span class="tag tag-mantra" onclick="event.stopPropagation(); showDeityPage('${key}', { initialTab: 'mantra' })">मंत्र</span>`,
     );
   }
-  if (hasLyricsContent(deity.katha)) {
-    const kathaCount = getKathaEntries(deity.katha, key).length;
+  if (hasLyricsContent(deity.katha) || manifest?.katha) {
+    const kathaCount = deity.katha
+      ? getKathaEntries(deity.katha, key).length
+      : manifest?.kathaCount || 1;
     const kathaLabel = kathaCount > 1 ? `कथा (${kathaCount})` : 'कथा';
     tags.push(
       `<span class="tag tag-katha" onclick="event.stopPropagation(); showDeityPage('${key}', { initialTab: 'katha' })">${kathaLabel}</span>`,
     );
   }
-  if (hasLyricsContent(deity.bhajan)) {
-    const bhajanCount = getBhajanEntries(deity.bhajan, key).length;
+  if (hasLyricsContent(deity.bhajan) || manifest?.bhajan) {
+    const bhajanCount = deity.bhajan
+      ? getBhajanEntries(deity.bhajan, key).length
+      : manifest?.bhajanCount || 1;
     const bhajanLabel = bhajanCount > 1 ? `भजन (${bhajanCount})` : 'भजन';
     tags.push(
       `<span class="tag tag-bhajan" onclick="event.stopPropagation(); showDeityPage('${key}', { initialTab: 'bhajan' })">${bhajanLabel}</span>`,
@@ -203,6 +212,25 @@ function getHomeTagsHtml(key, deity) {
         `<span class="tag tag-extra" onclick="event.stopPropagation(); showDeityPage('${key}', { initialTab: 'extra', initialExtraIndex: ${idx} })">${extraTag}</span>`,
       );
     });
+  } else if (manifest?.extra) {
+    if (
+      Array.isArray(manifest.extraEntries) &&
+      manifest.extraEntries.length > 0
+    ) {
+      manifest.extraEntries.forEach((entry, idx) => {
+        const extraTag = escapeHtml(
+          entry.tag || entry.title || `अतिरिक्त ${idx + 1}`,
+        );
+        tags.push(
+          `<span class="tag tag-extra" onclick="event.stopPropagation(); showDeityPage('${key}', { initialTab: 'extra', initialExtraIndex: ${idx} })">${extraTag}</span>`,
+        );
+      });
+    } else {
+      const extraTag = escapeHtml(manifest.extraTag || 'अतिरिक्त');
+      tags.push(
+        `<span class="tag tag-extra" onclick="event.stopPropagation(); showDeityPage('${key}', { initialTab: 'extra' })">${extraTag}</span>`,
+      );
+    }
   }
   const templeCount = getHomeTempleCount(key);
   if (templeCount > 0) {
