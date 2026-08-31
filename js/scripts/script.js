@@ -43,6 +43,7 @@ window.addEventListener('load', () => {
     setupHomeViewToggle();
     setupHomeSearch();
     setupNavOverflow();
+    initLangSelector();
     syncResponsiveNavLayout();
     buildHomeGrid();
     updateSiteTitleByLang();
@@ -90,10 +91,12 @@ window.addEventListener('keydown', (event) => {
   closeMantraMalaDialog();
   closeReadingMode();
   closeNavOverflow();
+  setLangMenuOpen(false);
 });
 
 window.addEventListener('DOMContentLoaded', () => {
   setupNavOverflow();
+  initLangSelector();
   syncResponsiveNavLayout();
   applyUrlState();
   const activePageEl = document.querySelector('.page.active');

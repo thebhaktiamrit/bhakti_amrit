@@ -335,3 +335,79 @@ function syncNav(pageId) {
   syncNavOverflowState();
 }
 
+// ============ LANGUAGE SELECTOR ============
+
+const LANG_LABELS = {
+  hi: 'हि',
+  mr: 'म',
+  ta: 'த',
+  te: 'తె',
+  kn: 'ಕ',
+  bn: 'ব',
+};
+
+const LANG_STORAGE_KEY = 'bhaktiAmritLang';
+
+function setLangMenuOpen(isOpen) {
+  const navLang = document.getElementById('navLang');
+  const navLangButton = document.getElementById('navLangButton');
+  if (!navLang || !navLangButton) return;
+  navLang.classList.toggle('open', isOpen);
+  navLangButton.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+}
+
+function toggleLangMenu() {
+  const navLang = document.getElementById('navLang');
+  if (!navLang) return;
+  setLangMenuOpen(!navLang.classList.contains('open'));
+}
+
+function setAppLanguage(lang) {
+  // Close dropdown
+  setLangMenuOpen(false);
+
+  // For now only Hindi is supported — other langs are "coming soon"
+  const supportedLangs = ['hi'];
+  if (!supportedLangs.includes(lang)) return;
+
+  // Persist
+  try { localStorage.setItem(LANG_STORAGE_KEY, lang); } catch (_) {}
+
+  // Update <html lang>
+  document.documentElement.setAttribute('lang', lang);
+
+  // Update button label
+  const label = document.getElementById('navLangLabel');
+  if (label) label.textContent = LANG_LABELS[lang] || lang;
+
+  // Update active item in menu
+  document.querySelectorAll('.nav-lang-item').forEach((item) => {
+    item.classList.toggle('active', item.dataset.lang === lang);
+  });
+
+  // Future: trigger content reload for the selected language here
+}
+
+function initLangSelector() {
+  const navLangButton = document.getElementById('navLangButton');
+  const navLang = document.getElementById('navLang');
+  if (!navLangButton || !navLang) return;
+  if (navLang.dataset.ready === 'true') return;
+  navLang.dataset.ready = 'true';
+
+  navLangButton.addEventListener('click', (e) => {
+    e.stopPropagation();
+    toggleLangMenu();
+  });
+
+  // Close on outside click
+  document.addEventListener('click', (e) => {
+    if (!navLang.contains(e.target)) setLangMenuOpen(false);
+  });
+
+  // Restore saved language
+  let saved = 'hi';
+  try { saved = localStorage.getItem(LANG_STORAGE_KEY) || 'hi'; } catch (_) {}
+  setAppLanguage(saved);
+}
+

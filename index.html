@@ -114,8 +114,57 @@
           </button>
         </div>
       </div>
+
+      <!-- Language Selector -->
+      <div class="nav-lang" id="navLang">
+        <button id="navLangButton" class="nav-btn" type="button"
+          aria-label="भाषा चुनें / Select Language" aria-controls="navLangMenu" aria-expanded="false">
+          <span class="nav-icon-emoji">🌐</span>
+          <span id="navLangLabel">हि</span>
+        </button>
+        <div class="nav-lang-menu" id="navLangMenu" role="menu">
+          <div class="nav-lang-menu-title">भाषा चुनें</div>
+          <button class="nav-lang-item active" data-lang="hi" role="menuitem" onclick="setAppLanguage('hi')">
+            <span class="nav-lang-item-flag">🇮🇳</span>
+            <span class="nav-lang-item-name">हिंदी</span>
+            <span class="nav-lang-item-native">Hindi</span>
+            <span class="nav-lang-item-check">✓</span>
+          </button>
+          <button class="nav-lang-item nav-lang-item--soon" data-lang="mr" role="menuitem" disabled>
+            <span class="nav-lang-item-flag">🇮🇳</span>
+            <span class="nav-lang-item-name">मराठी</span>
+            <span class="nav-lang-item-native">Marathi</span>
+            <span class="nav-lang-item-soon-badge">जल्द आएगा</span>
+          </button>
+          <button class="nav-lang-item nav-lang-item--soon" data-lang="ta" role="menuitem" disabled>
+            <span class="nav-lang-item-flag">🇮🇳</span>
+            <span class="nav-lang-item-name">தமிழ்</span>
+            <span class="nav-lang-item-native">Tamil</span>
+            <span class="nav-lang-item-soon-badge">जल्द आएगा</span>
+          </button>
+          <button class="nav-lang-item nav-lang-item--soon" data-lang="te" role="menuitem" disabled>
+            <span class="nav-lang-item-flag">🇮🇳</span>
+            <span class="nav-lang-item-name">తెలుగు</span>
+            <span class="nav-lang-item-native">Telugu</span>
+            <span class="nav-lang-item-soon-badge">जल्द आएगा</span>
+          </button>
+          <button class="nav-lang-item nav-lang-item--soon" data-lang="kn" role="menuitem" disabled>
+            <span class="nav-lang-item-flag">🇮🇳</span>
+            <span class="nav-lang-item-name">ಕನ್ನಡ</span>
+            <span class="nav-lang-item-native">Kannada</span>
+            <span class="nav-lang-item-soon-badge">जल्द आएगा</span>
+          </button>
+          <button class="nav-lang-item nav-lang-item--soon" data-lang="bn" role="menuitem" disabled>
+            <span class="nav-lang-item-flag">🇮🇳</span>
+            <span class="nav-lang-item-name">বাংলা</span>
+            <span class="nav-lang-item-native">Bengali</span>
+            <span class="nav-lang-item-soon-badge">जल्द आएगा</span>
+          </button>
+        </div>
+      </div>
     </div>
   </nav>
+
 
   <div class="main-container">
     <!-- HOME PAGE -->
