@@ -1,30 +1,47 @@
 // ============ ON-DEMAND DATA LOADER ============
+
+// ─────────────────────────────────────────────────────────────────────────────
+// LOCAL DEV FLAG
+// Set USE_LOCAL_DATA = true to load data files from your local machine instead
+// of the CDN. Useful when you want to test changes in bhakti_amrit_data before
+// pushing to GitHub.
+//
+// HOW TO USE:
+//   1. Set USE_LOCAL_DATA = true below.
+//   2. In a terminal, cd into your local bhakti_amrit_data folder and run:
+//        npx serve . --cors --listen 51584
+//   3. Open the bhakti_amrit site locally (e.g. via Live Server or npx serve).
+//   4. Data will now load from localhost:51584 instead of the CDN.
+//
+// ⚠️  IMPORTANT: Set USE_LOCAL_DATA = false before committing / deploying.
+// ─────────────────────────────────────────────────────────────────────────────
+const USE_LOCAL_DATA = false;
+const LOCAL_DATA_PORT = 51584; // Change if you use a different port
+
+const CDN_BASE = 'https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main';
+const LOCAL_BASE = `http://localhost:${LOCAL_DATA_PORT}`;
+const DATA_BASE = USE_LOCAL_DATA ? LOCAL_BASE : CDN_BASE;
+
 const DATA_MODULE_URLS = {
-  aarti:
-    'https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main/aarti.js',
-  chalisa:
-    'https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main/chalisa.js',
-  mantra:
-    'https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main/mantra.js',
-  katha:
-    'https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main/katha.js',
-  bhajan:
-    'https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main/bhajan.js',
-  geeta:
-    'https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main/geeta.js',
-  extra:
-    'https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main/extra-content.js',
-  temples:
-    'https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main/temples.js',
-  festivals:
-    'https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main/festivals.js',
-  scriptures:
-    'https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main/scriptures.js',
+  aarti: `${DATA_BASE}/aarti.js`,
+  chalisa: `${DATA_BASE}/chalisa.js`,
+  mantra: `${DATA_BASE}/mantra.js`,
+  katha: `${DATA_BASE}/katha.js`,
+  bhajan: `${DATA_BASE}/bhajan.js`,
+  geeta: `${DATA_BASE}/geeta.js`,
+  extra: `${DATA_BASE}/extra-content.js`,
+  temples: `${DATA_BASE}/temples.js`,
+  festivals: `${DATA_BASE}/festivals.js`,
+  scriptures: `${DATA_BASE}/scriptures.js`,
 };
+
+if (USE_LOCAL_DATA) {
+  console.warn(`[DEV] 🟡 USE_LOCAL_DATA is ON — loading data from ${LOCAL_BASE}`);
+}
 
 // Compact manifest to enable instant homepage badges & tab discovery without downloading full content
 const DEITY_CONTENT_MANIFEST = {
-  ganesh: { aarti: true, chalisa: true, mantra: true },
+  ganesh: { aarti: true, chalisa: true, mantra: true, extra: true, extraTag: 'सुखकर्ता दुःखहर्ता', },
   shiva: {
     aarti: true,
     chalisa: true,
