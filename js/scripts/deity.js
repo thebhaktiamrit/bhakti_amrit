@@ -225,6 +225,7 @@ function ensureAndRenderDeityTab(resolvedKey, tabId) {
 
   const i18n = window.BhaktiI18n;
   const tabLabels = {
+    about: i18n ? i18n.t('loadingAbout') || 'परिचय लोड हो रहा है...' : 'परिचय लोड हो रहा है...',
     aarti: i18n ? i18n.t('loadingAarti') : 'आरती लोड हो रही है...',
     chalisa: i18n ? i18n.t('loadingChalisa') : 'चालीसा लोड हो रही है...',
     geeta: i18n ? i18n.t('loadingGeeta') : 'गीता लोड हो रही है...',
@@ -246,11 +247,6 @@ function ensureAndRenderDeityTab(resolvedKey, tabId) {
     extra: () => getDeityTabExtraHtml(resolvedKey),
     temples: () => getDeityTabTemplesHtml(resolvedKey),
   };
-
-  if (tabId === 'about') {
-    tabEl.innerHTML = renderMap.about();
-    return;
-  }
 
   const isLoaded = isDataModuleLoaded(tabId);
   if (isLoaded) {

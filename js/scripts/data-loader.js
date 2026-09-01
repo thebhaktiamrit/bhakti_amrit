@@ -1,42 +1,80 @@
 // ============ ON-DEMAND DATA LOADER ============
 
 // ─────────────────────────────────────────────────────────────────────────────
-// LOCAL DEV FLAG
-// Set USE_LOCAL_DATA = true to load data files from your local machine instead
-// of the CDN. Useful when you want to test changes in bhakti_amrit_data before
-// pushing to GitHub.
+// DATA SOURCE MODE
+// Supported values:
+//   - 'cdn': load from jsDelivr
+//   - 'local': load from localhost
+//   - 'cdn-no-cache': load from jsDelivr with cache-busting
 //
-// HOW TO USE:
-//   1. Set USE_LOCAL_DATA = true below.
-//   2. In a terminal, cd into your local bhakti_amrit_data folder and run:
-//        npx serve . --cors --listen 51584
-//   3. Open the bhakti_amrit site locally (e.g. via Live Server or npx serve).
-//   4. Data will now load from localhost:51584 instead of the CDN.
-//
-// ⚠️  IMPORTANT: Set USE_LOCAL_DATA = false before committing / deploying.
+// Set window.BHAKTI_AMRIT_DATA_SOURCE before this file loads if you want to
+// override the default.
 // ─────────────────────────────────────────────────────────────────────────────
-const USE_LOCAL_DATA = false;
+const DATA_SOURCE_MODE = String(window.BHAKTI_AMRIT_DATA_SOURCE || 'cdn')
+  .trim()
+  .toLowerCase();
+const DATA_SOURCE_MODES = new Set(['cdn', 'local', 'cdn-no-cache']);
 const LOCAL_DATA_PORT = 51584; // Change if you use a different port
+const DATA_CACHE_BUST =
+  window.BHAKTI_AMRIT_DATA_CACHE_BUST || String(Date.now());
 
 const CDN_BASE = 'https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main';
 const LOCAL_BASE = `http://localhost:${LOCAL_DATA_PORT}`;
-const DATA_BASE = USE_LOCAL_DATA ? LOCAL_BASE : CDN_BASE;
+const SUPPORTED_DATA_LANGS = new Set(['hi', 'mr', 'ta', 'te', 'kn', 'bn']);
 
-const DATA_MODULE_URLS = {
-  aarti: `${DATA_BASE}/aarti.js`,
-  chalisa: `${DATA_BASE}/chalisa.js`,
-  mantra: `${DATA_BASE}/mantra.js`,
-  katha: `${DATA_BASE}/katha.js`,
-  bhajan: `${DATA_BASE}/bhajan.js`,
-  geeta: `${DATA_BASE}/geeta.js`,
-  extra: `${DATA_BASE}/extra-content.js`,
-  temples: `${DATA_BASE}/temples.js`,
-  festivals: `${DATA_BASE}/festivals.js`,
-  scriptures: `${DATA_BASE}/scriptures.js`,
+const DATA_MODULE_FILES = {
+  about: 'about.js',
+  aarti: 'aarti.js',
+  chalisa: 'chalisa.js',
+  mantra: 'mantra.js',
+  katha: 'katha.js',
+  bhajan: 'bhajan.js',
+  geeta: 'geeta.js',
+  extra: 'extra-content.js',
+  temples: 'temples.js',
+  festivals: 'festivals.js',
+  scriptures: 'scriptures.js',
 };
 
-if (USE_LOCAL_DATA) {
-  console.warn(`[DEV] 🟡 USE_LOCAL_DATA is ON — loading data from ${LOCAL_BASE}`);
+function getActiveDataSourceMode() {
+  return DATA_SOURCE_MODES.has(DATA_SOURCE_MODE) ? DATA_SOURCE_MODE : 'cdn';
+}
+
+function appendCacheBust(url) {
+  if (getActiveDataSourceMode() !== 'cdn-no-cache') {
+    return url;
+  }
+  const separator = url.includes('?') ? '&' : '?';
+  return `${url}${separator}v=${encodeURIComponent(DATA_CACHE_BUST)}`;
+}
+
+if (getActiveDataSourceMode() === 'local') {
+  console.warn(`[DEV] 🟡 DATA_SOURCE_MODE is LOCAL — loading data from ${LOCAL_BASE}`);
+} else if (getActiveDataSourceMode() === 'cdn-no-cache') {
+  console.warn('[DEV] 🟡 DATA_SOURCE_MODE is CDN-NO-CACHE — loading fresh assets from jsDelivr');
+}
+
+function getCurrentDataLang() {
+  const i18n = window.BhaktiI18n;
+  const rawLang =
+    i18n && typeof i18n.getCurrentLang === 'function'
+      ? i18n.getCurrentLang()
+      : document.documentElement.getAttribute('lang') || 'hi';
+  const normalized = String(rawLang || 'hi').trim().toLowerCase();
+  return SUPPORTED_DATA_LANGS.has(normalized) ? normalized : 'hi';
+}
+
+function getDataBaseUrl(lang = getCurrentDataLang()) {
+  const safeLang = SUPPORTED_DATA_LANGS.has(lang) ? lang : 'hi';
+  const mode = getActiveDataSourceMode();
+  const base = mode === 'local' ? LOCAL_BASE : CDN_BASE;
+  return `${base}/${safeLang}`;
+}
+
+function getDataModuleUrl(moduleName, lang = getCurrentDataLang()) {
+  const fileName = DATA_MODULE_FILES[moduleName];
+  if (!fileName) return '';
+  return appendCacheBust(`${getDataBaseUrl(lang)}/${fileName}`);
 }
 
 // Compact manifest to enable instant homepage badges & tab discovery without downloading full content
@@ -144,9 +182,86 @@ const DEITY_CONTENT_MANIFEST = {
 
 const loadedDataModules = {};
 const loadingDataPromises = {};
+const loadingBaseDataPromises = {};
+let dataLoadGeneration = 0;
+let currentBaseDataLang = 'hi';
 
 function isDataModuleLoaded(moduleName) {
-  return Boolean(loadedDataModules[moduleName]);
+  return Boolean(loadedDataModules[`${getCurrentDataLang()}:${moduleName}`]);
+}
+
+function getDataModuleCacheKey(moduleName, lang = getCurrentDataLang()) {
+  return `${lang}:${moduleName}`;
+}
+
+function markDataLoadGeneration() {
+  dataLoadGeneration += 1;
+}
+
+function resetLanguageDataCaches() {
+  Object.keys(loadedDataModules).forEach((key) => {
+    delete loadedDataModules[key];
+  });
+  Object.keys(loadingDataPromises).forEach((key) => {
+    delete loadingDataPromises[key];
+  });
+  Object.keys(loadingBaseDataPromises).forEach((key) => {
+    delete loadingBaseDataPromises[key];
+  });
+  currentBaseDataLang = '';
+  markDataLoadGeneration();
+}
+
+function getBaseDataUrl(lang = getCurrentDataLang()) {
+  return appendCacheBust(`${getDataBaseUrl(lang)}/data.js`);
+}
+
+function ensureLanguageData(lang = getCurrentDataLang()) {
+  const safeLang = SUPPORTED_DATA_LANGS.has(lang) ? lang : 'hi';
+  if (currentBaseDataLang === safeLang) {
+    return Promise.resolve();
+  }
+  if (loadingBaseDataPromises[safeLang]) {
+    return loadingBaseDataPromises[safeLang];
+  }
+
+  const url = getBaseDataUrl(safeLang);
+  const requestGeneration = dataLoadGeneration;
+
+  loadingBaseDataPromises[safeLang] = new Promise((resolve, reject) => {
+    const script = document.createElement('script');
+    script.src = url;
+    script.async = true;
+    script.crossOrigin = 'anonymous';
+
+    script.onload = () => {
+      try {
+        delete loadingBaseDataPromises[safeLang];
+        if (
+          requestGeneration !== dataLoadGeneration ||
+          getCurrentDataLang() !== safeLang
+        ) {
+          resolve();
+          return;
+        }
+        currentBaseDataLang = safeLang;
+        resolve();
+      } catch (err) {
+        delete loadingBaseDataPromises[safeLang];
+        reject(err);
+      }
+    };
+
+    script.onerror = (err) => {
+      delete loadingBaseDataPromises[safeLang];
+      console.error(`Failed to load base data for lang: ${safeLang}`, err);
+      reject(err);
+    };
+
+    document.head.appendChild(script);
+  });
+
+  return loadingBaseDataPromises[safeLang];
 }
 
 function applyModuleData(moduleName) {
@@ -158,6 +273,12 @@ function applyModuleData(moduleName) {
         for (const key in aartiData) {
           if (deities[key]) deities[key].aarti = aartiData[key];
         }
+      }
+      break;
+
+    case 'about':
+      if (typeof aboutData !== 'undefined') {
+        window.aboutData = aboutData;
       }
       break;
 
@@ -228,19 +349,23 @@ function applyModuleData(moduleName) {
 }
 
 function ensureDataModule(moduleName) {
-  if (loadedDataModules[moduleName]) {
+  const lang = getCurrentDataLang();
+  const cacheKey = getDataModuleCacheKey(moduleName, lang);
+
+  if (loadedDataModules[cacheKey]) {
     return Promise.resolve();
   }
-  if (loadingDataPromises[moduleName]) {
-    return loadingDataPromises[moduleName];
+  if (loadingDataPromises[cacheKey]) {
+    return loadingDataPromises[cacheKey];
   }
 
-  const url = DATA_MODULE_URLS[moduleName];
+  const url = getDataModuleUrl(moduleName, lang);
   if (!url) {
     return Promise.reject(new Error(`Unknown data module: ${moduleName}`));
   }
 
-  loadingDataPromises[moduleName] = new Promise((resolve, reject) => {
+  const requestGeneration = dataLoadGeneration;
+  loadingDataPromises[cacheKey] = new Promise((resolve, reject) => {
     const script = document.createElement('script');
     script.src = url;
     script.async = true;
@@ -248,18 +373,25 @@ function ensureDataModule(moduleName) {
 
     script.onload = () => {
       try {
+        delete loadingDataPromises[cacheKey];
+        if (
+          requestGeneration !== dataLoadGeneration ||
+          getCurrentDataLang() !== lang
+        ) {
+          resolve();
+          return;
+        }
         applyModuleData(moduleName);
-        loadedDataModules[moduleName] = true;
-        delete loadingDataPromises[moduleName];
+        loadedDataModules[cacheKey] = true;
         resolve();
       } catch (err) {
-        delete loadingDataPromises[moduleName];
+        delete loadingDataPromises[cacheKey];
         reject(err);
       }
     };
 
     script.onerror = (err) => {
-      delete loadingDataPromises[moduleName];
+      delete loadingDataPromises[cacheKey];
       console.error(`Failed to load data module: ${moduleName}`, err);
       reject(err);
     };
@@ -267,8 +399,11 @@ function ensureDataModule(moduleName) {
     document.head.appendChild(script);
   });
 
-  return loadingDataPromises[moduleName];
+  return loadingDataPromises[cacheKey];
 }
+
+window.addEventListener('bhakti-lang-change', resetLanguageDataCaches);
+window.ensureLanguageData = ensureLanguageData;
 
 function getContentLoadingHtml(message = 'लोड हो रहा है...') {
   return `

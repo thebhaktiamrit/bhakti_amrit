@@ -386,35 +386,42 @@ function toggleLangMenu() {
   setLangMenuOpen(!navLang.classList.contains('open'));
 }
 
-function setAppLanguage(lang) {
+function applyLanguageSelectionUI(lang) {
+  document.documentElement.setAttribute('lang', lang);
+  const label = document.getElementById('navLangLabel');
+  if (label) label.textContent = LANG_LABELS[lang] || lang;
+  document.querySelectorAll('.nav-lang-item').forEach((item) => {
+    item.classList.toggle('active', item.dataset.lang === lang);
+  });
+}
+
+function setAppLanguage(lang, options = {}) {
   // Close dropdown
   setLangMenuOpen(false);
 
   // Validate against available translations
   const i18n = window.BhaktiI18n;
   if (!i18n || !i18n.translations[lang]) return;
+  const shouldReload = options.reload !== false;
 
-  // Persist
+  const currentLang =
+    typeof i18n.getCurrentLang === 'function' ? i18n.getCurrentLang() : 'hi';
+
+  // Persist the selection so the next page load uses the matching data folder.
   try { localStorage.setItem(LANG_STORAGE_KEY, lang); } catch (_) {}
 
-  // Update <html lang>
-  document.documentElement.setAttribute('lang', lang);
+  applyLanguageSelectionUI(lang);
 
-  // Sync the i18n engine
+  if (currentLang === lang) {
+    return;
+  }
+
   i18n.setI18nLang(lang);
-
-  // Update button label
-  const label = document.getElementById('navLangLabel');
-  if (label) label.textContent = LANG_LABELS[lang] || lang;
-
-  // Update active item in menu
-  document.querySelectorAll('.nav-lang-item').forEach((item) => {
-    item.classList.toggle('active', item.dataset.lang === lang);
-  });
-
-  // Apply all translations to DOM — pass rerender:true so the home grid
-  // and any open deity page refresh their translated labels immediately.
   i18n.applyI18n({ rerender: true });
+
+  if (shouldReload) {
+    window.location.reload();
+  }
 }
 
 function initLangSelector() {
@@ -437,5 +444,9 @@ function initLangSelector() {
   // Restore saved language
   let saved = 'hi';
   try { saved = localStorage.getItem(LANG_STORAGE_KEY) || 'hi'; } catch (_) {}
-  setAppLanguage(saved);
+  if (saved !== (window.BhaktiI18n?.getCurrentLang?.() || 'hi')) {
+    setAppLanguage(saved, { reload: false });
+    return;
+  }
+  applyLanguageSelectionUI(saved);
 }
