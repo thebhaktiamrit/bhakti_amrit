@@ -150,9 +150,9 @@ function getFilteredHomeDeities(filter = activeHomeType, searchQuery = '') {
   return Object.entries(deities).filter(
     ([key, deity]) =>
       (showFavoritesOnly ? favorites.includes(key) : true) &&
-      (filter === 'all' ? true : getDeityType(key) === filter) &&
+      (filter === 'all' ? true : getCanonicalDeityType(key) === filter) &&
       (!normalizedQuery ||
-        `${key} ${deity.name} ${deity.desc} ${getDeityType(key)}`
+        `${key} ${deity.name} ${deity.desc} ${getCanonicalDeityType(key)} ${getDeityType(key)}`
           .toLowerCase()
           .includes(normalizedQuery)),
   );

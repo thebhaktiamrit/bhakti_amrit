@@ -61,6 +61,10 @@ function getDeityType(key) {
   return hindiType;
 }
 
+function getCanonicalDeityType(key) {
+  return deityTypeMap[key] || 'देव';
+}
+
 function getValidDeityImage(path) {
   if (!path) return '';
   const normalized = String(path)
@@ -224,8 +228,20 @@ const homeTypeToNavId = {
   'लोक देव': 'type-lok-dev',
 };
 
+const homeTypeToUrlParam = {
+  देव: 'dev',
+  देवी: 'devi',
+  अवतार: 'avatar',
+  'ग्रह देव': 'grah-dev',
+  'लोक देव': 'lok-dev',
+};
+
 function getNavIdByHomeType(typeId = 'all') {
   return homeTypeToNavId[typeId] || 'home';
+}
+
+function getUrlParamByHomeType(typeId = 'all') {
+  return homeTypeToUrlParam[typeId] || typeId;
 }
 
 function getSafeHomeType(typeId = 'all') {
@@ -839,7 +855,7 @@ function updateUrlState({
   } else {
     url.pathname = '/';
     url.search = '';
-    if (safeType !== 'all') url.searchParams.set('type', safeType);
+    if (safeType !== 'all') url.searchParams.set('type', getUrlParamByHomeType(safeType));
   }
 
   const method = replace ? 'replaceState' : 'pushState';

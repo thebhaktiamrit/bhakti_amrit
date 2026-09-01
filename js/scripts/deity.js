@@ -308,7 +308,7 @@ function showDeityPage(key, options = {}) {
 
   // If a deity is opened directly from "मुख्य पृष्ठ", highlight its type menu.
   if (activeHomeNavId === 'home' || activeHomeType === 'all') {
-    const inferredType = getDeityType(resolvedKey);
+    const inferredType = getCanonicalDeityType(resolvedKey);
     activeHomeType = inferredType;
     activeHomeNavId = getNavIdByHomeType(inferredType);
   }

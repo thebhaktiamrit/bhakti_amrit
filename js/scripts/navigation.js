@@ -197,6 +197,12 @@ function updateDeityBackButton(pageId) {
 let defaultSiteHeaderMarkup = '';
 let defaultSiteHeaderHeight = 0;
 
+function refreshDefaultSiteHeaderMarkup() {
+  const siteHeaderMount = document.getElementById('siteHeaderMount');
+  if (!siteHeaderMount) return;
+  defaultSiteHeaderMarkup = siteHeaderMount.innerHTML;
+}
+
 function syncDefaultSiteHeaderHeight() {
   const siteHeaderMount = document.getElementById('siteHeaderMount');
   if (!siteHeaderMount) return;
@@ -225,18 +231,28 @@ function syncDefaultSiteHeaderHeight() {
   );
 }
 
+window.addEventListener('bhakti-lang-change', () => {
+  refreshDefaultSiteHeaderMarkup();
+  syncDefaultSiteHeaderHeight();
+});
+
 function syncSiteHeaderByPage(pageId) {
   const siteHeaderMount = document.getElementById('siteHeaderMount');
   const deityHeader = document.getElementById('deityHeader');
   if (!siteHeaderMount) return;
 
   if (!defaultSiteHeaderMarkup) {
-    defaultSiteHeaderMarkup = siteHeaderMount.innerHTML;
+    refreshDefaultSiteHeaderMarkup();
     syncDefaultSiteHeaderHeight();
   }
 
+  const currentLang =
+    window.BhaktiI18n && typeof window.BhaktiI18n.getCurrentLang === 'function'
+      ? window.BhaktiI18n.getCurrentLang()
+      : 'hi';
   const useDeityHeader =
     pageId === 'deity' &&
+    currentLang === 'hi' &&
     deityHeader &&
     deityHeader.innerHTML &&
     deityHeader.innerHTML.trim().length > 0;
