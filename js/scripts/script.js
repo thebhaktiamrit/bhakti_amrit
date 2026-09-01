@@ -49,6 +49,11 @@ window.addEventListener('load', () => {
     updateSiteTitleByLang();
     syncDefaultSiteHeaderHeight();
 
+    // Apply all i18n translations to DOM now that everything is rendered
+    if (window.BhaktiI18n) {
+      window.BhaktiI18n.applyI18n();
+    }
+
     const htmlObserver = new MutationObserver(updateSiteTitleByLang);
     htmlObserver.observe(document.documentElement, {
       attributes: true,

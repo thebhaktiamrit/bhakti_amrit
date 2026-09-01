@@ -40,11 +40,11 @@ function getDeityTabAartiHtml(resolvedKey) {
               class="aarti-bell-btn"
               type="button"
               onclick="playAartiBell(this)"
-              aria-label="घंटी बजाएं"
-              title="घंटी बजाएं"
+              aria-label="${window.BhaktiI18n ? window.BhaktiI18n.t('aartiRingBell') : 'घंटी बजाएं'}"
+              title="${window.BhaktiI18n ? window.BhaktiI18n.t('aartiRingBell') : 'घंटी बजाएं'}"
             >
               <span class="chalisa-nav-icon aarti-bell-icon" aria-hidden="true">🔔</span>
-              <span class="chalisa-nav-label aarti-bell-label">घंटी</span>
+              <span class="chalisa-nav-label aarti-bell-label">${window.BhaktiI18n ? window.BhaktiI18n.t('aartiRingBellLabel') : 'घंटी'}</span>
             </button>
           </div>
           ${renderLyrics(deity.aarti)}
@@ -223,15 +223,16 @@ function ensureAndRenderDeityTab(resolvedKey, tabId) {
   const tabEl = document.getElementById('tab-' + tabId);
   if (!tabEl) return;
 
+  const i18n = window.BhaktiI18n;
   const tabLabels = {
-    aarti: 'आरती लोड हो रही है...',
-    chalisa: 'चालीसा लोड हो रही है...',
-    geeta: 'गीता लोड हो रही है...',
-    katha: 'कथा लोड हो रही है...',
-    bhajan: 'भजन लोड हो रहा है...',
-    mantra: 'मंत्र लोड हो रहे हैं...',
-    extra: 'स्तोत्र लोड हो रहा है...',
-    temples: 'मंदिरों की सूची लोड हो रही है...',
+    aarti: i18n ? i18n.t('loadingAarti') : 'आरती लोड हो रही है...',
+    chalisa: i18n ? i18n.t('loadingChalisa') : 'चालीसा लोड हो रही है...',
+    geeta: i18n ? i18n.t('loadingGeeta') : 'गीता लोड हो रही है...',
+    katha: i18n ? i18n.t('loadingKatha') : 'कथा लोड हो रही है...',
+    bhajan: i18n ? i18n.t('loadingBhajan') : 'भजन लोड हो रहा है...',
+    mantra: i18n ? i18n.t('loadingMantra') : 'मंत्र लोड हो रहे हैं...',
+    extra: i18n ? i18n.t('loadingExtra') : 'स्तोत्र लोड हो रहा है...',
+    temples: i18n ? i18n.t('loadingTemples') : 'मंदिरों की सूची लोड हो रही है...',
   };
 
   const renderMap = {
@@ -352,30 +353,31 @@ function showDeityPage(key, options = {}) {
 
   // Build tabs
   const tabs = document.getElementById('deityTabs');
+  const _i18n = window.BhaktiI18n;
   const tabButtons = [
-    `<button class="tab-btn ${activeDeityTab === 'about' ? 'active' : ''}" onclick="showTab('about', this)">🚩 परिचय</button>`,
+    `<button class="tab-btn ${activeDeityTab === 'about' ? 'active' : ''}" onclick="showTab('about', this)">${_i18n ? _i18n.t('tabAbout') : '🚩 परिचय'}</button>`,
     hasLyricsContent(deity.aarti) || manifest?.aarti
-      ? `<button class="tab-btn ${activeDeityTab === 'aarti' ? 'active' : ''}" onclick="showTab('aarti', this)">🪔 आरती</button>`
+      ? `<button class="tab-btn ${activeDeityTab === 'aarti' ? 'active' : ''}" onclick="showTab('aarti', this)">${_i18n ? _i18n.t('tabAarti') : '🪔 आरती'}</button>`
       : '',
     hasLyricsContent(deity.chalisa) || manifest?.chalisa
-      ? `<button class="tab-btn ${activeDeityTab === 'chalisa' ? 'active' : ''}" onclick="showTab('chalisa', this)">📖 चालीसा</button>`
+      ? `<button class="tab-btn ${activeDeityTab === 'chalisa' ? 'active' : ''}" onclick="showTab('chalisa', this)">${_i18n ? _i18n.t('tabChalisa') : '📖 चालीसा'}</button>`
       : '',
     hasGeetaContent(geetaData) || manifest?.geeta
       ? `<button class="tab-btn ${activeDeityTab === 'geeta' ? 'active' : ''}" onclick="showTab('geeta', this)">📘 ${geetaTag}</button>`
       : '',
     hasLyricsContent(deity.katha) || manifest?.katha
-      ? `<button class="tab-btn ${activeDeityTab === 'katha' ? 'active' : ''}" onclick="showTab('katha', this)">📚 कथा</button>`
+      ? `<button class="tab-btn ${activeDeityTab === 'katha' ? 'active' : ''}" onclick="showTab('katha', this)">${_i18n ? _i18n.t('tabKatha') : '📚 कथा'}</button>`
       : '',
     hasLyricsContent(deity.bhajan) || manifest?.bhajan
-      ? `<button class="tab-btn ${activeDeityTab === 'bhajan' ? 'active' : ''}" onclick="showTab('bhajan', this)">🎵 भजन</button>`
+      ? `<button class="tab-btn ${activeDeityTab === 'bhajan' ? 'active' : ''}" onclick="showTab('bhajan', this)">${_i18n ? _i18n.t('tabBhajan') : '🎵 भजन'}</button>`
       : '',
     hasMantrasContent(deity.mantras) || manifest?.mantra
-      ? `<button class="tab-btn ${activeDeityTab === 'mantra' ? 'active' : ''}" onclick="showTab('mantra', this)">🕉️ मंत्र</button>`
+      ? `<button class="tab-btn ${activeDeityTab === 'mantra' ? 'active' : ''}" onclick="showTab('mantra', this)">${_i18n ? _i18n.t('tabMantra') : '🕉️ मंत्र'}</button>`
       : '',
     hasLyricsContent(extraData) || manifest?.extra
       ? `<button class="tab-btn ${activeDeityTab === 'extra' ? 'active' : ''}" onclick="showTab('extra', this)">✨ ${extraTag}</button>`
       : '',
-    `<button class="tab-btn ${activeDeityTab === 'temples' ? 'active' : ''}" onclick="showTab('temples', this)">🛕 मंदिर</button>`,
+    `<button class="tab-btn ${activeDeityTab === 'temples' ? 'active' : ''}" onclick="showTab('temples', this)">${_i18n ? _i18n.t('tabTemples') : '🛕 मंदिर'}</button>`,
   ].join('');
   tabs.innerHTML = `
   ${tabButtons}`;
@@ -463,7 +465,14 @@ function getSectionMetaHtml({
       ? isContentFavorite(deityKey, contentType, contentSlug)
       : false;
   const favoriteIcon = isFavorite ? '❤️' : '🤍';
-  const favoriteLabel = isFavorite ? 'पसंदीदा से हटाएं' : 'पसंदीदा में जोड़ें';
+  const _sm = window.BhaktiI18n;
+  const favoriteLabel = isFavorite
+    ? (_sm ? _sm.t('removeFavorite') : 'पसंदीदा से हटाएं')
+    : (_sm ? _sm.t('addFavorite') : 'पसंदीदा में जोड़ें');
+  const meaningShowLabel = _sm ? _sm.t('meaningShow') : 'हिंदी में समझें';
+  const meaningHideLabel = _sm ? _sm.t('meaningHide') : 'हिंदी अर्थ छुपाएं';
+  const readingModeLabel = _sm ? _sm.t('readingMode') : 'पठन मोड';
+  const printLabel = _sm ? _sm.t('printLabel') : 'प्रिंट';
 
   const controlItems = [
     readTimeLabel
@@ -473,14 +482,14 @@ function getSectionMetaHtml({
     </span>`
       : '',
     showLyricsMeaningToggle
-      ? `<button class="section-action-btn section-meaning-btn" type="button" onclick="toggleLyricsMeanings(this)" aria-expanded="false" data-collapsed-label="हिंदी में समझें" data-expanded-label="हिंदी अर्थ छुपाएं" title="हिंदी में समझें" aria-label="हिंदी में समझें">
-      <span class="section-meaning-label">हिंदी में समझें</span>
+      ? `<button class="section-action-btn section-meaning-btn" type="button" onclick="toggleLyricsMeanings(this)" aria-expanded="false" data-collapsed-label="${meaningShowLabel}" data-expanded-label="${meaningHideLabel}" title="${meaningShowLabel}" aria-label="${meaningShowLabel}">
+      <span class="section-meaning-label">${meaningShowLabel}</span>
     </button>`
       : '',
     showReadingMode
-      ? `<button class="section-action-btn section-reading-btn" type="button" onclick="openReadingModeFromSection(this)" title="पठन मोड" aria-label="पठन मोड">
+      ? `<button class="section-action-btn section-reading-btn" type="button" onclick="openReadingModeFromSection(this)" title="${readingModeLabel}" aria-label="${readingModeLabel}">
       <span class="section-reading-icon" aria-hidden="true">📖</span>
-      <span class="section-reading-label">पठन मोड</span>
+      <span class="section-reading-label">${readingModeLabel}</span>
     </button>`
       : '',
     deityKey && contentType
@@ -489,9 +498,9 @@ function getSectionMetaHtml({
       <span class="section-favorite-label">${favoriteLabel}</span>
     </button>`
       : '',
-    `<button class="section-action-btn section-print-btn" type="button" onclick="printDeityContent()" title="प्रिंट करें" aria-label="प्रिंट करें">
+    `<button class="section-action-btn section-print-btn" type="button" onclick="printDeityContent()" title="${printLabel}" aria-label="${printLabel}">
       <span class="section-print-icon" aria-hidden="true">🖨️</span>
-      <span class="section-print-label">प्रिंट</span>
+      <span class="section-print-label">${printLabel}</span>
     </button>`,
   ].filter(Boolean);
   const isSingleControl = controlItems.length === 1;

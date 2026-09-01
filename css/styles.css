@@ -112,6 +112,7 @@ html {
   font-size: calc(100% * var(--font-size-multiplier, 1));
   transition: font-size 0.3s ease;
   background: var(--page-background);
+  overflow-x: hidden;
 }
 
 * {
@@ -404,10 +405,17 @@ nav {
 
 /* ─── LANGUAGE SELECTOR ─── reuses nav-overflow-menu visual ─── */
 .nav-lang {
-  position: relative;
+  position: absolute;
+  top: calc(env(safe-area-inset-top, 0px) + 12px);
+  right: calc(env(safe-area-inset-right, 0px) + 12px);
+  left: auto;
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   flex-shrink: 0;
+  width: auto;
+  max-width: calc(100vw - 24px);
+  z-index: 1300;
 }
 
 /* The language dropdown panel — identical look to nav-overflow-menu */
@@ -426,6 +434,10 @@ nav {
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
   box-shadow: 0 18px 44px rgba(var(--dark-rgb), 0.42);
+  max-width: calc(100vw - 24px);
+  max-height: calc(100vh - 88px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
   z-index: 1010;
 }
 
@@ -2890,6 +2902,18 @@ footer {
 }
 
 @media (max-width: 600px) {
+  .nav-lang {
+    top: calc(env(safe-area-inset-top, 0px) + 8px);
+    right: calc(env(safe-area-inset-right, 0px) + 8px);
+    max-width: calc(100vw - 16px);
+  }
+
+  .nav-lang-menu {
+    min-width: min(210px, calc(100vw - 16px));
+    max-width: calc(100vw - 16px);
+    max-height: calc(100vh - 72px);
+  }
+
   nav {
     display: grid;
     grid-template-columns: max-content minmax(0, 1fr);
@@ -2907,12 +2931,7 @@ footer {
   .nav-primary {
     width: 100%;
     display: grid;
-    grid-template-columns:
-      minmax(0, 0.92fr)
-      minmax(0, 0.92fr)
-      minmax(0, 1.16fr)
-      auto
-      auto;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     align-items: stretch;
     gap: 6px;
   }
@@ -2922,15 +2941,13 @@ footer {
     padding-inline: 8px;
   }
 
-  /* On mobile, lang sits as the 5th auto column inside nav-primary row */
-  .nav-lang {
-    display: flex;
-    align-items: stretch;
+  .nav-overflow {
+    width: 100%;
+    justify-self: stretch;
   }
 
-  .nav-lang > .nav-btn {
+  .nav-btn.nav-more-btn {
     width: 100%;
-    padding-inline: 8px;
   }
 
   .home-grid {
@@ -4994,4 +5011,3 @@ footer {
     transform: rotate(360deg);
   }
 }
-

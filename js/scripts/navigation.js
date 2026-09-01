@@ -121,18 +121,23 @@ function setupNavOverflow() {
 }
 
 function updateSiteTitleByLang() {
-  const titleEl = document.getElementById('siteTitle');
-  const lang = (
-    document.documentElement.getAttribute('lang') || ''
-  ).toLowerCase();
+  // Delegate to i18n system if available
+  if (window.BhaktiI18n) {
+    const titleEl = document.getElementById('siteTitle');
+    if (titleEl) titleEl.textContent = window.BhaktiI18n.t('siteTitle');
+    const subtitleEl = document.getElementById('siteSubtitle');
+    if (subtitleEl) subtitleEl.textContent = window.BhaktiI18n.t('siteSubtitle');
+    return;
+  }
+  // Fallback (no i18n loaded)
+  const lang = (document.documentElement.getAttribute('lang') || '').toLowerCase();
   const isEnglish = lang.startsWith('en');
-
+  const titleEl = document.getElementById('siteTitle');
   if (titleEl) {
     titleEl.textContent = isEnglish
       ? titleEl.dataset.titleEn || 'Bhakti Amrit'
       : titleEl.dataset.titleHi || 'भक्ति अमृत';
   }
-
   const subtitleEl = document.getElementById('siteSubtitle');
   if (subtitleEl) {
     subtitleEl.textContent = isEnglish
@@ -144,9 +149,12 @@ function updateSiteTitleByLang() {
 function updateTopHomeButton(pageId) {
   const homeBtn = document.getElementById('mainHomeButton');
   if (!homeBtn) return;
+  const backLabel = window.BhaktiI18n ? window.BhaktiI18n.t('navBack') : 'वापस जाएं';
+  const homeLabel = window.BhaktiI18n ? window.BhaktiI18n.t('navHome') : 'मुख्य पृष्ठ';
+  const labelClass = 'nav-label';
 
   if (pageId === 'deity') {
-    homeBtn.innerHTML = '<span class="nav-icon-emoji">↩️</span> वापस जाएं';
+    homeBtn.innerHTML = `<span class="nav-icon-emoji">↩️</span><span class="${labelClass}">${backLabel}</span>`;
     homeBtn.setAttribute(
       'onclick',
       'showHomeByType(deityReturnHomeType, deityReturnHomeNavId)',
@@ -155,24 +163,24 @@ function updateTopHomeButton(pageId) {
   }
 
   if (pageId === 'temple-detail') {
-    homeBtn.innerHTML = '<span class="nav-icon-emoji">↩️</span> वापस जाएं';
+    homeBtn.innerHTML = `<span class="nav-icon-emoji">↩️</span><span class="${labelClass}">${backLabel}</span>`;
     homeBtn.setAttribute('onclick', 'showTemplesMenuPage()');
     return;
   }
 
   if (pageId === 'festival-detail') {
-    homeBtn.innerHTML = '<span class="nav-icon-emoji">↩️</span> वापस जाएं';
+    homeBtn.innerHTML = `<span class="nav-icon-emoji">↩️</span><span class="${labelClass}">${backLabel}</span>`;
     homeBtn.setAttribute('onclick', 'showFestivalsMenuPage()');
     return;
   }
 
   if (pageId === 'scripture-detail') {
-    homeBtn.innerHTML = '<span class="nav-icon-emoji">↩️</span> वापस जाएं';
+    homeBtn.innerHTML = `<span class="nav-icon-emoji">↩️</span><span class="${labelClass}">${backLabel}</span>`;
     homeBtn.setAttribute('onclick', 'showScripturesMenuPage()');
     return;
   }
 
-  homeBtn.innerHTML = '<span class="nav-icon-emoji">🏠</span> मुख्य पृष्ठ';
+  homeBtn.innerHTML = `<span class="nav-icon-emoji">🏠</span><span class="${labelClass}">${homeLabel}</span>`;
   homeBtn.setAttribute('onclick', "showHomeByType('all', 'home')");
 }
 
@@ -366,15 +374,18 @@ function setAppLanguage(lang) {
   // Close dropdown
   setLangMenuOpen(false);
 
-  // For now only Hindi is supported — other langs are "coming soon"
-  const supportedLangs = ['hi'];
-  if (!supportedLangs.includes(lang)) return;
+  // Validate against available translations
+  const i18n = window.BhaktiI18n;
+  if (!i18n || !i18n.translations[lang]) return;
 
   // Persist
   try { localStorage.setItem(LANG_STORAGE_KEY, lang); } catch (_) {}
 
   // Update <html lang>
   document.documentElement.setAttribute('lang', lang);
+
+  // Sync the i18n engine
+  i18n.setI18nLang(lang);
 
   // Update button label
   const label = document.getElementById('navLangLabel');
@@ -385,7 +396,9 @@ function setAppLanguage(lang) {
     item.classList.toggle('active', item.dataset.lang === lang);
   });
 
-  // Future: trigger content reload for the selected language here
+  // Apply all translations to DOM — pass rerender:true so the home grid
+  // and any open deity page refresh their translated labels immediately.
+  i18n.applyI18n({ rerender: true });
 }
 
 function initLangSelector() {
@@ -410,4 +423,3 @@ function initLangSelector() {
   try { saved = localStorage.getItem(LANG_STORAGE_KEY) || 'hi'; } catch (_) {}
   setAppLanguage(saved);
 }
-

@@ -164,32 +164,34 @@ function getHomeTagsHtml(key, deity) {
     typeof DEITY_CONTENT_MANIFEST !== 'undefined'
       ? DEITY_CONTENT_MANIFEST[key]
       : null;
+  const tagName = (key) => window.BhaktiI18n ? window.BhaktiI18n.t(key) : key;
 
   if (hasLyricsContent(deity.aarti) || manifest?.aarti) {
     tags.push(
-      `<span class="tag tag-aarti" onclick="event.stopPropagation(); showDeityPage('${key}', { initialTab: 'aarti' })">आरती</span>`,
+      `<span class="tag tag-aarti" onclick="event.stopPropagation(); showDeityPage('${key}', { initialTab: 'aarti' })">${tagName('tagAarti')}</span>`,
     );
   }
   if (hasLyricsContent(deity.chalisa) || manifest?.chalisa) {
     tags.push(
-      `<span class="tag tag-chalisa" onclick="event.stopPropagation(); showDeityPage('${key}', { initialTab: 'chalisa' })">चालीसा</span>`,
+      `<span class="tag tag-chalisa" onclick="event.stopPropagation(); showDeityPage('${key}', { initialTab: 'chalisa' })">${tagName('tagChalisa')}</span>`,
     );
   }
   if (hasGeetaContent(deity.geeta) || manifest?.geeta) {
     tags.push(
-      `<span class="tag tag-geeta" onclick="event.stopPropagation(); showDeityPage('${key}', { initialTab: 'geeta' })">गीता</span>`,
+      `<span class="tag tag-geeta" onclick="event.stopPropagation(); showDeityPage('${key}', { initialTab: 'geeta' })">${tagName('tagGeeta')}</span>`,
     );
   }
   if (hasMantrasContent(deity.mantras) || manifest?.mantra) {
     tags.push(
-      `<span class="tag tag-mantra" onclick="event.stopPropagation(); showDeityPage('${key}', { initialTab: 'mantra' })">मंत्र</span>`,
+      `<span class="tag tag-mantra" onclick="event.stopPropagation(); showDeityPage('${key}', { initialTab: 'mantra' })">${tagName('tagMantra')}</span>`,
     );
   }
   if (hasLyricsContent(deity.katha) || manifest?.katha) {
     const kathaCount = deity.katha
       ? getKathaEntries(deity.katha, key).length
       : manifest?.kathaCount || 1;
-    const kathaLabel = kathaCount > 1 ? `कथा (${kathaCount})` : 'कथा';
+    const baseLabel = tagName('tagKatha');
+    const kathaLabel = kathaCount > 1 ? `${baseLabel} (${kathaCount})` : baseLabel;
     tags.push(
       `<span class="tag tag-katha" onclick="event.stopPropagation(); showDeityPage('${key}', { initialTab: 'katha' })">${kathaLabel}</span>`,
     );
@@ -198,7 +200,8 @@ function getHomeTagsHtml(key, deity) {
     const bhajanCount = deity.bhajan
       ? getBhajanEntries(deity.bhajan, key).length
       : manifest?.bhajanCount || 1;
-    const bhajanLabel = bhajanCount > 1 ? `भजन (${bhajanCount})` : 'भजन';
+    const baseLabel = tagName('tagBhajan');
+    const bhajanLabel = bhajanCount > 1 ? `${baseLabel} (${bhajanCount})` : baseLabel;
     tags.push(
       `<span class="tag tag-bhajan" onclick="event.stopPropagation(); showDeityPage('${key}', { initialTab: 'bhajan' })">${bhajanLabel}</span>`,
     );
@@ -244,8 +247,10 @@ function getHomeTagsHtml(key, deity) {
   const hasHiddenTags = tags.length > HOME_VISIBLE_TAG_COUNT;
   const visibleTags =
     hasHiddenTags && !isExpanded ? tags.slice(0, HOME_VISIBLE_TAG_COUNT) : tags;
+  const moreLabel = window.BhaktiI18n ? window.BhaktiI18n.t('tagMore') : 'और..';
+  const lessLabel = window.BhaktiI18n ? window.BhaktiI18n.t('tagLess') : 'कम..';
   const toggleHtml = hasHiddenTags
-    ? `<button class="tag tag-toggle" type="button" onclick="toggleHomeTags(event, '${key}')">${isExpanded ? 'कम..' : 'और..'}</button>`
+    ? `<button class="tag tag-toggle" type="button" onclick="toggleHomeTags(event, '${key}')">${isExpanded ? lessLabel : moreLabel}</button>`
     : '';
 
   return `<div class="deity-tags${isExpanded ? ' is-expanded' : ''}" data-home-tags-key="${key}">${visibleTags.join('')}${toggleHtml}</div>`;
@@ -406,11 +411,13 @@ function renderHomeGrid(
       const queryText = normalizedQuery
         ? ` "${escapeHtml(searchQuery.trim())}"`
         : '';
+      const emptyTitle = window.BhaktiI18n ? window.BhaktiI18n.t('emptyStateTitle') : 'कोई परिणाम नहीं मिला';
+      const emptySubtitle = window.BhaktiI18n ? window.BhaktiI18n.t('emptyStateSubtitle') : 'दूसरा नाम लिखें या ऊपर की श्रेणी बदलकर देखें';
       grid.innerHTML = `
         <div class="home-empty-state">
           <div class="home-empty-icon">🔍</div>
-          <div class="home-empty-title">कोई परिणाम नहीं मिला${queryText}</div>
-          <div class="home-empty-subtitle">दूसरा नाम लिखें या ऊपर की श्रेणी बदलकर देखें</div>
+          <div class="home-empty-title">${emptyTitle}${queryText}</div>
+          <div class="home-empty-subtitle">${emptySubtitle}</div>
         </div>
       `;
       return;
@@ -584,9 +591,9 @@ function syncFavoritesToggle() {
     const titleText = document.getElementById('homeSectionTitleText');
     const subtitleText = document.getElementById('homeSectionSubtitle');
     if (iconEl) iconEl.textContent = '❤️';
-    if (titleText) titleText.textContent = 'पसंदीदा देव-देवी';
+    if (titleText) titleText.textContent = window.BhaktiI18n ? window.BhaktiI18n.t('favoritesTitle') : 'पसंदीदा देव-देवी';
     if (subtitleText)
-      subtitleText.textContent = 'आपके पसंदीदा देव-देवी की सूची';
+      subtitleText.textContent = window.BhaktiI18n ? window.BhaktiI18n.t('favoritesSubtitle') : 'आपके पसंदीदा देव-देवी की सूची';
   } else {
     updateHomeSectionHeader(activeHomeType);
   }

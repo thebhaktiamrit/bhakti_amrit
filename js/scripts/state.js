@@ -54,7 +54,11 @@ const deityTypeMap = {
 };
 
 function getDeityType(key) {
-  return deityTypeMap[key] || 'देव';
+  const hindiType = deityTypeMap[key] || 'देव';
+  if (window.BhaktiI18n) {
+    return window.BhaktiI18n.getI18nDeityType(hindiType);
+  }
+  return hindiType;
 }
 
 function getValidDeityImage(path) {
@@ -260,11 +264,14 @@ function getSafeHomeType(typeId = 'all') {
 }
 
 function getHomeSearchPlaceholder(typeId = activeHomeType) {
+  if (window.BhaktiI18n) {
+    return window.BhaktiI18n.getI18nSearchPlaceholder(typeId);
+  }
   const placeholders = {
     all: 'देव-देवी का नाम लिखें...',
-    देव: 'देव का नाम लिखें...',
-    देवी: 'देवी का नाम लिखें...',
-    अवतार: 'अवतार का नाम लिखें...',
+    'देव': 'देव का नाम लिखें...',
+    'देवी': 'देवी का नाम लिखें...',
+    'अवतार': 'अवतार का नाम लिखें...',
     'ग्रह देव': 'ग्रह देव का नाम लिखें...',
     'लोक देव': 'लोक देव का नाम लिखें...',
   };
@@ -273,6 +280,22 @@ function getHomeSearchPlaceholder(typeId = activeHomeType) {
 }
 
 function getHomeSectionMeta(typeId = activeHomeType) {
+  const safeType = getSafeHomeType(typeId);
+  if (window.BhaktiI18n) {
+    const iconMap = {
+      all: '🪔',
+      'देव': '🕉️',
+      'देवी': '🌺',
+      'अवतार': '🏹',
+      'ग्रह देव': '🪐',
+      'लोक देव': '🎠',
+    };
+    return {
+      icon: iconMap[safeType] || '🪔',
+      title: window.BhaktiI18n.getI18nSectionTitle(safeType),
+      subtitle: window.BhaktiI18n.getI18nSectionSubtitle(safeType),
+    };
+  }
   const sectionMeta = {
     all: {
       icon: '🪔',
@@ -308,7 +331,6 @@ function getHomeSectionMeta(typeId = activeHomeType) {
         'किसी भी लोक देव का नाम चुनें और उनकी आरती, चालीसा व मंत्र पढ़ें',
     },
   };
-  const safeType = getSafeHomeType(typeId);
   return sectionMeta[safeType] || sectionMeta.all;
 }
 
