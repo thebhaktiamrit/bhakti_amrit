@@ -117,6 +117,7 @@ window.addEventListener('DOMContentLoaded', () => {
     templeId: activeTempleDetailId,
     festivalId: activeFestivalDetailId,
     scriptureId: activeScriptureDetailId,
+    kathaId: activeKathaDetailId,
     replace: true,
   });
   syncChalisaNavigationControls();

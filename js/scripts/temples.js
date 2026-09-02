@@ -640,6 +640,7 @@ function showTempleDetailsPage(templeId, options = {}) {
   activeTempleDetailId = temple.id;
   activeFestivalDetailId = '';
   activeScriptureDetailId = '';
+  activeKathaDetailId = '';
   const headerEl = document.getElementById('templeDetailHeader');
   const infoEl = document.getElementById('templeDetailInfo');
   if (!headerEl || !infoEl) return;

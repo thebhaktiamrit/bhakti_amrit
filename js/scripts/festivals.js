@@ -213,6 +213,7 @@ function showFestivalDetailsPage(festivalId, options = {}) {
   activeTempleDetailId = '';
   activeFestivalDetailId = festival.id;
   activeScriptureDetailId = '';
+  activeKathaDetailId = '';
   const headerEl = document.getElementById('festivalDetailHeader');
   const infoEl = document.getElementById('festivalDetailInfo');
   if (!headerEl || !infoEl) return;

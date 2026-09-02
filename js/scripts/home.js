@@ -476,6 +476,7 @@ function showHomeByType(typeId = 'all', navId = 'home', options = {}) {
   activeTempleDetailId = '';
   activeFestivalDetailId = '';
   activeScriptureDetailId = '';
+  activeKathaDetailId = '';
   showFavoritesOnly = false;
   updateHomeSectionHeader(safeType);
   showPage('home', safeNavId);

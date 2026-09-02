@@ -180,6 +180,12 @@ function updateTopHomeButton(pageId) {
     return;
   }
 
+  if (pageId === 'katha-detail') {
+    homeBtn.innerHTML = `<span class="nav-icon-emoji">↩️</span><span class="${labelClass}">${backLabel}</span>`;
+    homeBtn.setAttribute('onclick', 'showKathasMenuPage()');
+    return;
+  }
+
   homeBtn.innerHTML = `<span class="nav-icon-emoji">🏠</span><span class="${labelClass}">${homeLabel}</span>`;
   homeBtn.setAttribute('onclick', "showHomeByType('all', 'home')");
 }
@@ -298,6 +304,7 @@ function showPage(pageId, navId) {
   if (pageId === 'temples') buildTemplesPage();
   if (pageId === 'festivals') buildFestivalsPage();
   if (pageId === 'scriptures') buildScripturesPage();
+  if (pageId === 'kathas') buildFamousKathasPage();
 }
 
 function showTemplesMenuPage(options = {}) {
@@ -307,6 +314,7 @@ function showTemplesMenuPage(options = {}) {
   activeTempleDetailId = '';
   activeFestivalDetailId = '';
   activeScriptureDetailId = '';
+  activeKathaDetailId = '';
   showPage('temples', 'temples');
   if (!skipUrl) {
     updateUrlState({
@@ -324,6 +332,7 @@ function showFestivalsMenuPage(options = {}) {
   activeTempleDetailId = '';
   activeFestivalDetailId = '';
   activeScriptureDetailId = '';
+  activeKathaDetailId = '';
   showPage('festivals', 'festivals');
   if (!skipUrl) {
     updateUrlState({
@@ -341,12 +350,31 @@ function showScripturesMenuPage(options = {}) {
   activeTempleDetailId = '';
   activeFestivalDetailId = '';
   activeScriptureDetailId = '';
+  activeKathaDetailId = '';
   showPage('scriptures', 'scriptures');
   if (!skipUrl) {
     updateUrlState({
       typeId: activeHomeType,
       deityKey: '',
       pageId: 'scriptures',
+    });
+  }
+}
+
+function showKathasMenuPage(options = {}) {
+  const { skipUrl = false } = options;
+  activeDeityKey = '';
+  activeDeityTab = 'about';
+  activeTempleDetailId = '';
+  activeFestivalDetailId = '';
+  activeScriptureDetailId = '';
+  activeKathaDetailId = '';
+  showPage('kathas', 'kathas');
+  if (!skipUrl) {
+    updateUrlState({
+      typeId: activeHomeType,
+      deityKey: '',
+      pageId: 'kathas',
     });
   }
 }

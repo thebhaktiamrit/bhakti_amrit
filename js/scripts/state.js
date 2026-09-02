@@ -89,6 +89,7 @@ let activeExtraIndex = 0;
 let activeTempleDetailId = '';
 let activeFestivalDetailId = '';
 let activeScriptureDetailId = '';
+let activeKathaDetailId = '';
 let showFavoritesOnly = false;
 const HOME_BATCH_SIZE = 60;
 const HOME_VISIBLE_TAG_COUNT = 4;
@@ -484,6 +485,23 @@ function getPathState() {
       scriptureId: segments[1],
       festivalId: '',
       templeId: '',
+      kathaId: '',
+      deityKey: '',
+      tabId: 'about',
+      geetaSlug: '',
+      kathaSlug: '',
+      bhajanSlug: '',
+      extraIndex: 0,
+    };
+  }
+
+  if (segments.length === 2 && segments[0] === 'kathas') {
+    return {
+      pageId: 'katha-detail',
+      kathaId: segments[1],
+      scriptureId: '',
+      festivalId: '',
+      templeId: '',
       deityKey: '',
       tabId: 'about',
       geetaSlug: '',
@@ -524,6 +542,23 @@ function getPathState() {
   if (segments.length === 1 && segments[0] === 'scriptures') {
     return {
       pageId: 'scriptures',
+      scriptureId: '',
+      festivalId: '',
+      templeId: '',
+      kathaId: '',
+      deityKey: '',
+      tabId: 'about',
+      geetaSlug: '',
+      kathaSlug: '',
+      bhajanSlug: '',
+      extraIndex: 0,
+    };
+  }
+
+  if (segments.length === 1 && segments[0] === 'kathas') {
+    return {
+      pageId: 'kathas',
+      kathaId: '',
       scriptureId: '',
       festivalId: '',
       templeId: '',
@@ -777,6 +812,7 @@ function updateUrlState({
   templeId = activeTempleDetailId,
   festivalId = activeFestivalDetailId,
   scriptureId = activeScriptureDetailId,
+  kathaId = activeKathaDetailId,
   extraIndex = activeExtraIndex,
   replace = false,
 } = {}) {
@@ -843,6 +879,14 @@ function updateUrlState({
       ? `/scriptures/${encodeURIComponent(safeScriptureId)}`
       : '/scriptures';
     url.search = '';
+  } else if (pageId === 'katha-detail') {
+    const safeKathaId = famousKathasData.some((k) => k.id === kathaId)
+      ? kathaId
+      : '';
+    url.pathname = safeKathaId
+      ? `/kathas/${encodeURIComponent(safeKathaId)}`
+      : '/kathas';
+    url.search = '';
   } else if (pageId === 'temples') {
     url.pathname = '/temples';
     url.search = '';
@@ -851,6 +895,9 @@ function updateUrlState({
     url.search = '';
   } else if (pageId === 'scriptures') {
     url.pathname = '/scriptures';
+    url.search = '';
+  } else if (pageId === 'kathas') {
+    url.pathname = '/kathas';
     url.search = '';
   } else {
     url.pathname = '/';
@@ -881,6 +928,7 @@ function applyUrlState() {
   const pathFestivalId = pathState.festivalId || '';
   const pathTempleId = pathState.templeId || '';
   const pathScriptureId = pathState.scriptureId || '';
+  const pathKathaId = pathState.kathaId || '';
   const pathDeity = pathState.deityKey;
   const pathTab = pathState.tabId;
   const pathGeetaSlug = pathState.geetaSlug || '';
@@ -918,6 +966,11 @@ function applyUrlState() {
     return;
   }
 
+  if (pathPageId === 'katha-detail') {
+    showFamousKathaDetailsPage(pathKathaId, { skipUrl: true });
+    return;
+  }
+
   if (pathPageId === 'temples') {
     showTemplesMenuPage({ skipUrl: true });
     return;
@@ -930,6 +983,11 @@ function applyUrlState() {
 
   if (pathPageId === 'scriptures') {
     showScripturesMenuPage({ skipUrl: true });
+    return;
+  }
+
+  if (pathPageId === 'kathas') {
+    showKathasMenuPage({ skipUrl: true });
     return;
   }
 

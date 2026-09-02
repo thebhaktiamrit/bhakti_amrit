@@ -257,6 +257,7 @@ function showScriptureDetailsPage(scriptureId, options = {}) {
   activeTempleDetailId = '';
   activeFestivalDetailId = '';
   activeScriptureDetailId = scripture.id;
+  activeKathaDetailId = '';
   const headerEl = document.getElementById('scriptureDetailHeader');
   const infoEl = document.getElementById('scriptureDetailInfo');
   if (!headerEl || !infoEl) return;

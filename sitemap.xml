@@ -575,4 +575,11 @@
   <url><loc>https://bhaktiamrit.com/temples/jagannath-puri</loc></url>
   <url><loc>https://bhaktiamrit.com/temples/dwarka-temple</loc></url>
   <url><loc>https://bhaktiamrit.com/temples/mahakaleshwar-jyotirlinga</loc></url>
+  <!-- Famous Kathas menu routes -->
+  <url><loc>https://bhaktiamrit.com/kathas</loc></url>
+  <url><loc>https://bhaktiamrit.com/kathas/somvar-vrat-katha</loc></url>
+  <url><loc>https://bhaktiamrit.com/kathas/somya-pradosh-vrat-katha</loc></url>
+  <url><loc>https://bhaktiamrit.com/kathas/16-somvar-vrat-katha</loc></url>
+  <url><loc>https://bhaktiamrit.com/kathas/tirupati-balaji-katha</loc></url>
+  <url><loc>https://bhaktiamrit.com/kathas/brihaspati-katha</loc></url>
 </urlset>

@@ -276,6 +276,14 @@
               <span class="nav-icon-emoji">📚</span
               ><span class="nav-label">प्रसिद्ध धर्मग्रन्थ</span>
             </button>
+            <button
+              class="nav-btn"
+              onclick="showKathasMenuPage()"
+              data-page="kathas"
+            >
+              <span class="nav-icon-emoji">📖</span
+              ><span class="nav-label">प्रसिद्ध कथाए</span>
+            </button>
           </div>
         </div>
       </div>
@@ -564,6 +572,29 @@
           </div>
         </div>
       </div>
+
+      <!-- FAMOUS KATHAS PAGE -->
+      <div id="page-kathas" class="page">
+        <div class="temples-header">
+          <div class="section-title">
+            <span class="diya">📖</span> प्रसिद्ध कथाए
+          </div>
+          <div class="section-subtitle">
+            व्रत और पौराणिक कथाएँ — पढ़ें और श्रद्धा से सुनें
+          </div>
+        </div>
+        <div class="temples-grid" id="kathasGrid"></div>
+      </div>
+
+      <!-- KATHA DETAIL PAGE -->
+      <div id="page-katha-detail" class="page">
+        <div class="temple-detail-shell">
+          <div class="temple-modal-header" id="kathaDetailHeader"></div>
+          <div class="temple-modal-body temple-detail-body">
+            <div class="temple-modal-info" id="kathaDetailInfo"></div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Temple Map Modal -->
@@ -742,7 +773,7 @@
     </div>
     <script>
       window.BHAKTI_AMRIT_DATA_SOURCE =
-        window.BHAKTI_AMRIT_DATA_SOURCE || 'cdn-no-cache'; // 'cdn' | 'local' | 'cdn-no-cache'
+        window.BHAKTI_AMRIT_DATA_SOURCE || 'local'; // 'cdn' | 'local' | 'cdn-no-cache'
       window.BHAKTI_AMRIT_DATA_CACHE_BUST =
         window.BHAKTI_AMRIT_DATA_CACHE_BUST || String(Date.now());
     </script>
@@ -803,6 +834,7 @@
     <script src="js/scripts/reading-mode.js"></script>
     <script src="js/scripts/temples.js"></script>
     <script src="js/scripts/scriptures.js"></script>
+    <script src="js/scripts/famous-kathas.js"></script>
     <script src="js/scripts/script.js"></script>
   </body>
 </html>

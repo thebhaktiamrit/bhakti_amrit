@@ -315,6 +315,7 @@ function showDeityPage(key, options = {}) {
   activeTempleDetailId = '';
   activeFestivalDetailId = '';
   activeScriptureDetailId = '';
+  activeKathaDetailId = '';
   activeGeetaSlug = getSafeGeetaSlug(
     resolvedKey,
     options.initialGeetaSlug || activeGeetaSlug,
