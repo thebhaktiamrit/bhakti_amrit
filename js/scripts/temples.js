@@ -53,6 +53,7 @@ const deityTempleMap = {
   shakambhari: ['शाकम्भरी'],
   lalita_shakambhari: ['शाकम्भरी', 'ललिता'],
   rani_sati: ['राणी सती', 'रानी सती', 'माता रानी सती'],
+  neem_karoli_baba: ['नीम करोली बाबा'],
 };
 
 const deityTempleIdMap = {
