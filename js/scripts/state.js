@@ -9,6 +9,13 @@ const deityTypeMap = {
   ram: 'अवतार',
   krishna: 'अवतार',
   hanuman: 'देव',
+  balarama: 'अवतार',
+  narasimha: 'अवतार',
+  vamana: 'अवतार',
+  varaha: 'अवतार',
+  matsya: 'अवतार',
+  kartikeya: 'देव',
+  ayyappa: 'देव',
   surya: 'ग्रह देव',
   kali: 'देवी',
   khatu_shyam: 'लोक देव',
@@ -18,6 +25,7 @@ const deityTypeMap = {
   brahma: 'देव',
   bhairav: 'देव',
   batuk_bhairav: 'देव',
+  veerabhadra: 'देव',
   navgrah: 'ग्रह देव',
   vishwakarma: 'देव',
   ravidas: 'लोक देव',
@@ -1078,20 +1086,20 @@ function saveFavoriteContent(favorites) {
 function isContentFavorite(deityKey, contentType, contentSlug = '') {
   const favorites = loadFavoriteContent();
   return favorites.some(
-    fav => fav.deityKey === deityKey && 
-          fav.contentType === contentType && 
-          fav.contentSlug === contentSlug
+    fav => fav.deityKey === deityKey &&
+      fav.contentType === contentType &&
+      fav.contentSlug === contentSlug
   );
 }
 
 function toggleContentFavorite(deityKey, contentType, contentSlug = '', title = '') {
   const favorites = loadFavoriteContent();
   const existingIndex = favorites.findIndex(
-    fav => fav.deityKey === deityKey && 
-          fav.contentType === contentType && 
-          fav.contentSlug === contentSlug
+    fav => fav.deityKey === deityKey &&
+      fav.contentType === contentType &&
+      fav.contentSlug === contentSlug
   );
-  
+
   if (existingIndex > -1) {
     favorites.splice(existingIndex, 1);
   } else {
@@ -1103,7 +1111,7 @@ function toggleContentFavorite(deityKey, contentType, contentSlug = '', title = 
       addedAt: Date.now()
     });
   }
-  
+
   saveFavoriteContent(favorites);
   return existingIndex === -1;
 }
