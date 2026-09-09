@@ -64,11 +64,14 @@ function getCurrentDataLang() {
   return SUPPORTED_DATA_LANGS.has(normalized) ? normalized : 'hi';
 }
 
+function getDeityAssetBaseUrl() {
+  const mode = getActiveDataSourceMode();
+  return mode === 'local' ? LOCAL_BASE : CDN_BASE;
+}
+
 function getDataBaseUrl(lang = getCurrentDataLang()) {
   const safeLang = SUPPORTED_DATA_LANGS.has(lang) ? lang : 'hi';
-  const mode = getActiveDataSourceMode();
-  const base = mode === 'local' ? LOCAL_BASE : CDN_BASE;
-  return `${base}/${safeLang}`;
+  return `${getDeityAssetBaseUrl()}/${safeLang}`;
 }
 
 function getDataModuleUrl(moduleName, lang = getCurrentDataLang()) {
@@ -76,6 +79,23 @@ function getDataModuleUrl(moduleName, lang = getCurrentDataLang()) {
   if (!fileName) return '';
   return appendCacheBust(`${getDataBaseUrl(lang)}/${fileName}`);
 }
+
+function getDeityImageUrl(path) {
+  if (!path) return '';
+  let filename = String(path)
+    .trim()
+    .replace(/^\.?\//, '');
+  if (filename.startsWith('icons/')) {
+    filename = filename.slice(6);
+  }
+  if (!filename || !filename.toLowerCase().endsWith('.webp')) return '';
+  const url = `${getDeityAssetBaseUrl()}/icons/${filename}`;
+  return appendCacheBust(url);
+}
+
+window.getDeityAssetBaseUrl = getDeityAssetBaseUrl;
+window.getDeityImageUrl = getDeityImageUrl;
+
 
 // Compact manifest to enable instant homepage badges & tab discovery without downloading full content
 const DEITY_CONTENT_MANIFEST = {

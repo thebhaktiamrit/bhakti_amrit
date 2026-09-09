@@ -81,14 +81,22 @@ function getCanonicalDeityType(key) {
 }
 
 function getValidDeityImage(path) {
+  if (typeof window.getDeityImageUrl === 'function') {
+    return window.getDeityImageUrl(path);
+  }
   if (!path) return '';
-  const normalized = String(path)
+  let filename = String(path)
     .trim()
     .replace(/^\.?\//, '');
-  if (!normalized.startsWith('icons/')) return '';
-  if (!normalized.toLowerCase().endsWith('.webp')) return '';
-  return normalized;
+  if (filename.startsWith('icons/')) {
+    filename = filename.slice(6);
+  }
+  if (!filename || !filename.toLowerCase().endsWith('.webp')) return '';
+  const mode = String(window.BHAKTI_AMRIT_DATA_SOURCE || 'cdn').trim().toLowerCase();
+  const base = mode === 'local' ? 'http://localhost:51584' : 'https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main';
+  return `${base}/icons/${filename}`;
 }
+
 
 let activeHomeType = 'all';
 let activeHomeNavId = 'home';
