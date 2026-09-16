@@ -96,7 +96,9 @@
       tabKatha: '📚 कथा',
       tabBhajan: '🎵 भजन',
       tabMantra: '🕉️ मंत्र',
+      tabAvatar: '🔱 अवतार',
       tabTemples: '🛕 मंदिर',
+      tabAvatarEmpty: 'इस देवता के कोई अवतार नहीं हैं।',
 
       // Section action buttons
       readingMode: 'पठन मोड',
@@ -115,6 +117,7 @@
       loadingMantra: 'मंत्र लोड हो रहे हैं...',
       loadingExtra: 'स्तोत्र लोड हो रहा है...',
       loadingTemples: 'मंदिरों की सूची लोड हो रही है...',
+      loadingAvatar: 'अवतार लोड हो रहे हैं...',
       loadingContent: 'सामग्री लोड हो रही है...',
       loadingError: 'सामग्री लोड करने में समस्या आई। कृपया पुनः प्रयास करें।',
       retryLabel: 'पुनः लोड करें 🔄',
@@ -241,7 +244,9 @@
       tabKatha: '📚 कथा',
       tabBhajan: '🎵 भजन',
       tabMantra: '🕉️ मंत्र',
+      tabAvatar: '🔱 अवतार',
       tabTemples: '🛕 मंदिरे',
+      tabAvatarEmpty: 'या देवतेचे अवतार उपलब्ध नाहीत.',
 
       readingMode: 'वाचन मोड',
       printLabel: 'मुद्रण',
@@ -258,6 +263,7 @@
       loadingMantra: 'मंत्र लोड होत आहेत...',
       loadingExtra: 'स्तोत्र लोड होत आहे...',
       loadingTemples: 'मंदिरांची यादी लोड होत आहे...',
+      loadingAvatar: 'अवतार लोड होत आहेत...',
       loadingContent: 'सामग्री लोड होत आहे...',
       loadingError: 'सामग्री लोड करण्यात समस्या आली. कृपया पुन्हा प्रयत्न करा.',
       retryLabel: 'पुन्हा लोड करा 🔄',
@@ -375,7 +381,9 @@
       tabKatha: '📚 கதை',
       tabBhajan: '🎵 பஜனை',
       tabMantra: '🕉️ மந்திரம்',
+      tabAvatar: '🔱 அவதாரம்',
       tabTemples: '🛕 கோயில்கள்',
+      tabAvatarEmpty: 'இந்த தெய்வத்திற்கு அவதாரங்கள் இல்லை.',
 
       readingMode: 'வாசிப்பு பாணி',
       printLabel: 'அச்சிடு',
@@ -392,6 +400,7 @@
       loadingMantra: 'மந்திரங்கள் ஏற்றப்படுகின்றன...',
       loadingExtra: 'ஸ்தோத்திரம் ஏற்றப்படுகிறது...',
       loadingTemples: 'கோயில்களின் பட்டியல் ஏற்றப்படுகிறது...',
+      loadingAvatar: 'அவதாரங்கள் ஏற்றப்படுகின்றன...',
       loadingContent: 'உள்ளடக்கம் ஏற்றப்படுகிறது...',
       loadingError: 'உள்ளடக்கத்தை ஏற்றுவதில் சிக்கல். மீண்டும் முயற்சிக்கவும்.',
       retryLabel: 'மீண்டும் ஏற்று 🔄',
@@ -509,7 +518,9 @@
       tabKatha: '📚 కథ',
       tabBhajan: '🎵 భజన',
       tabMantra: '🕉️ మంత్రం',
+      tabAvatar: '🔱 అవతారం',
       tabTemples: '🛕 దేవాలయాలు',
+      tabAvatarEmpty: 'ఈ దేవతకు అవతారాలు లేవు.',
 
       readingMode: 'చదివే విధానం',
       printLabel: 'ముద్రించు',
@@ -526,6 +537,7 @@
       loadingMantra: 'మంత్రాలు లోడ్ అవుతున్నాయి...',
       loadingExtra: 'స్తోత్రం లోడ్ అవుతోంది...',
       loadingTemples: 'దేవాలయాల జాబితా లోడ్ అవుతోంది...',
+      loadingAvatar: 'అవతారాలు లోడ్ అవుతున్నాయి...',
       loadingContent: 'కంటెంట్ లోడ్ అవుతోంది...',
       loadingError: 'కంటెంట్ లోడ్ చేయడంలో సమస్య. దయచేసి మళ్ళీ ప్రయత్నించండి.',
       retryLabel: 'మళ్ళీ లోడ్ చేయి 🔄',
@@ -643,7 +655,9 @@
       tabKatha: '📚 ಕಥೆ',
       tabBhajan: '🎵 ಭಜನೆ',
       tabMantra: '🕉️ ಮಂತ್ರ',
+      tabAvatar: '🔱 ಅವತಾರ',
       tabTemples: '🛕 ದೇವಾಲಯಗಳು',
+      tabAvatarEmpty: 'ಈ ದೇವತೆಗೆ ಅವತಾರಗಳಿಲ್ಲ.',
 
       readingMode: 'ಓದುವ ವಿಧಾನ',
       printLabel: 'ಮುದ್ರಿಸಿ',
@@ -660,6 +674,7 @@
       loadingMantra: 'ಮಂತ್ರಗಳು ಲೋಡ್ ಆಗುತ್ತಿವೆ...',
       loadingExtra: 'ಸ್ತೋತ್ರ ಲೋಡ್ ಆಗುತ್ತಿದೆ...',
       loadingTemples: 'ದೇವಾಲಯಗಳ ಪಟ್ಟಿ ಲೋಡ್ ಆಗುತ್ತಿದೆ...',
+      loadingAvatar: 'ಅವತಾರಗಳು ಲೋಡ್ ಆಗುತ್ತಿವೆ...',
       loadingContent: 'ವಿಷಯ ಲೋಡ್ ಆಗುತ್ತಿದೆ...',
       loadingError: 'ವಿಷಯ ಲೋಡ್ ಮಾಡುವಲ್ಲಿ ಸಮಸ್ಯೆ. ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.',
       retryLabel: 'ಮತ್ತೆ ಲೋಡ್ ಮಾಡಿ 🔄',
@@ -777,7 +792,9 @@
       tabKatha: '📚 কথা',
       tabBhajan: '🎵 ভজন',
       tabMantra: '🕉️ মন্ত্র',
+      tabAvatar: '🔱 অবতার',
       tabTemples: '🛕 মন্দির',
+      tabAvatarEmpty: 'এই দেবতার কোনো অবতার নেই।',
 
       readingMode: 'পড়ার মোড',
       printLabel: 'প্রিন্ট',
@@ -794,6 +811,7 @@
       loadingMantra: 'মন্ত্র লোড হচ্ছে...',
       loadingExtra: 'স্তোত্র লোড হচ্ছে...',
       loadingTemples: 'মন্দিরের তালিকা লোড হচ্ছে...',
+      loadingAvatar: 'অবতার লোড হচ্ছে...',
       loadingContent: 'বিষয়বস্তু লোড হচ্ছে...',
       loadingError: 'বিষয়বস্তু লোড করতে সমস্যা হয়েছে। আবার চেষ্টা করুন।',
       retryLabel: 'আবার লোড করুন 🔄',
@@ -1042,6 +1060,9 @@
         showDeityPage(activeDeityKey, {
           initialTab: typeof activeDeityTab !== 'undefined' ? activeDeityTab : 'about',
           skipUrl: true,
+          fromAvatar: Boolean(
+            typeof avatarParentDeityKey !== 'undefined' && avatarParentDeityKey,
+          ),
         });
       }
     }

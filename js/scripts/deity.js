@@ -219,6 +219,56 @@ function getDeityTabTemplesHtml(resolvedKey) {
   `;
 }
 
+function getDeityTabAvatarHtml(resolvedKey) {
+  const avatarKeys = getDeityAvatarKeys(resolvedKey);
+  if (!avatarKeys.length) {
+    const emptyMessage = window.BhaktiI18n
+      ? window.BhaktiI18n.t('tabAvatarEmpty')
+      : 'इस देवता के कोई अवतार नहीं हैं।';
+    return `
+      <div class="deity-tab-wrap">
+        <div class="deity-tab-content">
+          <p>${emptyMessage}</p>
+        </div>
+      </div>
+    `;
+  }
+
+  const avatarCards = avatarKeys
+    .map((avatarKey) => {
+      const avatarDeity = deities[avatarKey];
+      if (!avatarDeity) return '';
+
+      const safeName = escapeHtml(avatarDeity.name || '');
+      const safeEmoji = escapeHtml(avatarDeity.emoji || '🪔');
+      const imgSrc = getValidDeityImage(avatarDeity.img);
+      const imgHtml = imgSrc
+        ? `<img class="avatar-card-img" src="${imgSrc}" alt="${safeName}" loading="lazy" decoding="async" onerror="this.nextElementSibling.style.display='flex'; this.style.display='none';">
+         <div class="avatar-card-emoji" style="display:none">${safeEmoji}</div>`
+        : `<div class="avatar-card-emoji">${safeEmoji}</div>`;
+
+      return `
+        <div class="avatar-card" role="button" tabindex="0" onclick="openAvatarFromParent('${resolvedKey}', '${avatarKey}')">
+          ${imgHtml}
+          <div class="avatar-card-info">
+            <div class="avatar-card-name">${safeName}</div>
+          </div>
+        </div>
+      `;
+    })
+    .join('');
+
+  return `
+    <div class="deity-tab-wrap">
+      <div class="deity-tab-content">
+        <div class="avatar-grid">
+          ${avatarCards}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
 function ensureAndRenderDeityTab(resolvedKey, tabId) {
   const tabEl = document.getElementById('tab-' + tabId);
   if (!tabEl) return;
@@ -234,6 +284,7 @@ function ensureAndRenderDeityTab(resolvedKey, tabId) {
     mantra: i18n ? i18n.t('loadingMantra') : 'मंत्र लोड हो रहे हैं...',
     extra: i18n ? i18n.t('loadingExtra') : 'स्तोत्र लोड हो रहा है...',
     temples: i18n ? i18n.t('loadingTemples') : 'मंदिरों की सूची लोड हो रही है...',
+    avatar: i18n ? i18n.t('loadingAvatar') : 'अवतार लोड हो रहे हैं...',
   };
 
   const renderMap = {
@@ -246,9 +297,12 @@ function ensureAndRenderDeityTab(resolvedKey, tabId) {
     mantra: () => getDeityTabMantraHtml(resolvedKey),
     extra: () => getDeityTabExtraHtml(resolvedKey),
     temples: () => getDeityTabTemplesHtml(resolvedKey),
+    avatar: () => getDeityTabAvatarHtml(resolvedKey),
   };
 
-  const isLoaded = isDataModuleLoaded(tabId);
+  const hasDataModule =
+    typeof DATA_MODULE_FILES !== 'undefined' && Boolean(DATA_MODULE_FILES[tabId]);
+  const isLoaded = !hasDataModule || isDataModuleLoaded(tabId);
   if (isLoaded) {
     tabEl.innerHTML = renderMap[tabId]();
     if (tabId === 'chalisa') syncChalisaNavigationControls();
@@ -297,10 +351,17 @@ function showDeityPage(key, options = {}) {
   const geetaTag = escapeHtml(getGeetaTabLabel(geetaData));
   const extraTag = escapeHtml(getExtraTabLabel(extraData, resolvedKey));
 
+  // Keep avatar-parent back-nav only while viewing an avatar opened from that parent.
+  if (!options.fromAvatar) {
+    avatarParentDeityKey = '';
+  }
+
   // Preserve where the user came from for back navigation.
-  deityReturnHomeType = getSafeHomeType(activeHomeType);
-  deityReturnHomeNavId =
-    activeHomeNavId || getNavIdByHomeType(deityReturnHomeType);
+  if (!options.fromAvatar && !options.returnToAvatarParent) {
+    deityReturnHomeType = getSafeHomeType(activeHomeType);
+    deityReturnHomeNavId =
+      activeHomeNavId || getNavIdByHomeType(deityReturnHomeType);
+  }
 
   // If a deity is opened directly from "मुख्य पृष्ठ", highlight its type menu.
   if (activeHomeNavId === 'home' || activeHomeType === 'all') {
@@ -374,6 +435,9 @@ function showDeityPage(key, options = {}) {
     hasLyricsContent(extraData) || manifest?.extra
       ? `<button class="tab-btn ${activeDeityTab === 'extra' ? 'active' : ''}" onclick="showTab('extra', this)">✨ ${extraTag}</button>`
       : '',
+    getDeityAvatarKeys(resolvedKey).length > 0
+      ? `<button class="tab-btn ${activeDeityTab === 'avatar' ? 'active' : ''}" onclick="showTab('avatar', this)">${_i18n ? _i18n.t('tabAvatar') : '🔱 अवतार'}</button>`
+      : '',
     `<button class="tab-btn ${activeDeityTab === 'temples' ? 'active' : ''}" onclick="showTab('temples', this)">${_i18n ? _i18n.t('tabTemples') : '🛕 मंदिर'}</button>`,
   ].join('');
   tabs.innerHTML = `
@@ -394,6 +458,7 @@ function showDeityPage(key, options = {}) {
   <div id="tab-bhajan" class="text-content ${activeDeityTab === 'bhajan' ? 'active' : ''}"></div>
   <div id="tab-mantra" class="text-content ${activeDeityTab === 'mantra' ? 'active' : ''}"></div>
   <div id="tab-extra" class="text-content ${activeDeityTab === 'extra' ? 'active' : ''}"></div>
+  <div id="tab-avatar" class="text-content ${activeDeityTab === 'avatar' ? 'active' : ''}"></div>
   <div id="tab-temples" class="text-content ${activeDeityTab === 'temples' ? 'active' : ''}"></div>`;
 
   // Render active tab content
@@ -1392,4 +1457,14 @@ function printDeityContent() {
       window.print();
     });
   });
+}
+
+function openAvatarFromParent(parentDeityKey, avatarKey) {
+  if (!deities[avatarKey]) return;
+
+  // Store the parent deity key for back navigation
+  avatarParentDeityKey = parentDeityKey;
+
+  // Open the avatar deity page with fromAvatar flag
+  showDeityPage(avatarKey, { skipUrl: false, fromAvatar: true });
 }

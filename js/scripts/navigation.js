@@ -154,6 +154,16 @@ function updateTopHomeButton(pageId) {
   const labelClass = 'nav-label';
 
   if (pageId === 'deity') {
+    // Check if we came from an avatar parent
+    if (avatarParentDeityKey && deities[avatarParentDeityKey]) {
+      homeBtn.innerHTML = `<span class="nav-icon-emoji">↩️</span><span class="${labelClass}">${backLabel}</span>`;
+      homeBtn.setAttribute(
+        'onclick',
+        `showDeityPage('${avatarParentDeityKey}', { initialTab: 'avatar', returnToAvatarParent: true })`,
+      );
+      return;
+    }
+
     homeBtn.innerHTML = `<span class="nav-icon-emoji">↩️</span><span class="${labelClass}">${backLabel}</span>`;
     homeBtn.setAttribute(
       'onclick',

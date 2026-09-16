@@ -114,6 +114,7 @@ let activeFestivalDetailId = '';
 let activeScriptureDetailId = '';
 let activeKathaDetailId = '';
 let showFavoritesOnly = false;
+let avatarParentDeityKey = '';
 const HOME_BATCH_SIZE = 60;
 const HOME_VISIBLE_TAG_COUNT = 4;
 const HOME_CARD_IMG_SIZE = 240;
@@ -161,6 +162,7 @@ const validDeityTabs = [
   'mantra',
   'extra',
   'temples',
+  'avatar',
 ];
 
 function normalizeAlias(value = '') {

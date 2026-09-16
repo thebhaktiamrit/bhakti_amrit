@@ -1,15 +1,3 @@
-// ============ ON-DEMAND DATA LOADER ============
-
-// ─────────────────────────────────────────────────────────────────────────────
-// DATA SOURCE MODE
-// Supported values:
-//   - 'cdn': load from jsDelivr
-//   - 'local': load from localhost
-//   - 'cdn-no-cache': load from jsDelivr with cache-busting
-//
-// Set window.BHAKTI_AMRIT_DATA_SOURCE before this file loads if you want to
-// override the default.
-// ─────────────────────────────────────────────────────────────────────────────
 const DATA_SOURCE_MODE = String(window.BHAKTI_AMRIT_DATA_SOURCE || 'cdn')
   .trim()
   .toLowerCase();
@@ -198,6 +186,27 @@ const DEITY_CONTENT_MANIFEST = {
   rani_sati: { aarti: true, mantra: true },
   navgrah: { mantra: true },
   vishwakarma: { mantra: true },
+};
+
+const DEITY_AVATARS = {
+  shiva: [
+    'hanuman', 'kartikeya', 'ayyappa', 'bhairav', 'batuk_bhairav', 'veerabhadra', 'ardhanarishvara'
+  ],
+  parvati: ['durga', 'kali', 'mahakali', 'baglamukhi', 'mahalakshmi', 'vaishno_devi', 'sheetla', 'vindhyeshwari', 'shakambhari', 'lalita_shakambhari', 'annapurna', 'santoshi_maa', 'chhathi_maiya'],
+  vishnu: [
+    'krishna', 'ram', 'narasimha', 'vamana', 'varaha', 'matsya', 'kurma', 'parshuram', 'balarama', 'hayagriva', 'dhanvantari', 'jagannath', 'tirupati_balaji', 'gopal', 'giriraj', 'radha', 'tulsi', 'ganga', 'narmada'
+  ],
+  lakshmi: ['annapurna', 'santoshi_maa', 'sharda', 'shakambhari', 'lalita_shakambhari', 'rani_sati'],
+  hanuman: ['balaji'],
+  durga: ['kali', 'mahakali', 'baglamukhi', 'mahalakshmi', 'vaishno_devi', 'sheetla', 'vindhyeshwari', 'shakambhari', 'lalita_shakambhari'],
+  kali: ['mahakali', 'baglamukhi', 'mahalakshmi', 'vaishno_devi', 'sheetla', 'vindhyeshwari', 'shakambhari', 'lalita_shakambhari'],
+  mahakali: ['baglamukhi', 'mahalakshmi', 'vaishno_devi', 'sheetla', 'vindhyeshwari', 'shakambhari', 'lalita_shakambhari'],
+  baglamukhi: ['mahalakshmi', 'vaishno_devi', 'sheetla', 'vindhyeshwari', 'shakambhari', 'lalita_shakambhari'],
+  mahalakshmi: ['vaishno_devi', 'sheetla', 'vindhyeshwari', 'shakambhari', 'lalita_shakambhari'],
+  vaishno_devi: ['sheetla', 'vindhyeshwari', 'shakambhari', 'lalita_shakambhari'],
+  sheetla: ['vindhyeshwari', 'shakambhari', 'lalita_shakambhari'],
+  vindhyeshwari: ['shakambhari', 'lalita_shakambhari'],
+  shakambhari: ['lalita_shakambhari'],
 };
 
 const loadedDataModules = {};

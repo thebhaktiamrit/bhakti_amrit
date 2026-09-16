@@ -490,6 +490,17 @@ function getSelectedGeetaEntry(deityKey, data) {
   return entries[safeIndex] || null;
 }
 
+function getDeityAvatarKeys(key) {
+  const deity = deities[key];
+  const fromData = Array.isArray(deity?.avatars) ? deity.avatars : [];
+  const fromMap =
+    typeof DEITY_AVATARS !== 'undefined' && Array.isArray(DEITY_AVATARS[key])
+      ? DEITY_AVATARS[key]
+      : [];
+  const keys = fromData.length ? fromData : fromMap;
+  return [...new Set(keys)].filter((avatarKey) => Boolean(deities[avatarKey]));
+}
+
 function getAvailableDeityTabs(key) {
   const deity = deities[key];
   if (!deity) return ['about', 'temples'];
@@ -507,6 +518,7 @@ function getAvailableDeityTabs(key) {
   if (hasLyricsContent(deity.bhajan) || manifest?.bhajan) tabs.push('bhajan');
   if (hasMantrasContent(deity.mantras) || manifest?.mantra) tabs.push('mantra');
   if (hasLyricsContent(extraData) || manifest?.extra) tabs.push('extra');
+  if (getDeityAvatarKeys(key).length > 0) tabs.push('avatar');
   tabs.push('temples');
   return tabs;
 }
