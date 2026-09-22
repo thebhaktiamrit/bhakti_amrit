@@ -42,6 +42,77 @@ function handleContentImageError(img) {
   }
 }
 
+// Progressive image loading with blur-up effect
+function setupProgressiveImageLoading(img) {
+  if (!img || !img.src) return;
+
+  // Add loading class initially
+  img.classList.add('loading');
+
+  // Create a new image to preload
+  const preloadImg = new Image();
+  
+  preloadImg.onload = function() {
+    // When the actual image loads, remove loading class and add loaded class
+    img.classList.remove('loading');
+    img.classList.add('loaded');
+  };
+
+  preloadImg.onerror = function() {
+    // If image fails to load, handle the error
+    img.classList.remove('loading');
+    handleContentImageError(img);
+  };
+
+  // Start loading the image
+  preloadImg.src = img.src;
+}
+
+// Initialize progressive loading for all images when DOM is ready
+function initializeProgressiveImageLoading() {
+  const images = document.querySelectorAll('img.deity-img, img.avatar-card-img, img.deity-portrait, img.loading');
+  images.forEach(setupProgressiveImageLoading);
+}
+
+// Setup MutationObserver to handle dynamically added images
+function setupDynamicImageLoading() {
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      mutation.addedNodes.forEach((node) => {
+        if (node.nodeType === 1) { // Element node
+          // Check if the added node is an image
+          if (node.nodeName === 'IMG' && 
+              (node.classList.contains('deity-img') || 
+               node.classList.contains('avatar-card-img') || 
+               node.classList.contains('deity-portrait') ||
+               node.classList.contains('loading'))) {
+            setupProgressiveImageLoading(node);
+          }
+          
+          // Check for images within the added node
+          const images = node.querySelectorAll?.('img.deity-img, img.avatar-card-img, img.deity-portrait, img.loading');
+          if (images) {
+            images.forEach(setupProgressiveImageLoading);
+          }
+        }
+      });
+    });
+  });
+
+  // Start observing the document body for added nodes
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+}
+
+// Make functions available globally
+if (typeof window !== 'undefined') {
+  window.setupProgressiveImageLoading = setupProgressiveImageLoading;
+  window.initializeProgressiveImageLoading = initializeProgressiveImageLoading;
+  window.setupDynamicImageLoading = setupDynamicImageLoading;
+}
+
 function isDocumentShort(extraSpace = 120) {
   return (
     document.documentElement.scrollHeight <= window.innerHeight + extraSpace

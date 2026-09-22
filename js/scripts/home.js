@@ -330,8 +330,10 @@ function getHomeCardHtml(key, deity, index) {
   const isFavorite = isDeityFavorite(key);
   const favoriteIcon = isFavorite ? '❤️' : '🤍';
   const imgHtml = imgSrc
-    ? `<img class="deity-img" src="${imgSrc}" alt="${safeName}" loading="${isPriorityImage ? 'eager' : 'lazy'}" fetchpriority="${isPriorityImage ? 'high' : 'low'}" width="${HOME_CARD_IMG_SIZE}" height="${HOME_CARD_IMG_SIZE}" decoding="async" onerror="this.parentNode.querySelector('.deity-img-fallback').style.display='flex'; this.style.display='none';">
-     <div class="deity-img-fallback" style="display:none">${safeEmoji}</div>`
+    ? `<div class="deity-img-wrapper">
+        <img class="deity-img loading" src="${imgSrc}" alt="${safeName}" loading="${isPriorityImage ? 'eager' : 'lazy'}" fetchpriority="${isPriorityImage ? 'high' : 'low'}" width="${HOME_CARD_IMG_SIZE}" height="${HOME_CARD_IMG_SIZE}" decoding="async" onload="this.classList.remove('loading'); this.classList.add('loaded'); this.parentNode.classList.add('has-image');" onerror="this.parentNode.querySelector('.deity-img-fallback').style.display='flex'; this.style.display='none'; this.parentNode.classList.add('has-image');">
+        <div class="deity-img-fallback" style="display:none">${safeEmoji}</div>
+       </div>`
     : `<div class="deity-img-fallback">${safeEmoji}</div>`;
   return `
     <div class="deity-card" onclick="showDeityPage('${key}')">
@@ -360,8 +362,10 @@ function getHomeTableHtml(key, deity, index) {
   const isFavorite = isDeityFavorite(key);
   const favoriteIcon = isFavorite ? '❤️' : '🤍';
   const imgHtml = imgSrc
-    ? `<img class="deity-img" src="${imgSrc}" alt="${safeName}" loading="${isPriorityImage ? 'eager' : 'lazy'}" fetchpriority="${isPriorityImage ? 'high' : 'low'}" width="${HOME_TABLE_IMG_SIZE}" height="${HOME_TABLE_IMG_SIZE}" decoding="async" onerror="this.parentNode.querySelector('.deity-img-fallback').style.display='flex'; this.style.display='none';">
-     <div class="deity-img-fallback" style="display:none">${safeEmoji}</div>`
+    ? `<div class="deity-img-wrapper">
+        <img class="deity-img loading" src="${imgSrc}" alt="${safeName}" loading="${isPriorityImage ? 'eager' : 'lazy'}" fetchpriority="${isPriorityImage ? 'high' : 'low'}" width="${HOME_TABLE_IMG_SIZE}" height="${HOME_TABLE_IMG_SIZE}" decoding="async" onload="this.classList.remove('loading'); this.classList.add('loaded'); this.parentNode.classList.add('has-image');" onerror="this.parentNode.querySelector('.deity-img-fallback').style.display='flex'; this.style.display='none'; this.parentNode.classList.add('has-image');">
+        <div class="deity-img-fallback" style="display:none">${safeEmoji}</div>
+       </div>`
     : `<div class="deity-img-fallback">${safeEmoji}</div>`;
 
   return `

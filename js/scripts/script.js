@@ -48,6 +48,16 @@ window.addEventListener('load', () => {
     buildHomeGrid();
     updateSiteTitleByLang();
     syncDefaultSiteHeaderHeight();
+    
+    // Initialize progressive image loading
+    if (typeof initializeProgressiveImageLoading === 'function') {
+      initializeProgressiveImageLoading();
+    }
+    
+    // Setup dynamic image loading for dynamically added content
+    if (typeof setupDynamicImageLoading === 'function') {
+      setupDynamicImageLoading();
+    }
 
     // Apply all i18n translations to DOM now that everything is rendered
     if (window.BhaktiI18n) {
@@ -121,4 +131,9 @@ window.addEventListener('DOMContentLoaded', () => {
     replace: true,
   });
   syncChalisaNavigationControls();
+  
+  // Initialize progressive image loading for DOMContentLoaded
+  if (typeof initializeProgressiveImageLoading === 'function') {
+    initializeProgressiveImageLoading();
+  }
 });

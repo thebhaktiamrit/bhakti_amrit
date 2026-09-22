@@ -1500,9 +1500,19 @@ body.reduced-effects .deity-card:hover {
   border-right: 0;
   border-top: 0;
   background-color: rgba(var(--gold-rgb), 0.1);
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, filter 0.3s ease, opacity 0.3s ease;
   filter: none;
   transform: translateZ(0);
+}
+
+.deity-img.loading {
+  opacity: 0;
+  filter: blur(10px);
+}
+
+.deity-img.loaded {
+  opacity: 1;
+  filter: none;
 }
 
 .deity-card:hover .deity-img {
@@ -1718,6 +1728,58 @@ body.reduced-effects .deity-card:hover {
     rgba(var(--gold-rgb), 0.1),
     rgba(var(--saffron-rgb), 0.05)
   );
+}
+
+/* Image skeleton loading animation */
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.deity-img-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(var(--gold-rgb), 0.1) 25%,
+    rgba(var(--gold-rgb), 0.2) 50%,
+    rgba(var(--gold-rgb), 0.1) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+}
+
+.deity-img-wrapper.has-image {
+  background: transparent;
+  animation: none;
+}
+
+/* Handle katha figure images loading state */
+.katha-figure img.loading {
+  opacity: 0;
+  filter: blur(10px);
+  background: linear-gradient(
+    90deg,
+    rgba(var(--gold-rgb), 0.1) 25%,
+    rgba(var(--gold-rgb), 0.2) 50%,
+    rgba(var(--gold-rgb), 0.1) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+}
+
+.katha-figure img.loaded {
+  opacity: 1;
+  filter: none;
+  background: transparent;
+  animation: none;
 }
 
 .deity-info {
@@ -2178,6 +2240,27 @@ body.reduced-effects .deity-card:hover {
     0 10px 24px rgba(var(--shadow-rgb), 0.38),
     inset 0 1px 0 rgba(var(--white-rgb), 0.35);
   flex-shrink: 0;
+  transition: opacity 0.3s ease, filter 0.3s ease;
+}
+
+.deity-portrait.loading {
+  opacity: 0;
+  filter: blur(10px);
+  background: linear-gradient(
+    90deg,
+    rgba(var(--gold-rgb), 0.1) 25%,
+    rgba(var(--gold-rgb), 0.2) 50%,
+    rgba(var(--gold-rgb), 0.1) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+}
+
+.deity-portrait.loaded {
+  opacity: 1;
+  filter: none;
+  background: transparent;
+  animation: none;
 }
 
 .deity-portrait-emoji {
@@ -5089,7 +5172,35 @@ footer {
   margin-bottom: 12px;
   transition:
     transform 0.45s ease,
-    filter 0.45s ease;
+    filter 0.45s ease,
+    opacity 0.3s ease;
+}
+
+.avatar-card-img.loading {
+  opacity: 0;
+  filter: blur(10px) saturate(0.94);
+}
+
+.avatar-card-img.loaded {
+  opacity: 1;
+  filter: saturate(0.94);
+}
+
+/* Add skeleton background for avatar card images during loading */
+.avatar-card-img.loading {
+  background: linear-gradient(
+    90deg,
+    rgba(var(--gold-rgb), 0.1) 25%,
+    rgba(var(--gold-rgb), 0.2) 50%,
+    rgba(var(--gold-rgb), 0.1) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+}
+
+.avatar-card-img.loaded {
+  background: transparent;
+  animation: none;
 }
 
 .avatar-card-emoji {

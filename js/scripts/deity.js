@@ -243,7 +243,7 @@ function getDeityTabAvatarHtml(resolvedKey) {
       const safeEmoji = escapeHtml(avatarDeity.emoji || '🪔');
       const imgSrc = getValidDeityImage(avatarDeity.img);
       const imgHtml = imgSrc
-        ? `<img class="avatar-card-img" src="${imgSrc}" alt="${safeName}" loading="lazy" decoding="async" onerror="this.nextElementSibling.style.display='flex'; this.style.display='none';">
+        ? `<img class="avatar-card-img loading" src="${imgSrc}" alt="${safeName}" loading="lazy" decoding="async" onload="this.classList.remove('loading'); this.classList.add('loaded');" onerror="this.nextElementSibling.style.display='flex'; this.style.display='none';">
          <div class="avatar-card-emoji" style="display:none">${safeEmoji}</div>`
         : `<div class="avatar-card-emoji">${safeEmoji}</div>`;
 
@@ -398,8 +398,8 @@ function showDeityPage(key, options = {}) {
   // Build header
   const imgSrc = getValidDeityImage(deity.img);
   const imgHtml = imgSrc
-    ? `<img class="deity-portrait" src="${imgSrc}" alt="${deity.name}" loading="eager" fetchpriority="high" width="100" height="100" decoding="async" onerror="this.nextElementSibling.style.display='flex'; this.style.display='none';">
-   <div class="deity-portrait-emoji" style="display:none">${deity.emoji}</div>`
+    ? `<img class="deity-portrait loading" src="${imgSrc}" alt="${deity.name}" loading="eager" fetchpriority="high" width="100" height="100" decoding="async" onload="this.classList.remove('loading'); this.classList.add('loaded');" onerror="this.nextElementSibling.style.display='flex'; this.style.display='none';">
+     <div class="deity-portrait-emoji" style="display:none">${deity.emoji}</div>`
     : `<div class="deity-portrait-emoji">${deity.emoji}</div>`;
 
   document.getElementById('deityHeader').innerHTML = `
@@ -724,7 +724,7 @@ function renderLyrics(data, options = {}) {
         const placementClass = placement ? ` katha-figure-${placement}` : '';
 
         return `<figure class="katha-figure${placementClass}${alignClass}">
-          <img src="${escapeHtml(item.src)}" alt="${altText}" loading="lazy" decoding="async" onerror="handleContentImageError(this)">
+          <img src="${escapeHtml(item.src)}" alt="${altText}" loading="lazy" decoding="async" class="loading" onload="this.classList.remove('loading'); this.classList.add('loaded');" onerror="handleContentImageError(this);">
           ${captionHtml}
         </figure>`;
       })
