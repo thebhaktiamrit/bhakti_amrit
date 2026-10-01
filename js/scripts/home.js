@@ -489,8 +489,9 @@ function syncHomeLandingMode() {
   if (landing) {
     landing.setAttribute('aria-hidden', landingOn ? 'false' : 'true');
   }
-  if (landingOn && typeof window.initSlokaCarousel === 'function') {
-    window.initSlokaCarousel();
+  if (landingOn) {
+    if (typeof window.initHeroArcGallery === 'function') window.initHeroArcGallery();
+    if (typeof window.initSlokaCarousel === 'function') window.initSlokaCarousel();
   }
 }
 
@@ -799,4 +800,127 @@ if (typeof window !== 'undefined') {
   window.prevSlokaSlide = prevSlokaSlide;
   window.goToSlokaSlide = goToSlokaSlide;
   window.initSlokaCarousel = initSlokaCarousel;
+}
+
+// ----------------------------------------------------
+// 3D HERO CURVED GALLERY ARC LOGIC
+// ----------------------------------------------------
+const ARC_DEITIES = [
+  {
+    key: 'ganesh',
+    name: 'श्री गणेश',
+    mantra: '"वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ। अविघ्नं कुरु मे देव सर्वकार्येषु सर्वदा॥"'
+  },
+  {
+    key: 'shiva',
+    name: 'भगवान शिव',
+    mantra: '"कर्पूरगौरं करुणावतारं संसारसारम् भुजगेन्द्रहारम्। सदावसन्तं हृदयारविन्दे भवं भवानीसहितं नमामि॥"'
+  },
+  {
+    key: 'durga',
+    name: 'माँ दुर्गा',
+    mantra: '"सर्वमङ्गलमगल्ये शिवे सर्वार्थसाधिके। शरण्ये त्र्यम्बके गौरि नारायणि नमोऽस्तु ते॥"'
+  },
+  {
+    key: 'ram',
+    name: 'भगवान राम',
+    mantra: '"रामाय रामभद्राय रामचन्द्राय वेधसे। रघुनाथाय नाथाय सीतायाः पतये नमः॥"'
+  },
+  {
+    key: 'krishna',
+    name: 'श्री कृष्ण',
+    mantra: '"वसुदेवसुतं देवं कंसचाणूरमर्दनम्। देवकीपरमानन्दं कृष्णं वन्दे जगद्गुरुम्॥"'
+  },
+  {
+    key: 'hanuman',
+    name: 'हनुमान जी',
+    mantra: '"मनोजवं मारुततुल्यवेगं जितेन्द्रियं बुद्धिमतां वरिष्ठम्। श्रीरामदूतं शरणं प्रपद्ये॥"'
+  },
+  {
+    key: 'lakshmi',
+    name: 'माँ लक्ष्मी',
+    mantra: '"नमस्तेऽस्तु महामाये श्रीपीठे सुरपूजिते। शङ्खचक्रगदाहस्ते महालक्ष्मि नमोऽस्तु ते॥"'
+  }
+];
+
+let activeArcIndex = 3; // Ram by default
+let arcAutoRotateTimer = null;
+
+function updateArcCardsLayout() {
+  const cards = document.querySelectorAll('.ba-arc-card');
+  if (!cards.length) return;
+
+  const centerIdx = activeArcIndex;
+
+  cards.forEach((card, i) => {
+    const offset = i - centerIdx;
+    const absOffset = Math.abs(offset);
+
+    // Calculate 3D curved arc transforms
+    const translateX = offset * 115;
+    const translateZ = -absOffset * 85;
+    const rotateY = -offset * 14;
+    const scale = offset === 0 ? 1.15 : Math.max(0.72, 1 - absOffset * 0.12);
+    const opacity = Math.max(0.4, 1 - absOffset * 0.2);
+    const zIndex = 100 - absOffset;
+
+    card.style.transform = `translateX(${translateX}px) translateZ(${translateZ}px) rotateY(${rotateY}deg) scale(${scale})`;
+    card.style.opacity = opacity;
+    card.style.zIndex = zIndex;
+
+    if (offset === 0) {
+      card.classList.add('active-center');
+    } else {
+      card.classList.remove('active-center');
+    }
+  });
+
+  const activeDeity = ARC_DEITIES[centerIdx];
+  if (activeDeity) {
+    const mantraText = document.getElementById('spotlightMantraText');
+    const spotlightBtn = document.getElementById('spotlightBtn');
+    if (mantraText) mantraText.textContent = activeDeity.mantra;
+    if (spotlightBtn) {
+      spotlightBtn.onclick = () => showDeityPage(activeDeity.key, { initialTab: 'mantra' });
+    }
+  }
+}
+
+function setActiveArcCard(index) {
+  if (index < 0) index = ARC_DEITIES.length - 1;
+  if (index >= ARC_DEITIES.length) index = 0;
+  activeArcIndex = index;
+  updateArcCardsLayout();
+}
+
+function startArcAutoRotate() {
+  stopArcAutoRotate();
+  arcAutoRotateTimer = setInterval(() => {
+    setActiveArcCard(activeArcIndex + 1);
+  }, 5000);
+}
+
+function stopArcAutoRotate() {
+  if (arcAutoRotateTimer) {
+    clearInterval(arcAutoRotateTimer);
+    arcAutoRotateTimer = null;
+  }
+}
+
+function initHeroArcGallery() {
+  const container = document.getElementById('baHero3dArc');
+  if (!container) return;
+  setActiveArcCard(3);
+  startArcAutoRotate();
+
+  if (!container.dataset.bound) {
+    container.addEventListener('mouseenter', stopArcAutoRotate);
+    container.addEventListener('mouseleave', startArcAutoRotate);
+    container.dataset.bound = 'true';
+  }
+}
+
+if (typeof window !== 'undefined') {
+  window.setActiveArcCard = setActiveArcCard;
+  window.initHeroArcGallery = initHeroArcGallery;
 }

@@ -376,77 +376,242 @@
     <div class="main-container">
       <!-- HOME PAGE -->
       <div id="page-home" class="page active is-landing">
-        <section class="ba-landing" id="baLanding" aria-labelledby="baLandingTitle">
-          <!-- HERO SECTION -->
+        <section
+          class="ba-landing"
+          id="baLanding"
+          aria-labelledby="baLandingTitle"
+        >
+          <!-- HERO SECTION (SAMPLE INSPIRED 3D CURVED GALLERY DESIGN) -->
           <div class="ba-landing-hero-wrapper">
             <div class="ba-landing-hero-bg-glow"></div>
-            <article class="ba-landing-hero">
-              <div class="ba-landing-hero-content">
+            <article class="ba-landing-hero ba-landing-hero-sample-style">
+              <!-- Top Centered Header Stack -->
+              <div class="ba-hero-header-center">
                 <div class="ba-landing-badge">
                   <span class="ba-landing-badge-icon">🪔</span>
-                  <span class="ba-landing-badge-text" data-i18n="landingEyebrow">भक्ति अमृत</span>
+                  <span class="ba-landing-badge-text" data-i18n="landingEyebrow"
+                    >भक्ति अमृत</span
+                  >
                   <span class="ba-landing-badge-sparkle">✨</span>
                 </div>
-                <h1 class="ba-landing-title" id="baLandingTitle" data-i18n="landingTitle">
+                <h1
+                  class="ba-landing-title ba-hero-title-center"
+                  id="baLandingTitle"
+                  data-i18n="landingTitle"
+                >
                   श्रद्धा को सरल बनाएं, साधना को रोज़ आसान बनाएं
                 </h1>
-                <p class="ba-landing-lead" data-i18n="landingLead">
-                  आरती, चालीसा, मंत्र, स्तोत्र, कथा, प्रसिद्ध मंदिर और त्योहार — एक शांत जगह पर, शुद्ध एवं सुव्यवस्थित सनातन कोष।
+                <p
+                  class="ba-landing-lead ba-hero-lead-center"
+                  data-i18n="landingLead"
+                >
+                  आरती, चालीसा, मंत्र, स्तोत्र, कथा, प्रसिद्ध मंदिर और त्योहार —
+                  एक शांत जगह पर, शुद्ध एवं सुव्यवस्थित सनातन कोष।
                 </p>
 
-                <div class="ba-landing-actions">
+                <div class="ba-hero-main-cta">
                   <button
-                    class="ba-landing-btn ba-landing-btn-primary"
+                    class="ba-landing-btn ba-landing-btn-primary ba-hero-center-btn"
                     type="button"
                     onclick="showHomeByType('dev', 'type-dev')"
                   >
-                    <span class="btn-icon">🕉️</span>
-                    <span data-i18n="landingCtaDev">देव संग्रह देखें</span>
-                  </button>
-                  <button
-                    class="ba-landing-btn ba-landing-btn-secondary"
-                    type="button"
-                    onclick="showHomeByType('devi', 'type-devi')"
-                  >
-                    <span class="btn-icon">🌺</span>
-                    <span data-i18n="landingCtaDevi">देवी संग्रह देखें</span>
-                  </button>
-                  <button
-                    class="ba-landing-btn ba-landing-btn-outline"
-                    type="button"
-                    onclick="showTemplesMenuPage()"
-                  >
-                    <span class="btn-icon">🛕</span>
-                    <span data-i18n="landingCtaTemples">प्रसिद्ध मंदिर</span>
+                    <span data-i18n="landingCtaDev"
+                      >देव संग्रह एक्सप्लोर करें</span
+                    >
+                    <span class="btn-arrow-icon">→</span>
                   </button>
                 </div>
               </div>
 
-              <!-- 3D HERO SLOKA SHOWCASE CAROUSEL -->
-              <div class="ba-landing-hero-visual">
-                <div class="ba-landing-sloka-card ba-3d-sloka-card" id="baLandingSlokaCard">
-                  <div class="sloka-card-bg-blur" id="slokaBgBlur" style="background-image: url('https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main/icons/ganesh.webp');"></div>
-                  <div class="sloka-header">
-                    <span class="sloka-tag" data-i18n="landingSlokaTag">✨ दैनिक पावन मंत्र</span>
-                    <div class="sloka-deity-badge" id="slokaDeityBadge">
-                      <img src="https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main/icons/ganesh.webp" alt="Ganesh" class="sloka-deity-thumb" id="slokaDeityThumb" onerror="handleDeityIconError(this)" />
-                      <span class="sloka-deity" id="slokaDeityName">ॐ श्री गणेशाय नमः</span>
+              <!-- Center 3D Curved Fanned Gallery Arc -->
+              <div class="ba-hero-curved-gallery-wrapper">
+                <div class="ba-hero-3d-arc" id="baHero3dArc">
+                  <!-- 7 Fanned Deity Cards -->
+                  <div
+                    class="ba-arc-card"
+                    data-deity="ganesh"
+                    onclick="handleArcCardClick(0)"
+                  >
+                    <div class="ba-arc-card-inner">
+                      <img
+                        src="https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main/icons/ganesh.webp"
+                        alt="श्री गणेश"
+                        class="ba-arc-img"
+                        loading="lazy"
+                        onerror="handleDeityIconError(this)"
+                      />
+                      <div class="ba-arc-card-overlay">
+                        <span class="ba-arc-deity-name">श्री गणेश</span>
+                        <span class="ba-arc-tag">विघ्नहर्ता</span>
+                      </div>
                     </div>
                   </div>
-                  <div class="sloka-body" id="slokaBody">
-                    <p class="sloka-text" id="slokaText">"वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ।<br>अविघ्नं कुरु मे देव सर्वकार्येषु सर्वदा॥"</p>
-                    <p class="sloka-meaning" id="slokaMeaning">हे घुमावदार सूंड वाले, विशाल शरीर वाले, करोड़ों सूर्यों के समान तेजस्वी देव! मेरे सभी कार्यों को सदा बाधारहित पूरा करें।</p>
-                  </div>
-                  <div class="sloka-footer">
-                    <button type="button" class="sloka-action-btn" id="slokaActionBtn" onclick="showDeityPage('ganesh', { initialTab: 'mantra' })">
-                      <span id="slokaActionLabel">📿 गणेश मंत्र पढ़ें</span>
-                    </button>
-                    <div class="sloka-carousel-nav">
-                      <button type="button" class="sloka-nav-arrow" onclick="prevSlokaSlide()" aria-label="Previous Mantra">‹</button>
-                      <div class="sloka-nav-dots" id="slokaNavDots"></div>
-                      <button type="button" class="sloka-nav-arrow" onclick="nextSlokaSlide()" aria-label="Next Mantra">›</button>
+
+                  <div
+                    class="ba-arc-card"
+                    data-deity="shiva"
+                    onclick="handleArcCardClick(1)"
+                  >
+                    <div class="ba-arc-card-inner">
+                      <img
+                        src="https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main/icons/shiv.webp"
+                        alt="भगवान शिव"
+                        class="ba-arc-img"
+                        loading="lazy"
+                        onerror="handleDeityIconError(this)"
+                      />
+                      <div class="ba-arc-card-overlay">
+                        <span class="ba-arc-deity-name">भगवान शिव</span>
+                        <span class="ba-arc-tag">महादेव</span>
+                      </div>
                     </div>
                   </div>
+
+                  <div
+                    class="ba-arc-card"
+                    data-deity="durga"
+                    onclick="handleArcCardClick(2)"
+                  >
+                    <div class="ba-arc-card-inner">
+                      <img
+                        src="https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main/icons/durga.webp"
+                        alt="माँ दुर्गा"
+                        class="ba-arc-img"
+                        loading="lazy"
+                        onerror="handleDeityIconError(this)"
+                      />
+                      <div class="ba-arc-card-overlay">
+                        <span class="ba-arc-deity-name">माँ दुर्गा</span>
+                        <span class="ba-arc-tag">शक्तिपीठ</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    class="ba-arc-card active-center"
+                    data-deity="ram"
+                    onclick="handleArcCardClick(3)"
+                  >
+                    <div class="ba-arc-card-inner">
+                      <img
+                        src="https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main/icons/ram.webp"
+                        alt="श्री राम"
+                        class="ba-arc-img"
+                        loading="lazy"
+                        onerror="handleDeityIconError(this)"
+                      />
+                      <div class="ba-arc-card-overlay">
+                        <span class="ba-arc-deity-name">भगवान राम</span>
+                        <span class="ba-arc-tag">मर्यादा पुरुषोत्तम</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    class="ba-arc-card"
+                    data-deity="krishna"
+                    onclick="handleArcCardClick(4)"
+                  >
+                    <div class="ba-arc-card-inner">
+                      <img
+                        src="https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main/icons/krishna.webp"
+                        alt="श्री कृष्ण"
+                        class="ba-arc-img"
+                        loading="lazy"
+                        onerror="handleDeityIconError(this)"
+                      />
+                      <div class="ba-arc-card-overlay">
+                        <span class="ba-arc-deity-name">श्री कृष्ण</span>
+                        <span class="ba-arc-tag">जगद्गुरु</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    class="ba-arc-card"
+                    data-deity="hanuman"
+                    onclick="handleArcCardClick(5)"
+                  >
+                    <div class="ba-arc-card-inner">
+                      <img
+                        src="https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main/icons/hanuman.webp"
+                        alt="हनुमान जी"
+                        class="ba-arc-img"
+                        loading="lazy"
+                        onerror="handleDeityIconError(this)"
+                      />
+                      <div class="ba-arc-card-overlay">
+                        <span class="ba-arc-deity-name">हनुमान जी</span>
+                        <span class="ba-arc-tag">संकटमोचन</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    class="ba-arc-card"
+                    data-deity="lakshmi"
+                    onclick="handleArcCardClick(6)"
+                  >
+                    <div class="ba-arc-card-inner">
+                      <img
+                        src="https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main/icons/lakshmi.webp"
+                        alt="माँ लक्ष्मी"
+                        class="ba-arc-img"
+                        loading="lazy"
+                        onerror="handleDeityIconError(this)"
+                      />
+                      <div class="ba-arc-card-overlay">
+                        <span class="ba-arc-deity-name">माँ लक्ष्मी</span>
+                        <span class="ba-arc-tag">वैभव लक्ष्मी</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Laser Light Line under center card -->
+                <div class="ba-hero-laser-line"></div>
+              </div>
+
+              <!-- Active Deity Spotlight Badge under Arc -->
+              <div class="ba-hero-spotlight-info" id="baHeroSpotlightInfo">
+                <div class="spotlight-mantra-pill">
+                  <span class="spotlight-mantra-text" id="spotlightMantraText"
+                    >"रामाय रामभद्राय रामचन्द्राय वेधसे। रघुनाथाय नाथाय सीतायाः
+                    पतये नमः॥"</span
+                  >
+                  <button
+                    type="button"
+                    class="spotlight-btn"
+                    id="spotlightBtn"
+                    onclick="showDeityPage('ram', { initialTab: 'mantra' })"
+                  >
+                    पाठ करें →
+                  </button>
+                </div>
+              </div>
+
+              <!-- Bottom 3 Highlight Pillars -->
+              <div class="ba-hero-features-three">
+                <div class="ba-hero-feature-col">
+                  <h3 class="feature-col-title">📿 आरती, चालीसा व मंत्र</h3>
+                  <p class="feature-col-desc">
+                    शुद्ध हिंदी अर्थ और आसान पाठ के साथ सनातन मंत्र, स्तोत्र एवं
+                    चालीसा संग्रह।
+                  </p>
+                </div>
+                <div class="ba-hero-feature-col">
+                  <h3 class="feature-col-title">🛕 ५०+ प्रसिद्ध मंदिर</h3>
+                  <p class="feature-col-desc">
+                    दर्शन समय, गूगल मैप्स दिशाएं, इतिहास, आरती शेड्यूल एवं
+                    संपर्क विवरण।
+                  </p>
+                </div>
+                <div class="ba-hero-feature-col">
+                  <h3 class="feature-col-title">📚 सनातन ज्ञान कोष</h3>
+                  <p class="feature-col-desc">
+                    वेद, उपनिषद, श्रीमद्भगवद्गीता एवं प्रामाणिक व्रत-त्योहार
+                    कथाएं।
+                  </p>
                 </div>
               </div>
             </article>
@@ -455,117 +620,277 @@
           <!-- QUICK CATEGORIES & ECOSYSTEM -->
           <div class="ba-landing-block ba-landing-categories-section">
             <div class="ba-landing-section-header">
-              <span class="section-eye" data-i18n="landingSectionEcosystemEye">🚩 संग्रह एवं पावन ज्ञान कोष</span>
-              <h2 class="ba-landing-heading" data-i18n="landingExploreTitle">यहाँ क्या मिलेगा</h2>
-              <p class="ba-landing-kicker" data-i18n="landingExploreSubtitle">सनातन भक्ति के हर आयाम को सरलता से एक्सप्लोर करें</p>
+              <span class="section-eye" data-i18n="landingSectionEcosystemEye"
+                >🚩 संग्रह एवं पावन ज्ञान कोष</span
+              >
+              <h2 class="ba-landing-heading" data-i18n="landingExploreTitle">
+                यहाँ क्या मिलेगा
+              </h2>
+              <p class="ba-landing-kicker" data-i18n="landingExploreSubtitle">
+                सनातन भक्ति के हर आयाम को सरलता से एक्सप्लोर करें
+              </p>
             </div>
 
             <div class="ba-landing-explore">
-              <button class="ba-landing-card ba-3d-card" type="button" onclick="showHomeByType('dev', 'type-dev')">
+              <button
+                class="ba-landing-card ba-3d-card"
+                type="button"
+                onclick="showHomeByType('dev', 'type-dev')"
+              >
                 <div class="ba-landing-card-header">
                   <div class="ba-3d-icon-sphere">
-                    <img src="https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main/icons/ganesh.webp" alt="Dev" class="ba-3d-deity-icon" loading="lazy" onerror="handleDeityIconError(this)" />
+                    <img
+                      src="https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main/icons/ganesh.webp"
+                      alt="Dev"
+                      class="ba-3d-deity-icon"
+                      loading="lazy"
+                      onerror="handleDeityIconError(this)"
+                    />
                   </div>
-                  <span class="ba-landing-card-badge" data-i18n="navDev">देव</span>
+                  <span class="ba-landing-card-badge" data-i18n="navDev"
+                    >देव</span
+                  >
                 </div>
                 <span class="ba-landing-card-title">देव संग्रह</span>
-                <span class="ba-landing-card-desc" data-i18n="landingCardDevDesc">श्री गणेश, शिव, विष्णु, हनुमान जी व अन्य देवों की आरती, चालीसा व मंत्र।</span>
+                <span
+                  class="ba-landing-card-desc"
+                  data-i18n="landingCardDevDesc"
+                  >श्री गणेश, शिव, विष्णु, हनुमान जी व अन्य देवों की आरती,
+                  चालीसा व मंत्र।</span
+                >
                 <span class="ba-landing-card-arrow">देखें →</span>
               </button>
 
-              <button class="ba-landing-card ba-3d-card" type="button" onclick="showHomeByType('devi', 'type-devi')">
+              <button
+                class="ba-landing-card ba-3d-card"
+                type="button"
+                onclick="showHomeByType('devi', 'type-devi')"
+              >
                 <div class="ba-landing-card-header">
                   <div class="ba-3d-icon-sphere">
-                    <img src="https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main/icons/durga.webp" alt="Devi" class="ba-3d-deity-icon" loading="lazy" onerror="handleDeityIconError(this)" />
+                    <img
+                      src="https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main/icons/durga.webp"
+                      alt="Devi"
+                      class="ba-3d-deity-icon"
+                      loading="lazy"
+                      onerror="handleDeityIconError(this)"
+                    />
                   </div>
-                  <span class="ba-landing-card-badge" data-i18n="navDevi">देवी</span>
+                  <span class="ba-landing-card-badge" data-i18n="navDevi"
+                    >देवी</span
+                  >
                 </div>
                 <span class="ba-landing-card-title">देवी संग्रह</span>
-                <span class="ba-landing-card-desc" data-i18n="landingCardDeviDesc">माँ दुर्गा, लक्ष्मी, सरस्वती, गायत्री व अन्य देवी-शक्ति की भक्ति सामग्री।</span>
+                <span
+                  class="ba-landing-card-desc"
+                  data-i18n="landingCardDeviDesc"
+                  >माँ दुर्गा, लक्ष्मी, सरस्वती, गायत्री व अन्य देवी-शक्ति की
+                  भक्ति सामग्री।</span
+                >
                 <span class="ba-landing-card-arrow">देखें →</span>
               </button>
 
-              <button class="ba-landing-card ba-3d-card" type="button" onclick="showHomeByType('avatar', 'type-avatar')">
+              <button
+                class="ba-landing-card ba-3d-card"
+                type="button"
+                onclick="showHomeByType('avatar', 'type-avatar')"
+              >
                 <div class="ba-landing-card-header">
                   <div class="ba-3d-icon-sphere">
-                    <img src="https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main/icons/ram.webp" alt="Avatar" class="ba-3d-deity-icon" loading="lazy" onerror="handleDeityIconError(this)" />
+                    <img
+                      src="https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main/icons/ram.webp"
+                      alt="Avatar"
+                      class="ba-3d-deity-icon"
+                      loading="lazy"
+                      onerror="handleDeityIconError(this)"
+                    />
                   </div>
-                  <span class="ba-landing-card-badge" data-i18n="navAvatar">अवतार</span>
+                  <span class="ba-landing-card-badge" data-i18n="navAvatar"
+                    >अवतार</span
+                  >
                 </div>
                 <span class="ba-landing-card-title">अवतार संग्रह</span>
-                <span class="ba-landing-card-desc" data-i18n="landingCardAvatarDesc">मर्यादा पुरुषोत्तम राम, भगवान श्री कृष्ण और अन्य अवतारों की गाथा।</span>
+                <span
+                  class="ba-landing-card-desc"
+                  data-i18n="landingCardAvatarDesc"
+                  >मर्यादा पुरुषोत्तम राम, भगवान श्री कृष्ण और अन्य अवतारों की
+                  गाथा।</span
+                >
                 <span class="ba-landing-card-arrow">देखें →</span>
               </button>
 
-              <button class="ba-landing-card ba-3d-card" type="button" onclick="showHomeByType('grah-dev', 'type-grah-dev')">
+              <button
+                class="ba-landing-card ba-3d-card"
+                type="button"
+                onclick="showHomeByType('grah-dev', 'type-grah-dev')"
+              >
                 <div class="ba-landing-card-header">
                   <div class="ba-3d-icon-sphere">
-                    <img src="https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main/icons/surya.webp" alt="Grah Dev" class="ba-3d-deity-icon" loading="lazy" onerror="handleDeityIconError(this)" />
+                    <img
+                      src="https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main/icons/surya.webp"
+                      alt="Grah Dev"
+                      class="ba-3d-deity-icon"
+                      loading="lazy"
+                      onerror="handleDeityIconError(this)"
+                    />
                   </div>
-                  <span class="ba-landing-card-badge" data-i18n="navGrahDev">ग्रह देव</span>
+                  <span class="ba-landing-card-badge" data-i18n="navGrahDev"
+                    >ग्रह देव</span
+                  >
                 </div>
                 <span class="ba-landing-card-title">ग्रह देव</span>
-                <span class="ba-landing-card-desc" data-i18n="landingCardGrahDesc">सूर्य देव, शनि देव और नवग्रहों की शांति के लिए मंत्र एवं चालीसा।</span>
+                <span
+                  class="ba-landing-card-desc"
+                  data-i18n="landingCardGrahDesc"
+                  >सूर्य देव, शनि देव और नवग्रहों की शांति के लिए मंत्र एवं
+                  चालीसा।</span
+                >
                 <span class="ba-landing-card-arrow">देखें →</span>
               </button>
 
-              <button class="ba-landing-card ba-3d-card" type="button" onclick="showHomeByType('lok-dev', 'type-lok-dev')">
+              <button
+                class="ba-landing-card ba-3d-card"
+                type="button"
+                onclick="showHomeByType('lok-dev', 'type-lok-dev')"
+              >
                 <div class="ba-landing-card-header">
                   <div class="ba-3d-icon-sphere">
-                    <img src="https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main/icons/khatu_shyam.webp" alt="Lok Dev" class="ba-3d-deity-icon" loading="lazy" onerror="handleDeityIconError(this)" />
+                    <img
+                      src="https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main/icons/khatu_shyam.webp"
+                      alt="Lok Dev"
+                      class="ba-3d-deity-icon"
+                      loading="lazy"
+                      onerror="handleDeityIconError(this)"
+                    />
                   </div>
-                  <span class="ba-landing-card-badge" data-i18n="navLokDev">लोक देव</span>
+                  <span class="ba-landing-card-badge" data-i18n="navLokDev"
+                    >लोक देव</span
+                  >
                 </div>
                 <span class="ba-landing-card-title">लोक देव</span>
-                <span class="ba-landing-card-desc" data-i18n="landingCardLokDesc">बाबा रामदेव जी, तेजाजी महाराज एवं क्षेत्रीय लोक देवताओं का पाठ।</span>
+                <span
+                  class="ba-landing-card-desc"
+                  data-i18n="landingCardLokDesc"
+                  >बाबा रामदेव जी, तेजाजी महाराज एवं क्षेत्रीय लोक देवताओं का
+                  पाठ।</span
+                >
                 <span class="ba-landing-card-arrow">देखें →</span>
               </button>
 
-              <button class="ba-landing-card ba-3d-card" type="button" onclick="showTemplesMenuPage()">
+              <button
+                class="ba-landing-card ba-3d-card"
+                type="button"
+                onclick="showTemplesMenuPage()"
+              >
                 <div class="ba-landing-card-header">
                   <div class="ba-3d-icon-sphere">
-                    <img src="https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main/icons/shiva.webp" alt="Temples" class="ba-3d-deity-icon" loading="lazy" onerror="handleDeityIconError(this)" />
+                    <img
+                      src="https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main/icons/shiv.webp"
+                      alt="Temples"
+                      class="ba-3d-deity-icon"
+                      loading="lazy"
+                      onerror="handleDeityIconError(this)"
+                    />
                   </div>
-                  <span class="ba-landing-card-badge" data-i18n="navTemples">तीर्थ</span>
+                  <span class="ba-landing-card-badge" data-i18n="navTemples"
+                    >तीर्थ</span
+                  >
                 </div>
                 <span class="ba-landing-card-title">प्रसिद्ध मंदिर</span>
-                <span class="ba-landing-card-desc" data-i18n="landingCardTemplesDesc">भारत भर के ५०+ प्रमुख मंदिर, दर्शन समय, नक्शा और इतिहास।</span>
+                <span
+                  class="ba-landing-card-desc"
+                  data-i18n="landingCardTemplesDesc"
+                  >भारत भर के ५०+ प्रमुख मंदिर, दर्शन समय, नक्शा और
+                  इतिहास।</span
+                >
                 <span class="ba-landing-card-arrow">देखें →</span>
               </button>
 
-              <button class="ba-landing-card ba-3d-card" type="button" onclick="showFestivalsMenuPage()">
+              <button
+                class="ba-landing-card ba-3d-card"
+                type="button"
+                onclick="showFestivalsMenuPage()"
+              >
                 <div class="ba-landing-card-header">
                   <div class="ba-3d-icon-sphere">
-                    <img src="https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main/icons/lakshmi.webp" alt="Festivals" class="ba-3d-deity-icon" loading="lazy" onerror="handleDeityIconError(this)" />
+                    <img
+                      src="https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main/icons/lakshmi.webp"
+                      alt="Festivals"
+                      class="ba-3d-deity-icon"
+                      loading="lazy"
+                      onerror="handleDeityIconError(this)"
+                    />
                   </div>
-                  <span class="ba-landing-card-badge" data-i18n="navFestivals">पर्व</span>
+                  <span class="ba-landing-card-badge" data-i18n="navFestivals"
+                    >पर्व</span
+                  >
                 </div>
                 <span class="ba-landing-card-title">प्रसिद्ध त्योहार</span>
-                <span class="ba-landing-card-desc" data-i18n="landingCardFestivalsDesc">दिवाली, होली, नवरात्रि व अन्य प्रमुख पर्वों का महत्व व पूजा विधि।</span>
+                <span
+                  class="ba-landing-card-desc"
+                  data-i18n="landingCardFestivalsDesc"
+                  >दिवाली, होली, नवरात्रि व अन्य प्रमुख पर्वों का महत्व व पूजा
+                  विधि।</span
+                >
                 <span class="ba-landing-card-arrow">देखें →</span>
               </button>
 
-              <button class="ba-landing-card ba-3d-card" type="button" onclick="showScripturesMenuPage()">
+              <button
+                class="ba-landing-card ba-3d-card"
+                type="button"
+                onclick="showScripturesMenuPage()"
+              >
                 <div class="ba-landing-card-header">
                   <div class="ba-3d-icon-sphere">
-                    <img src="https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main/icons/vishnu.webp" alt="Scriptures" class="ba-3d-deity-icon" loading="lazy" onerror="handleDeityIconError(this)" />
+                    <img
+                      src="https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main/icons/vishnu.webp"
+                      alt="Scriptures"
+                      class="ba-3d-deity-icon"
+                      loading="lazy"
+                      onerror="handleDeityIconError(this)"
+                    />
                   </div>
-                  <span class="ba-landing-card-badge" data-i18n="navScriptures">ग्रन्थ</span>
+                  <span class="ba-landing-card-badge" data-i18n="navScriptures"
+                    >ग्रन्थ</span
+                  >
                 </div>
                 <span class="ba-landing-card-title">प्रसिद्ध धर्मग्रन्थ</span>
-                <span class="ba-landing-card-desc" data-i18n="landingCardScripturesDesc">वेद, उपनिषद, भगवद्गीता एवं सनातन ग्रन्थों का सरल परिचय।</span>
+                <span
+                  class="ba-landing-card-desc"
+                  data-i18n="landingCardScripturesDesc"
+                  >वेद, उपनिषद, भगवद्गीता एवं सनातन ग्रन्थों का सरल परिचय।</span
+                >
                 <span class="ba-landing-card-arrow">देखें →</span>
               </button>
 
-              <button class="ba-landing-card ba-3d-card" type="button" onclick="showKathasMenuPage()">
+              <button
+                class="ba-landing-card ba-3d-card"
+                type="button"
+                onclick="showKathasMenuPage()"
+              >
                 <div class="ba-landing-card-header">
                   <div class="ba-3d-icon-sphere">
-                    <img src="https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main/icons/hanuman.webp" alt="Kathas" class="ba-3d-deity-icon" loading="lazy" onerror="handleDeityIconError(this)" />
+                    <img
+                      src="https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main/icons/hanuman.webp"
+                      alt="Kathas"
+                      class="ba-3d-deity-icon"
+                      loading="lazy"
+                      onerror="handleDeityIconError(this)"
+                    />
                   </div>
                   <span class="ba-landing-card-badge">कथाएँ</span>
                 </div>
-                <span class="ba-landing-card-title" data-i18n="landingCardKathasTitle">प्रसिद्ध कथाएँ</span>
-                <span class="ba-landing-card-desc" data-i18n="landingCardKathasDesc">सत्यनारायण कथा, व्रत कथा एवं प्रेरणादायक पौराणिक गाथाएँ।</span>
+                <span
+                  class="ba-landing-card-title"
+                  data-i18n="landingCardKathasTitle"
+                  >प्रसिद्ध कथाएँ</span
+                >
+                <span
+                  class="ba-landing-card-desc"
+                  data-i18n="landingCardKathasDesc"
+                  >सत्यनारायण कथा, व्रत कथा एवं प्रेरणादायक पौराणिक
+                  गाथाएँ।</span
+                >
                 <span class="ba-landing-card-arrow">देखें →</span>
               </button>
             </div>
@@ -574,46 +899,82 @@
           <!-- FEATURES & EXPERIENCE SPOTLIGHT -->
           <div class="ba-landing-block ba-landing-features-section">
             <div class="ba-landing-section-header">
-              <span class="section-eye" data-i18n="landingFeaturesEye">✨ आधुनिक सुविधाएँ</span>
-              <h2 class="ba-landing-heading" data-i18n="landingFeaturesTitle">दैनिक साधना के लिए विशेष सुविधाएँ</h2>
-              <p class="ba-landing-kicker" data-i18n="landingFeaturesSubtitle">आपकी पूजा को आसान, शांत और बाधारहित बनाने वाले साधन</p>
+              <span class="section-eye" data-i18n="landingFeaturesEye"
+                >✨ आधुनिक सुविधाएँ</span
+              >
+              <h2 class="ba-landing-heading" data-i18n="landingFeaturesTitle">
+                दैनिक साधना के लिए विशेष सुविधाएँ
+              </h2>
+              <p class="ba-landing-kicker" data-i18n="landingFeaturesSubtitle">
+                आपकी पूजा को आसान, शांत और बाधारहित बनाने वाले साधन
+              </p>
             </div>
 
             <div class="ba-landing-features-grid">
               <div class="ba-feature-card">
                 <div class="feature-icon-wrap">📿</div>
-                <h3 class="feature-title" data-i18n="landingFeature1Title">डिजिटल मंत्र माला</h3>
-                <p class="feature-desc" data-i18n="landingFeature1Desc">108 मनकों का डिजिटल जाप काउंटर। हर जाप पर स्पर्श संकेत और माला पूर्ण होने पर विशेष सूचना।</p>
+                <h3 class="feature-title" data-i18n="landingFeature1Title">
+                  डिजिटल मंत्र माला
+                </h3>
+                <p class="feature-desc" data-i18n="landingFeature1Desc">
+                  108 मनकों का डिजिटल जाप काउंटर। हर जाप पर स्पर्श संकेत और माला
+                  पूर्ण होने पर विशेष सूचना।
+                </p>
               </div>
 
               <div class="ba-feature-card">
                 <div class="feature-icon-wrap">🌐</div>
-                <h3 class="feature-title" data-i18n="landingFeature2Title">7 भारतीय भाषाएँ</h3>
-                <p class="feature-desc" data-i18n="landingFeature2Desc">हिंदी, मराठी, तमिल, तेलुगु, कन्नड़, बंगाली एवं अंग्रेजी में इंटरफ़ेस सहजता से बदलें।</p>
+                <h3 class="feature-title" data-i18n="landingFeature2Title">
+                  7 भारतीय भाषाएँ
+                </h3>
+                <p class="feature-desc" data-i18n="landingFeature2Desc">
+                  हिंदी, मराठी, तमिल, तेलुगु, कन्नड़, बंगाली एवं अंग्रेजी में
+                  इंटरफ़ेस सहजता से बदलें।
+                </p>
               </div>
 
               <div class="ba-feature-card">
                 <div class="feature-icon-wrap">🤍</div>
-                <h3 class="feature-title" data-i18n="landingFeature3Title">पसंदीदा & ऑफ़लाइन</h3>
-                <p class="feature-desc" data-i18n="landingFeature3Desc">अपने दैनिक पाठों को एक क्लिक में पसंदीदा में जोड़ें और बिना इंटरनेट कभी भी पढ़ें।</p>
+                <h3 class="feature-title" data-i18n="landingFeature3Title">
+                  पसंदीदा & ऑफ़लाइन
+                </h3>
+                <p class="feature-desc" data-i18n="landingFeature3Desc">
+                  अपने दैनिक पाठों को एक क्लिक में पसंदीदा में जोड़ें और बिना
+                  इंटरनेट कभी भी पढ़ें।
+                </p>
               </div>
 
               <div class="ba-feature-card">
                 <div class="feature-icon-wrap">🔍</div>
-                <h3 class="feature-title" data-i18n="landingFeature4Title">शीघ्र खोज व फ़िल्टर</h3>
-                <p class="feature-desc" data-i18n="landingFeature4Desc">किसी भी देव-देवी, आरती, चालीसा या मंदिर को तुरंत ढूँढें। कार्ड और टेबल व्यू विकल्प।</p>
+                <h3 class="feature-title" data-i18n="landingFeature4Title">
+                  शीघ्र खोज व फ़िल्टर
+                </h3>
+                <p class="feature-desc" data-i18n="landingFeature4Desc">
+                  किसी भी देव-देवी, आरती, चालीसा या मंदिर को तुरंत ढूँढें। कार्ड
+                  और टेबल व्यू विकल्प।
+                </p>
               </div>
 
               <div class="ba-feature-card">
                 <div class="feature-icon-wrap">📖</div>
-                <h3 class="feature-title" data-i18n="landingFeature5Title">पठन मोड & प्रिंट</h3>
-                <p class="feature-desc" data-i18n="landingFeature5Desc">बिना किसी भटकाव के पूर्ण स्क्रीन पर पढ़ने के लिए पठन मोड और प्रिंटिंग सुविधा।</p>
+                <h3 class="feature-title" data-i18n="landingFeature5Title">
+                  पठन मोड & प्रिंट
+                </h3>
+                <p class="feature-desc" data-i18n="landingFeature5Desc">
+                  बिना किसी भटकाव के पूर्ण स्क्रीन पर पढ़ने के लिए पठन मोड और
+                  प्रिंटिंग सुविधा।
+                </p>
               </div>
 
               <div class="ba-feature-card">
                 <div class="feature-icon-wrap">🕊️</div>
-                <h3 class="feature-title" data-i18n="landingFeature6Title">शांत व विज्ञापन-मुक्त</h3>
-                <p class="feature-desc" data-i18n="landingFeature6Desc">बिना किसी कमर्शियल विज्ञापन, पॉप-अप या शोर के केवल और केवल भक्ति वातावरण।</p>
+                <h3 class="feature-title" data-i18n="landingFeature6Title">
+                  शांत व विज्ञापन-मुक्त
+                </h3>
+                <p class="feature-desc" data-i18n="landingFeature6Desc">
+                  बिना किसी कमर्शियल विज्ञापन, पॉप-अप या शोर के केवल और केवल
+                  भक्ति वातावरण।
+                </p>
               </div>
             </div>
           </div>
@@ -622,8 +983,12 @@
           <div class="ba-landing-block ba-landing-steps-block">
             <div class="ba-landing-section-header">
               <span class="section-eye">🚩 सरल मार्ग</span>
-              <h2 class="ba-landing-heading" data-i18n="landingHowTitle">कैसे उपयोग करें</h2>
-              <p class="ba-landing-kicker">३ आसान चरणों में अपनी दैनिक पूजा आरंभ करें</p>
+              <h2 class="ba-landing-heading" data-i18n="landingHowTitle">
+                कैसे उपयोग करें
+              </h2>
+              <p class="ba-landing-kicker">
+                ३ आसान चरणों में अपनी दैनिक पूजा आरंभ करें
+              </p>
             </div>
 
             <ol class="ba-landing-steps">
@@ -632,8 +997,15 @@
                   <span class="ba-landing-step-num" aria-hidden="true">१</span>
                 </div>
                 <div class="ba-landing-step-body">
-                  <h3 class="ba-landing-step-title" data-i18n="landingHow1Title">संग्रह चुनें</h3>
-                  <p class="ba-landing-step-desc" data-i18n="landingHow1Desc">देव, देवी, अवतार या मंदिर में से वह मार्ग चुनें जो आज चाहिए।</p>
+                  <h3
+                    class="ba-landing-step-title"
+                    data-i18n="landingHow1Title"
+                  >
+                    संग्रह चुनें
+                  </h3>
+                  <p class="ba-landing-step-desc" data-i18n="landingHow1Desc">
+                    देव, देवी, अवतार या मंदिर में से वह मार्ग चुनें जो आज चाहिए।
+                  </p>
                 </div>
               </li>
               <li class="ba-landing-step">
@@ -641,8 +1013,15 @@
                   <span class="ba-landing-step-num" aria-hidden="true">२</span>
                 </div>
                 <div class="ba-landing-step-body">
-                  <h3 class="ba-landing-step-title" data-i18n="landingHow2Title">देवता खोलें</h3>
-                  <p class="ba-landing-step-desc" data-i18n="landingHow2Desc">परिचय पढ़ें, फिर आरती, चालीसा, मंत्र या कथा पर जाएँ।</p>
+                  <h3
+                    class="ba-landing-step-title"
+                    data-i18n="landingHow2Title"
+                  >
+                    देवता खोलें
+                  </h3>
+                  <p class="ba-landing-step-desc" data-i18n="landingHow2Desc">
+                    परिचय पढ़ें, फिर आरती, चालीसा, मंत्र या कथा पर जाएँ।
+                  </p>
                 </div>
               </li>
               <li class="ba-landing-step">
@@ -650,8 +1029,15 @@
                   <span class="ba-landing-step-num" aria-hidden="true">३</span>
                 </div>
                 <div class="ba-landing-step-body">
-                  <h3 class="ba-landing-step-title" data-i18n="landingHow3Title">रोज़ लौटें</h3>
-                  <p class="ba-landing-step-desc" data-i18n="landingHow3Desc">पसंदीदा जोड़ें और अपनी दैनिक साधना को तुरंत फिर से खोलें।</p>
+                  <h3
+                    class="ba-landing-step-title"
+                    data-i18n="landingHow3Title"
+                  >
+                    रोज़ लौटें
+                  </h3>
+                  <p class="ba-landing-step-desc" data-i18n="landingHow3Desc">
+                    पसंदीदा जोड़ें और अपनी दैनिक साधना को तुरंत फिर से खोलें।
+                  </p>
                 </div>
               </li>
             </ol>
@@ -661,26 +1047,38 @@
           <article class="ba-landing-mission">
             <div class="ba-landing-mission-header">
               <span class="diya-glow">🪔</span>
-              <h2 class="ba-landing-heading" data-i18n="landingMissionTitle">हमारा उद्देश्य</h2>
+              <h2 class="ba-landing-heading" data-i18n="landingMissionTitle">
+                हमारा उद्देश्य
+              </h2>
             </div>
-            <p class="ba-landing-lead ba-landing-lead-compact" data-i18n="landingMissionLead">
-              पारंपरिक सामग्री को आधुनिक पाठकों के लिए सरल, शुद्ध और व्यवस्थित रखना — बिना शोर, बिना भटकाव।
+            <p
+              class="ba-landing-lead ba-landing-lead-compact"
+              data-i18n="landingMissionLead"
+            >
+              पारंपरिक सामग्री को आधुनिक पाठकों के लिए सरल, शुद्ध और व्यवस्थित
+              रखना — बिना शोर, बिना भटकाव।
             </p>
             <div class="ba-landing-values">
               <div class="ba-landing-value">
                 <div class="value-icon">📜</div>
                 <strong data-i18n="landingValueAccuracy">सटीकता</strong>
-                <span data-i18n="landingValueAccuracyDesc">पढ़ने में सरल, सुव्यवस्थित भक्ति पाठ।</span>
+                <span data-i18n="landingValueAccuracyDesc"
+                  >पढ़ने में सरल, सुव्यवस्थित भक्ति पाठ।</span
+                >
               </div>
               <div class="ba-landing-value">
                 <div class="value-icon">🕉️</div>
                 <strong data-i18n="landingValueSadhana">दैनिक साधना</strong>
-                <span data-i18n="landingValueSadhanaDesc">सुबह-शाम के पाठ के लिए तेज़ पहुँच।</span>
+                <span data-i18n="landingValueSadhanaDesc"
+                  >सुबह-शाम के पाठ के लिए तेज़ पहुँच।</span
+                >
               </div>
               <div class="ba-landing-value">
                 <div class="value-icon">✨</div>
                 <strong data-i18n="landingValueSimple">सरल अनुभव</strong>
-                <span data-i18n="landingValueSimpleDesc">मोबाइल और डेस्कटॉप दोनों पर शांत, स्पष्ट इंटरफ़ेस।</span>
+                <span data-i18n="landingValueSimpleDesc"
+                  >मोबाइल और डेस्कटॉप दोनों पर शांत, स्पष्ट इंटरफ़ेस।</span
+                >
               </div>
             </div>
           </article>
@@ -688,9 +1086,12 @@
           <!-- BOTTOM CALL TO ACTION -->
           <div class="ba-landing-close">
             <div class="ba-landing-close-icon">🔱</div>
-            <h2 class="ba-landing-heading" data-i18n="landingCloseTitle">आज की साधना यहीं से शुरू करें</h2>
+            <h2 class="ba-landing-heading" data-i18n="landingCloseTitle">
+              आज की साधना यहीं से शुरू करें
+            </h2>
             <p class="ba-landing-kicker" data-i18n="landingCloseLead">
-              संग्रह खोलें, अपने इष्ट को चुनें, और आरती या मंत्र पढ़ना शुरू करें।
+              संग्रह खोलें, अपने इष्ट को चुनें, और आरती या मंत्र पढ़ना शुरू
+              करें।
             </p>
             <div class="ba-landing-actions">
               <button
@@ -716,7 +1117,9 @@
         <div class="home-catalog" id="homeCatalog">
           <div class="home-title-row">
             <div class="section-title">
-              <span class="diya" id="homeSectionIcon" aria-hidden="true">🪔</span>
+              <span class="diya" id="homeSectionIcon" aria-hidden="true"
+                >🪔</span
+              >
               <span id="homeSectionTitleText">देव-देवी संग्रह</span>
             </div>
           </div>
@@ -1112,7 +1515,7 @@
     </div>
     <script>
       window.BHAKTI_AMRIT_DATA_SOURCE =
-        window.BHAKTI_AMRIT_DATA_SOURCE || 'local'; // 'cdn' | 'local' | 'cdn-no-cache'
+        window.BHAKTI_AMRIT_DATA_SOURCE || 'cdn-no-cache'; // 'cdn' | 'local' | 'cdn-no-cache'
       window.BHAKTI_AMRIT_DATA_CACHE_BUST =
         window.BHAKTI_AMRIT_DATA_CACHE_BUST || String(Date.now());
     </script>

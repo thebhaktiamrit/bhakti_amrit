@@ -930,44 +930,290 @@ body.reading-mode-open .aarti-floating-bell-wrap {
   border-radius: 28px;
 }
 
-.ba-landing-hero {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
+.ba-landing-hero-sample-style {
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: clamp(24px, 4vw, 40px);
-  background: linear-gradient(135deg, rgba(var(--dark-rgb), 0.88) 0%, rgba(var(--gold-rgb), 0.08) 50%, rgba(var(--saffron-rgb), 0.12) 100%);
+  text-align: center;
+  padding: clamp(32px, 5vw, 56px) clamp(20px, 4vw, 40px);
+  background: radial-gradient(
+    circle at 50% 25%,
+    rgba(var(--dark-rgb), 0.92) 0%,
+    rgba(var(--maroon-rgb), 0.78) 60%,
+    rgba(var(--dark-rgb), 0.95) 100%
+  );
   border: 1px solid rgba(var(--gold-rgb), 0.35);
-  border-radius: 28px;
-  padding: clamp(28px, 4.5vw, 44px);
-  box-shadow: 0 20px 50px rgba(var(--shadow-rgb), 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+  border-radius: 32px;
+  position: relative;
   overflow: hidden;
+  box-shadow: 0 24px 60px rgba(var(--shadow-rgb), 0.45);
 }
 
-.ba-landing-hero::before {
-  content: '';
+.ba-hero-header-center {
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 2;
+}
+
+.ba-hero-title-center {
+  font-size: clamp(2rem, 4.2vw, 3.2rem);
+  text-align: center;
+  margin: 0;
+}
+
+.ba-hero-lead-center {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto;
+  font-size: clamp(0.98rem, 1.8vw, 1.1rem);
+  color: rgba(var(--cream-rgb), 0.88);
+}
+
+.ba-hero-center-btn {
+  font-size: 1rem;
+  padding: 13px 28px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--gold) 0%, var(--saffron) 100%);
+  color: var(--dark);
+  box-shadow: 0 8px 25px rgba(var(--saffron-rgb), 0.45);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  transition: all 0.3s ease;
+}
+
+.ba-hero-center-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 12px 32px rgba(var(--saffron-rgb), 0.6);
+}
+
+/* Curved 3D Gallery Arc Container */
+.ba-hero-curved-gallery-wrapper {
+  width: 100%;
+  max-width: 1100px;
+  height: 270px;
+  position: relative;
+  perspective: 1200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0 16px;
+}
+
+.ba-hero-3d-arc {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+/* Arc Cards */
+.ba-arc-card {
   position: absolute;
-  top: -50%;
-  right: -20%;
-  width: 380px;
-  height: 380px;
-  background: radial-gradient(circle, rgba(var(--gold-rgb), 0.2) 0%, rgba(var(--saffron-rgb), 0.08) 50%, transparent 70%);
-  filter: blur(40px);
+  left: 50%;
+  top: 50%;
+  width: 145px;
+  height: 225px;
+  margin-left: -72.5px;
+  margin-top: -112.5px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.5s ease, z-index 0.5s ease;
+  transform-style: preserve-3d;
+  user-select: none;
+}
+
+.ba-arc-card-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1.5px solid rgba(var(--gold-rgb), 0.35);
+  background: rgba(var(--dark-rgb), 0.85);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+  position: relative;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.ba-arc-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: brightness(0.9) contrast(1.05);
+  transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.ba-arc-card:hover .ba-arc-img {
+  transform: scale(1.08);
+  filter: brightness(1.08);
+}
+
+.ba-arc-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.92) 0%, rgba(0, 0, 0, 0.2) 65%, transparent 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 12px 10px;
+  text-align: center;
+}
+
+.ba-arc-deity-name {
+  font-family: 'Tiro Devanagari Hindi', serif;
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: var(--gold);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.ba-arc-tag {
+  font-size: 0.75rem;
+  color: rgba(var(--cream-rgb), 0.85);
+}
+
+/* Highlighted Active Center Card */
+.ba-arc-card.active-center {
+  width: 175px;
+  height: 255px;
+  margin-left: -87.5px;
+  margin-top: -127.5px;
+  z-index: 20;
+}
+
+.ba-arc-card.active-center .ba-arc-card-inner {
+  border: 2px solid var(--gold);
+  box-shadow: 
+    0 25px 55px rgba(0, 0, 0, 0.85),
+    0 0 35px rgba(var(--gold-rgb), 0.45),
+    0 0 15px rgba(var(--saffron-rgb), 0.6);
+}
+
+/* Laser Light Line underneath center card */
+.ba-hero-laser-line {
+  position: absolute;
+  bottom: 0;
+  width: 170px;
+  height: 4px;
+  background: linear-gradient(90deg, transparent 0%, var(--gold) 50%, transparent 100%);
+  border-radius: 999px;
+  box-shadow: 0 0 20px var(--gold), 0 0 10px var(--saffron);
+  z-index: 5;
   pointer-events: none;
-  border-radius: 50%;
+}
+
+/* Active Deity Spotlight Info Pill */
+.ba-hero-spotlight-info {
+  margin-top: 14px;
+  margin-bottom: 32px;
+  position: relative;
+  z-index: 3;
+}
+
+.spotlight-mantra-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  background: rgba(var(--dark-rgb), 0.85);
+  border: 1px solid rgba(var(--gold-rgb), 0.4);
+  backdrop-filter: blur(14px);
+  padding: 10px 22px;
+  border-radius: 999px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.spotlight-mantra-text {
+  font-family: 'Tiro Devanagari Hindi', serif;
+  font-size: 0.96rem;
+  color: var(--gold);
+  font-weight: 600;
+}
+
+.spotlight-btn {
+  background: rgba(var(--gold-rgb), 0.2);
+  border: 1px solid rgba(var(--gold-rgb), 0.5);
+  color: var(--gold);
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.spotlight-btn:hover {
+  background: var(--gold);
+  color: var(--dark);
+}
+
+/* Bottom 3 Feature Columns */
+.ba-hero-features-three {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  width: 100%;
+  max-width: 1020px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(var(--gold-rgb), 0.22);
+  position: relative;
+  z-index: 2;
+}
+
+.ba-hero-feature-col {
+  text-align: center;
+  padding: 16px clamp(14px, 2vw, 20px);
+  background: rgba(var(--dark-rgb), 0.45);
+  border: 1px solid rgba(var(--gold-rgb), 0.22);
+  border-radius: 18px;
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.ba-hero-feature-col:hover {
+  background: rgba(var(--dark-rgb), 0.65);
+  border-color: rgba(var(--gold-rgb), 0.45);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(var(--shadow-rgb), 0.25);
+}
+
+.feature-col-title {
+  font-family: 'Tiro Devanagari Hindi', serif;
+  font-size: 1.05rem;
+  color: var(--gold);
+  margin: 0 0 6px 0;
+  font-weight: 700;
+}
+
+.feature-col-desc {
+  font-size: 0.88rem;
+  color: rgba(var(--cream-rgb), 0.82);
+  margin: 0;
+  line-height: 1.55;
 }
 
 .ba-landing-hero-bg-glow {
   position: absolute;
   inset: -20px;
   background: radial-gradient(
-    circle at 20% 30%,
-    rgba(var(--gold-rgb), 0.15) 0%,
-    rgba(var(--saffron-rgb), 0.08) 40%,
-    transparent 70%
+    circle at 50% 30%,
+    rgba(var(--gold-rgb), 0.22) 0%,
+    rgba(var(--saffron-rgb), 0.14) 40%,
+    rgba(var(--maroon-rgb), 0.1) 70%,
+    transparent 100%
   );
-  filter: blur(30px);
+  filter: blur(35px);
   pointer-events: none;
   z-index: 0;
   border-radius: 40px;
