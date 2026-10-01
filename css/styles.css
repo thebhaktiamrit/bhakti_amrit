@@ -1006,6 +1006,7 @@ body.reading-mode-open .aarti-floating-bell-wrap {
   align-items: center;
   justify-content: center;
   margin: 20px 0 16px;
+  touch-action: pan-y;
 }
 
 .ba-hero-3d-arc {
@@ -1032,6 +1033,7 @@ body.reading-mode-open .aarti-floating-bell-wrap {
   transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.5s ease, z-index 0.5s ease;
   transform-style: preserve-3d;
   user-select: none;
+  -webkit-user-drag: none;
 }
 
 .ba-arc-card-inner {
@@ -1053,6 +1055,7 @@ body.reading-mode-open .aarti-floating-bell-wrap {
   display: block;
   filter: brightness(0.9) contrast(1.05);
   transition: transform 0.4s ease, filter 0.4s ease;
+  pointer-events: none;
 }
 
 .ba-arc-card:hover .ba-arc-img {
@@ -1069,6 +1072,7 @@ body.reading-mode-open .aarti-floating-bell-wrap {
   justify-content: flex-end;
   padding: 12px 10px;
   text-align: center;
+  pointer-events: none;
 }
 
 .ba-arc-deity-name {
@@ -1086,10 +1090,6 @@ body.reading-mode-open .aarti-floating-bell-wrap {
 
 /* Highlighted Active Center Card */
 .ba-arc-card.active-center {
-  width: 175px;
-  height: 255px;
-  margin-left: -87.5px;
-  margin-top: -127.5px;
   z-index: 20;
 }
 
@@ -1099,6 +1099,60 @@ body.reading-mode-open .aarti-floating-bell-wrap {
     0 25px 55px rgba(0, 0, 0, 0.85),
     0 0 35px rgba(var(--gold-rgb), 0.45),
     0 0 15px rgba(var(--saffron-rgb), 0.6);
+}
+
+/* 3D Arc Navigation Arrows */
+.ba-arc-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(var(--dark-rgb), 0.75);
+  border: 1px solid rgba(var(--gold-rgb), 0.4);
+  color: var(--gold);
+  font-size: 1.6rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 50;
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+  user-select: none;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.ba-arc-nav-btn:hover {
+  background: rgba(var(--gold-rgb), 0.25);
+  border-color: var(--gold);
+  color: #fff;
+  transform: translateY(-50%) scale(1.12);
+  box-shadow: 0 0 20px rgba(var(--gold-rgb), 0.5);
+}
+
+.ba-arc-nav-prev {
+  left: 8px;
+}
+
+.ba-arc-nav-next {
+  right: 8px;
+}
+
+@media (max-width: 640px) {
+  .ba-arc-nav-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 1.3rem;
+  }
+  .ba-arc-nav-prev {
+    left: 2px;
+  }
+  .ba-arc-nav-next {
+    right: 2px;
+  }
 }
 
 /* Laser Light Line underneath center card */

@@ -803,7 +803,7 @@ if (typeof window !== 'undefined') {
 }
 
 // ----------------------------------------------------
-// 3D HERO CURVED GALLERY ARC LOGIC
+// 3D HERO CURVED GALLERY ARC LOGIC (Infinite Circular Carousel)
 // ----------------------------------------------------
 const ARC_DEITIES = [
   {
@@ -843,39 +843,69 @@ const ARC_DEITIES = [
   }
 ];
 
-let activeArcIndex = 3; // Ram by default
+let activeArcIndex = 3; // Unbounded integer center index (default 3: Ram)
+let prevArcOffsets = []; // Track previous offset per card to handle teleporting seamlessly
 let arcAutoRotateTimer = null;
+let isArcDragging = false;
+let arcDragStartX = 0;
+let arcDragStartIndex = 0;
 
-function updateArcCardsLayout() {
+function updateArcCardsLayout(isDragging = false) {
   const cards = document.querySelectorAll('.ba-arc-card');
   if (!cards.length) return;
 
+  const N = cards.length;
   const centerIdx = activeArcIndex;
 
   cards.forEach((card, i) => {
-    const offset = i - centerIdx;
-    const absOffset = Math.abs(offset);
+    let rawOffset = i - centerIdx;
+    // Modular offset in range [-N/2, N/2]
+    let offset = rawOffset - Math.round(rawOffset / N) * N;
+    let absOffset = Math.abs(offset);
 
-    // Calculate 3D curved arc transforms
+    const prevOffset = prevArcOffsets[i] !== undefined ? prevArcOffsets[i] : offset;
+    const isWrapping = Math.abs(offset - prevOffset) > (N / 2 - 0.5);
+
+    if (isDragging || isWrapping) {
+      card.style.transition = 'none';
+    } else {
+      card.style.transition = 'transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.5s ease, z-index 0.5s ease';
+    }
+
+    // 3D Arc layout parameters
     const translateX = offset * 115;
     const translateZ = -absOffset * 85;
     const rotateY = -offset * 14;
-    const scale = offset === 0 ? 1.15 : Math.max(0.72, 1 - absOffset * 0.12);
-    const opacity = Math.max(0.4, 1 - absOffset * 0.2);
-    const zIndex = 100 - absOffset;
+    const scale = offset === 0 ? 1.15 : Math.max(0.68, 1 - absOffset * 0.12);
+    const opacity = Math.max(0.15, 1 - absOffset * 0.22);
+    const zIndex = Math.round(100 - absOffset * 10);
 
     card.style.transform = `translateX(${translateX}px) translateZ(${translateZ}px) rotateY(${rotateY}deg) scale(${scale})`;
     card.style.opacity = opacity;
     card.style.zIndex = zIndex;
 
-    if (offset === 0) {
+    if (Math.abs(offset) < 0.1) {
       card.classList.add('active-center');
     } else {
       card.classList.remove('active-center');
     }
+
+    if (isWrapping) {
+      // Force reflow so teleport takes effect without animation
+      card.offsetHeight;
+      if (!isDragging) {
+        requestAnimationFrame(() => {
+          card.style.transition = 'transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.5s ease, z-index 0.5s ease';
+        });
+      }
+    }
+
+    prevArcOffsets[i] = offset;
   });
 
-  const activeDeity = ARC_DEITIES[centerIdx];
+  // Update spotlight for normalized center deity
+  const normalizedIdx = ((Math.round(centerIdx) % N) + N) % N;
+  const activeDeity = ARC_DEITIES[normalizedIdx];
   if (activeDeity) {
     const mantraText = document.getElementById('spotlightMantraText');
     const spotlightBtn = document.getElementById('spotlightBtn');
@@ -887,10 +917,34 @@ function updateArcCardsLayout() {
 }
 
 function setActiveArcCard(index) {
-  if (index < 0) index = ARC_DEITIES.length - 1;
-  if (index >= ARC_DEITIES.length) index = 0;
   activeArcIndex = index;
-  updateArcCardsLayout();
+  updateArcCardsLayout(false);
+}
+
+function nextArcCard() {
+  setActiveArcCard(activeArcIndex + 1);
+}
+
+function prevArcCard() {
+  setActiveArcCard(activeArcIndex - 1);
+}
+
+function handleArcCardClick(index) {
+  if (isArcDragging) return;
+  const N = ARC_DEITIES.length;
+  const currentNormalized = ((Math.round(activeArcIndex) % N) + N) % N;
+  let delta = (index - currentNormalized) % N;
+  if (delta > N / 2) delta -= N;
+  if (delta < -N / 2) delta += N;
+
+  if (delta === 0) {
+    const activeDeity = ARC_DEITIES[index];
+    if (activeDeity && typeof showDeityPage === 'function') {
+      showDeityPage(activeDeity.key, { initialTab: 'mantra' });
+    }
+  } else {
+    setActiveArcCard(activeArcIndex + delta);
+  }
 }
 
 function startArcAutoRotate() {
@@ -909,18 +963,69 @@ function stopArcAutoRotate() {
 
 function initHeroArcGallery() {
   const container = document.getElementById('baHero3dArc');
+  const wrapper = container ? container.parentElement : null;
   if (!container) return;
-  setActiveArcCard(3);
+
+  setActiveArcCard(activeArcIndex);
   startArcAutoRotate();
 
   if (!container.dataset.bound) {
     container.addEventListener('mouseenter', stopArcAutoRotate);
-    container.addEventListener('mouseleave', startArcAutoRotate);
+    container.addEventListener('mouseleave', () => {
+      if (!isArcDragging) startArcAutoRotate();
+    });
+
+    // Touch and Drag support
+    const targetEl = wrapper || container;
+
+    const onPointerDown = (e) => {
+      isArcDragging = false;
+      stopArcAutoRotate();
+      const pageX = e.touches ? e.touches[0].pageX : e.pageX;
+      arcDragStartX = pageX;
+      arcDragStartIndex = activeArcIndex;
+
+      const onPointerMove = (moveEvt) => {
+        const currentX = moveEvt.touches ? moveEvt.touches[0].pageX : moveEvt.pageX;
+        const diffX = currentX - arcDragStartX;
+        if (Math.abs(diffX) > 5) {
+          isArcDragging = true;
+          // Dragging right moves index left (-); dragging left moves index right (+)
+          activeArcIndex = arcDragStartIndex - diffX / 120;
+          updateArcCardsLayout(true);
+        }
+      };
+
+      const onPointerUp = () => {
+        targetEl.removeEventListener('mousemove', onPointerMove);
+        targetEl.removeEventListener('mouseup', onPointerUp);
+        targetEl.removeEventListener('touchmove', onPointerMove);
+        targetEl.removeEventListener('touchend', onPointerUp);
+
+        if (isArcDragging) {
+          setActiveArcCard(Math.round(activeArcIndex));
+          setTimeout(() => { isArcDragging = false; }, 50);
+        }
+        startArcAutoRotate();
+      };
+
+      targetEl.addEventListener('mousemove', onPointerMove);
+      targetEl.addEventListener('mouseup', onPointerUp);
+      targetEl.addEventListener('touchmove', onPointerMove, { passive: true });
+      targetEl.addEventListener('touchend', onPointerUp);
+    };
+
+    targetEl.addEventListener('mousedown', onPointerDown);
+    targetEl.addEventListener('touchstart', onPointerDown, { passive: true });
+
     container.dataset.bound = 'true';
   }
 }
 
 if (typeof window !== 'undefined') {
   window.setActiveArcCard = setActiveArcCard;
+  window.nextArcCard = nextArcCard;
+  window.prevArcCard = prevArcCard;
+  window.handleArcCardClick = handleArcCardClick;
   window.initHeroArcGallery = initHeroArcGallery;
 }
