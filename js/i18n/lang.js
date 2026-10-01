@@ -88,6 +88,88 @@
       emptyStateTitle: 'कोई परिणाम नहीं मिला',
       emptyStateSubtitle: 'दूसरा नाम लिखें या ऊपर की श्रेणी बदलकर देखें',
 
+      landingEyebrow: 'भक्ति अमृत',
+      landingTitle: 'श्रद्धा को सरल बनाएं, साधना को रोज़ आसान बनाएं',
+      landingLead:
+        'आरती, चालीसा, मंत्र, स्तोत्र, कथा, प्रसिद्ध मंदिर और त्योहार — एक शांत जगह पर, शुद्ध एवं सुव्यवस्थित सनातन कोष।',
+      landingCtaDev: 'देव संग्रह देखें',
+      landingCtaDevi: 'देवी संग्रह देखें',
+      landingCtaTemples: 'प्रसिद्ध मंदिर',
+      landingSlokaTag: '✨ दैनिक पावन मंत्र',
+      landingSlokaDeity: 'ॐ श्री गणेशाय नमः',
+      landingSlokaText:
+        '"वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ।\nअविघ्नं कुरु मे देव सर्वकार्येषु सर्वदा॥"',
+      landingSlokaMeaning:
+        'हे घुमावदार सूंड वाले, विशाल शरीर वाले, करोड़ों सूर्यों के समान तेजस्वी देव! मेरे सभी कार्यों को सदा बाधारहित पूरा करें।',
+      landingSlokaAction: '📿 गणेश मंत्र पढ़ें',
+      landingSectionEcosystemEye: '🚩 संग्रह एवं पावन ज्ञान कोष',
+      landingExploreTitle: 'यहाँ क्या मिलेगा',
+      landingExploreSubtitle: 'सनातन भक्ति के हर आयाम को सरलता से एक्सप्लोर करें',
+      landingCardDevDesc:
+        'श्री गणेश, शिव, विष्णु, हनुमान जी व अन्य देवों की आरती, चालीसा व मंत्र।',
+      landingCardDeviDesc:
+        'माँ दुर्गा, लक्ष्मी, सरस्वती, गायत्री व अन्य देवी-शक्ति की भक्ति सामग्री।',
+      landingCardAvatarDesc:
+        'मर्यादा पुरुषोत्तम राम, भगवान श्री कृष्ण और अन्य अवतारों की गाथा।',
+      landingCardGrahDesc:
+        'सूर्य देव, शनि देव और नवग्रहों की शांति के लिए मंत्र एवं चालीसा।',
+      landingCardLokDesc:
+        'बाबा रामदेव जी, तेजाजी महाराज एवं क्षेत्रीय लोक देवताओं का पाठ।',
+      landingCardTemplesDesc:
+        'भारत भर के ५०+ प्रमुख मंदिर, दर्शन समय, नक्शा और इतिहास।',
+      landingCardFestivalsDesc:
+        'दिवाली, होली, नवरात्रि व अन्य प्रमुख पर्वों का महत्व व पूजा विधि।',
+      landingCardScripturesDesc:
+        'वेद, उपनिषद, भगवद्गीता एवं सनातन ग्रन्थों का सरल परिचय।',
+      landingCardKathasTitle: 'प्रसिद्ध कथाएँ',
+      landingCardKathasDesc:
+        'सत्यनारायण कथा, व्रत कथा एवं प्रेरणादायक पौराणिक गाथाएँ।',
+      landingFeaturesEye: '✨ आधुनिक सुविधाएँ',
+      landingFeaturesTitle: 'दैनिक साधना के लिए विशेष सुविधाएँ',
+      landingFeaturesSubtitle:
+        'आपकी पूजा को आसान, शांत और बाधारहित बनाने वाले साधन',
+      landingFeature1Title: 'डिजिटल मंत्र माला',
+      landingFeature1Desc:
+        '108 मनकों का डिजिटल जाप काउंटर। हर जाप पर स्पर्श संकेत और माला पूर्ण होने पर विशेष सूचना।',
+      landingFeature2Title: '7 भारतीय भाषाएँ',
+      landingFeature2Desc:
+        'हिंदी, मराठी, तमिल, तेलुगु, कन्नड़, बंगाली एवं अंग्रेजी में इंटरफ़ेस सहजता से बदलें।',
+      landingFeature3Title: 'पसंदीदा & ऑफ़लाइन',
+      landingFeature3Desc:
+        'अपने दैनिक पाठों को एक क्लिक में पसंदीदा में जोड़ें और बिना इंटरनेट कभी भी पढ़ें।',
+      landingFeature4Title: 'शीघ्र खोज व फ़िल्टर',
+      landingFeature4Desc:
+        'किसी भी देव-देवी, आरती, चालीसा या मंदिर को तुरंत ढूँढें। कार्ड और टेबल व्यू विकल्प।',
+      landingFeature5Title: 'पठन मोड & प्रिंट',
+      landingFeature5Desc:
+        'बिना किसी भटकाव के पूर्ण स्क्रीन पर पढ़ने के लिए पठन मोड और प्रिंटिंग सुविधा।',
+      landingFeature6Title: 'शांत व विज्ञापन-मुक्त',
+      landingFeature6Desc:
+        'बिना किसी कमर्शियल विज्ञापन, पॉप-अप या शोर के केवल और केवल भक्ति वातावरण।',
+      landingHowTitle: 'कैसे उपयोग करें',
+      landingHow1Title: 'संग्रह चुनें',
+      landingHow1Desc:
+        'देव, देवी, अवतार या मंदिर में से वह मार्ग चुनें जो आज चाहिए।',
+      landingHow2Title: 'देवता खोलें',
+      landingHow2Desc:
+        'परिचय पढ़ें, फिर आरती, चालीसा, मंत्र या कथा पर जाएँ।',
+      landingHow3Title: 'रोज़ लौटें',
+      landingHow3Desc:
+        'पसंदीदा जोड़ें और अपनी दैनिक साधना को तुरंत फिर से खोलें।',
+      landingMissionTitle: 'हमारा उद्देश्य',
+      landingMissionLead:
+        'पारंपरिक सामग्री को आधुनिक पाठकों के लिए सरल, शुद्ध और व्यवस्थित रखना — बिना शोर, बिना भटकाव।',
+      landingValueAccuracy: 'सटीकता',
+      landingValueAccuracyDesc: 'पढ़ने में सरल, सुव्यवस्थित भक्ति पाठ।',
+      landingValueSadhana: 'दैनिक साधना',
+      landingValueSadhanaDesc: 'सुबह-शाम के पाठ के लिए तेज़ पहुँच।',
+      landingValueSimple: 'सरल अनुभव',
+      landingValueSimpleDesc:
+        'मोबाइल और डेस्कटॉप दोनों पर शांत, स्पष्ट इंटरफ़ेस।',
+      landingCloseTitle: 'आज की साधना यहीं से शुरू करें',
+      landingCloseLead:
+        'संग्रह खोलें, अपने इष्ट को चुनें, और आरती या मंत्र पढ़ना शुरू करें।',
+
       // Deity tabs
       tabAbout: '🚩 परिचय',
       tabAarti: '🪔 आरती',
@@ -237,6 +319,43 @@
       emptyStateTitle: 'कोणताही निकाल सापडला नाही',
       emptyStateSubtitle: 'दुसरे नाव लिहा किंवा वरील श्रेणी बदलून पहा',
 
+      landingEyebrow: 'भक्ती अमृत',
+      landingTitle: 'श्रद्धा सोपी करा, साधना दररोज सुलभ करा',
+      landingLead:
+        'आरती, चाळीसा, मंत्र, कथा, मंदिरे आणि सण — एका शांत जागी, स्पष्ट भाषेत. आपल्या इष्टाला निवडा आणि दैनंदिन पूजा येथून सुरू करा.',
+      landingCtaDev: 'देव संग्रह पहा',
+      landingCtaDevi: 'देवी संग्रह पहा',
+      landingExploreTitle: 'इथे काय मिळेल',
+      landingExploreSubtitle: 'खालीलपैकी थेट त्या विभागात जा ज्याचे वाचन करायचे आहे.',
+      landingCardDevDesc: 'गणेश, शिव, विष्णू आणि इतर देवांची आरती, चाळीसा व मंत्र.',
+      landingCardDeviDesc: 'दुर्गा, लक्ष्मी, सरस्वती आणि इतर देवी-शक्तीची भक्तिसामग्री.',
+      landingCardAvatarDesc: 'राम, कृष्ण आणि इतर अवतारांचा परिचय, कथा आणि पाठ.',
+      landingCardGrahDesc: 'सूर्य, शनी आणि इतर ग्रह देवांची साधना सामग्री.',
+      landingCardLokDesc: 'प्रादेशिक आणि लोक देवतांची भक्तिपरंपरा.',
+      landingCardTemplesDesc: 'प्रसिद्ध तीर्थक्षेत्रे, नकाशा आणि संक्षिप्त परिचय.',
+      landingCardFestivalsDesc: 'प्रमुख सण, महत्त्व आणि मुख्य विधी.',
+      landingCardScripturesDesc: 'वैदिक आणि सनातन ग्रंथांचा सोपा परिचय.',
+      landingCardKathasTitle: 'प्रसिद्ध कथा',
+      landingCardKathasDesc: 'प्रसिद्ध कथा, ज्या तुम्ही हळू हळू वाचू शकता.',
+      landingHowTitle: 'कसे वापरावे',
+      landingHow1Title: 'संग्रह निवडा',
+      landingHow1Desc: 'देव, देवी, अवतार किंवा मंदिर यापैकी आजचे मार्ग निवडा.',
+      landingHow2Title: 'देवता उघडा',
+      landingHow2Desc: 'परिचय वाचा, नंतर आरती, चाळीसा, मंत्र किंवा कथेवर जा.',
+      landingHow3Title: 'दररोज परत या',
+      landingHow3Desc: 'आवडते जोडा आणि आपली दैनंदिन साधना लगेच पुन्हा उघडा.',
+      landingMissionTitle: 'आमचे उद्दिष्ट',
+      landingMissionLead:
+        'पारंपरिक सामग्री आधुनिक वाचकांसाठी सोपी, शुद्ध आणि व्यवस्थित ठेवणे — गोंधळाशिवाय.',
+      landingValueAccuracy: 'अचूकता',
+      landingValueAccuracyDesc: 'वाचण्यास सोपे, सुव्यवस्थित भक्तिपाठ.',
+      landingValueSadhana: 'दैनंदिन साधना',
+      landingValueSadhanaDesc: 'सकाळ-संध्याकाळच्या पाठासाठी जलद प्रवेश.',
+      landingValueSimple: 'सोपा अनुभव',
+      landingValueSimpleDesc: 'मोबाइल आणि डेस्कटॉपवर शांत, स्पष्ट इंटरफेस.',
+      landingCloseTitle: 'आजची साधना येथून सुरू करा',
+      landingCloseLead: 'संग्रह उघडा, आपल्या इष्टाला निवडा आणि आरती किंवा मंत्र वाचण्यास सुरुवात करा.',
+
       tabAbout: '🚩 परिचय',
       tabAarti: '🪔 आरती',
       tabChalisa: '📖 चाळीसा',
@@ -373,6 +492,43 @@
 
       emptyStateTitle: 'எந்த முடிவும் கிடைக்கவில்லை',
       emptyStateSubtitle: 'வேறு பெயர் தேடுங்கள் அல்லது மேலே உள்ள வகையை மாற்றுங்கள்',
+
+      landingEyebrow: 'பக்தி அமிர்தம்',
+      landingTitle: 'பக்தியை எளிதாக்கி, நாள்தோறும் சாதனையை இலகுவாக்குங்கள்',
+      landingLead:
+        'ஆரத்தி, சாலீசா, மந்திரம், கதை, கோயில்கள் மற்றும் திருவிழாக்கள் — ஒரு அமைதியான இடத்தில், தெளிவான மொழியில். உங்கள் இஷ்டத்தைத் தேர்ந்தெடுத்து இன்றைய பூஜையை இங்கிருந்து தொடங்குங்கள்.',
+      landingCtaDev: 'தேவன் தொகுப்பைக் காண்க',
+      landingCtaDevi: 'தேவி தொகுப்பைக் காண்க',
+      landingExploreTitle: 'இங்கே என்ன கிடைக்கும்',
+      landingExploreSubtitle: 'நீங்கள் படிக்க விரும்பும் பகுதிக்கு நேரடியாகச் செல்லுங்கள்.',
+      landingCardDevDesc: 'கணேசர், சிவன், விஷ்ணு மற்றும் பிற தேவர்களின் ஆரத்தி, சாலீசா, மந்திரம்.',
+      landingCardDeviDesc: 'துர்க்கை, லட்சுமி, சரஸ்வதி மற்றும் பிற தேவி சக்தியின் பக்தி உள்ளடக்கம்.',
+      landingCardAvatarDesc: 'ராமர், கிருஷ்ணர் மற்றும் பிற அவதாரங்களின் அறிமுகம், கதை, பாடம்.',
+      landingCardGrahDesc: 'சூரியன், சனி மற்றும் பிற கிரக தேவர்களின் சாதனை உள்ளடக்கம்.',
+      landingCardLokDesc: 'பிராந்திய மற்றும் லோக தெய்வங்களின் பக்தி மரபு.',
+      landingCardTemplesDesc: 'புகழ்பெற்ற தீர்த்தங்கள், வரைபடம் மற்றும் சுருக்க அறிமுகம்.',
+      landingCardFestivalsDesc: 'முக்கிய திருவிழாக்கள், முக்கியத்துவம் மற்றும் அனுஷ்டானங்கள்.',
+      landingCardScripturesDesc: 'வேத மற்றும் சனாதன நூல்களின் எளிய அறிமுகம்.',
+      landingCardKathasTitle: 'புகழ்பெற்ற கதைகள்',
+      landingCardKathasDesc: 'மெதுவாக படிக்கக்கூடிய புகழ்பெற்ற கதைகள்.',
+      landingHowTitle: 'எப்படி பயன்படுத்துவது',
+      landingHow1Title: 'தொகுப்பைத் தேர்ந்தெடுங்கள்',
+      landingHow1Desc: 'தேவன், தேவி, அவதாரம் அல்லது கோயில் வழியில் இன்றைய பாதையைத் தேர்ந்தெடுங்கள்.',
+      landingHow2Title: 'தெய்வத்தைத் திறக்கவும்',
+      landingHow2Desc: 'அறிமுகத்தைப் படித்து, பிறகு ஆரத்தி, சாலீசா, மந்திரம் அல்லது கதைக்குச் செல்லுங்கள்.',
+      landingHow3Title: 'தினமும் திரும்புங்கள்',
+      landingHow3Desc: 'பிடித்தவற்றைச் சேர்த்து உங்கள் நாள்தோறும் சாதனையை உடனே மீண்டும் திறக்கவும்.',
+      landingMissionTitle: 'எங்கள் நோக்கம்',
+      landingMissionLead:
+        'பாரம்பரிய உள்ளடக்கத்தை நவீன வாசகர்களுக்கு எளிமையாக, தூய்மையாக, ஒழுங்காக வைத்திருத்தல் — குழப்பமின்றி.',
+      landingValueAccuracy: 'துல்லியம்',
+      landingValueAccuracyDesc: 'படிக்க எளிய, ஒழுங்கான பக்தி பாடம்.',
+      landingValueSadhana: 'நாள்தோறும் சாதனை',
+      landingValueSadhanaDesc: 'காலை-மாலை பாடத்திற்கு விரைவான அணுகல்.',
+      landingValueSimple: 'எளிய அனுபவம்',
+      landingValueSimpleDesc: 'மொபைல் மற்றும் டெஸ்க்டாப்பில் அமைதியான, தெளிவான இடைமுகம்.',
+      landingCloseTitle: 'இன்றைய சாதனையை இங்கிருந்து தொடங்குங்கள்',
+      landingCloseLead: 'தொகுப்பைத் திறந்து, இஷ்டத்தைத் தேர்ந்தெடுத்து ஆரத்தி அல்லது மந்திரம் படிக்கத் தொடங்குங்கள்.',
 
       tabAbout: '🚩 அறிமுகம்',
       tabAarti: '🪔 ஆரத்தி',
@@ -511,6 +667,43 @@
       emptyStateTitle: 'ఫలితాలు కనుగొనబడలేదు',
       emptyStateSubtitle: 'వేరే పేరు వెతకండి లేదా పై వర్గాన్ని మార్చండి',
 
+      landingEyebrow: 'భక్తి అమృతం',
+      landingTitle: 'భక్తిని సులభం చేసి, నిత్య సాధనను తేలికగా చేయండి',
+      landingLead:
+        'ఆరతి, చాలీసా, మంత్రాలు, కథలు, దేవాలయాలు మరియు పండుగలు — ఒక ప్రశాంత స్థలంలో, స్పష్టమైన భాషలో. మీ ఇష్టాన్ని ఎంచుకుని నిత్య పూజను ఇక్కడి నుంచి ప్రారంభించండి.',
+      landingCtaDev: 'దేవుని సంగ్రహం చూడండి',
+      landingCtaDevi: 'దేవి సంగ్రహం చూడండి',
+      landingExploreTitle: 'ఇక్కడ ఏం దొరుకుతుంది',
+      landingExploreSubtitle: 'మీరు చదవాలనుకునే విభాగానికి నేరుగా వెళ్లండి.',
+      landingCardDevDesc: 'గణేశుడు, శివుడు, విష్ణువు మరియు ఇతర దేవుల ఆరతి, చాలీసా, మంత్రాలు.',
+      landingCardDeviDesc: 'దుర్గ, లక్ష్మి, సరస్వతి మరియు ఇతర దేవి శక్తి భక్తి సామగ్రి.',
+      landingCardAvatarDesc: 'రాముడు, కృష్ణుడు మరియు ఇతర అవతారాల పరిచయం, కథ, పాఠం.',
+      landingCardGrahDesc: 'సూర్యుడు, శని మరియు ఇతర గ్రహ దేవుల సాధన సామగ్రి.',
+      landingCardLokDesc: 'ప్రాంతీయ మరియు లోక దేవతల భక్తి సంప్రదాయం.',
+      landingCardTemplesDesc: 'ప్రసిద్ధ తీర్థాలు, మ్యాప్ మరియు సంక్షిప్త పరిచయం.',
+      landingCardFestivalsDesc: 'ప్రధాన పండుగలు, ప్రాముఖ్యత మరియు ముఖ్య ఆచారాలు.',
+      landingCardScripturesDesc: 'వైదిక మరియు సనాతన గ్రంథాల సరళ పరిచయం.',
+      landingCardKathasTitle: 'ప్రసిద్ధ కథలు',
+      landingCardKathasDesc: 'మెల్లగా చదువుకోగల ప్రసిద్ధ కథలు.',
+      landingHowTitle: 'ఎలా ఉపయోగించాలి',
+      landingHow1Title: 'సంగ్రహం ఎంచుకోండి',
+      landingHow1Desc: 'దేవుడు, దేవి, అవతారం లేదా దేవాలయం నుంచి నేటి మార్గాన్ని ఎంచుకోండి.',
+      landingHow2Title: 'దేవతను తెరవండి',
+      landingHow2Desc: 'పరిచయం చదివి, తర్వాత ఆరతి, చాలీసా, మంత్రం లేదా కథకు వెళ్లండి.',
+      landingHow3Title: 'ప్రతిరోజూ తిరిగి రండి',
+      landingHow3Desc: 'ఇష్టమైనవి జోడించి మీ నిత్య సాధనను వెంటనే మళ్లీ తెరవండి.',
+      landingMissionTitle: 'మా లక్ష్యం',
+      landingMissionLead:
+        'సాంప్రదాయిక విషయాన్ని ఆధునిక పాఠకులకు సరళంగా, శుద్ధంగా, క్రమబద్ధంగా ఉంచడం — గందరగోళం లేకుండా.',
+      landingValueAccuracy: 'నిఖరత',
+      landingValueAccuracyDesc: 'చదవడానికి సులభమైన, క్రమబద్ధమైన భక్తి పాఠం.',
+      landingValueSadhana: 'నిత్య సాధన',
+      landingValueSadhanaDesc: 'ఉదయం-సాయంత్రం పాఠానికి వేగవంతమైన ప్రవేశం.',
+      landingValueSimple: 'సరళ అనుభవం',
+      landingValueSimpleDesc: 'మొబైల్ మరియు డెస్క్‌టాప్‌పై ప్రశాంత, స్పష్టమైన ఇంటర్‌ఫేస్.',
+      landingCloseTitle: 'నేటి సాధనను ఇక్కడి నుంచి ప్రారంభించండి',
+      landingCloseLead: 'సంగ్రహం తెరిచి, ఇష్టాన్ని ఎంచుకుని ఆరతి లేదా మంత్రం చదవడం మొదలుపెట్టండి.',
+
       tabAbout: '🚩 పరిచయం',
       tabAarti: '🪔 ఆరతి',
       tabChalisa: '📖 చాలీసా',
@@ -648,6 +841,43 @@
       emptyStateTitle: 'ಯಾವುದೇ ಫಲಿತಾಂಶ ಕಂಡುಬಂದಿಲ್ಲ',
       emptyStateSubtitle: 'ಬೇರೆ ಹೆಸರು ಹುಡುಕಿ ಅಥವಾ ಮೇಲಿನ ವರ್ಗ ಬದಲಿಸಿ',
 
+      landingEyebrow: 'ಭಕ್ತಿ ಅಮೃತ',
+      landingTitle: 'ಭಕ್ತಿಯನ್ನು ಸರಳಗೊಳಿಸಿ, ನಿತ್ಯ ಸಾಧನೆಯನ್ನು ಸುಲಭಗೊಳಿಸಿ',
+      landingLead:
+        'ಆರತಿ, ಚಾಲೀಸಾ, ಮಂತ್ರ, ಕಥೆ, ದೇವಾಲಯಗಳು ಮತ್ತು ಹಬ್ಬಗಳು — ಒಂದು ಶಾಂತ ಸ್ಥಳದಲ್ಲಿ, ಸ್ಪಷ್ಟ ಭಾಷೆಯಲ್ಲಿ. ನಿಮ್ಮ ಇಷ್ಟವನ್ನು ಆಯ್ಕೆ ಮಾಡಿ ದೈನಂದಿನ ಪೂಜೆಯನ್ನು ಇಲ್ಲಿಂದ ಪ್ರಾರಂಭಿಸಿ.',
+      landingCtaDev: 'ದೇವ ಸಂಗ್ರಹ ನೋಡಿ',
+      landingCtaDevi: 'ದೇವಿ ಸಂಗ್ರಹ ನೋಡಿ',
+      landingExploreTitle: 'ಇಲ್ಲಿ ಏನು ಸಿಗುತ್ತದೆ',
+      landingExploreSubtitle: 'ನೀವು ಓದಲು ಬಯಸುವ ವಿಭಾಗಕ್ಕೆ ನೇರವಾಗಿ ಹೋಗಿ.',
+      landingCardDevDesc: 'ಗಣೇಶ, ಶಿವ, ವಿಷ್ಣು ಮತ್ತು ಇತರ ದೇವರ ಆರತಿ, ಚಾಲೀಸಾ, ಮಂತ್ರ.',
+      landingCardDeviDesc: 'ದುರ್ಗಾ, ಲಕ್ಷ್ಮಿ, ಸರಸ್ವತಿ ಮತ್ತು ಇತರ ದೇವಿ ಶಕ್ತಿಯ ಭಕ್ತಿ ವಿಷಯ.',
+      landingCardAvatarDesc: 'ರಾಮ, ಕೃಷ್ಣ ಮತ್ತು ಇತರ ಅವತಾರಗಳ ಪರಿಚಯ, ಕಥೆ, ಪಾಠ.',
+      landingCardGrahDesc: 'ಸೂರ್ಯ, ಶನಿ ಮತ್ತು ಇತರ ಗ್ರಹ ದೇವರ ಸಾಧನೆ ವಿಷಯ.',
+      landingCardLokDesc: 'ಪ್ರಾದೇಶಿಕ ಮತ್ತು ಲೋಕ ದೇವತೆಗಳ ಭಕ್ತಿ ಪರಂಪರೆ.',
+      landingCardTemplesDesc: 'ಪ್ರಸಿದ್ಧ ತೀರ್ಥಕ್ಷೇತ್ರಗಳು, ನಕ್ಷೆ ಮತ್ತು ಸಂಕ್ಷಿಪ್ತ ಪರಿಚಯ.',
+      landingCardFestivalsDesc: 'ಪ್ರಮುಖ ಹಬ್ಬಗಳು, ಮಹತ್ವ ಮತ್ತು ಮುಖ್ಯ ಆಚರಣೆಗಳು.',
+      landingCardScripturesDesc: 'ವೈದಿಕ ಮತ್ತು ಸನಾತನ ಗ್ರಂಥಗಳ ಸರಳ ಪರಿಚಯ.',
+      landingCardKathasTitle: 'ಪ್ರಸಿದ್ಧ ಕಥೆಗಳು',
+      landingCardKathasDesc: 'ನಿಧಾನವಾಗಿ ಓದಬಹುದಾದ ಪ್ರಸಿದ್ಧ ಕಥೆಗಳು.',
+      landingHowTitle: 'ಹೇಗೆ ಬಳಸುವುದು',
+      landingHow1Title: 'ಸಂಗ್ರಹವನ್ನು ಆಯ್ಕೆಮಾಡಿ',
+      landingHow1Desc: 'ದೇವ, ದೇವಿ, ಅವತಾರ ಅಥವಾ ದೇವಾಲಯದಿಂದ ಇಂದಿನ ಮಾರ್ಗವನ್ನು ಆಯ್ಕೆಮಾಡಿ.',
+      landingHow2Title: 'ದೇವತೆಯನ್ನು ತೆರೆಯಿರಿ',
+      landingHow2Desc: 'ಪರಿಚಯ ಓದಿ, ನಂತರ ಆರತಿ, ಚಾಲೀಸಾ, ಮಂತ್ರ ಅಥವಾ ಕಥೆಗೆ ಹೋಗಿ.',
+      landingHow3Title: 'ಪ್ರತಿದಿನ ಹಿಂತಿರುಗಿ',
+      landingHow3Desc: 'ಮೆಚ್ಚಿನವುಗಳನ್ನು ಸೇರಿಸಿ ನಿಮ್ಮ ನಿತ್ಯ ಸಾಧನೆಯನ್ನು ತಕ್ಷಣ ಮತ್ತೆ ತೆರೆಯಿರಿ.',
+      landingMissionTitle: 'ನಮ್ಮ ಉದ್ದೇಶ',
+      landingMissionLead:
+        'ಸಾಂಪ್ರದಾಯಿಕ ವಿಷಯವನ್ನು ಆಧುನಿಕ ಓದುಗರಿಗೆ ಸರಳ, ಶುದ್ಧ ಮತ್ತು ವ್ಯವಸ್ಥಿತವಾಗಿ ಇಡುವುದು — ಗೊಂದಲವಿಲ್ಲದೆ.',
+      landingValueAccuracy: 'ನಿಖರತೆ',
+      landingValueAccuracyDesc: 'ಓದಲು ಸುಲಭವಾದ, ವ್ಯವಸ್ಥಿತ ಭಕ್ತಿ ಪಾಠ.',
+      landingValueSadhana: 'ನಿತ್ಯ ಸಾಧನೆ',
+      landingValueSadhanaDesc: 'ಬೆಳಗ್ಗೆ-ಸಂಜೆ ಪಾಠಕ್ಕೆ ವೇಗದ ಪ್ರವೇಶ.',
+      landingValueSimple: 'ಸರಳ ಅನುಭವ',
+      landingValueSimpleDesc: 'ಮೊಬೈಲ್ ಮತ್ತು ಡೆಸ್ಕ್‌ಟಾಪ್‌ನಲ್ಲಿ ಶಾಂತ, ಸ್ಪಷ್ಟ ಇಂಟರ್‌ಫೇಸ್.',
+      landingCloseTitle: 'ಇಂದಿನ ಸಾಧನೆಯನ್ನು ಇಲ್ಲಿಂದ ಪ್ರಾರಂಭಿಸಿ',
+      landingCloseLead: 'ಸಂಗ್ರಹ ತೆರೆದು, ಇಷ್ಟವನ್ನು ಆಯ್ಕೆಮಾಡಿ ಆರತಿ ಅಥವಾ ಮಂತ್ರ ಓದಲು ಆರಂಭಿಸಿ.',
+
       tabAbout: '🚩 ಪರಿಚಯ',
       tabAarti: '🪔 ಆರತಿ',
       tabChalisa: '📖 ಚಾಲೀಸಾ',
@@ -784,6 +1014,43 @@
 
       emptyStateTitle: 'কোনো ফলাফল পাওয়া যায়নি',
       emptyStateSubtitle: 'অন্য নাম লিখুন বা উপরের বিভাগ পরিবর্তন করুন',
+
+      landingEyebrow: 'ভক্তি অমৃত',
+      landingTitle: 'শ্রদ্ধাকে সহজ করুন, নিত্য সাধনাকে প্রতিদিন সহজ করুন',
+      landingLead:
+        'আরতি, চালিশা, মন্ত্র, কথা, মন্দির ও উৎসব — এক শান্ত স্থানে, স্পষ্ট ভাষায়। আপনার ইষ্টকে বেছে নিন এবং দৈনিক পূজা এখান থেকে শুরু করুন।',
+      landingCtaDev: 'দেব সংগ্রহ দেখুন',
+      landingCtaDevi: 'দেবী সংগ্রহ দেখুন',
+      landingExploreTitle: 'এখানে কী পাবেন',
+      landingExploreSubtitle: 'আপনি যে বিভাগটি পড়তে চান, সরাসরি সেখানে যান।',
+      landingCardDevDesc: 'গণেশ, শিব, বিষ্ণু ও অন্যান্য দেবের আরতি, চালিশা ও মন্ত্র।',
+      landingCardDeviDesc: 'দুর্গা, লক্ষ্মী, সরস্বতী ও অন্যান্য দেবী-শক্তির ভক্তি বিষয়।',
+      landingCardAvatarDesc: 'রাম, কৃষ্ণ ও অন্যান্য অবতারের পরিচয়, কথা ও পাঠ।',
+      landingCardGrahDesc: 'সূর্য, শনি ও অন্যান্য গ্রহ দেবের সাধনা বিষয়।',
+      landingCardLokDesc: 'আঞ্চলিক ও লোক দেবতাদের ভক্তি ঐতিহ্য।',
+      landingCardTemplesDesc: 'প্রসিদ্ধ তীর্থস্থান, মানচিত্র ও সংক্ষিপ্ত পরিচয়।',
+      landingCardFestivalsDesc: 'প্রধান উৎসব, তাৎপর্য ও মুখ্য অনুষ্ঠান।',
+      landingCardScripturesDesc: 'বৈদিক ও সনাতন গ্রন্থের সহজ পরিচয়।',
+      landingCardKathasTitle: 'প্রসিদ্ধ কথা',
+      landingCardKathasDesc: 'ধীরে ধীরে পড়ার মতো প্রসিদ্ধ কথা।',
+      landingHowTitle: 'কীভাবে ব্যবহার করবেন',
+      landingHow1Title: 'সংগ্রহ বেছে নিন',
+      landingHow1Desc: 'দেব, দেবী, অবতার বা মন্দির থেকে আজকের পথ বেছে নিন।',
+      landingHow2Title: 'দেবতা খুলুন',
+      landingHow2Desc: 'পরিচয় পড়ুন, তারপর আরতি, চালিশা, মন্ত্র বা কথায় যান।',
+      landingHow3Title: 'প্রতিদিন ফিরে আসুন',
+      landingHow3Desc: 'পছন্দের যোগ করুন এবং আপনার নিত্য সাধনা তৎক্ষণাৎ আবার খুলুন।',
+      landingMissionTitle: 'আমাদের উদ্দেশ্য',
+      landingMissionLead:
+        'ঐতিহ্যবাহী বিষয়কে আধুনিক পাঠকের জন্য সহজ, শুদ্ধ ও সুবিন্যস্ত রাখা — বিভ্রান্তি ছাড়া।',
+      landingValueAccuracy: 'নিখুঁততা',
+      landingValueAccuracyDesc: 'পড়তে সহজ, সুবিন্যস্ত ভক্তি পাঠ।',
+      landingValueSadhana: 'নিত্য সাধনা',
+      landingValueSadhanaDesc: 'সকাল-সন্ধ্যার পাঠের জন্য দ্রুত প্রবেশ।',
+      landingValueSimple: 'সহজ অভিজ্ঞতা',
+      landingValueSimpleDesc: 'মোবাইল ও ডেস্কটপে শান্ত, স্পষ্ট ইন্টারফেস।',
+      landingCloseTitle: 'আজকের সাধনা এখান থেকে শুরু করুন',
+      landingCloseLead: 'সংগ্রহ খুলুন, ইষ্টকে বেছে নিন, এবং আরতি বা মন্ত্র পড়া শুরু করুন।',
 
       tabAbout: '🚩 পরিচয়',
       tabAarti: '🪔 আরতি',
@@ -993,6 +1260,12 @@
       mantraMalaClose.setAttribute('title', t('closeMantraMala'));
     }
 
+    // ── Home landing copy ──
+    document.querySelectorAll('#baLanding [data-i18n]').forEach((el) => {
+      const key = el.getAttribute('data-i18n');
+      if (key) el.textContent = t(key);
+    });
+
     // ── Home view toggle buttons ──
     const homeViewCardBtn = document.getElementById('homeViewCardBtn');
     if (homeViewCardBtn) homeViewCardBtn.textContent = t('viewCard');
@@ -1068,7 +1341,12 @@
     }
 
     // ── Re-render home grid to update tag labels — only on lang switch ──
-    if (rerender && typeof renderHomeGrid === 'function' && typeof activeHomeType !== 'undefined') {
+    if (
+      rerender &&
+      typeof renderHomeGrid === 'function' &&
+      typeof activeHomeType !== 'undefined' &&
+      !(typeof isHomeLandingView === 'function' && isHomeLandingView())
+    ) {
       renderHomeGrid(activeHomeType, typeof activeHomeSearchQuery !== 'undefined' ? activeHomeSearchQuery : '');
     }
   }

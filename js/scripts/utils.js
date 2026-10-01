@@ -42,6 +42,23 @@ function handleContentImageError(img) {
   }
 }
 
+function handleDeityIconError(img) {
+  if (!img || typeof img !== 'object') return;
+  const parent = img.parentElement;
+  if (parent && parent.classList.contains('ba-3d-icon-sphere')) {
+    parent.innerHTML = '<span class="ba-3d-deity-emoji">🕉️</span>';
+  } else if (typeof img.replaceWith === 'function') {
+    const span = document.createElement('span');
+    span.className = 'ba-3d-deity-emoji';
+    span.textContent = '🕉️';
+    img.replaceWith(span);
+  }
+}
+
+if (typeof window !== 'undefined') {
+  window.handleDeityIconError = handleDeityIconError;
+}
+
 // Progressive image loading with blur-up effect
 function setupProgressiveImageLoading(img) {
   if (!img || !img.src) return;

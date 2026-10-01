@@ -2,6 +2,10 @@ function showUnifiedFavoritesPage(searchQuery = '') {
   const grid = document.getElementById('homeGrid');
   if (!grid) return;
 
+  if (typeof window.syncHomeLandingMode === 'function') {
+    window.syncHomeLandingMode();
+  }
+
   grid.classList.add('favorites-page-grid');
 
   const favoriteDeities = getFavoriteDeities();

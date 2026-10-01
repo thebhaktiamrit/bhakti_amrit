@@ -1,4 +1,6 @@
 function buildHomeGrid() {
+  syncHomeLandingMode();
+  if (isHomeLandingView()) return;
   updateHomeSectionHeader(activeHomeType);
   renderHomeGrid(activeHomeType, activeHomeSearchQuery);
 }
@@ -277,6 +279,8 @@ if (typeof window !== 'undefined') {
   window.toggleHomeTags = toggleHomeTags;
   window.toggleFavorite = toggleFavorite;
   window.toggleFavoritesView = toggleFavoritesView;
+  window.isHomeLandingView = isHomeLandingView;
+  window.syncHomeLandingMode = syncHomeLandingMode;
 }
 
 function toggleFavoritesView() {
@@ -402,6 +406,7 @@ function renderHomeGrid(
   const { reset = true } = options;
   const grid = document.getElementById('homeGrid');
   if (!grid) return;
+  if (isHomeLandingView()) return;
 
   if (reset) {
     homeRenderCycleId += 1;
@@ -463,11 +468,30 @@ function fillHomeViewportIfNeeded() {
 function maybeLoadMoreHomeOnScroll() {
   const homePage = document.getElementById('page-home');
   if (!homePage || !homePage.classList.contains('active')) return;
+  if (isHomeLandingView()) return;
   if (homeRenderTimer) return;
   if (renderedHomeCount >= homeFilteredEntries.length) return;
   if (!isNearDocumentBottom()) return;
   renderHomeGrid(activeHomeType, activeHomeSearchQuery, { reset: false });
   window.requestAnimationFrame(maybeLoadMoreHomeOnScroll);
+}
+
+function isHomeLandingView() {
+  return !showFavoritesOnly && getSafeHomeType(activeHomeType) === 'all';
+}
+
+function syncHomeLandingMode() {
+  const homePage = document.getElementById('page-home');
+  if (!homePage) return;
+  const landingOn = isHomeLandingView();
+  homePage.classList.toggle('is-landing', landingOn);
+  const landing = document.getElementById('baLanding');
+  if (landing) {
+    landing.setAttribute('aria-hidden', landingOn ? 'false' : 'true');
+  }
+  if (landingOn && typeof window.initSlokaCarousel === 'function') {
+    window.initSlokaCarousel();
+  }
 }
 
 function showHomeByType(typeId = 'all', navId = 'home', options = {}) {
@@ -484,6 +508,7 @@ function showHomeByType(typeId = 'all', navId = 'home', options = {}) {
   showFavoritesOnly = false;
   updateHomeSectionHeader(safeType);
   showPage('home', safeNavId);
+  syncHomeLandingMode();
   const grid = document.getElementById('homeGrid');
   if (grid) {
     grid.classList.remove('favorites-page-grid');
@@ -498,6 +523,15 @@ function showHomeByType(typeId = 'all', navId = 'home', options = {}) {
   if (homeRenderTimer) {
     clearTimeout(homeRenderTimer);
     homeRenderTimer = null;
+  }
+  if (isHomeLandingView()) {
+    grid.innerHTML = '';
+    grid.style.opacity = '1';
+    grid.style.transform = 'translateY(0)';
+    if (!options.skipUrl) {
+      updateUrlState({ typeId: safeType, deityKey: '' });
+    }
+    return;
   }
   const cycleId = homeRenderCycleId + 1;
   grid.style.opacity = '0';
@@ -602,4 +636,167 @@ function syncFavoritesToggle() {
   } else {
     updateHomeSectionHeader(activeHomeType);
   }
+}
+
+// ----------------------------------------------------
+// DAILY SLOKA SHOWCASE CAROUSEL
+// ----------------------------------------------------
+const FEATURED_SLOKAS = [
+  {
+    deityKey: 'ganesh',
+    deityName: 'ॐ श्री गणेशाय नमः',
+    deityIcon: 'https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main/icons/ganesh.webp',
+    slokaText: '"वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ।<br>अविघ्नं कुरु मे देव सर्वकार्येषु सर्वदा॥"',
+    meaning: 'हे घुमावदार सूंड वाले, विशाल शरीर वाले, करोड़ों सूर्यों के समान तेजस्वी देव! मेरे सभी कार्यों को सदा बाधारहित पूरा करें।',
+    actionText: '📿 गणेश मंत्र पढ़ें'
+  },
+  {
+    deityKey: 'shiva',
+    deityName: 'ॐ नमः शिवाय',
+    deityIcon: 'https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main/icons/shiva.webp',
+    slokaText: '"कर्पूरगौरं करुणावतारं संसारसारम् भुजगेन्द्रहारम्।<br>सदावसन्तं हृदयारविन्दे भवं भवानीसहितं नमामि॥"',
+    meaning: 'जो कर्पूर के समान शुद्ध गौर वर्ण वाले, करुणा के अवतार हैं, उन भगवान शिव एवं माँ भवानी की वंदना करता हूँ।',
+    actionText: '📿 शिव मंत्र पढ़ें'
+  },
+  {
+    deityKey: 'durga',
+    deityName: 'ॐ श्री दुर्गायै नमः',
+    deityIcon: 'https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main/icons/durga.webp',
+    slokaText: '"सर्वमङ्गलमगल्ये शिवे सर्वार्थसाधिके।<br>शरण्ये त्र्यम्बके गौरि नारायणि नमोऽस्तु ते॥"',
+    meaning: 'सब प्रकार का कल्याण करने वाली, कल्याणमयी, सब पुरुषार्थों को सिद्ध करने वाली माँ दुर्गा को प्रणाम है।',
+    actionText: '📿 दुर्गा मंत्र पढ़ें'
+  },
+  {
+    deityKey: 'ram',
+    deityName: 'जय श्री राम',
+    deityIcon: 'https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main/icons/ram.webp',
+    slokaText: '"रामाय रामभद्राय रामचन्द्राय वेधसे।<br>रघुनाथाय नाथाय सीतायाः पतये नमः॥"',
+    meaning: 'सकल जगत के स्वामी, रघुकुल शिरोमणि, श्री सीतापति भगवान रामचन्द्र जी को हमारा बारंबार प्रणाम है।',
+    actionText: '📿 राम मंत्र पढ़ें'
+  },
+  {
+    deityKey: 'hanuman',
+    deityName: 'जय श्री हनुमान',
+    deityIcon: 'https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main/icons/hanuman.webp',
+    slokaText: '"मनोजवं मारुततुल्यवेगं जितेन्द्रियं बुद्धिमतां वरिष्ठम्।<br>वातात्मजं वानरयूथमुख्यं श्रीरामदूतं शरणं प्रपद्ये॥"',
+    meaning: 'मन और वायु के समान तीव्र गति वाले, बुद्धिमानों में श्रेष्ठ, श्रीराम के परम दूत श्री हनुमान जी की शरण लेता हूँ।',
+    actionText: '📿 हनुमान मंत्र पढ़ें'
+  },
+  {
+    deityKey: 'krishna',
+    deityName: 'जय श्री कृष्णा',
+    deityIcon: 'https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main/icons/krishna.webp',
+    slokaText: '"वसुदेवसुतं देवं कंसचाणूरमर्दनम्।<br>देवकीपरमानन्दं कृष्णं वन्दे जगद्गुरुम्॥"',
+    meaning: 'माता देवकी के परमानंद स्वरूप, कंस और चाणूर का वध करने वाले जगद्गुरु भगवान श्रीकृष्ण की मैं वंदना करता हूँ।',
+    actionText: '📿 कृष्ण मंत्र पढ़ें'
+  },
+  {
+    deityKey: 'lakshmi',
+    deityName: 'ॐ श्री महालक्ष्म्यै नमः',
+    deityIcon: 'https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main/icons/lakshmi.webp',
+    slokaText: '"नमस्तेऽस्तु महामाये श्रीपीठे सुरपूजिते।<br>शङ्खचक्रगदाहस्ते महालक्ष्मि नमोऽस्तु ते॥"',
+    meaning: 'हे महामाया, देवताओं द्वारा पूजित, शंख, चक्र और गदा धारण करने वाली भगवती महालक्ष्मी को प्रणाम है।',
+    actionText: '📿 लक्ष्मी मंत्र पढ़ें'
+  }
+];
+
+let activeSlokaIndex = 0;
+let slokaAutoPlayTimer = null;
+
+function renderSlokaSlide(index = activeSlokaIndex) {
+  if (index < 0) index = FEATURED_SLOKAS.length - 1;
+  if (index >= FEATURED_SLOKAS.length) index = 0;
+  activeSlokaIndex = index;
+
+  const item = FEATURED_SLOKAS[activeSlokaIndex];
+  if (!item) return;
+
+  const bgBlur = document.getElementById('slokaBgBlur');
+  const thumb = document.getElementById('slokaDeityThumb');
+  const deityName = document.getElementById('slokaDeityName');
+  const slokaText = document.getElementById('slokaText');
+  const slokaMeaning = document.getElementById('slokaMeaning');
+  const actionBtn = document.getElementById('slokaActionBtn');
+  const actionLabel = document.getElementById('slokaActionLabel');
+  const bodyEl = document.getElementById('slokaBody');
+  const dotsContainer = document.getElementById('slokaNavDots');
+
+  if (bgBlur) bgBlur.style.backgroundImage = `url('${item.deityIcon}')`;
+  if (thumb) {
+    thumb.src = item.deityIcon;
+    thumb.alt = item.deityName;
+  }
+  if (deityName) deityName.textContent = item.deityName;
+  if (slokaText) slokaText.innerHTML = item.slokaText;
+  if (slokaMeaning) slokaMeaning.textContent = item.meaning;
+  if (actionLabel) actionLabel.textContent = item.actionText;
+
+  if (actionBtn) {
+    actionBtn.onclick = () => showDeityPage(item.deityKey, { initialTab: 'mantra' });
+  }
+
+  if (bodyEl) {
+    bodyEl.classList.remove('sloka-content-fade');
+    void bodyEl.offsetWidth; // trigger reflow
+    bodyEl.classList.add('sloka-content-fade');
+  }
+
+  if (dotsContainer) {
+    dotsContainer.innerHTML = FEATURED_SLOKAS.map((_, i) =>
+      `<span class="sloka-dot ${i === activeSlokaIndex ? 'active' : ''}" onclick="goToSlokaSlide(${i})"></span>`
+    ).join('');
+  }
+}
+
+function nextSlokaSlide() {
+  renderSlokaSlide(activeSlokaIndex + 1);
+  resetSlokaAutoPlay();
+}
+
+function prevSlokaSlide() {
+  renderSlokaSlide(activeSlokaIndex - 1);
+  resetSlokaAutoPlay();
+}
+
+function goToSlokaSlide(index) {
+  renderSlokaSlide(index);
+  resetSlokaAutoPlay();
+}
+
+function startSlokaAutoPlay() {
+  stopSlokaAutoPlay();
+  slokaAutoPlayTimer = setInterval(() => {
+    renderSlokaSlide(activeSlokaIndex + 1);
+  }, 6000);
+}
+
+function stopSlokaAutoPlay() {
+  if (slokaAutoPlayTimer) {
+    clearInterval(slokaAutoPlayTimer);
+    slokaAutoPlayTimer = null;
+  }
+}
+
+function resetSlokaAutoPlay() {
+  startSlokaAutoPlay();
+}
+
+function initSlokaCarousel() {
+  const card = document.getElementById('baLandingSlokaCard');
+  if (!card) return;
+  renderSlokaSlide(0);
+  startSlokaAutoPlay();
+
+  if (!card.dataset.bound) {
+    card.addEventListener('mouseenter', stopSlokaAutoPlay);
+    card.addEventListener('mouseleave', startSlokaAutoPlay);
+    card.dataset.bound = 'true';
+  }
+}
+
+if (typeof window !== 'undefined') {
+  window.nextSlokaSlide = nextSlokaSlide;
+  window.prevSlokaSlide = prevSlokaSlide;
+  window.goToSlokaSlide = goToSlokaSlide;
+  window.initSlokaCarousel = initSlokaCarousel;
 }
