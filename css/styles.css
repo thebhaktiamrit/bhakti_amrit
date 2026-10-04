@@ -1030,7 +1030,10 @@ body.reading-mode-open .aarti-floating-bell-wrap {
   margin-top: -112.5px;
   border-radius: 20px;
   cursor: pointer;
-  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.5s ease, z-index 0.5s ease;
+  transition:
+    transform 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+    opacity 0.5s ease,
+    z-index 0.5s ease;
   transform-style: preserve-3d;
   user-select: none;
   -webkit-user-drag: none;
@@ -1045,7 +1048,9 @@ body.reading-mode-open .aarti-floating-bell-wrap {
   background: rgba(var(--dark-rgb), 0.85);
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
   position: relative;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .ba-arc-img {
@@ -1054,7 +1059,9 @@ body.reading-mode-open .aarti-floating-bell-wrap {
   object-fit: cover;
   display: block;
   filter: brightness(0.9) contrast(1.05);
-  transition: transform 0.4s ease, filter 0.4s ease;
+  transition:
+    transform 0.4s ease,
+    filter 0.4s ease;
   pointer-events: none;
 }
 
@@ -1066,7 +1073,12 @@ body.reading-mode-open .aarti-floating-bell-wrap {
 .ba-arc-card-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.92) 0%, rgba(0, 0, 0, 0.2) 65%, transparent 100%);
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.92) 0%,
+    rgba(0, 0, 0, 0.2) 65%,
+    transparent 100%
+  );
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -1095,7 +1107,7 @@ body.reading-mode-open .aarti-floating-bell-wrap {
 
 .ba-arc-card.active-center .ba-arc-card-inner {
   border: 2px solid var(--gold);
-  box-shadow: 
+  box-shadow:
     0 25px 55px rgba(0, 0, 0, 0.85),
     0 0 35px rgba(var(--gold-rgb), 0.45),
     0 0 15px rgba(var(--saffron-rgb), 0.6);
@@ -1161,9 +1173,16 @@ body.reading-mode-open .aarti-floating-bell-wrap {
   bottom: 0;
   width: 170px;
   height: 4px;
-  background: linear-gradient(90deg, transparent 0%, var(--gold) 50%, transparent 100%);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--gold) 50%,
+    transparent 100%
+  );
   border-radius: 999px;
-  box-shadow: 0 0 20px var(--gold), 0 0 10px var(--saffron);
+  box-shadow:
+    0 0 20px var(--gold),
+    0 0 10px var(--saffron);
   z-index: 5;
   pointer-events: none;
 }
@@ -1289,12 +1308,15 @@ body.reading-mode-open .aarti-floating-bell-wrap {
   border: 1px solid rgba(var(--gold-rgb), 0.45);
   border-radius: 24px;
   padding: 24px;
-  box-shadow: 
+  box-shadow:
     0 24px 50px -10px rgba(var(--shadow-rgb), 0.5),
     0 0 25px rgba(var(--gold-rgb), 0.18),
     inset 0 1px 1px rgba(255, 255, 255, 0.2);
   transform-style: preserve-3d;
-  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+  transition:
+    transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.4s ease,
+    border-color 0.4s ease;
   display: flex;
   flex-direction: column;
   gap: 14px;
@@ -1309,7 +1331,9 @@ body.reading-mode-open .aarti-floating-bell-wrap {
   filter: blur(28px);
   opacity: 0.22;
   transform: scale(1.15);
-  transition: background-image 0.6s ease-in-out, opacity 0.6s ease-in-out;
+  transition:
+    background-image 0.6s ease-in-out,
+    opacity 0.6s ease-in-out;
   pointer-events: none;
   z-index: 0;
 }
@@ -1317,7 +1341,7 @@ body.reading-mode-open .aarti-floating-bell-wrap {
 .ba-3d-sloka-card:hover {
   transform: translateY(-4px) rotateX(2deg) rotateY(-2deg);
   border-color: rgba(var(--gold-rgb), 0.75);
-  box-shadow: 
+  box-shadow:
     0 30px 60px -10px rgba(var(--shadow-rgb), 0.6),
     0 0 30px rgba(var(--gold-rgb), 0.25);
 }
@@ -1403,7 +1427,11 @@ body.reading-mode-open .aarti-floating-bell-wrap {
 .sloka-action-btn {
   flex-grow: 1;
   border: 1px solid rgba(var(--gold-rgb), 0.5);
-  background: linear-gradient(135deg, rgba(var(--gold-rgb), 0.22) 0%, rgba(var(--saffron-rgb), 0.15) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(var(--gold-rgb), 0.22) 0%,
+    rgba(var(--saffron-rgb), 0.15) 100%
+  );
   color: var(--gold);
   padding: 10px 16px;
   border-radius: 14px;
@@ -1535,7 +1563,7 @@ body.reading-mode-open .aarti-floating-bell-wrap {
 .ba-landing-title {
   margin: 0;
   color: var(--gold);
-  background: linear-gradient(135deg, #FFF8EB 0%, #FFD700 45%, #FF9900 100%);
+  background: linear-gradient(135deg, #fff8eb 0%, #ffd700 45%, #ff9900 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-family: 'Tiro Devanagari Hindi', serif;
@@ -1652,7 +1680,9 @@ body.reading-mode-open .aarti-floating-bell-wrap {
   gap: 14px;
   position: relative;
   z-index: 2;
-  transition: border-color 0.3s ease, transform 0.3s ease;
+  transition:
+    border-color 0.3s ease,
+    transform 0.3s ease;
 }
 
 .ba-landing-sloka-card:hover {
@@ -1829,15 +1859,24 @@ body.reading-mode-open .aarti-floating-bell-wrap {
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, rgba(var(--gold-rgb), 0.28), rgba(var(--saffron-rgb), 0.12));
+  background: radial-gradient(
+    circle at 35% 35%,
+    rgba(var(--gold-rgb), 0.28),
+    rgba(var(--saffron-rgb), 0.12)
+  );
   border: 1.5px solid rgba(var(--gold-rgb), 0.45);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35), inset 0 1px 2px rgba(255, 255, 255, 0.3);
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.35),
+    inset 0 1px 2px rgba(255, 255, 255, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
   overflow: hidden;
-  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+  transition:
+    transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
 }
 
 .ba-3d-deity-icon {
@@ -1862,7 +1901,9 @@ body.reading-mode-open .aarti-floating-bell-wrap {
 .ba-landing-card:hover .ba-3d-icon-sphere {
   transform: scale(1.1) rotate(4deg);
   border-color: var(--gold);
-  box-shadow: 0 6px 16px rgba(var(--gold-rgb), 0.4), inset 0 1px 3px rgba(255, 255, 255, 0.5);
+  box-shadow:
+    0 6px 16px rgba(var(--gold-rgb), 0.4),
+    inset 0 1px 3px rgba(255, 255, 255, 0.5);
 }
 
 .ba-landing-card-icon {
@@ -1908,7 +1949,7 @@ body.reading-mode-open .aarti-floating-bell-wrap {
 }
 
 /* Feature Spotlight Section */
-.ba-landing-features-section {
+.ba-landing-block {
   border: 1px solid rgba(var(--gold-rgb), 0.22);
   border-radius: 24px;
   background: rgba(var(--dark-rgb), 0.35);
@@ -1968,13 +2009,6 @@ body.reading-mode-open .aarti-floating-bell-wrap {
 }
 
 /* 3-Step Sadhana Journey */
-.ba-landing-steps-block {
-  border: 1px solid rgba(var(--saffron-rgb), 0.25);
-  border-radius: 24px;
-  background: rgba(var(--saffron-rgb), 0.04);
-  padding: clamp(20px, 3.5vw, 36px);
-}
-
 .ba-landing-steps {
   margin: 20px 0 0;
   padding: 0;
@@ -2174,7 +2208,6 @@ body.reduced-effects .ba-landing-card:hover,
 body.reduced-effects .ba-landing-btn:hover {
   transform: none;
 }
-
 
 /* PAGE: HOME */
 .home-title-row {
@@ -2767,7 +2800,10 @@ body.reduced-effects .deity-card:hover {
   border-right: 0;
   border-top: 0;
   background-color: rgba(var(--gold-rgb), 0.1);
-  transition: transform 0.3s ease, filter 0.3s ease, opacity 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    filter 0.3s ease,
+    opacity 0.3s ease;
   filter: none;
   transform: translateZ(0);
 }
@@ -3507,7 +3543,9 @@ body.reduced-effects .deity-card:hover {
     0 10px 24px rgba(var(--shadow-rgb), 0.38),
     inset 0 1px 0 rgba(var(--white-rgb), 0.35);
   flex-shrink: 0;
-  transition: opacity 0.3s ease, filter 0.3s ease;
+  transition:
+    opacity 0.3s ease,
+    filter 0.3s ease;
 }
 
 .deity-portrait.loading {
