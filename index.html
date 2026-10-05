@@ -634,6 +634,102 @@
             </article>
           </div>
 
+          <!-- DAILY DIYA -->
+          <section
+            class="ba-landing-block ba-daily-diya-section"
+            aria-labelledby="baDailyDiyaTitle"
+          >
+            <div class="ba-landing-section-header">
+              <span class="section-eye" data-i18n="landingDailyDiyaEyebrow">
+                🪔 दैनिक साधना
+              </span>
+              <h2
+                class="ba-landing-heading"
+                id="baDailyDiyaTitle"
+                data-i18n="landingDailyDiyaTitle"
+              >
+                आज की साधना
+              </h2>
+            </div>
+            <div
+              class="ba-daily-diya-visual"
+              id="baDailyDiyaVisual"
+              aria-hidden="true"
+            >
+              <svg
+                class="ba-daily-diya-art"
+                viewBox="0 0 200 200"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <defs>
+                  <linearGradient
+                    id="baDailyDiyaFlameGradient"
+                    x1="0"
+                    y1="0"
+                    x2="0"
+                    y2="1"
+                  >
+                    <stop offset="0" stop-color="var(--saffron-light)" />
+                    <stop offset="1" stop-color="var(--saffron)" />
+                  </linearGradient>
+                </defs>
+                <g class="ba-daily-diya-flame">
+                  <path
+                    d="M100 50 C119 78 126 98 111 121 C106 128 94 128 89 121 C74 98 81 78 100 50 Z"
+                    fill="url(#baDailyDiyaFlameGradient)"
+                  />
+                  <path
+                    class="ba-daily-diya-inner-flame"
+                    d="M100 84 C108 96 110 107 104 117 C102 121 98 121 96 117 C90 107 92 96 100 84 Z"
+                    fill="var(--cream)"
+                  />
+                </g>
+                <path
+                  d="M100 144 L100 122"
+                  stroke="var(--dark)"
+                  stroke-width="4"
+                  stroke-linecap="round"
+                />
+                <path
+                  d="M22 142 C38 192 162 192 178 142 C150 157 50 157 22 142 Z"
+                  fill="var(--saffron)"
+                />
+                <ellipse cx="100" cy="142" rx="78" ry="10" fill="var(--gold)" />
+                <ellipse
+                  cx="100"
+                  cy="143"
+                  rx="63"
+                  ry="6"
+                  fill="var(--maroon)"
+                />
+                <rect
+                  x="62"
+                  y="184"
+                  width="76"
+                  height="8"
+                  rx="4"
+                  fill="var(--deep-gold)"
+                />
+              </svg>
+            </div>
+            <p
+              class="ba-daily-diya-message"
+              id="baDailyDiyaMessage"
+              aria-live="polite"
+            >
+              आज की साधना आरंभ करें
+            </p>
+            <button
+              class="ba-landing-btn ba-landing-btn-primary ba-daily-diya-open"
+              id="baDailyDiyaOpen"
+              type="button"
+            >
+              <span data-i18n="landingDailyDiyaOpen">आज का पाठ खोलिए</span>
+              <span aria-hidden="true">→</span>
+            </button>
+          </section>
+
           <!-- QUICK CATEGORIES & ECOSYSTEM -->
           <div class="ba-landing-block ba-landing-categories-section">
             <div class="ba-landing-section-header">

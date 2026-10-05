@@ -1271,6 +1271,110 @@ body.reading-mode-open .aarti-floating-bell-wrap {
   line-height: 1.55;
 }
 
+.ba-daily-diya-section {
+  display: grid;
+  justify-items: center;
+  gap: 20px;
+  text-align: center;
+  background: var(--hero-panel-background);
+}
+
+.ba-daily-diya-section .ba-landing-section-header {
+  margin-bottom: 0;
+}
+
+.ba-daily-diya-visual {
+  position: relative;
+  display: block;
+  width: min(100%, 300px);
+  aspect-ratio: 300 / 390;
+  padding: 0;
+  border: 0;
+  border-radius: 50% 50% 14px 14px;
+  color: inherit;
+  background: var(--dark);
+  box-shadow:
+    0 0 0 3px rgba(var(--gold-rgb), 0.55),
+    0 0 0 11px rgba(var(--gold-rgb), 0.14);
+  overflow: hidden;
+}
+
+.ba-daily-diya-visual::before {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  pointer-events: none;
+  opacity: 1;
+  background: radial-gradient(
+    circle at 50% 66%,
+    rgba(var(--saffron-rgb), 0.6),
+    rgba(var(--saffron-rgb), 0.2) 36%,
+    transparent 64%
+  );
+  transition: opacity 1.2s ease;
+}
+
+.ba-daily-diya-art {
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  bottom: 7%;
+  display: block;
+  width: 80%;
+  height: auto;
+  transform: translateX(-50%);
+}
+
+.ba-daily-diya-flame,
+.ba-daily-diya-inner-flame {
+  opacity: 1;
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
+}
+
+.ba-daily-diya-flame {
+  transform: scale(1);
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: dailyDiyaFlicker 2.4s ease-in-out 0.7s infinite;
+}
+
+.ba-daily-diya-message {
+  max-width: 30ch;
+  min-height: 3.6em;
+  margin: 0;
+  color: var(--gold);
+  font-family: 'Tiro Devanagari Hindi', serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.6;
+  text-align: center;
+}
+
+@keyframes dailyDiyaFlicker {
+  0%,
+  100% {
+    transform: scale(1, 1) rotate(0);
+  }
+  25% {
+    transform: scale(0.97, 1.05) rotate(-1.5deg);
+  }
+  50% {
+    transform: scale(1.02, 0.97) rotate(1deg);
+  }
+  75% {
+    transform: scale(0.98, 1.04) rotate(-0.6deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ba-daily-diya-flame {
+    animation: none;
+  }
+}
+
 .ba-landing-hero-bg-glow {
   position: absolute;
   inset: -20px;
@@ -5192,6 +5296,17 @@ footer {
   .deity-img,
   .deity-img-fallback {
     height: 140px;
+  }
+
+  .home-grid:not(.table-view) .deity-img,
+  .home-grid:not(.table-view) .deity-img-fallback {
+    height: auto;
+    aspect-ratio: 1 / 1;
+  }
+
+  .home-grid:not(.table-view) .deity-img {
+    object-fit: contain;
+    object-position: center;
   }
 
   /* Ensure favorites page uses the same compact card sizing on mobile */

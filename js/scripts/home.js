@@ -502,6 +502,7 @@ function syncHomeLandingMode() {
       window.initSlokaCarousel();
     setupLandingComparison();
     setupLandingExperience();
+    setupLandingDailyDiya();
   }
 }
 
@@ -611,6 +612,36 @@ function setupLandingExperience() {
 
   section.dataset.bound = 'true';
   updateJapa();
+}
+
+function setupLandingDailyDiya() {
+  const visual = document.getElementById('baDailyDiyaVisual');
+  const message = document.getElementById('baDailyDiyaMessage');
+  const openButton = document.getElementById('baDailyDiyaOpen');
+  if (!visual || !message || !openButton || visual.dataset.bound) return;
+
+  const weekdayReadings = [
+    { deityKey: 'surya', deity: 'सूर्य देव', tab: 'mantra' },
+    { deityKey: 'shiva', deity: 'भगवान शिव', tab: 'chalisa' },
+    { deityKey: 'hanuman', deity: 'हनुमान जी', tab: 'chalisa' },
+    { deityKey: 'ganesh', deity: 'श्री गणेश', tab: 'aarti' },
+    { deityKey: 'vishnu', deity: 'भगवान विष्णु', tab: 'aarti' },
+    { deityKey: 'lakshmi', deity: 'माँ लक्ष्मी', tab: 'aarti' },
+    { deityKey: 'shani', deity: 'शनि देव', tab: 'chalisa' },
+  ];
+  const today = new Date();
+  const reading = weekdayReadings[today.getDay()];
+  const weekday = new Intl.DateTimeFormat('hi-IN', {
+    weekday: 'long',
+  }).format(today);
+  const deityName = reading.deity;
+
+  message.textContent = `आज ${weekday} है, ${deityName} का दिन।`;
+  openButton.addEventListener('click', () => {
+    showDeityPage(reading.deityKey, { initialTab: reading.tab });
+  });
+
+  visual.dataset.bound = 'true';
 }
 
 function openLandingHomeScreenHelp() {
