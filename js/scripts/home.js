@@ -503,6 +503,7 @@ function syncHomeLandingMode() {
     setupLandingComparison();
     setupLandingExperience();
     setupLandingDailyDiya();
+    syncLandingRoutineState();
   }
 }
 
@@ -642,6 +643,38 @@ function setupLandingDailyDiya() {
   });
 
   visual.dataset.bound = 'true';
+}
+
+function syncLandingRoutineState(date = new Date()) {
+  const timeSlots = document.querySelectorAll('.routine-item[data-period]');
+  const weekdayRows = document.querySelectorAll(
+    '.routine-week-table tbody tr[data-weekday]',
+  );
+  if (!timeSlots.length || !weekdayRows.length) return;
+
+  const hour = date.getHours();
+  const activePeriod =
+    hour >= 5 && hour < 11
+      ? 'morning'
+      : hour >= 11 && hour < 16
+        ? 'midday'
+        : hour >= 16 && hour < 20
+          ? 'evening'
+          : 'night';
+
+  timeSlots.forEach((item) => {
+    const isActive = item.dataset.period === activePeriod;
+    item.classList.toggle('is-active', isActive);
+    if (isActive) item.setAttribute('aria-current', 'time');
+    else item.removeAttribute('aria-current');
+  });
+
+  weekdayRows.forEach((row) => {
+    const isToday = Number(row.dataset.weekday) === date.getDay();
+    row.classList.toggle('is-highlighted', isToday);
+    if (isToday) row.setAttribute('aria-current', 'date');
+    else row.removeAttribute('aria-current');
+  });
 }
 
 function openLandingHomeScreenHelp() {
