@@ -1271,22 +1271,19 @@ body.reading-mode-open .aarti-floating-bell-wrap {
   line-height: 1.55;
 }
 
-.ba-daily-diya-section {
+.ba-daily-routine-diya {
   display: grid;
+  align-content: center;
   justify-items: center;
-  gap: 20px;
+  gap: 12px;
+  min-width: 0;
   text-align: center;
-  background: var(--hero-panel-background);
-}
-
-.ba-daily-diya-section .ba-landing-section-header {
-  margin-bottom: 0;
 }
 
 .ba-daily-diya-visual {
   position: relative;
   display: block;
-  width: min(100%, 300px);
+  width: min(100%, 220px);
   aspect-ratio: 300 / 390;
   padding: 0;
   border: 0;
@@ -1343,11 +1340,11 @@ body.reading-mode-open .aarti-floating-bell-wrap {
 
 .ba-daily-diya-message {
   max-width: 30ch;
-  min-height: 3.6em;
+  min-height: 3.2em;
   margin: 0;
   color: var(--gold);
   font-family: 'Tiro Devanagari Hindi', serif;
-  font-size: 1.2rem;
+  font-size: 0.98rem;
   font-weight: 700;
   line-height: 1.6;
   text-align: center;
@@ -2521,11 +2518,20 @@ body.reading-mode-open .aarti-floating-bell-wrap {
 
 .ba-daily-routine-layout {
   display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.4fr);
+  grid-template-columns: minmax(190px, 0.72fr) minmax(0, 1.75fr);
   gap: 28px;
   align-items: stretch;
 }
 
+.ba-daily-routine-panels {
+  display: grid;
+  grid-template-columns: minmax(180px, 0.9fr) minmax(0, 1.4fr);
+  align-items: stretch;
+  gap: 20px;
+  min-width: 0;
+}
+
+.ba-daily-routine-diya,
 .ba-daily-routine-day,
 .ba-daily-routine-week {
   background: rgba(var(--dark-rgb), 0.42);
@@ -2989,10 +2995,60 @@ body.reading-mode-open .aarti-floating-bell-wrap {
 
   .ba-daily-routine-layout {
     display: grid;
+    grid-template-columns: minmax(170px, 0.72fr) minmax(0, 1.75fr);
+    gap: 18px;
+  }
+
+  .ba-daily-routine-panels {
+    grid-template-columns: minmax(150px, 0.85fr) minmax(0, 1.15fr);
+    gap: 12px;
   }
 }
 
 @media (max-width: 640px) {
+  .ba-compare-section {
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+
+  .ba-compare-section .ba-landing-section-header {
+    margin-bottom: 12px;
+  }
+
+  .ba-compare-section .ba-landing-heading {
+    font-size: 1.15rem;
+  }
+
+  .ba-compare-section .ba-landing-kicker {
+    margin-top: 4px;
+    font-size: 0.82rem;
+    line-height: 1.5;
+  }
+
+  .ba-hero-features-three {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+    padding-top: 18px;
+  }
+
+  .ba-hero-feature-col {
+    display: grid;
+    grid-template-columns: minmax(96px, 0.8fr) minmax(0, 1.2fr);
+    align-items: center;
+    gap: 4px 12px;
+    padding: 12px 14px;
+    text-align: left;
+  }
+
+  .feature-col-title,
+  .feature-col-desc {
+    text-align: left;
+  }
+
+  .feature-col-title {
+    margin: 0;
+  }
+
   .ba-landing-journey-title {
     font-size: 1.75rem;
   }
@@ -3016,13 +3072,6 @@ body.reading-mode-open .aarti-floating-bell-wrap {
     flex-basis: 44px;
   }
 
-  .ba-compare-section {
-    width: calc(100vw - 16px);
-    margin-left: calc((100% - (100vw - 16px)) / 2);
-    padding-right: 10px;
-    padding-left: 10px;
-  }
-
   .ba-daily-routine-layout,
   .ba-landing-explore,
   .ba-landing-features-grid,
@@ -3032,14 +3081,53 @@ body.reading-mode-open .aarti-floating-bell-wrap {
   }
 
   .ba-compare-demo {
-    min-height: 230px;
-    aspect-ratio: 1.2;
-    border-radius: 20px;
+    width: 100%;
+    min-width: 0;
+    min-height: 190px;
+    aspect-ratio: 1.42;
+    border-radius: 16px;
+  }
+
+  .ba-compare-layout {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .ba-compare-label {
+    top: 10px;
+    padding: 4px 8px;
+    font-size: 0.68rem;
+  }
+
+  .ba-compare-kicker {
+    margin-bottom: 6px;
+    font-size: 0.68rem;
+  }
+
+  .ba-compare-divider span {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
   }
 
   .ba-compare-benefits {
-    grid-template-columns: 1fr;
-    gap: 14px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .ba-compare-benefits li {
+    gap: 3px;
+    text-align: center;
+  }
+
+  .ba-compare-benefits strong {
+    font-size: 0.74rem;
+    line-height: 1.35;
+  }
+
+  .ba-compare-benefits span {
+    font-size: 0.68rem;
+    line-height: 1.35;
   }
 
   .ba-compare-clean-copy {
@@ -3047,24 +3135,30 @@ body.reading-mode-open .aarti-floating-bell-wrap {
   }
 
   .ba-compare-noisy {
-    padding: 46px 12px 12px;
+    padding: 38px 10px 10px;
   }
 
   .ba-compare-ad {
-    min-height: 50px;
-    font-size: 0.8rem;
+    min-height: 42px;
+    padding: 8px;
+    font-size: 0.72rem;
   }
 
   .ba-compare-popup {
     left: calc(50% - 29%);
     bottom: 24%;
     width: 58%;
-    padding: 10px;
-    font-size: 0.72rem;
+    padding: 8px;
+    font-size: 0.68rem;
   }
 
   .ba-daily-routine-layout {
     display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .ba-daily-routine-panels {
+    grid-template-columns: 1fr;
   }
 
   .ba-landing-hero {

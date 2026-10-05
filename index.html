@@ -634,102 +634,6 @@
             </article>
           </div>
 
-          <!-- DAILY DIYA -->
-          <section
-            class="ba-landing-block ba-daily-diya-section"
-            aria-labelledby="baDailyDiyaTitle"
-          >
-            <div class="ba-landing-section-header">
-              <span class="section-eye" data-i18n="landingDailyDiyaEyebrow">
-                🪔 दैनिक साधना
-              </span>
-              <h2
-                class="ba-landing-heading"
-                id="baDailyDiyaTitle"
-                data-i18n="landingDailyDiyaTitle"
-              >
-                आज की साधना
-              </h2>
-            </div>
-            <div
-              class="ba-daily-diya-visual"
-              id="baDailyDiyaVisual"
-              aria-hidden="true"
-            >
-              <svg
-                class="ba-daily-diya-art"
-                viewBox="0 0 200 200"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <defs>
-                  <linearGradient
-                    id="baDailyDiyaFlameGradient"
-                    x1="0"
-                    y1="0"
-                    x2="0"
-                    y2="1"
-                  >
-                    <stop offset="0" stop-color="var(--saffron-light)" />
-                    <stop offset="1" stop-color="var(--saffron)" />
-                  </linearGradient>
-                </defs>
-                <g class="ba-daily-diya-flame">
-                  <path
-                    d="M100 50 C119 78 126 98 111 121 C106 128 94 128 89 121 C74 98 81 78 100 50 Z"
-                    fill="url(#baDailyDiyaFlameGradient)"
-                  />
-                  <path
-                    class="ba-daily-diya-inner-flame"
-                    d="M100 84 C108 96 110 107 104 117 C102 121 98 121 96 117 C90 107 92 96 100 84 Z"
-                    fill="var(--cream)"
-                  />
-                </g>
-                <path
-                  d="M100 144 L100 122"
-                  stroke="var(--dark)"
-                  stroke-width="4"
-                  stroke-linecap="round"
-                />
-                <path
-                  d="M22 142 C38 192 162 192 178 142 C150 157 50 157 22 142 Z"
-                  fill="var(--saffron)"
-                />
-                <ellipse cx="100" cy="142" rx="78" ry="10" fill="var(--gold)" />
-                <ellipse
-                  cx="100"
-                  cy="143"
-                  rx="63"
-                  ry="6"
-                  fill="var(--maroon)"
-                />
-                <rect
-                  x="62"
-                  y="184"
-                  width="76"
-                  height="8"
-                  rx="4"
-                  fill="var(--deep-gold)"
-                />
-              </svg>
-            </div>
-            <p
-              class="ba-daily-diya-message"
-              id="baDailyDiyaMessage"
-              aria-live="polite"
-            >
-              आज की साधना आरंभ करें
-            </p>
-            <button
-              class="ba-landing-btn ba-landing-btn-primary ba-daily-diya-open"
-              id="baDailyDiyaOpen"
-              type="button"
-            >
-              <span data-i18n="landingDailyDiyaOpen">आज का पाठ खोलिए</span>
-              <span aria-hidden="true">→</span>
-            </button>
-          </section>
-
           <!-- QUICK CATEGORIES & ECOSYSTEM -->
           <div class="ba-landing-block ba-landing-categories-section">
             <div class="ba-landing-section-header">
@@ -1020,105 +924,193 @@
             </div>
 
             <div class="ba-daily-routine-layout">
-              <div class="ba-daily-routine-day">
-                <h3 class="ba-routine-title">आज का दिन</h3>
-
+              <div class="ba-daily-routine-diya">
                 <div
-                  class="routine-timeline"
-                  aria-label="Daily routine timeline"
+                  class="ba-daily-diya-visual"
+                  id="baDailyDiyaVisual"
+                  aria-hidden="true"
                 >
-                  <div class="routine-item">
-                    <span class="routine-dot"></span>
-                    <div class="routine-content">
-                      <div class="routine-label">प्रातः</div>
-                      <div class="routine-text">
-                        दिन की शुरुआत शुभ की आरती और गायत्री मंत्र से करें।
+                  <svg
+                    class="ba-daily-diya-art"
+                    viewBox="0 0 200 200"
+                    aria-hidden="true"
+                    focusable="false"
+                  >
+                    <defs>
+                      <linearGradient
+                        id="baDailyDiyaFlameGradient"
+                        x1="0"
+                        y1="0"
+                        x2="0"
+                        y2="1"
+                      >
+                        <stop offset="0" stop-color="var(--saffron-light)" />
+                        <stop offset="1" stop-color="var(--saffron)" />
+                      </linearGradient>
+                    </defs>
+                    <g class="ba-daily-diya-flame">
+                      <path
+                        d="M100 50 C119 78 126 98 111 121 C106 128 94 128 89 121 C74 98 81 78 100 50 Z"
+                        fill="url(#baDailyDiyaFlameGradient)"
+                      />
+                      <path
+                        class="ba-daily-diya-inner-flame"
+                        d="M100 84 C108 96 110 107 104 117 C102 121 98 121 96 117 C90 107 92 96 100 84 Z"
+                        fill="var(--cream)"
+                      />
+                    </g>
+                    <path
+                      d="M100 144 L100 122"
+                      stroke="var(--dark)"
+                      stroke-width="4"
+                      stroke-linecap="round"
+                    />
+                    <path
+                      d="M22 142 C38 192 162 192 178 142 C150 157 50 157 22 142 Z"
+                      fill="var(--saffron)"
+                    />
+                    <ellipse
+                      cx="100"
+                      cy="142"
+                      rx="78"
+                      ry="10"
+                      fill="var(--gold)"
+                    />
+                    <ellipse
+                      cx="100"
+                      cy="143"
+                      rx="63"
+                      ry="6"
+                      fill="var(--maroon)"
+                    />
+                    <rect
+                      x="62"
+                      y="184"
+                      width="76"
+                      height="8"
+                      rx="4"
+                      fill="var(--deep-gold)"
+                    />
+                  </svg>
+                </div>
+                <p
+                  class="ba-daily-diya-message"
+                  id="baDailyDiyaMessage"
+                  aria-live="polite"
+                >
+                  आज की साधना आरंभ करें
+                </p>
+                <button
+                  class="ba-landing-btn ba-landing-btn-primary ba-daily-diya-open"
+                  id="baDailyDiyaOpen"
+                  type="button"
+                >
+                  <span data-i18n="landingDailyDiyaOpen">आज का पाठ खोलिए</span>
+                  <span aria-hidden="true">→</span>
+                </button>
+              </div>
+
+              <div class="ba-daily-routine-panels">
+                <div class="ba-daily-routine-day">
+                  <h3 class="ba-routine-title">आज का दिन</h3>
+
+                  <div
+                    class="routine-timeline"
+                    aria-label="Daily routine timeline"
+                  >
+                    <div class="routine-item">
+                      <span class="routine-dot"></span>
+                      <div class="routine-content">
+                        <div class="routine-label">प्रातः</div>
+                        <div class="routine-text">
+                          दिन की शुरुआत शुभ की आरती और गायत्री मंत्र से करें।
+                        </div>
                       </div>
                     </div>
-                  </div>
 
-                  <div class="routine-item is-active">
-                    <span class="routine-dot"></span>
-                    <div class="routine-content">
-                      <div class="routine-label">मध्याह्न</div>
-                      <div class="routine-text">
-                        भोजन से पहले एक छोटी प्रार्थना और प्रसाद अर्पित करें।
+                    <div class="routine-item is-active">
+                      <span class="routine-dot"></span>
+                      <div class="routine-content">
+                        <div class="routine-label">मध्याह्न</div>
+                        <div class="routine-text">
+                          भोजन से पहले एक छोटी प्रार्थना और प्रसाद अर्पित करें।
+                        </div>
                       </div>
                     </div>
-                  </div>
 
-                  <div class="routine-item">
-                    <span class="routine-dot"></span>
-                    <div class="routine-content">
-                      <div class="routine-label">संध्या</div>
-                      <div class="routine-text">
-                        दीप जलाकर संध्या आरती का स्मरण और शांत ध्यान करें।
+                    <div class="routine-item">
+                      <span class="routine-dot"></span>
+                      <div class="routine-content">
+                        <div class="routine-label">संध्या</div>
+                        <div class="routine-text">
+                          दीप जलाकर संध्या आरती का स्मरण और शांत ध्यान करें।
+                        </div>
                       </div>
                     </div>
-                  </div>
 
-                  <div class="routine-item">
-                    <span class="routine-dot"></span>
-                    <div class="routine-content">
-                      <div class="routine-label">रात्रि</div>
-                      <div class="routine-text">
-                        सोने से पहले चालीसा या शांति मंत्र का पाठ करें।
+                    <div class="routine-item">
+                      <span class="routine-dot"></span>
+                      <div class="routine-content">
+                        <div class="routine-label">रात्रि</div>
+                        <div class="routine-text">
+                          सोने से पहले चालीसा या शांति मंत्र का पाठ करें।
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              <div class="ba-daily-routine-week">
-                <h3 class="ba-routine-title">सप्ताह के देव</h3>
+                <div class="ba-daily-routine-week">
+                  <h3 class="ba-routine-title">सप्ताह के देव</h3>
 
-                <div class="routine-table-wrap">
-                  <table class="routine-week-table">
-                    <thead>
-                      <tr>
-                        <th>दिन</th>
-                        <th>देव</th>
-                        <th>सुबह पाठ</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>रविवार</td>
-                        <td>सूर्य देव</td>
-                        <td>सूर्य मंत्र और आरती</td>
-                      </tr>
-                      <tr class="is-highlighted">
-                        <td>सोमवार</td>
-                        <td>भगवान शिव</td>
-                        <td>शिव चालीसा, नमः शिवाय</td>
-                      </tr>
-                      <tr>
-                        <td>मंगलवार</td>
-                        <td>हनुमान जी</td>
-                        <td>हनुमान चालीसा</td>
-                      </tr>
-                      <tr>
-                        <td>बुधवार</td>
-                        <td>श्री गणेश</td>
-                        <td>गणेश आरती</td>
-                      </tr>
-                      <tr>
-                        <td>गुरुवार</td>
-                        <td>भगवान विष्णु</td>
-                        <td>विष्णु आरती</td>
-                      </tr>
-                      <tr>
-                        <td>शुक्रवार</td>
-                        <td>माँ लक्ष्मी</td>
-                        <td>लक्ष्मी आरती</td>
-                      </tr>
-                      <tr>
-                        <td>शनिवार</td>
-                        <td>शनि देव</td>
-                        <td>शनि चालीसा</td>
-                      </tr>
-                    </tbody>
-                  </table>
+                  <div class="routine-table-wrap">
+                    <table class="routine-week-table">
+                      <thead>
+                        <tr>
+                          <th>दिन</th>
+                          <th>देव</th>
+                          <th>सुबह पाठ</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>रविवार</td>
+                          <td>सूर्य देव</td>
+                          <td>सूर्य मंत्र और आरती</td>
+                        </tr>
+                        <tr class="is-highlighted">
+                          <td>सोमवार</td>
+                          <td>भगवान शिव</td>
+                          <td>शिव चालीसा, नमः शिवाय</td>
+                        </tr>
+                        <tr>
+                          <td>मंगलवार</td>
+                          <td>हनुमान जी</td>
+                          <td>हनुमान चालीसा</td>
+                        </tr>
+                        <tr>
+                          <td>बुधवार</td>
+                          <td>श्री गणेश</td>
+                          <td>गणेश आरती</td>
+                        </tr>
+                        <tr>
+                          <td>गुरुवार</td>
+                          <td>भगवान विष्णु</td>
+                          <td>विष्णु आरती</td>
+                        </tr>
+                        <tr>
+                          <td>शुक्रवार</td>
+                          <td>माँ लक्ष्मी</td>
+                          <td>लक्ष्मी आरती</td>
+                        </tr>
+                        <tr>
+                          <td>शनिवार</td>
+                          <td>शनि देव</td>
+                          <td>शनि चालीसा</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
             </div>
