@@ -936,12 +936,7 @@ body.reading-mode-open .aarti-floating-bell-wrap {
   align-items: center;
   text-align: center;
   padding: clamp(32px, 5vw, 56px) clamp(20px, 4vw, 40px);
-  background: radial-gradient(
-    circle at 50% 25%,
-    rgba(var(--dark-rgb), 0.92) 0%,
-    rgba(var(--maroon-rgb), 0.78) 60%,
-    rgba(var(--dark-rgb), 0.95) 100%
-  );
+  background: var(--hero-panel-background);
   border: 1px solid rgba(var(--gold-rgb), 0.35);
   border-radius: 32px;
   position: relative;
@@ -1563,7 +1558,8 @@ body.reading-mode-open .aarti-floating-bell-wrap {
 .ba-landing-title {
   margin: 0;
   color: var(--gold);
-  background: linear-gradient(135deg, #fff8eb 0%, #ffd700 45%, #ff9900 100%);
+  background: var(--action-gradient);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-family: 'Tiro Devanagari Hindi', serif;
@@ -2423,7 +2419,7 @@ body.reading-mode-open .aarti-floating-bell-wrap {
   display: grid;
   grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.4fr);
   gap: 28px;
-  align-items: start;
+  align-items: stretch;
 }
 
 .ba-daily-routine-day,
@@ -2522,7 +2518,7 @@ body.reading-mode-open .aarti-floating-bell-wrap {
 .routine-week-table {
   width: 100%;
   border-collapse: collapse;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(var(--dark-rgb), 0.32);
   border-radius: 12px;
   overflow: hidden;
 }
@@ -2545,11 +2541,11 @@ body.reading-mode-open .aarti-floating-bell-wrap {
 }
 
 .routine-week-table tbody tr:nth-child(even) td {
-  background: rgba(var(--dark-rgb), 0.18);
+  background: rgba(var(--cream-rgb), 0.06);
 }
 
 .routine-week-table tbody tr.is-highlighted td {
-  background: rgba(var(--gold-rgb), 0.08);
+  background: rgba(var(--gold-rgb), 0.14);
   font-weight: 600;
 }
 
