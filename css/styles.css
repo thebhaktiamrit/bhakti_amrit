@@ -2055,8 +2055,8 @@ body.reading-mode-open .aarti-floating-bell-wrap {
   justify-content: space-between;
   overflow: hidden;
   border-radius: 25px;
-  color: var(--text);
-  background: var(--cream);
+  color: var(--cream);
+  background: var(--hero-panel-background);
 }
 
 .ba-experience-phone-top {
@@ -2064,7 +2064,7 @@ body.reading-mode-open .aarti-floating-bell-wrap {
   align-items: center;
   justify-content: space-between;
   padding: 16px 16px 0;
-  color: var(--maroon);
+  color: var(--gold);
   font-weight: 700;
 }
 
@@ -2075,12 +2075,12 @@ body.reading-mode-open .aarti-floating-bell-wrap {
 }
 
 .ba-experience-deity {
-  color: rgba(var(--text-rgb), 0.72);
+  color: rgba(var(--cream-rgb), 0.72);
   font-size: 0.84rem;
 }
 
 .ba-experience-phone-verse {
-  color: var(--maroon);
+  color: var(--cream);
   font-family: 'Tiro Devanagari Hindi', serif;
   font-size: var(--experience-font-size, 1.12rem);
   font-weight: 700;
@@ -2090,7 +2090,7 @@ body.reading-mode-open .aarti-floating-bell-wrap {
 
 .ba-experience-phone-meaning {
   margin: 0;
-  color: rgba(var(--text-rgb), 0.76);
+  color: rgba(var(--cream-rgb), 0.76);
   font-size: 0.78rem;
   line-height: 1.65;
 }
@@ -2100,8 +2100,8 @@ body.reading-mode-open .aarti-floating-bell-wrap {
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 5px;
   padding: 8px;
-  border-top: 1px solid rgba(var(--maroon-rgb), 0.12);
-  background: rgba(var(--white-rgb), 0.72);
+  border-top: 1px solid rgba(var(--gold-rgb), 0.2);
+  background: rgba(var(--dark-rgb), 0.45);
 }
 
 .ba-experience-control {
@@ -2112,8 +2112,8 @@ body.reading-mode-open .aarti-floating-bell-wrap {
   padding: 4px;
   border: 0;
   border-radius: 12px;
-  color: var(--maroon);
-  background: rgba(var(--saffron-rgb), 0.1);
+  color: var(--cream);
+  background: rgba(var(--gold-rgb), 0.12);
   font: inherit;
   font-size: 0.78rem;
   font-weight: 700;
@@ -2127,8 +2127,8 @@ body.reading-mode-open .aarti-floating-bell-wrap {
 }
 
 .ba-experience-reading-toggle {
-  color: var(--cream);
-  background: var(--maroon);
+  color: var(--text);
+  background: var(--action-gradient);
 }
 
 .ba-experience-favorite {
@@ -2136,7 +2136,7 @@ body.reading-mode-open .aarti-floating-bell-wrap {
 }
 
 .ba-experience-favorite[aria-pressed='true'] {
-  color: var(--crimson);
+  color: var(--saffron);
 }
 
 .ba-experience-phone.is-reading-mode .ba-experience-phone-top,

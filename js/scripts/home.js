@@ -552,7 +552,7 @@ function setupLandingExperience() {
     return;
 
   let fontSize = 1.12;
-  let count = 8;
+  let count = 0;
   let rounds = 0;
   renderMantraMalaTrack(108, japaTrack);
   const formatNumber = (value) =>
