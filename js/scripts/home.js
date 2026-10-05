@@ -166,7 +166,7 @@ function getHomeTagsHtml(key, deity) {
     typeof DEITY_CONTENT_MANIFEST !== 'undefined'
       ? DEITY_CONTENT_MANIFEST[key]
       : null;
-  const tagName = (key) => window.BhaktiI18n ? window.BhaktiI18n.t(key) : key;
+  const tagName = (key) => (window.BhaktiI18n ? window.BhaktiI18n.t(key) : key);
 
   if (hasLyricsContent(deity.aarti) || manifest?.aarti) {
     tags.push(
@@ -193,7 +193,8 @@ function getHomeTagsHtml(key, deity) {
       ? getKathaEntries(deity.katha, key).length
       : manifest?.kathaCount || 1;
     const baseLabel = tagName('tagKatha');
-    const kathaLabel = kathaCount > 1 ? `${baseLabel} (${kathaCount})` : baseLabel;
+    const kathaLabel =
+      kathaCount > 1 ? `${baseLabel} (${kathaCount})` : baseLabel;
     tags.push(
       `<span class="tag tag-katha" onclick="event.stopPropagation(); showDeityPage('${key}', { initialTab: 'katha' })">${kathaLabel}</span>`,
     );
@@ -203,7 +204,8 @@ function getHomeTagsHtml(key, deity) {
       ? getBhajanEntries(deity.bhajan, key).length
       : manifest?.bhajanCount || 1;
     const baseLabel = tagName('tagBhajan');
-    const bhajanLabel = bhajanCount > 1 ? `${baseLabel} (${bhajanCount})` : baseLabel;
+    const bhajanLabel =
+      bhajanCount > 1 ? `${baseLabel} (${bhajanCount})` : baseLabel;
     tags.push(
       `<span class="tag tag-bhajan" onclick="event.stopPropagation(); showDeityPage('${key}', { initialTab: 'bhajan' })">${bhajanLabel}</span>`,
     );
@@ -420,8 +422,12 @@ function renderHomeGrid(
       const queryText = normalizedQuery
         ? ` "${escapeHtml(searchQuery.trim())}"`
         : '';
-      const emptyTitle = window.BhaktiI18n ? window.BhaktiI18n.t('emptyStateTitle') : 'कोई परिणाम नहीं मिला';
-      const emptySubtitle = window.BhaktiI18n ? window.BhaktiI18n.t('emptyStateSubtitle') : 'दूसरा नाम लिखें या ऊपर की श्रेणी बदलकर देखें';
+      const emptyTitle = window.BhaktiI18n
+        ? window.BhaktiI18n.t('emptyStateTitle')
+        : 'कोई परिणाम नहीं मिला';
+      const emptySubtitle = window.BhaktiI18n
+        ? window.BhaktiI18n.t('emptyStateSubtitle')
+        : 'दूसरा नाम लिखें या ऊपर की श्रेणी बदलकर देखें';
       grid.innerHTML = `
         <div class="home-empty-state">
           <div class="home-empty-icon">🔍</div>
@@ -490,8 +496,168 @@ function syncHomeLandingMode() {
     landing.setAttribute('aria-hidden', landingOn ? 'false' : 'true');
   }
   if (landingOn) {
-    if (typeof window.initHeroArcGallery === 'function') window.initHeroArcGallery();
-    if (typeof window.initSlokaCarousel === 'function') window.initSlokaCarousel();
+    if (typeof window.initHeroArcGallery === 'function')
+      window.initHeroArcGallery();
+    if (typeof window.initSlokaCarousel === 'function')
+      window.initSlokaCarousel();
+    setupLandingComparison();
+    setupLandingExperience();
+  }
+}
+
+function setupLandingComparison() {
+  const demo = document.getElementById('baCompareDemo');
+  const slider = demo?.querySelector('.ba-compare-range');
+  if (!demo || !slider || slider.dataset.bound) return;
+
+  const updatePosition = () => {
+    demo.style.setProperty('--compare-position', `${slider.value}%`);
+  };
+
+  slider.addEventListener('input', updatePosition);
+  slider.dataset.bound = 'true';
+  updatePosition();
+}
+
+function setupLandingExperience() {
+  const section = document.getElementById('baExperienceSection');
+  if (!section || section.dataset.bound) return;
+
+  const phone = document.getElementById('baExperiencePhone');
+  const verse = section.querySelector('.ba-experience-phone-verse');
+  const fontDown = document.getElementById('baExperienceFontDown');
+  const fontUp = document.getElementById('baExperienceFontUp');
+  const readingToggle = document.getElementById('baExperienceReadingToggle');
+  const favoriteToggle = document.getElementById('baExperienceFavorite');
+  const japaButton = document.getElementById('baExperienceJapaButton');
+  const japaReset = document.getElementById('baExperienceJapaReset');
+  const japaTrack = document.getElementById('baExperienceJapaTrack');
+  const japaCount = document.getElementById('baExperienceJapaCount');
+  const japaPercent = document.getElementById('baExperienceJapaPercent');
+  const japaRounds = document.getElementById('baExperienceJapaRounds');
+  if (
+    !phone ||
+    !verse ||
+    !fontDown ||
+    !fontUp ||
+    !readingToggle ||
+    !favoriteToggle ||
+    !japaButton ||
+    !japaReset ||
+    !japaTrack ||
+    !japaCount ||
+    !japaPercent ||
+    !japaRounds
+  )
+    return;
+
+  let fontSize = 1.12;
+  let count = 8;
+  let rounds = 0;
+  renderMantraMalaTrack(108, japaTrack);
+  const formatNumber = (value) =>
+    new Intl.NumberFormat(document.documentElement.lang || 'hi').format(value);
+
+  const updateJapa = () => {
+    const percent = Math.round((count / 108) * 100);
+    japaCount.textContent = `${formatNumber(count)} / ${formatNumber(108)}`;
+    japaPercent.textContent = `${formatNumber(percent)}%`;
+    japaRounds.textContent = formatNumber(rounds);
+    Array.from(japaTrack.children).forEach((bead, index) => {
+      bead.classList.toggle('is-complete', index < count);
+      bead.classList.toggle('is-current', index === count && count < 108);
+    });
+  };
+
+  fontDown.addEventListener('click', () => {
+    fontSize = Math.max(0.88, fontSize - 0.12);
+    verse.style.setProperty('--experience-font-size', `${fontSize}rem`);
+  });
+  fontUp.addEventListener('click', () => {
+    fontSize = Math.min(1.6, fontSize + 0.12);
+    verse.style.setProperty('--experience-font-size', `${fontSize}rem`);
+  });
+  readingToggle.addEventListener('click', () => {
+    const readingModeOn = readingToggle.getAttribute('aria-pressed') !== 'true';
+    phone.classList.toggle('is-reading-mode', readingModeOn);
+    readingToggle.setAttribute('aria-pressed', readingModeOn.toString());
+  });
+  favoriteToggle.addEventListener('click', () => {
+    const isFavorite = favoriteToggle.getAttribute('aria-pressed') !== 'true';
+    favoriteToggle.setAttribute('aria-pressed', isFavorite.toString());
+    favoriteToggle.setAttribute(
+      'aria-label',
+      isFavorite ? 'नमूना पसंदीदा में है' : 'नमूना पसंदीदा में जोड़ें',
+    );
+    favoriteToggle.title = isFavorite
+      ? 'नमूना पसंदीदा में है'
+      : 'नमूना पसंदीदा में जोड़ें';
+    favoriteToggle.querySelector('span').textContent = isFavorite ? '♥' : '♡';
+  });
+  japaButton.addEventListener('click', () => {
+    if (count === 108) {
+      count = 0;
+      rounds += 1;
+    } else {
+      count += 1;
+    }
+    updateJapa();
+  });
+  japaReset.addEventListener('click', () => {
+    count = 0;
+    rounds = 0;
+    updateJapa();
+  });
+
+  section.dataset.bound = 'true';
+  updateJapa();
+}
+
+function openLandingHomeScreenHelp() {
+  const faqItem = document.getElementById('landingFaqHomeItem');
+  if (!faqItem) return;
+
+  faqItem.open = true;
+  faqItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  const summary = faqItem.querySelector('summary');
+  if (summary) {
+    try {
+      summary.focus({ preventScroll: true });
+    } catch (_error) {
+      summary.focus();
+    }
+  }
+}
+
+async function shareLandingPage() {
+  const status = document.getElementById('landingShareStatus');
+  const translate = (key) =>
+    window.BhaktiI18n && typeof window.BhaktiI18n.t === 'function'
+      ? window.BhaktiI18n.t(key)
+      : key;
+  const shareData = {
+    title: document.title,
+    text: translate('landingShareText'),
+    url: window.location.href,
+  };
+
+  if (navigator.share) {
+    try {
+      await navigator.share(shareData);
+      if (status) status.textContent = translate('landingShareDone');
+      return;
+    } catch (error) {
+      if (error.name === 'AbortError') return;
+    }
+  }
+
+  try {
+    if (!navigator.clipboard?.writeText)
+      throw new Error('Clipboard unavailable');
+    await navigator.clipboard.writeText(shareData.url);
+    if (status) status.textContent = translate('landingShareCopied');
+  } catch (_error) {
+    window.prompt(translate('landingShareCopyPrompt'), shareData.url);
   }
 }
 
@@ -631,9 +797,14 @@ function syncFavoritesToggle() {
     const titleText = document.getElementById('homeSectionTitleText');
     const subtitleText = document.getElementById('homeSectionSubtitle');
     if (iconEl) iconEl.textContent = '❤️';
-    if (titleText) titleText.textContent = window.BhaktiI18n ? window.BhaktiI18n.t('favoritesTitle') : 'पसंदीदा देव-देवी';
+    if (titleText)
+      titleText.textContent = window.BhaktiI18n
+        ? window.BhaktiI18n.t('favoritesTitle')
+        : 'पसंदीदा देव-देवी';
     if (subtitleText)
-      subtitleText.textContent = window.BhaktiI18n ? window.BhaktiI18n.t('favoritesSubtitle') : 'आपके पसंदीदा देव-देवी की सूची';
+      subtitleText.textContent = window.BhaktiI18n
+        ? window.BhaktiI18n.t('favoritesSubtitle')
+        : 'आपके पसंदीदा देव-देवी की सूची';
   } else {
     updateHomeSectionHeader(activeHomeType);
   }
@@ -646,59 +817,80 @@ const FEATURED_SLOKAS = [
   {
     deityKey: 'ganesh',
     deityName: 'ॐ श्री गणेशाय नमः',
-    deityIcon: 'https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main/icons/ganesh.webp',
-    slokaText: '"वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ।<br>अविघ्नं कुरु मे देव सर्वकार्येषु सर्वदा॥"',
-    meaning: 'हे घुमावदार सूंड वाले, विशाल शरीर वाले, करोड़ों सूर्यों के समान तेजस्वी देव! मेरे सभी कार्यों को सदा बाधारहित पूरा करें।',
-    actionText: '📿 गणेश मंत्र पढ़ें'
+    deityIcon:
+      'https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main/icons/ganesh.webp',
+    slokaText:
+      '"वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ।<br>अविघ्नं कुरु मे देव सर्वकार्येषु सर्वदा॥"',
+    meaning:
+      'हे घुमावदार सूंड वाले, विशाल शरीर वाले, करोड़ों सूर्यों के समान तेजस्वी देव! मेरे सभी कार्यों को सदा बाधारहित पूरा करें।',
+    actionText: '📿 गणेश मंत्र पढ़ें',
   },
   {
     deityKey: 'shiva',
     deityName: 'ॐ नमः शिवाय',
-    deityIcon: 'https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main/icons/shiva.webp',
-    slokaText: '"कर्पूरगौरं करुणावतारं संसारसारम् भुजगेन्द्रहारम्।<br>सदावसन्तं हृदयारविन्दे भवं भवानीसहितं नमामि॥"',
-    meaning: 'जो कर्पूर के समान शुद्ध गौर वर्ण वाले, करुणा के अवतार हैं, उन भगवान शिव एवं माँ भवानी की वंदना करता हूँ।',
-    actionText: '📿 शिव मंत्र पढ़ें'
+    deityIcon:
+      'https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main/icons/shiva.webp',
+    slokaText:
+      '"कर्पूरगौरं करुणावतारं संसारसारम् भुजगेन्द्रहारम्।<br>सदावसन्तं हृदयारविन्दे भवं भवानीसहितं नमामि॥"',
+    meaning:
+      'जो कर्पूर के समान शुद्ध गौर वर्ण वाले, करुणा के अवतार हैं, उन भगवान शिव एवं माँ भवानी की वंदना करता हूँ।',
+    actionText: '📿 शिव मंत्र पढ़ें',
   },
   {
     deityKey: 'durga',
     deityName: 'ॐ श्री दुर्गायै नमः',
-    deityIcon: 'https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main/icons/durga.webp',
-    slokaText: '"सर्वमङ्गलमगल्ये शिवे सर्वार्थसाधिके।<br>शरण्ये त्र्यम्बके गौरि नारायणि नमोऽस्तु ते॥"',
-    meaning: 'सब प्रकार का कल्याण करने वाली, कल्याणमयी, सब पुरुषार्थों को सिद्ध करने वाली माँ दुर्गा को प्रणाम है।',
-    actionText: '📿 दुर्गा मंत्र पढ़ें'
+    deityIcon:
+      'https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main/icons/durga.webp',
+    slokaText:
+      '"सर्वमङ्गलमगल्ये शिवे सर्वार्थसाधिके।<br>शरण्ये त्र्यम्बके गौरि नारायणि नमोऽस्तु ते॥"',
+    meaning:
+      'सब प्रकार का कल्याण करने वाली, कल्याणमयी, सब पुरुषार्थों को सिद्ध करने वाली माँ दुर्गा को प्रणाम है।',
+    actionText: '📿 दुर्गा मंत्र पढ़ें',
   },
   {
     deityKey: 'ram',
     deityName: 'जय श्री राम',
-    deityIcon: 'https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main/icons/ram.webp',
-    slokaText: '"रामाय रामभद्राय रामचन्द्राय वेधसे।<br>रघुनाथाय नाथाय सीतायाः पतये नमः॥"',
-    meaning: 'सकल जगत के स्वामी, रघुकुल शिरोमणि, श्री सीतापति भगवान रामचन्द्र जी को हमारा बारंबार प्रणाम है।',
-    actionText: '📿 राम मंत्र पढ़ें'
+    deityIcon:
+      'https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main/icons/ram.webp',
+    slokaText:
+      '"रामाय रामभद्राय रामचन्द्राय वेधसे।<br>रघुनाथाय नाथाय सीतायाः पतये नमः॥"',
+    meaning:
+      'सकल जगत के स्वामी, रघुकुल शिरोमणि, श्री सीतापति भगवान रामचन्द्र जी को हमारा बारंबार प्रणाम है।',
+    actionText: '📿 राम मंत्र पढ़ें',
   },
   {
     deityKey: 'hanuman',
     deityName: 'जय श्री हनुमान',
-    deityIcon: 'https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main/icons/hanuman.webp',
-    slokaText: '"मनोजवं मारुततुल्यवेगं जितेन्द्रियं बुद्धिमतां वरिष्ठम्।<br>वातात्मजं वानरयूथमुख्यं श्रीरामदूतं शरणं प्रपद्ये॥"',
-    meaning: 'मन और वायु के समान तीव्र गति वाले, बुद्धिमानों में श्रेष्ठ, श्रीराम के परम दूत श्री हनुमान जी की शरण लेता हूँ।',
-    actionText: '📿 हनुमान मंत्र पढ़ें'
+    deityIcon:
+      'https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main/icons/hanuman.webp',
+    slokaText:
+      '"मनोजवं मारुततुल्यवेगं जितेन्द्रियं बुद्धिमतां वरिष्ठम्।<br>वातात्मजं वानरयूथमुख्यं श्रीरामदूतं शरणं प्रपद्ये॥"',
+    meaning:
+      'मन और वायु के समान तीव्र गति वाले, बुद्धिमानों में श्रेष्ठ, श्रीराम के परम दूत श्री हनुमान जी की शरण लेता हूँ।',
+    actionText: '📿 हनुमान मंत्र पढ़ें',
   },
   {
     deityKey: 'krishna',
     deityName: 'जय श्री कृष्णा',
-    deityIcon: 'https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main/icons/krishna.webp',
-    slokaText: '"वसुदेवसुतं देवं कंसचाणूरमर्दनम्।<br>देवकीपरमानन्दं कृष्णं वन्दे जगद्गुरुम्॥"',
-    meaning: 'माता देवकी के परमानंद स्वरूप, कंस और चाणूर का वध करने वाले जगद्गुरु भगवान श्रीकृष्ण की मैं वंदना करता हूँ।',
-    actionText: '📿 कृष्ण मंत्र पढ़ें'
+    deityIcon:
+      'https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main/icons/krishna.webp',
+    slokaText:
+      '"वसुदेवसुतं देवं कंसचाणूरमर्दनम्।<br>देवकीपरमानन्दं कृष्णं वन्दे जगद्गुरुम्॥"',
+    meaning:
+      'माता देवकी के परमानंद स्वरूप, कंस और चाणूर का वध करने वाले जगद्गुरु भगवान श्रीकृष्ण की मैं वंदना करता हूँ।',
+    actionText: '📿 कृष्ण मंत्र पढ़ें',
   },
   {
     deityKey: 'lakshmi',
     deityName: 'ॐ श्री महालक्ष्म्यै नमः',
-    deityIcon: 'https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main/icons/lakshmi.webp',
-    slokaText: '"नमस्तेऽस्तु महामाये श्रीपीठे सुरपूजिते।<br>शङ्खचक्रगदाहस्ते महालक्ष्मि नमोऽस्तु ते॥"',
-    meaning: 'हे महामाया, देवताओं द्वारा पूजित, शंख, चक्र और गदा धारण करने वाली भगवती महालक्ष्मी को प्रणाम है।',
-    actionText: '📿 लक्ष्मी मंत्र पढ़ें'
-  }
+    deityIcon:
+      'https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main/icons/lakshmi.webp',
+    slokaText:
+      '"नमस्तेऽस्तु महामाये श्रीपीठे सुरपूजिते।<br>शङ्खचक्रगदाहस्ते महालक्ष्मि नमोऽस्तु ते॥"',
+    meaning:
+      'हे महामाया, देवताओं द्वारा पूजित, शंख, चक्र और गदा धारण करने वाली भगवती महालक्ष्मी को प्रणाम है।',
+    actionText: '📿 लक्ष्मी मंत्र पढ़ें',
+  },
 ];
 
 let activeSlokaIndex = 0;
@@ -733,7 +925,8 @@ function renderSlokaSlide(index = activeSlokaIndex) {
   if (actionLabel) actionLabel.textContent = item.actionText;
 
   if (actionBtn) {
-    actionBtn.onclick = () => showDeityPage(item.deityKey, { initialTab: 'mantra' });
+    actionBtn.onclick = () =>
+      showDeityPage(item.deityKey, { initialTab: 'mantra' });
   }
 
   if (bodyEl) {
@@ -743,8 +936,9 @@ function renderSlokaSlide(index = activeSlokaIndex) {
   }
 
   if (dotsContainer) {
-    dotsContainer.innerHTML = FEATURED_SLOKAS.map((_, i) =>
-      `<span class="sloka-dot ${i === activeSlokaIndex ? 'active' : ''}" onclick="goToSlokaSlide(${i})"></span>`
+    dotsContainer.innerHTML = FEATURED_SLOKAS.map(
+      (_, i) =>
+        `<span class="sloka-dot ${i === activeSlokaIndex ? 'active' : ''}" onclick="goToSlokaSlide(${i})"></span>`,
     ).join('');
   }
 }
@@ -809,38 +1003,45 @@ const ARC_DEITIES = [
   {
     key: 'ganesh',
     name: 'श्री गणेश',
-    mantra: '"वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ। अविघ्नं कुरु मे देव सर्वकार्येषु सर्वदा॥"'
+    mantra:
+      '"वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ। अविघ्नं कुरु मे देव सर्वकार्येषु सर्वदा॥"',
   },
   {
     key: 'shiva',
     name: 'भगवान शिव',
-    mantra: '"कर्पूरगौरं करुणावतारं संसारसारम् भुजगेन्द्रहारम्। सदावसन्तं हृदयारविन्दे भवं भवानीसहितं नमामि॥"'
+    mantra:
+      '"कर्पूरगौरं करुणावतारं संसारसारम् भुजगेन्द्रहारम्। सदावसन्तं हृदयारविन्दे भवं भवानीसहितं नमामि॥"',
   },
   {
     key: 'durga',
     name: 'माँ दुर्गा',
-    mantra: '"सर्वमङ्गलमगल्ये शिवे सर्वार्थसाधिके। शरण्ये त्र्यम्बके गौरि नारायणि नमोऽस्तु ते॥"'
+    mantra:
+      '"सर्वमङ्गलमगल्ये शिवे सर्वार्थसाधिके। शरण्ये त्र्यम्बके गौरि नारायणि नमोऽस्तु ते॥"',
   },
   {
     key: 'ram',
     name: 'भगवान राम',
-    mantra: '"रामाय रामभद्राय रामचन्द्राय वेधसे। रघुनाथाय नाथाय सीतायाः पतये नमः॥"'
+    mantra:
+      '"रामाय रामभद्राय रामचन्द्राय वेधसे। रघुनाथाय नाथाय सीतायाः पतये नमः॥"',
   },
   {
     key: 'krishna',
     name: 'श्री कृष्ण',
-    mantra: '"वसुदेवसुतं देवं कंसचाणूरमर्दनम्। देवकीपरमानन्दं कृष्णं वन्दे जगद्गुरुम्॥"'
+    mantra:
+      '"वसुदेवसुतं देवं कंसचाणूरमर्दनम्। देवकीपरमानन्दं कृष्णं वन्दे जगद्गुरुम्॥"',
   },
   {
     key: 'hanuman',
     name: 'हनुमान जी',
-    mantra: '"मनोजवं मारुततुल्यवेगं जितेन्द्रियं बुद्धिमतां वरिष्ठम्। श्रीरामदूतं शरणं प्रपद्ये॥"'
+    mantra:
+      '"मनोजवं मारुततुल्यवेगं जितेन्द्रियं बुद्धिमतां वरिष्ठम्। श्रीरामदूतं शरणं प्रपद्ये॥"',
   },
   {
     key: 'lakshmi',
     name: 'माँ लक्ष्मी',
-    mantra: '"नमस्तेऽस्तु महामाये श्रीपीठे सुरपूजिते। शङ्खचक्रगदाहस्ते महालक्ष्मि नमोऽस्तु ते॥"'
-  }
+    mantra:
+      '"नमस्तेऽस्तु महामाये श्रीपीठे सुरपूजिते। शङ्खचक्रगदाहस्ते महालक्ष्मि नमोऽस्तु ते॥"',
+  },
 ];
 
 let activeArcIndex = 3; // Unbounded integer center index (default 3: Ram)
@@ -863,13 +1064,15 @@ function updateArcCardsLayout(isDragging = false) {
     let offset = rawOffset - Math.round(rawOffset / N) * N;
     let absOffset = Math.abs(offset);
 
-    const prevOffset = prevArcOffsets[i] !== undefined ? prevArcOffsets[i] : offset;
-    const isWrapping = Math.abs(offset - prevOffset) > (N / 2 - 0.5);
+    const prevOffset =
+      prevArcOffsets[i] !== undefined ? prevArcOffsets[i] : offset;
+    const isWrapping = Math.abs(offset - prevOffset) > N / 2 - 0.5;
 
     if (isDragging || isWrapping) {
       card.style.transition = 'none';
     } else {
-      card.style.transition = 'transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.5s ease, z-index 0.5s ease';
+      card.style.transition =
+        'transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.5s ease, z-index 0.5s ease';
     }
 
     // 3D Arc layout parameters
@@ -895,7 +1098,8 @@ function updateArcCardsLayout(isDragging = false) {
       card.offsetHeight;
       if (!isDragging) {
         requestAnimationFrame(() => {
-          card.style.transition = 'transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.5s ease, z-index 0.5s ease';
+          card.style.transition =
+            'transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.5s ease, z-index 0.5s ease';
         });
       }
     }
@@ -911,7 +1115,8 @@ function updateArcCardsLayout(isDragging = false) {
     const spotlightBtn = document.getElementById('spotlightBtn');
     if (mantraText) mantraText.textContent = activeDeity.mantra;
     if (spotlightBtn) {
-      spotlightBtn.onclick = () => showDeityPage(activeDeity.key, { initialTab: 'mantra' });
+      spotlightBtn.onclick = () =>
+        showDeityPage(activeDeity.key, { initialTab: 'mantra' });
     }
   }
 }
@@ -986,7 +1191,9 @@ function initHeroArcGallery() {
       arcDragStartIndex = activeArcIndex;
 
       const onPointerMove = (moveEvt) => {
-        const currentX = moveEvt.touches ? moveEvt.touches[0].pageX : moveEvt.pageX;
+        const currentX = moveEvt.touches
+          ? moveEvt.touches[0].pageX
+          : moveEvt.pageX;
         const diffX = currentX - arcDragStartX;
         if (Math.abs(diffX) > 5) {
           isArcDragging = true;
@@ -1004,7 +1211,9 @@ function initHeroArcGallery() {
 
         if (isArcDragging) {
           setActiveArcCard(Math.round(activeArcIndex));
-          setTimeout(() => { isArcDragging = false; }, 50);
+          setTimeout(() => {
+            isArcDragging = false;
+          }, 50);
         }
         startArcAutoRotate();
       };

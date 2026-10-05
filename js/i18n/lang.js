@@ -7,7 +7,6 @@
   'use strict';
 
   const translations = {
-
     // ─────────────────────────────────────────────
     //  HINDI  (हिंदी)  — Default / baseline
     // ─────────────────────────────────────────────
@@ -45,17 +44,23 @@
 
       // Home section — all filter types
       homeTitleAll: 'देव-देवी संग्रह',
-      homeSubtitleAll: 'किसी भी देव-देवी का नाम चुनें और उनकी आरती, चालीसा व मंत्र पढ़ें',
+      homeSubtitleAll:
+        'किसी भी देव-देवी का नाम चुनें और उनकी आरती, चालीसा व मंत्र पढ़ें',
       homeTitleDev: 'देव संग्रह',
-      homeSubtitleDev: 'किसी भी देव का नाम चुनें और उनकी आरती, चालीसा व मंत्र पढ़ें',
+      homeSubtitleDev:
+        'किसी भी देव का नाम चुनें और उनकी आरती, चालीसा व मंत्र पढ़ें',
       homeTitleDevi: 'देवी संग्रह',
-      homeSubtitleDevi: 'किसी भी देवी का नाम चुनें और उनकी आरती, चालीसा व मंत्र पढ़ें',
+      homeSubtitleDevi:
+        'किसी भी देवी का नाम चुनें और उनकी आरती, चालीसा व मंत्र पढ़ें',
       homeTitleAvatar: 'अवतार संग्रह',
-      homeSubtitleAvatar: 'किसी भी अवतार का नाम चुनें और उनकी आरती, चालीसा व मंत्र पढ़ें',
+      homeSubtitleAvatar:
+        'किसी भी अवतार का नाम चुनें और उनकी आरती, चालीसा व मंत्र पढ़ें',
       homeTitleGrahDev: 'ग्रह देव संग्रह',
-      homeSubtitleGrahDev: 'किसी भी ग्रह देव का नाम चुनें और उनकी आरती, चालीसा व मंत्र पढ़ें',
+      homeSubtitleGrahDev:
+        'किसी भी ग्रह देव का नाम चुनें और उनकी आरती, चालीसा व मंत्र पढ़ें',
       homeTitleLokDev: 'लोक देव संग्रह',
-      homeSubtitleLokDev: 'किसी भी लोक देव का नाम चुनें और उनकी आरती, चालीसा व मंत्र पढ़ें',
+      homeSubtitleLokDev:
+        'किसी भी लोक देव का नाम चुनें और उनकी आरती, चालीसा व मंत्र पढ़ें',
 
       // Search placeholders
       searchPlaceholderAll: 'देव-देवी का नाम लिखें...',
@@ -95,6 +100,12 @@
       landingCtaDev: 'देव संग्रह देखें',
       landingCtaDevi: 'देवी संग्रह देखें',
       landingCtaTemples: 'प्रसिद्ध मंदिर',
+      landingCtaHome: 'होम स्क्रीन पर जोड़ें',
+      landingCtaShare: 'दोस्तों को भेजें',
+      landingShareText: 'भक्ति अमृत पर अपनी दैनिक साधना शुरू करें।',
+      landingShareDone: 'लिंक साझा किया गया।',
+      landingShareCopied: 'लिंक कॉपी हो गया।',
+      landingShareCopyPrompt: 'भक्ति अमृत का लिंक कॉपी करें:',
       landingSlokaTag: '✨ दैनिक पावन मंत्र',
       landingSlokaDeity: 'ॐ श्री गणेशाय नमः',
       landingSlokaText:
@@ -104,7 +115,8 @@
       landingSlokaAction: '📿 गणेश मंत्र पढ़ें',
       landingSectionEcosystemEye: '🚩 संग्रह एवं पावन ज्ञान कोष',
       landingExploreTitle: 'यहाँ क्या मिलेगा',
-      landingExploreSubtitle: 'सनातन भक्ति के हर आयाम को सरलता से एक्सप्लोर करें',
+      landingExploreSubtitle:
+        'सनातन भक्ति के हर आयाम को सरलता से एक्सप्लोर करें',
       landingCardDevDesc:
         'श्री गणेश, शिव, विष्णु, हनुमान जी व अन्य देवों की आरती, चालीसा व मंत्र।',
       landingCardDeviDesc:
@@ -128,6 +140,37 @@
       landingFeaturesTitle: 'दैनिक साधना के लिए विशेष सुविधाएँ',
       landingFeaturesSubtitle:
         'आपकी पूजा को आसान, शांत और बाधारहित बनाने वाले साधन',
+      landingCompareEye: '✨ पढ़ने का अनुभव',
+      landingCompareTitle: 'शोर के बिना पढ़ने की जगह',
+      landingCompareSubtitle:
+        'बीच की रेखा को खिसकाकर देखिए, एक आम भीड़-भरे पन्ने और भक्ति अमृत के पन्ने में क्या फ़र्क़ है।',
+      landingCompareCleanLabel: 'भक्ति अमृत',
+      landingCompareTextLabel: 'सुबह का पाठ',
+      landingCompareSampleLabel: 'आम पन्ना (नमूना)',
+      landingCompareAdSample: 'महासेल! अभी खरीदें',
+      landingComparePopup: 'सूचनाएँ चालू करें',
+      landingComparePopupAction: 'बाद में',
+      landingCompareSliderHint: 'दोनों पन्नों की तुलना के लिए स्लाइडर खिसकाएँ।',
+      landingCompareBenefit1Title: 'कोई विज्ञापन नहीं',
+      landingCompareBenefit1Desc: 'न कमर्शियल विज्ञापन, न पॉप-अप।',
+      landingCompareBenefit2Title: 'बिना इंटरनेट भी',
+      landingCompareBenefit2Desc: 'पसंदीदा जोड़े गए पाठ ऑफ़लाइन खुलते हैं।',
+      landingCompareBenefit3Title: 'पाठ पर पूरा ध्यान',
+      landingCompareBenefit3Desc: 'पठन मोड में केवल पाठ दिखता है।',
+      landingExperienceEye: '✨ अनुभव देखिए',
+      landingExperienceTitle: 'छूकर देखिए, पन्ना कैसा दिखता है',
+      landingExperienceSubtitle:
+        'ये दोनों छोटे नमूने हैं। असली साइट पर यही सुविधाएँ हर पाठ में मिलती हैं।',
+      landingExperienceBrand: 'भक्ति अमृत',
+      landingExperienceDeity: 'श्री राम',
+      landingExperienceMeaning:
+        'श्री राम को नमन, जो सबके पालनहार और सीता के प्रिय हैं।',
+      landingExperienceReadingMode: 'पठन मोड',
+      landingExperiencePhoneHint:
+        'अक्षर बड़े कीजिए, पठन मोड खोलिए, पाठ को पसंदीदा में जोड़िए।',
+      landingExperienceRounds: 'पूर्ण माला:',
+      landingExperienceReset: 'फिर से शुरू करें',
+      landingExperienceJapaHint: 'जाप के साथ माला आगे बढ़ेगी।',
       landingFeature1Title: 'डिजिटल मंत्र माला',
       landingFeature1Desc:
         '108 मनकों का डिजिटल जाप काउंटर। हर जाप पर स्पर्श संकेत और माला पूर्ण होने पर विशेष सूचना।',
@@ -151,8 +194,7 @@
       landingHow1Desc:
         'देव, देवी, अवतार या मंदिर में से वह मार्ग चुनें जो आज चाहिए।',
       landingHow2Title: 'देवता खोलें',
-      landingHow2Desc:
-        'परिचय पढ़ें, फिर आरती, चालीसा, मंत्र या कथा पर जाएँ।',
+      landingHow2Desc: 'परिचय पढ़ें, फिर आरती, चालीसा, मंत्र या कथा पर जाएँ।',
       landingHow3Title: 'रोज़ लौटें',
       landingHow3Desc:
         'पसंदीदा जोड़ें और अपनी दैनिक साधना को तुरंत फिर से खोलें।',
@@ -166,6 +208,26 @@
       landingValueSimple: 'सरल अनुभव',
       landingValueSimpleDesc:
         'मोबाइल और डेस्कटॉप दोनों पर शांत, स्पष्ट इंटरफ़ेस।',
+      landingFaqTitle: 'अक्सर पूछे जाने वाले सवाल',
+      landingFaqAdsQuestion: 'क्या भक्ति अमृत पर विज्ञापन आते हैं?',
+      landingFaqAdsAnswer:
+        'नहीं। यहाँ कोई कमर्शियल विज्ञापन या पॉप-अप नहीं हैं, केवल पाठ और शांत भक्ति वातावरण।',
+      landingFaqOfflineQuestion: 'क्या बिना इंटरनेट के पढ़ सकते हैं?',
+      landingFaqOfflineAnswer:
+        'पहले से खुले पाठ ब्राउज़र कैश में मिल सकते हैं। नई सामग्री लोड करने और पृष्ठ दोबारा खोलने के लिए इंटरनेट चाहिए।',
+      landingFaqLanguageQuestion: 'भाषा कैसे बदलें?',
+      landingFaqLanguageAnswer: 'ऊपर दिए भाषा मेनू में जाकर उपलब्ध भाषा चुनें।',
+      landingFaqTextSizeQuestion: 'पाठ के अक्षर बड़े कैसे करें?',
+      landingFaqTextSizeAnswer:
+        'स्क्रीन के नीचे A+ बटन दबाएँ। हर बार दबाने पर अक्षर का आकार बढ़ेगा; तीसरी बार दबाने पर सामान्य आकार लौट आएगा।',
+      landingFaqPrintQuestion: 'क्या पाठ प्रिंट कर सकते हैं?',
+      landingFaqPrintAnswer:
+        'पाठ खोलें और प्रिंट विकल्प चुनें। उपलब्धता आपके ब्राउज़र और डिवाइस पर निर्भर करती है।',
+      landingFaqHomeQuestion: 'इसे फ़ोन की होम स्क्रीन पर कैसे जोड़ें?',
+      landingFaqHomeAnswer:
+        'अपने ब्राउज़र का मेनू खोलकर “होम स्क्रीन पर जोड़ें” चुनें, यदि यह विकल्प उपलब्ध हो। यह वेबसाइट का शॉर्टकट है; सामग्री लोड करने के लिए इंटरनेट चाहिए।',
+      landingFaqIssueQuestion: 'कोई गलती दिखे तो क्या करें?',
+      landingFaqEmailLink: 'ईमेल से भेजें',
       landingCloseTitle: 'आज की साधना यहीं से शुरू करें',
       landingCloseLead:
         'संग्रह खोलें, अपने इष्ट को चुनें, और आरती या मंत्र पढ़ना शुरू करें।',
@@ -228,7 +290,8 @@
 
       // Temples page
       templesPageTitle: 'प्रसिद्ध हिंदू मंदिर',
-      templesPageSubtitle: 'भारत के प्रसिद्ध तीर्थ स्थल — मानचित्र पर देखें और जानिए विस्तार से',
+      templesPageSubtitle:
+        'भारत के प्रसिद्ध तीर्थ स्थल — मानचित्र पर देखें और जानिए विस्तार से',
       templeSearchPlaceholder: 'मंदिर, देवता, स्थान या प्रकार खोजें...',
 
       // Festivals page
@@ -237,7 +300,8 @@
 
       // Scriptures page
       scripturesPageTitle: 'प्रसिद्ध धर्मग्रन्थ',
-      scripturesPageSubtitle: 'वैदिक और सनातन परंपरा के प्रमुख ग्रंथों का संक्षिप्त परिचय',
+      scripturesPageSubtitle:
+        'वैदिक और सनातन परंपरा के प्रमुख ग्रंथों का संक्षिप्त परिचय',
 
       // Footer
       footerDedication: '॥ जय जय श्री हरि ॥ — सभी देवी-देवताओं को समर्पित',
@@ -281,17 +345,23 @@
       typeLokDev: 'लोक देव',
 
       homeTitleAll: 'देव-देवी संग्रह',
-      homeSubtitleAll: 'कोणत्याही देव-देवीचे नाव निवडा आणि त्यांची आरती, चाळीसा व मंत्र वाचा',
+      homeSubtitleAll:
+        'कोणत्याही देव-देवीचे नाव निवडा आणि त्यांची आरती, चाळीसा व मंत्र वाचा',
       homeTitleDev: 'देव संग्रह',
-      homeSubtitleDev: 'कोणत्याही देवाचे नाव निवडा आणि त्यांची आरती, चाळीसा व मंत्र वाचा',
+      homeSubtitleDev:
+        'कोणत्याही देवाचे नाव निवडा आणि त्यांची आरती, चाळीसा व मंत्र वाचा',
       homeTitleDevi: 'देवी संग्रह',
-      homeSubtitleDevi: 'कोणत्याही देवीचे नाव निवडा आणि त्यांची आरती, चाळीसा व मंत्र वाचा',
+      homeSubtitleDevi:
+        'कोणत्याही देवीचे नाव निवडा आणि त्यांची आरती, चाळीसा व मंत्र वाचा',
       homeTitleAvatar: 'अवतार संग्रह',
-      homeSubtitleAvatar: 'कोणत्याही अवताराचे नाव निवडा आणि त्यांची आरती, चाळीसा व मंत्र वाचा',
+      homeSubtitleAvatar:
+        'कोणत्याही अवताराचे नाव निवडा आणि त्यांची आरती, चाळीसा व मंत्र वाचा',
       homeTitleGrahDev: 'ग्रह देव संग्रह',
-      homeSubtitleGrahDev: 'कोणत्याही ग्रह देवाचे नाव निवडा आणि त्यांची आरती, चाळीसा व मंत्र वाचा',
+      homeSubtitleGrahDev:
+        'कोणत्याही ग्रह देवाचे नाव निवडा आणि त्यांची आरती, चाळीसा व मंत्र वाचा',
       homeTitleLokDev: 'लोक देव संग्रह',
-      homeSubtitleLokDev: 'कोणत्याही लोक देवाचे नाव निवडा आणि त्यांची आरती, चाळीसा व मंत्र वाचा',
+      homeSubtitleLokDev:
+        'कोणत्याही लोक देवाचे नाव निवडा आणि त्यांची आरती, चाळीसा व मंत्र वाचा',
 
       searchPlaceholderAll: 'देव-देवीचे नाव लिहा...',
       searchPlaceholderDev: 'देवाचे नाव लिहा...',
@@ -326,13 +396,17 @@
       landingCtaDev: 'देव संग्रह पहा',
       landingCtaDevi: 'देवी संग्रह पहा',
       landingExploreTitle: 'इथे काय मिळेल',
-      landingExploreSubtitle: 'खालीलपैकी थेट त्या विभागात जा ज्याचे वाचन करायचे आहे.',
-      landingCardDevDesc: 'गणेश, शिव, विष्णू आणि इतर देवांची आरती, चाळीसा व मंत्र.',
-      landingCardDeviDesc: 'दुर्गा, लक्ष्मी, सरस्वती आणि इतर देवी-शक्तीची भक्तिसामग्री.',
+      landingExploreSubtitle:
+        'खालीलपैकी थेट त्या विभागात जा ज्याचे वाचन करायचे आहे.',
+      landingCardDevDesc:
+        'गणेश, शिव, विष्णू आणि इतर देवांची आरती, चाळीसा व मंत्र.',
+      landingCardDeviDesc:
+        'दुर्गा, लक्ष्मी, सरस्वती आणि इतर देवी-शक्तीची भक्तिसामग्री.',
       landingCardAvatarDesc: 'राम, कृष्ण आणि इतर अवतारांचा परिचय, कथा आणि पाठ.',
       landingCardGrahDesc: 'सूर्य, शनी आणि इतर ग्रह देवांची साधना सामग्री.',
       landingCardLokDesc: 'प्रादेशिक आणि लोक देवतांची भक्तिपरंपरा.',
-      landingCardTemplesDesc: 'प्रसिद्ध तीर्थक्षेत्रे, नकाशा आणि संक्षिप्त परिचय.',
+      landingCardTemplesDesc:
+        'प्रसिद्ध तीर्थक्षेत्रे, नकाशा आणि संक्षिप्त परिचय.',
       landingCardFestivalsDesc: 'प्रमुख सण, महत्त्व आणि मुख्य विधी.',
       landingCardScripturesDesc: 'वैदिक आणि सनातन ग्रंथांचा सोपा परिचय.',
       landingCardKathasTitle: 'प्रसिद्ध कथा',
@@ -354,7 +428,8 @@
       landingValueSimple: 'सोपा अनुभव',
       landingValueSimpleDesc: 'मोबाइल आणि डेस्कटॉपवर शांत, स्पष्ट इंटरफेस.',
       landingCloseTitle: 'आजची साधना येथून सुरू करा',
-      landingCloseLead: 'संग्रह उघडा, आपल्या इष्टाला निवडा आणि आरती किंवा मंत्र वाचण्यास सुरुवात करा.',
+      landingCloseLead:
+        'संग्रह उघडा, आपल्या इष्टाला निवडा आणि आरती किंवा मंत्र वाचण्यास सुरुवात करा.',
 
       tabAbout: '🚩 परिचय',
       tabAarti: '🪔 आरती',
@@ -406,14 +481,16 @@
       fontSizeLabel: 'अक्षर आकार',
 
       templesPageTitle: 'प्रसिद्ध हिंदू मंदिरे',
-      templesPageSubtitle: 'भारतातील प्रसिद्ध तीर्थस्थळे — नकाशावर पहा आणि अधिक जाणून घ्या',
+      templesPageSubtitle:
+        'भारतातील प्रसिद्ध तीर्थस्थळे — नकाशावर पहा आणि अधिक जाणून घ्या',
       templeSearchPlaceholder: 'मंदिर, देवता, ठिकाण किंवा प्रकार शोधा...',
 
       festivalsPageTitle: 'प्रसिद्ध हिंदू सण',
       festivalsPageSubtitle: 'प्रमुख सण, त्यांचे महत्त्व आणि मुख्य विधी',
 
       scripturesPageTitle: 'प्रसिद्ध धर्मग्रंथ',
-      scripturesPageSubtitle: 'वैदिक आणि सनातन परंपरेतील प्रमुख ग्रंथांचा संक्षिप्त परिचय',
+      scripturesPageSubtitle:
+        'वैदिक आणि सनातन परंपरेतील प्रमुख ग्रंथांचा संक्षिप्त परिचय',
 
       footerDedication: '॥ जय जय श्री हरी ॥ — सर्व देवी-देवतांना समर्पित',
       footerAbout: 'आमच्याबद्दल',
@@ -455,17 +532,23 @@
       typeLokDev: 'லோக தேவன்',
 
       homeTitleAll: 'தேவர்கள் தொகுப்பு',
-      homeSubtitleAll: 'எந்த தேவரின் பெயரையும் தேர்ந்தெடுத்து ஆரத்தி, சாலீசா மற்றும் மந்திரம் படியுங்கள்',
+      homeSubtitleAll:
+        'எந்த தேவரின் பெயரையும் தேர்ந்தெடுத்து ஆரத்தி, சாலீசா மற்றும் மந்திரம் படியுங்கள்',
       homeTitleDev: 'தேவன் தொகுப்பு',
-      homeSubtitleDev: 'எந்த தேவரின் பெயரையும் தேர்ந்தெடுத்து ஆரத்தி, சாலீசா மற்றும் மந்திரம் படியுங்கள்',
+      homeSubtitleDev:
+        'எந்த தேவரின் பெயரையும் தேர்ந்தெடுத்து ஆரத்தி, சாலீசா மற்றும் மந்திரம் படியுங்கள்',
       homeTitleDevi: 'தேவி தொகுப்பு',
-      homeSubtitleDevi: 'எந்த தேவியின் பெயரையும் தேர்ந்தெடுத்து ஆரத்தி, சாலீசா மற்றும் மந்திரம் படியுங்கள்',
+      homeSubtitleDevi:
+        'எந்த தேவியின் பெயரையும் தேர்ந்தெடுத்து ஆரத்தி, சாலீசா மற்றும் மந்திரம் படியுங்கள்',
       homeTitleAvatar: 'அவதார தொகுப்பு',
-      homeSubtitleAvatar: 'எந்த அவதாரத்தின் பெயரையும் தேர்ந்தெடுத்து ஆரத்தி, சாலீசா மற்றும் மந்திரம் படியுங்கள்',
+      homeSubtitleAvatar:
+        'எந்த அவதாரத்தின் பெயரையும் தேர்ந்தெடுத்து ஆரத்தி, சாலீசா மற்றும் மந்திரம் படியுங்கள்',
       homeTitleGrahDev: 'கிரக தேவன் தொகுப்பு',
-      homeSubtitleGrahDev: 'எந்த கிரக தேவரின் பெயரையும் தேர்ந்தெடுத்து ஆரத்தி மற்றும் மந்திரம் படியுங்கள்',
+      homeSubtitleGrahDev:
+        'எந்த கிரக தேவரின் பெயரையும் தேர்ந்தெடுத்து ஆரத்தி மற்றும் மந்திரம் படியுங்கள்',
       homeTitleLokDev: 'லோக தேவன் தொகுப்பு',
-      homeSubtitleLokDev: 'எந்த லோக தேவரின் பெயரையும் தேர்ந்தெடுத்து ஆரத்தி மற்றும் மந்திரம் படியுங்கள்',
+      homeSubtitleLokDev:
+        'எந்த லோக தேவரின் பெயரையும் தேர்ந்தெடுத்து ஆரத்தி மற்றும் மந்திரம் படியுங்கள்',
 
       searchPlaceholderAll: 'தேவர் பெயர் தேடுங்கள்...',
       searchPlaceholderDev: 'தேவர் பெயர் தேடுங்கள்...',
@@ -491,7 +574,8 @@
       favoritesSubtitle: 'உங்கள் பிடித்த தேவர்களின் பட்டியல்',
 
       emptyStateTitle: 'எந்த முடிவும் கிடைக்கவில்லை',
-      emptyStateSubtitle: 'வேறு பெயர் தேடுங்கள் அல்லது மேலே உள்ள வகையை மாற்றுங்கள்',
+      emptyStateSubtitle:
+        'வேறு பெயர் தேடுங்கள் அல்லது மேலே உள்ள வகையை மாற்றுங்கள்',
 
       landingEyebrow: 'பக்தி அமிர்தம்',
       landingTitle: 'பக்தியை எளிதாக்கி, நாள்தோறும் சாதனையை இலகுவாக்குங்கள்',
@@ -500,24 +584,34 @@
       landingCtaDev: 'தேவன் தொகுப்பைக் காண்க',
       landingCtaDevi: 'தேவி தொகுப்பைக் காண்க',
       landingExploreTitle: 'இங்கே என்ன கிடைக்கும்',
-      landingExploreSubtitle: 'நீங்கள் படிக்க விரும்பும் பகுதிக்கு நேரடியாகச் செல்லுங்கள்.',
-      landingCardDevDesc: 'கணேசர், சிவன், விஷ்ணு மற்றும் பிற தேவர்களின் ஆரத்தி, சாலீசா, மந்திரம்.',
-      landingCardDeviDesc: 'துர்க்கை, லட்சுமி, சரஸ்வதி மற்றும் பிற தேவி சக்தியின் பக்தி உள்ளடக்கம்.',
-      landingCardAvatarDesc: 'ராமர், கிருஷ்ணர் மற்றும் பிற அவதாரங்களின் அறிமுகம், கதை, பாடம்.',
-      landingCardGrahDesc: 'சூரியன், சனி மற்றும் பிற கிரக தேவர்களின் சாதனை உள்ளடக்கம்.',
+      landingExploreSubtitle:
+        'நீங்கள் படிக்க விரும்பும் பகுதிக்கு நேரடியாகச் செல்லுங்கள்.',
+      landingCardDevDesc:
+        'கணேசர், சிவன், விஷ்ணு மற்றும் பிற தேவர்களின் ஆரத்தி, சாலீசா, மந்திரம்.',
+      landingCardDeviDesc:
+        'துர்க்கை, லட்சுமி, சரஸ்வதி மற்றும் பிற தேவி சக்தியின் பக்தி உள்ளடக்கம்.',
+      landingCardAvatarDesc:
+        'ராமர், கிருஷ்ணர் மற்றும் பிற அவதாரங்களின் அறிமுகம், கதை, பாடம்.',
+      landingCardGrahDesc:
+        'சூரியன், சனி மற்றும் பிற கிரக தேவர்களின் சாதனை உள்ளடக்கம்.',
       landingCardLokDesc: 'பிராந்திய மற்றும் லோக தெய்வங்களின் பக்தி மரபு.',
-      landingCardTemplesDesc: 'புகழ்பெற்ற தீர்த்தங்கள், வரைபடம் மற்றும் சுருக்க அறிமுகம்.',
-      landingCardFestivalsDesc: 'முக்கிய திருவிழாக்கள், முக்கியத்துவம் மற்றும் அனுஷ்டானங்கள்.',
+      landingCardTemplesDesc:
+        'புகழ்பெற்ற தீர்த்தங்கள், வரைபடம் மற்றும் சுருக்க அறிமுகம்.',
+      landingCardFestivalsDesc:
+        'முக்கிய திருவிழாக்கள், முக்கியத்துவம் மற்றும் அனுஷ்டானங்கள்.',
       landingCardScripturesDesc: 'வேத மற்றும் சனாதன நூல்களின் எளிய அறிமுகம்.',
       landingCardKathasTitle: 'புகழ்பெற்ற கதைகள்',
       landingCardKathasDesc: 'மெதுவாக படிக்கக்கூடிய புகழ்பெற்ற கதைகள்.',
       landingHowTitle: 'எப்படி பயன்படுத்துவது',
       landingHow1Title: 'தொகுப்பைத் தேர்ந்தெடுங்கள்',
-      landingHow1Desc: 'தேவன், தேவி, அவதாரம் அல்லது கோயில் வழியில் இன்றைய பாதையைத் தேர்ந்தெடுங்கள்.',
+      landingHow1Desc:
+        'தேவன், தேவி, அவதாரம் அல்லது கோயில் வழியில் இன்றைய பாதையைத் தேர்ந்தெடுங்கள்.',
       landingHow2Title: 'தெய்வத்தைத் திறக்கவும்',
-      landingHow2Desc: 'அறிமுகத்தைப் படித்து, பிறகு ஆரத்தி, சாலீசா, மந்திரம் அல்லது கதைக்குச் செல்லுங்கள்.',
+      landingHow2Desc:
+        'அறிமுகத்தைப் படித்து, பிறகு ஆரத்தி, சாலீசா, மந்திரம் அல்லது கதைக்குச் செல்லுங்கள்.',
       landingHow3Title: 'தினமும் திரும்புங்கள்',
-      landingHow3Desc: 'பிடித்தவற்றைச் சேர்த்து உங்கள் நாள்தோறும் சாதனையை உடனே மீண்டும் திறக்கவும்.',
+      landingHow3Desc:
+        'பிடித்தவற்றைச் சேர்த்து உங்கள் நாள்தோறும் சாதனையை உடனே மீண்டும் திறக்கவும்.',
       landingMissionTitle: 'எங்கள் நோக்கம்',
       landingMissionLead:
         'பாரம்பரிய உள்ளடக்கத்தை நவீன வாசகர்களுக்கு எளிமையாக, தூய்மையாக, ஒழுங்காக வைத்திருத்தல் — குழப்பமின்றி.',
@@ -526,9 +620,11 @@
       landingValueSadhana: 'நாள்தோறும் சாதனை',
       landingValueSadhanaDesc: 'காலை-மாலை பாடத்திற்கு விரைவான அணுகல்.',
       landingValueSimple: 'எளிய அனுபவம்',
-      landingValueSimpleDesc: 'மொபைல் மற்றும் டெஸ்க்டாப்பில் அமைதியான, தெளிவான இடைமுகம்.',
+      landingValueSimpleDesc:
+        'மொபைல் மற்றும் டெஸ்க்டாப்பில் அமைதியான, தெளிவான இடைமுகம்.',
       landingCloseTitle: 'இன்றைய சாதனையை இங்கிருந்து தொடங்குங்கள்',
-      landingCloseLead: 'தொகுப்பைத் திறந்து, இஷ்டத்தைத் தேர்ந்தெடுத்து ஆரத்தி அல்லது மந்திரம் படிக்கத் தொடங்குங்கள்.',
+      landingCloseLead:
+        'தொகுப்பைத் திறந்து, இஷ்டத்தைத் தேர்ந்தெடுத்து ஆரத்தி அல்லது மந்திரம் படிக்கத் தொடங்குங்கள்.',
 
       tabAbout: '🚩 அறிமுகம்',
       tabAarti: '🪔 ஆரத்தி',
@@ -580,16 +676,20 @@
       fontSizeLabel: 'எழுத்து அளவு',
 
       templesPageTitle: 'புகழ்பெற்ற இந்து கோயில்கள்',
-      templesPageSubtitle: 'இந்தியாவின் புகழ்பெற்ற தீர்த்த ஸ்தலங்கள் — வரைபடத்தில் பார்க்கவும்',
+      templesPageSubtitle:
+        'இந்தியாவின் புகழ்பெற்ற தீர்த்த ஸ்தலங்கள் — வரைபடத்தில் பார்க்கவும்',
       templeSearchPlaceholder: 'கோயில், தேவர், இடம் அல்லது வகை தேடுங்கள்...',
 
       festivalsPageTitle: 'புகழ்பெற்ற இந்து திருவிழாக்கள்',
-      festivalsPageSubtitle: 'முக்கிய பண்டிகைகள், அவற்றின் முக்கியத்துவம் மற்றும் சடங்குகள்',
+      festivalsPageSubtitle:
+        'முக்கிய பண்டிகைகள், அவற்றின் முக்கியத்துவம் மற்றும் சடங்குகள்',
 
       scripturesPageTitle: 'புகழ்பெற்ற மறைநூல்கள்',
-      scripturesPageSubtitle: 'வேத மற்றும் சனாதன மரபின் முக்கிய நூல்களின் சுருக்கமான அறிமுகம்',
+      scripturesPageSubtitle:
+        'வேத மற்றும் சனாதன மரபின் முக்கிய நூல்களின் சுருக்கமான அறிமுகம்',
 
-      footerDedication: '॥ ஜய ஜய ஸ்ரீ ஹரி ॥ — அனைத்து தேவர்களுக்கும் சமர்ப்பணம்',
+      footerDedication:
+        '॥ ஜய ஜய ஸ்ரீ ஹரி ॥ — அனைத்து தேவர்களுக்கும் சமர்ப்பணம்',
       footerAbout: 'எங்களைப் பற்றி',
       footerContact: 'தொடர்பு',
       footerTheme: 'தீம்',
@@ -629,17 +729,23 @@
       typeLokDev: 'లోక దేవుడు',
 
       homeTitleAll: 'దేవతల సంగ్రహం',
-      homeSubtitleAll: 'ఏ దేవుని పేరైనా ఎంచుకుని వారి ఆరతి, చాలీసా మరియు మంత్రాలు చదవండి',
+      homeSubtitleAll:
+        'ఏ దేవుని పేరైనా ఎంచుకుని వారి ఆరతి, చాలీసా మరియు మంత్రాలు చదవండి',
       homeTitleDev: 'దేవుని సంగ్రహం',
-      homeSubtitleDev: 'ఏ దేవుని పేరైనా ఎంచుకుని వారి ఆరతి, చాలీసా మరియు మంత్రాలు చదవండి',
+      homeSubtitleDev:
+        'ఏ దేవుని పేరైనా ఎంచుకుని వారి ఆరతి, చాలీసా మరియు మంత్రాలు చదవండి',
       homeTitleDevi: 'దేవి సంగ్రహం',
-      homeSubtitleDevi: 'ఏ దేవి పేరైనా ఎంచుకుని వారి ఆరతి, చాలీసా మరియు మంత్రాలు చదవండి',
+      homeSubtitleDevi:
+        'ఏ దేవి పేరైనా ఎంచుకుని వారి ఆరతి, చాలీసా మరియు మంత్రాలు చదవండి',
       homeTitleAvatar: 'అవతార సంగ్రహం',
-      homeSubtitleAvatar: 'ఏ అవతారం పేరైనా ఎంచుకుని వారి ఆరతి, చాలీసా మరియు మంత్రాలు చదవండి',
+      homeSubtitleAvatar:
+        'ఏ అవతారం పేరైనా ఎంచుకుని వారి ఆరతి, చాలీసా మరియు మంత్రాలు చదవండి',
       homeTitleGrahDev: 'గ్రహ దేవుల సంగ్రహం',
-      homeSubtitleGrahDev: 'ఏ గ్రహ దేవుని పేరైనా ఎంచుకుని వారి ఆరతి మరియు మంత్రాలు చదవండి',
+      homeSubtitleGrahDev:
+        'ఏ గ్రహ దేవుని పేరైనా ఎంచుకుని వారి ఆరతి మరియు మంత్రాలు చదవండి',
       homeTitleLokDev: 'లోక దేవుల సంగ్రహం',
-      homeSubtitleLokDev: 'ఏ లోక దేవుని పేరైనా ఎంచుకుని వారి ఆరతి మరియు మంత్రాలు చదవండి',
+      homeSubtitleLokDev:
+        'ఏ లోక దేవుని పేరైనా ఎంచుకుని వారి ఆరతి మరియు మంత్రాలు చదవండి',
 
       searchPlaceholderAll: 'దేవుని పేరు వెతకండి...',
       searchPlaceholderDev: 'దేవుని పేరు వెతకండి...',
@@ -675,23 +781,31 @@
       landingCtaDevi: 'దేవి సంగ్రహం చూడండి',
       landingExploreTitle: 'ఇక్కడ ఏం దొరుకుతుంది',
       landingExploreSubtitle: 'మీరు చదవాలనుకునే విభాగానికి నేరుగా వెళ్లండి.',
-      landingCardDevDesc: 'గణేశుడు, శివుడు, విష్ణువు మరియు ఇతర దేవుల ఆరతి, చాలీసా, మంత్రాలు.',
-      landingCardDeviDesc: 'దుర్గ, లక్ష్మి, సరస్వతి మరియు ఇతర దేవి శక్తి భక్తి సామగ్రి.',
-      landingCardAvatarDesc: 'రాముడు, కృష్ణుడు మరియు ఇతర అవతారాల పరిచయం, కథ, పాఠం.',
+      landingCardDevDesc:
+        'గణేశుడు, శివుడు, విష్ణువు మరియు ఇతర దేవుల ఆరతి, చాలీసా, మంత్రాలు.',
+      landingCardDeviDesc:
+        'దుర్గ, లక్ష్మి, సరస్వతి మరియు ఇతర దేవి శక్తి భక్తి సామగ్రి.',
+      landingCardAvatarDesc:
+        'రాముడు, కృష్ణుడు మరియు ఇతర అవతారాల పరిచయం, కథ, పాఠం.',
       landingCardGrahDesc: 'సూర్యుడు, శని మరియు ఇతర గ్రహ దేవుల సాధన సామగ్రి.',
       landingCardLokDesc: 'ప్రాంతీయ మరియు లోక దేవతల భక్తి సంప్రదాయం.',
-      landingCardTemplesDesc: 'ప్రసిద్ధ తీర్థాలు, మ్యాప్ మరియు సంక్షిప్త పరిచయం.',
-      landingCardFestivalsDesc: 'ప్రధాన పండుగలు, ప్రాముఖ్యత మరియు ముఖ్య ఆచారాలు.',
+      landingCardTemplesDesc:
+        'ప్రసిద్ధ తీర్థాలు, మ్యాప్ మరియు సంక్షిప్త పరిచయం.',
+      landingCardFestivalsDesc:
+        'ప్రధాన పండుగలు, ప్రాముఖ్యత మరియు ముఖ్య ఆచారాలు.',
       landingCardScripturesDesc: 'వైదిక మరియు సనాతన గ్రంథాల సరళ పరిచయం.',
       landingCardKathasTitle: 'ప్రసిద్ధ కథలు',
       landingCardKathasDesc: 'మెల్లగా చదువుకోగల ప్రసిద్ధ కథలు.',
       landingHowTitle: 'ఎలా ఉపయోగించాలి',
       landingHow1Title: 'సంగ్రహం ఎంచుకోండి',
-      landingHow1Desc: 'దేవుడు, దేవి, అవతారం లేదా దేవాలయం నుంచి నేటి మార్గాన్ని ఎంచుకోండి.',
+      landingHow1Desc:
+        'దేవుడు, దేవి, అవతారం లేదా దేవాలయం నుంచి నేటి మార్గాన్ని ఎంచుకోండి.',
       landingHow2Title: 'దేవతను తెరవండి',
-      landingHow2Desc: 'పరిచయం చదివి, తర్వాత ఆరతి, చాలీసా, మంత్రం లేదా కథకు వెళ్లండి.',
+      landingHow2Desc:
+        'పరిచయం చదివి, తర్వాత ఆరతి, చాలీసా, మంత్రం లేదా కథకు వెళ్లండి.',
       landingHow3Title: 'ప్రతిరోజూ తిరిగి రండి',
-      landingHow3Desc: 'ఇష్టమైనవి జోడించి మీ నిత్య సాధనను వెంటనే మళ్లీ తెరవండి.',
+      landingHow3Desc:
+        'ఇష్టమైనవి జోడించి మీ నిత్య సాధనను వెంటనే మళ్లీ తెరవండి.',
       landingMissionTitle: 'మా లక్ష్యం',
       landingMissionLead:
         'సాంప్రదాయిక విషయాన్ని ఆధునిక పాఠకులకు సరళంగా, శుద్ధంగా, క్రమబద్ధంగా ఉంచడం — గందరగోళం లేకుండా.',
@@ -700,9 +814,11 @@
       landingValueSadhana: 'నిత్య సాధన',
       landingValueSadhanaDesc: 'ఉదయం-సాయంత్రం పాఠానికి వేగవంతమైన ప్రవేశం.',
       landingValueSimple: 'సరళ అనుభవం',
-      landingValueSimpleDesc: 'మొబైల్ మరియు డెస్క్‌టాప్‌పై ప్రశాంత, స్పష్టమైన ఇంటర్‌ఫేస్.',
+      landingValueSimpleDesc:
+        'మొబైల్ మరియు డెస్క్‌టాప్‌పై ప్రశాంత, స్పష్టమైన ఇంటర్‌ఫేస్.',
       landingCloseTitle: 'నేటి సాధనను ఇక్కడి నుంచి ప్రారంభించండి',
-      landingCloseLead: 'సంగ్రహం తెరిచి, ఇష్టాన్ని ఎంచుకుని ఆరతి లేదా మంత్రం చదవడం మొదలుపెట్టండి.',
+      landingCloseLead:
+        'సంగ్రహం తెరిచి, ఇష్టాన్ని ఎంచుకుని ఆరతి లేదా మంత్రం చదవడం మొదలుపెట్టండి.',
 
       tabAbout: '🚩 పరిచయం',
       tabAarti: '🪔 ఆరతి',
@@ -754,14 +870,17 @@
       fontSizeLabel: 'అక్షర పరిమాణం',
 
       templesPageTitle: 'ప్రసిద్ధ హిందూ దేవాలయాలు',
-      templesPageSubtitle: 'భారతదేశంలోని ప్రసిద్ధ తీర్థ స్థలాలు — మ్యాప్‌లో చూడండి',
+      templesPageSubtitle:
+        'భారతదేశంలోని ప్రసిద్ధ తీర్థ స్థలాలు — మ్యాప్‌లో చూడండి',
       templeSearchPlaceholder: 'దేవాలయం, దేవత, ప్రదేశం లేదా రకం వెతకండి...',
 
       festivalsPageTitle: 'ప్రసిద్ధ హిందూ పండుగలు',
-      festivalsPageSubtitle: 'ప్రధాన పండుగలు, వాటి ప్రాముఖ్యత మరియు ముఖ్య ఆచారాలు',
+      festivalsPageSubtitle:
+        'ప్రధాన పండుగలు, వాటి ప్రాముఖ్యత మరియు ముఖ్య ఆచారాలు',
 
       scripturesPageTitle: 'ప్రసిద్ధ గ్రంథాలు',
-      scripturesPageSubtitle: 'వేద మరియు సనాతన సంప్రదాయంలోని ముఖ్య గ్రంథాల సంక్షిప్త పరిచయం',
+      scripturesPageSubtitle:
+        'వేద మరియు సనాతన సంప్రదాయంలోని ముఖ్య గ్రంథాల సంక్షిప్త పరిచయం',
 
       footerDedication: '॥ జయ జయ శ్రీ హరి ॥ — అన్ని దేవతలకు అంకితం',
       footerAbout: 'మా గురించి',
@@ -803,17 +922,23 @@
       typeLokDev: 'ಲೋಕ ದೇವ',
 
       homeTitleAll: 'ದೇವ-ದೇವಿ ಸಂಗ್ರಹ',
-      homeSubtitleAll: 'ಯಾವುದೇ ದೇವ-ದೇವಿಯ ಹೆಸರನ್ನು ಆಯ್ಕೆ ಮಾಡಿ ಮತ್ತು ಅವರ ಆರತಿ, ಚಾಲೀಸಾ ಮತ್ತು ಮಂತ್ರ ಓದಿ',
+      homeSubtitleAll:
+        'ಯಾವುದೇ ದೇವ-ದೇವಿಯ ಹೆಸರನ್ನು ಆಯ್ಕೆ ಮಾಡಿ ಮತ್ತು ಅವರ ಆರತಿ, ಚಾಲೀಸಾ ಮತ್ತು ಮಂತ್ರ ಓದಿ',
       homeTitleDev: 'ದೇವ ಸಂಗ್ರಹ',
-      homeSubtitleDev: 'ಯಾವುದೇ ದೇವರ ಹೆಸರನ್ನು ಆಯ್ಕೆ ಮಾಡಿ ಮತ್ತು ಅವರ ಆರತಿ, ಚಾಲೀಸಾ ಮತ್ತು ಮಂತ್ರ ಓದಿ',
+      homeSubtitleDev:
+        'ಯಾವುದೇ ದೇವರ ಹೆಸರನ್ನು ಆಯ್ಕೆ ಮಾಡಿ ಮತ್ತು ಅವರ ಆರತಿ, ಚಾಲೀಸಾ ಮತ್ತು ಮಂತ್ರ ಓದಿ',
       homeTitleDevi: 'ದೇವಿ ಸಂಗ್ರಹ',
-      homeSubtitleDevi: 'ಯಾವುದೇ ದೇವಿಯ ಹೆಸರನ್ನು ಆಯ್ಕೆ ಮಾಡಿ ಮತ್ತು ಅವರ ಆರತಿ, ಚಾಲೀಸಾ ಮತ್ತು ಮಂತ್ರ ಓದಿ',
+      homeSubtitleDevi:
+        'ಯಾವುದೇ ದೇವಿಯ ಹೆಸರನ್ನು ಆಯ್ಕೆ ಮಾಡಿ ಮತ್ತು ಅವರ ಆರತಿ, ಚಾಲೀಸಾ ಮತ್ತು ಮಂತ್ರ ಓದಿ',
       homeTitleAvatar: 'ಅವತಾರ ಸಂಗ್ರಹ',
-      homeSubtitleAvatar: 'ಯಾವುದೇ ಅವತಾರದ ಹೆಸರನ್ನು ಆಯ್ಕೆ ಮಾಡಿ ಮತ್ತು ಅವರ ಆರತಿ, ಚಾಲೀಸಾ ಮತ್ತು ಮಂತ್ರ ಓದಿ',
+      homeSubtitleAvatar:
+        'ಯಾವುದೇ ಅವತಾರದ ಹೆಸರನ್ನು ಆಯ್ಕೆ ಮಾಡಿ ಮತ್ತು ಅವರ ಆರತಿ, ಚಾಲೀಸಾ ಮತ್ತು ಮಂತ್ರ ಓದಿ',
       homeTitleGrahDev: 'ಗ್ರಹ ದೇವ ಸಂಗ್ರಹ',
-      homeSubtitleGrahDev: 'ಯಾವುದೇ ಗ್ರಹ ದೇವರ ಹೆಸರನ್ನು ಆಯ್ಕೆ ಮಾಡಿ ಮತ್ತು ಅವರ ಆರತಿ ಮತ್ತು ಮಂತ್ರ ಓದಿ',
+      homeSubtitleGrahDev:
+        'ಯಾವುದೇ ಗ್ರಹ ದೇವರ ಹೆಸರನ್ನು ಆಯ್ಕೆ ಮಾಡಿ ಮತ್ತು ಅವರ ಆರತಿ ಮತ್ತು ಮಂತ್ರ ಓದಿ',
       homeTitleLokDev: 'ಲೋಕ ದೇವ ಸಂಗ್ರಹ',
-      homeSubtitleLokDev: 'ಯಾವುದೇ ಲೋಕ ದೇವರ ಹೆಸರನ್ನು ಆಯ್ಕೆ ಮಾಡಿ ಮತ್ತು ಅವರ ಆರತಿ ಮತ್ತು ಮಂತ್ರ ಓದಿ',
+      homeSubtitleLokDev:
+        'ಯಾವುದೇ ಲೋಕ ದೇವರ ಹೆಸರನ್ನು ಆಯ್ಕೆ ಮಾಡಿ ಮತ್ತು ಅವರ ಆರತಿ ಮತ್ತು ಮಂತ್ರ ಓದಿ',
 
       searchPlaceholderAll: 'ದೇವ-ದೇವಿ ಹೆಸರು ಹುಡುಕಿ...',
       searchPlaceholderDev: 'ದೇವ ಹೆಸರು ಹುಡುಕಿ...',
@@ -849,23 +974,28 @@
       landingCtaDevi: 'ದೇವಿ ಸಂಗ್ರಹ ನೋಡಿ',
       landingExploreTitle: 'ಇಲ್ಲಿ ಏನು ಸಿಗುತ್ತದೆ',
       landingExploreSubtitle: 'ನೀವು ಓದಲು ಬಯಸುವ ವಿಭಾಗಕ್ಕೆ ನೇರವಾಗಿ ಹೋಗಿ.',
-      landingCardDevDesc: 'ಗಣೇಶ, ಶಿವ, ವಿಷ್ಣು ಮತ್ತು ಇತರ ದೇವರ ಆರತಿ, ಚಾಲೀಸಾ, ಮಂತ್ರ.',
-      landingCardDeviDesc: 'ದುರ್ಗಾ, ಲಕ್ಷ್ಮಿ, ಸರಸ್ವತಿ ಮತ್ತು ಇತರ ದೇವಿ ಶಕ್ತಿಯ ಭಕ್ತಿ ವಿಷಯ.',
+      landingCardDevDesc:
+        'ಗಣೇಶ, ಶಿವ, ವಿಷ್ಣು ಮತ್ತು ಇತರ ದೇವರ ಆರತಿ, ಚಾಲೀಸಾ, ಮಂತ್ರ.',
+      landingCardDeviDesc:
+        'ದುರ್ಗಾ, ಲಕ್ಷ್ಮಿ, ಸರಸ್ವತಿ ಮತ್ತು ಇತರ ದೇವಿ ಶಕ್ತಿಯ ಭಕ್ತಿ ವಿಷಯ.',
       landingCardAvatarDesc: 'ರಾಮ, ಕೃಷ್ಣ ಮತ್ತು ಇತರ ಅವತಾರಗಳ ಪರಿಚಯ, ಕಥೆ, ಪಾಠ.',
       landingCardGrahDesc: 'ಸೂರ್ಯ, ಶನಿ ಮತ್ತು ಇತರ ಗ್ರಹ ದೇವರ ಸಾಧನೆ ವಿಷಯ.',
       landingCardLokDesc: 'ಪ್ರಾದೇಶಿಕ ಮತ್ತು ಲೋಕ ದೇವತೆಗಳ ಭಕ್ತಿ ಪರಂಪರೆ.',
-      landingCardTemplesDesc: 'ಪ್ರಸಿದ್ಧ ತೀರ್ಥಕ್ಷೇತ್ರಗಳು, ನಕ್ಷೆ ಮತ್ತು ಸಂಕ್ಷಿಪ್ತ ಪರಿಚಯ.',
+      landingCardTemplesDesc:
+        'ಪ್ರಸಿದ್ಧ ತೀರ್ಥಕ್ಷೇತ್ರಗಳು, ನಕ್ಷೆ ಮತ್ತು ಸಂಕ್ಷಿಪ್ತ ಪರಿಚಯ.',
       landingCardFestivalsDesc: 'ಪ್ರಮುಖ ಹಬ್ಬಗಳು, ಮಹತ್ವ ಮತ್ತು ಮುಖ್ಯ ಆಚರಣೆಗಳು.',
       landingCardScripturesDesc: 'ವೈದಿಕ ಮತ್ತು ಸನಾತನ ಗ್ರಂಥಗಳ ಸರಳ ಪರಿಚಯ.',
       landingCardKathasTitle: 'ಪ್ರಸಿದ್ಧ ಕಥೆಗಳು',
       landingCardKathasDesc: 'ನಿಧಾನವಾಗಿ ಓದಬಹುದಾದ ಪ್ರಸಿದ್ಧ ಕಥೆಗಳು.',
       landingHowTitle: 'ಹೇಗೆ ಬಳಸುವುದು',
       landingHow1Title: 'ಸಂಗ್ರಹವನ್ನು ಆಯ್ಕೆಮಾಡಿ',
-      landingHow1Desc: 'ದೇವ, ದೇವಿ, ಅವತಾರ ಅಥವಾ ದೇವಾಲಯದಿಂದ ಇಂದಿನ ಮಾರ್ಗವನ್ನು ಆಯ್ಕೆಮಾಡಿ.',
+      landingHow1Desc:
+        'ದೇವ, ದೇವಿ, ಅವತಾರ ಅಥವಾ ದೇವಾಲಯದಿಂದ ಇಂದಿನ ಮಾರ್ಗವನ್ನು ಆಯ್ಕೆಮಾಡಿ.',
       landingHow2Title: 'ದೇವತೆಯನ್ನು ತೆರೆಯಿರಿ',
       landingHow2Desc: 'ಪರಿಚಯ ಓದಿ, ನಂತರ ಆರತಿ, ಚಾಲೀಸಾ, ಮಂತ್ರ ಅಥವಾ ಕಥೆಗೆ ಹೋಗಿ.',
       landingHow3Title: 'ಪ್ರತಿದಿನ ಹಿಂತಿರುಗಿ',
-      landingHow3Desc: 'ಮೆಚ್ಚಿನವುಗಳನ್ನು ಸೇರಿಸಿ ನಿಮ್ಮ ನಿತ್ಯ ಸಾಧನೆಯನ್ನು ತಕ್ಷಣ ಮತ್ತೆ ತೆರೆಯಿರಿ.',
+      landingHow3Desc:
+        'ಮೆಚ್ಚಿನವುಗಳನ್ನು ಸೇರಿಸಿ ನಿಮ್ಮ ನಿತ್ಯ ಸಾಧನೆಯನ್ನು ತಕ್ಷಣ ಮತ್ತೆ ತೆರೆಯಿರಿ.',
       landingMissionTitle: 'ನಮ್ಮ ಉದ್ದೇಶ',
       landingMissionLead:
         'ಸಾಂಪ್ರದಾಯಿಕ ವಿಷಯವನ್ನು ಆಧುನಿಕ ಓದುಗರಿಗೆ ಸರಳ, ಶುದ್ಧ ಮತ್ತು ವ್ಯವಸ್ಥಿತವಾಗಿ ಇಡುವುದು — ಗೊಂದಲವಿಲ್ಲದೆ.',
@@ -874,9 +1004,11 @@
       landingValueSadhana: 'ನಿತ್ಯ ಸಾಧನೆ',
       landingValueSadhanaDesc: 'ಬೆಳಗ್ಗೆ-ಸಂಜೆ ಪಾಠಕ್ಕೆ ವೇಗದ ಪ್ರವೇಶ.',
       landingValueSimple: 'ಸರಳ ಅನುಭವ',
-      landingValueSimpleDesc: 'ಮೊಬೈಲ್ ಮತ್ತು ಡೆಸ್ಕ್‌ಟಾಪ್‌ನಲ್ಲಿ ಶಾಂತ, ಸ್ಪಷ್ಟ ಇಂಟರ್‌ಫೇಸ್.',
+      landingValueSimpleDesc:
+        'ಮೊಬೈಲ್ ಮತ್ತು ಡೆಸ್ಕ್‌ಟಾಪ್‌ನಲ್ಲಿ ಶಾಂತ, ಸ್ಪಷ್ಟ ಇಂಟರ್‌ಫೇಸ್.',
       landingCloseTitle: 'ಇಂದಿನ ಸಾಧನೆಯನ್ನು ಇಲ್ಲಿಂದ ಪ್ರಾರಂಭಿಸಿ',
-      landingCloseLead: 'ಸಂಗ್ರಹ ತೆರೆದು, ಇಷ್ಟವನ್ನು ಆಯ್ಕೆಮಾಡಿ ಆರತಿ ಅಥವಾ ಮಂತ್ರ ಓದಲು ಆರಂಭಿಸಿ.',
+      landingCloseLead:
+        'ಸಂಗ್ರಹ ತೆರೆದು, ಇಷ್ಟವನ್ನು ಆಯ್ಕೆಮಾಡಿ ಆರತಿ ಅಥವಾ ಮಂತ್ರ ಓದಲು ಆರಂಭಿಸಿ.',
 
       tabAbout: '🚩 ಪರಿಚಯ',
       tabAarti: '🪔 ಆರತಿ',
@@ -928,14 +1060,16 @@
       fontSizeLabel: 'ಅಕ್ಷರ ಗಾತ್ರ',
 
       templesPageTitle: 'ಪ್ರಸಿದ್ಧ ಹಿಂದೂ ದೇವಾಲಯಗಳು',
-      templesPageSubtitle: 'ಭಾರತದ ಪ್ರಸಿದ್ಧ ತೀರ್ಥ ಕ್ಷೇತ್ರಗಳು — ನಕ್ಷೆಯಲ್ಲಿ ನೋಡಿ ಮತ್ತು ಇನ್ನಷ್ಟು ತಿಳಿಯಿರಿ',
+      templesPageSubtitle:
+        'ಭಾರತದ ಪ್ರಸಿದ್ಧ ತೀರ್ಥ ಕ್ಷೇತ್ರಗಳು — ನಕ್ಷೆಯಲ್ಲಿ ನೋಡಿ ಮತ್ತು ಇನ್ನಷ್ಟು ತಿಳಿಯಿರಿ',
       templeSearchPlaceholder: 'ದೇವಾಲಯ, ದೇವತೆ, ಸ್ಥಳ ಅಥವಾ ಪ್ರಕಾರ ಹುಡುಕಿ...',
 
       festivalsPageTitle: 'ಪ್ರಸಿದ್ಧ ಹಿಂದೂ ಹಬ್ಬಗಳು',
       festivalsPageSubtitle: 'ಪ್ರಮುಖ ಹಬ್ಬಗಳು, ಅವುಗಳ ಮಹತ್ವ ಮತ್ತು ಮುಖ್ಯ ಆಚರಣೆಗಳು',
 
       scripturesPageTitle: 'ಪ್ರಸಿದ್ಧ ಧರ್ಮಗ್ರಂಥಗಳು',
-      scripturesPageSubtitle: 'ವೇದ ಮತ್ತು ಸನಾತನ ಪರಂಪರೆಯ ಪ್ರಮುಖ ಗ್ರಂಥಗಳ ಸಂಕ್ಷಿಪ್ತ ಪರಿಚಯ',
+      scripturesPageSubtitle:
+        'ವೇದ ಮತ್ತು ಸನಾತನ ಪರಂಪರೆಯ ಪ್ರಮುಖ ಗ್ರಂಥಗಳ ಸಂಕ್ಷಿಪ್ತ ಪರಿಚಯ',
 
       footerDedication: '॥ ಜಯ ಜಯ ಶ್ರೀ ಹರಿ ॥ — ಎಲ್ಲ ದೇವ-ದೇವಿಯರಿಗೆ ಸಮರ್ಪಿತ',
       footerAbout: 'ನಮ್ಮ ಬಗ್ಗೆ',
@@ -977,17 +1111,23 @@
       typeLokDev: 'লোক দেব',
 
       homeTitleAll: 'দেব-দেবী সংগ্রহ',
-      homeSubtitleAll: 'যেকোনো দেব-দেবীর নাম বেছে নিন এবং তাঁদের আরতি, চালিশা ও মন্ত্র পড়ুন',
+      homeSubtitleAll:
+        'যেকোনো দেব-দেবীর নাম বেছে নিন এবং তাঁদের আরতি, চালিশা ও মন্ত্র পড়ুন',
       homeTitleDev: 'দেব সংগ্রহ',
-      homeSubtitleDev: 'যেকোনো দেবের নাম বেছে নিন এবং তাঁদের আরতি, চালিশা ও মন্ত্র পড়ুন',
+      homeSubtitleDev:
+        'যেকোনো দেবের নাম বেছে নিন এবং তাঁদের আরতি, চালিশা ও মন্ত্র পড়ুন',
       homeTitleDevi: 'দেবী সংগ্রহ',
-      homeSubtitleDevi: 'যেকোনো দেবীর নাম বেছে নিন এবং তাঁদের আরতি, চালিশা ও মন্ত্র পড়ুন',
+      homeSubtitleDevi:
+        'যেকোনো দেবীর নাম বেছে নিন এবং তাঁদের আরতি, চালিশা ও মন্ত্র পড়ুন',
       homeTitleAvatar: 'অবতার সংগ্রহ',
-      homeSubtitleAvatar: 'যেকোনো অবতারের নাম বেছে নিন এবং তাঁদের আরতি, চালিশা ও মন্ত্র পড়ুন',
+      homeSubtitleAvatar:
+        'যেকোনো অবতারের নাম বেছে নিন এবং তাঁদের আরতি, চালিশা ও মন্ত্র পড়ুন',
       homeTitleGrahDev: 'গ্রহ দেব সংগ্রহ',
-      homeSubtitleGrahDev: 'যেকোনো গ্রহ দেবের নাম বেছে নিন এবং তাঁদের আরতি ও মন্ত্র পড়ুন',
+      homeSubtitleGrahDev:
+        'যেকোনো গ্রহ দেবের নাম বেছে নিন এবং তাঁদের আরতি ও মন্ত্র পড়ুন',
       homeTitleLokDev: 'লোক দেব সংগ্রহ',
-      homeSubtitleLokDev: 'যেকোনো লোক দেবের নাম বেছে নিন এবং তাঁদের আরতি ও মন্ত্র পড়ুন',
+      homeSubtitleLokDev:
+        'যেকোনো লোক দেবের নাম বেছে নিন এবং তাঁদের আরতি ও মন্ত্র পড়ুন',
 
       searchPlaceholderAll: 'দেব-দেবীর নাম লিখুন...',
       searchPlaceholderDev: 'দেবের নাম লিখুন...',
@@ -1023,12 +1163,15 @@
       landingCtaDevi: 'দেবী সংগ্রহ দেখুন',
       landingExploreTitle: 'এখানে কী পাবেন',
       landingExploreSubtitle: 'আপনি যে বিভাগটি পড়তে চান, সরাসরি সেখানে যান।',
-      landingCardDevDesc: 'গণেশ, শিব, বিষ্ণু ও অন্যান্য দেবের আরতি, চালিশা ও মন্ত্র।',
-      landingCardDeviDesc: 'দুর্গা, লক্ষ্মী, সরস্বতী ও অন্যান্য দেবী-শক্তির ভক্তি বিষয়।',
+      landingCardDevDesc:
+        'গণেশ, শিব, বিষ্ণু ও অন্যান্য দেবের আরতি, চালিশা ও মন্ত্র।',
+      landingCardDeviDesc:
+        'দুর্গা, লক্ষ্মী, সরস্বতী ও অন্যান্য দেবী-শক্তির ভক্তি বিষয়।',
       landingCardAvatarDesc: 'রাম, কৃষ্ণ ও অন্যান্য অবতারের পরিচয়, কথা ও পাঠ।',
       landingCardGrahDesc: 'সূর্য, শনি ও অন্যান্য গ্রহ দেবের সাধনা বিষয়।',
       landingCardLokDesc: 'আঞ্চলিক ও লোক দেবতাদের ভক্তি ঐতিহ্য।',
-      landingCardTemplesDesc: 'প্রসিদ্ধ তীর্থস্থান, মানচিত্র ও সংক্ষিপ্ত পরিচয়।',
+      landingCardTemplesDesc:
+        'প্রসিদ্ধ তীর্থস্থান, মানচিত্র ও সংক্ষিপ্ত পরিচয়।',
       landingCardFestivalsDesc: 'প্রধান উৎসব, তাৎপর্য ও মুখ্য অনুষ্ঠান।',
       landingCardScripturesDesc: 'বৈদিক ও সনাতন গ্রন্থের সহজ পরিচয়।',
       landingCardKathasTitle: 'প্রসিদ্ধ কথা',
@@ -1039,7 +1182,8 @@
       landingHow2Title: 'দেবতা খুলুন',
       landingHow2Desc: 'পরিচয় পড়ুন, তারপর আরতি, চালিশা, মন্ত্র বা কথায় যান।',
       landingHow3Title: 'প্রতিদিন ফিরে আসুন',
-      landingHow3Desc: 'পছন্দের যোগ করুন এবং আপনার নিত্য সাধনা তৎক্ষণাৎ আবার খুলুন।',
+      landingHow3Desc:
+        'পছন্দের যোগ করুন এবং আপনার নিত্য সাধনা তৎক্ষণাৎ আবার খুলুন।',
       landingMissionTitle: 'আমাদের উদ্দেশ্য',
       landingMissionLead:
         'ঐতিহ্যবাহী বিষয়কে আধুনিক পাঠকের জন্য সহজ, শুদ্ধ ও সুবিন্যস্ত রাখা — বিভ্রান্তি ছাড়া।',
@@ -1050,7 +1194,8 @@
       landingValueSimple: 'সহজ অভিজ্ঞতা',
       landingValueSimpleDesc: 'মোবাইল ও ডেস্কটপে শান্ত, স্পষ্ট ইন্টারফেস।',
       landingCloseTitle: 'আজকের সাধনা এখান থেকে শুরু করুন',
-      landingCloseLead: 'সংগ্রহ খুলুন, ইষ্টকে বেছে নিন, এবং আরতি বা মন্ত্র পড়া শুরু করুন।',
+      landingCloseLead:
+        'সংগ্রহ খুলুন, ইষ্টকে বেছে নিন, এবং আরতি বা মন্ত্র পড়া শুরু করুন।',
 
       tabAbout: '🚩 পরিচয়',
       tabAarti: '🪔 আরতি',
@@ -1102,14 +1247,17 @@
       fontSizeLabel: 'অক্ষরের আকার',
 
       templesPageTitle: 'প্রসিদ্ধ হিন্দু মন্দির',
-      templesPageSubtitle: 'ভারতের প্রসিদ্ধ তীর্থস্থান — মানচিত্রে দেখুন এবং বিস্তারিত জানুন',
+      templesPageSubtitle:
+        'ভারতের প্রসিদ্ধ তীর্থস্থান — মানচিত্রে দেখুন এবং বিস্তারিত জানুন',
       templeSearchPlaceholder: 'মন্দির, দেবতা, স্থান বা ধরন খুঁজুন...',
 
       festivalsPageTitle: 'প্রসিদ্ধ হিন্দু উৎসব',
-      festivalsPageSubtitle: 'প্রধান পার্বণ, তাদের তাৎপর্য এবং মূল আচার-অনুষ্ঠান',
+      festivalsPageSubtitle:
+        'প্রধান পার্বণ, তাদের তাৎপর্য এবং মূল আচার-অনুষ্ঠান',
 
       scripturesPageTitle: 'প্রসিদ্ধ ধর্মগ্রন্থ',
-      scripturesPageSubtitle: 'বৈদিক ও সনাতন পরম্পরার প্রধান গ্রন্থের সংক্ষিপ্ত পরিচয়',
+      scripturesPageSubtitle:
+        'বৈদিক ও সনাতন পরম্পরার প্রধান গ্রন্থের সংক্ষিপ্ত পরিচয়',
 
       footerDedication: '॥ জয় জয় শ্রী হরি ॥ — সকল দেবী-দেবতাদের সমর্পিত',
       footerAbout: 'আমাদের সম্পর্কে',
@@ -1130,7 +1278,7 @@
    */
   function t(key) {
     const lang = translations[currentLang] || translations.hi;
-    return lang[key] !== undefined ? lang[key] : (translations.hi[key] || key);
+    return lang[key] !== undefined ? lang[key] : translations.hi[key] || key;
   }
 
   /**
@@ -1141,7 +1289,9 @@
     if (!translations[lang]) return;
     currentLang = lang;
     document.documentElement.setAttribute('lang', lang);
-    window.dispatchEvent(new CustomEvent('bhakti-lang-change', { detail: { lang } }));
+    window.dispatchEvent(
+      new CustomEvent('bhakti-lang-change', { detail: { lang } }),
+    );
   }
 
   /**
@@ -1178,15 +1328,15 @@
 
     // ── Primary nav buttons (by data-page) ──
     const navMap = {
-      'type-dev':    { emoji: '🕉️', key: 'navDev' },
-      'type-devi':   { emoji: '🌺', key: 'navDevi' },
+      'type-dev': { emoji: '🕉️', key: 'navDev' },
+      'type-devi': { emoji: '🌺', key: 'navDevi' },
       'type-avatar': { emoji: '🏹', key: 'navAvatar' },
       'type-grah-dev': { emoji: '🪐', key: 'navGrahDev' },
-      'type-lok-dev':  { emoji: '🎠', key: 'navLokDev' },
-      favorites:     { emoji: null, key: 'navFavorites' },
-      temples:       { emoji: '🛕', key: 'navTemples' },
-      festivals:     { emoji: '🎉', key: 'navFestivals' },
-      scriptures:    { emoji: '📚', key: 'navScriptures' },
+      'type-lok-dev': { emoji: '🎠', key: 'navLokDev' },
+      favorites: { emoji: null, key: 'navFavorites' },
+      temples: { emoji: '🛕', key: 'navTemples' },
+      festivals: { emoji: '🎉', key: 'navFestivals' },
+      scriptures: { emoji: '📚', key: 'navScriptures' },
     };
 
     document.querySelectorAll('.nav-btn[data-page]').forEach((btn) => {
@@ -1200,8 +1350,12 @@
     });
 
     // ── Chalisa nav controls ──
-    const chalisaPrevLabel = document.querySelector('#chalisaPrevBtn .chalisa-nav-label');
-    const chalisaNextLabel = document.querySelector('#chalisaNextBtn .chalisa-nav-label');
+    const chalisaPrevLabel = document.querySelector(
+      '#chalisaPrevBtn .chalisa-nav-label',
+    );
+    const chalisaNextLabel = document.querySelector(
+      '#chalisaNextBtn .chalisa-nav-label',
+    );
     if (chalisaPrevLabel) chalisaPrevLabel.textContent = t('chalisaUp');
     if (chalisaNextLabel) chalisaNextLabel.textContent = t('chalisaDown');
     const chalisaPrevBtn = document.getElementById('chalisaPrevBtn');
@@ -1216,13 +1370,17 @@
     }
 
     // ── Accessibility buttons ──
-    const scrollTopBtn = document.querySelector('.quick-nav-btn[onclick*="scrollDirectTop"]');
+    const scrollTopBtn = document.querySelector(
+      '.quick-nav-btn[onclick*="scrollDirectTop"]',
+    );
     if (scrollTopBtn) {
       scrollTopBtn.setAttribute('data-tooltip', t('scrollTop'));
       scrollTopBtn.setAttribute('title', t('scrollTop'));
       scrollTopBtn.setAttribute('aria-label', t('scrollTop'));
     }
-    const scrollBottomBtn = document.querySelector('.quick-nav-btn[onclick*="scrollDirectBottom"]');
+    const scrollBottomBtn = document.querySelector(
+      '.quick-nav-btn[onclick*="scrollDirectBottom"]',
+    );
     if (scrollBottomBtn) {
       scrollBottomBtn.setAttribute('data-tooltip', t('scrollBottom'));
       scrollBottomBtn.setAttribute('title', t('scrollBottom'));
@@ -1241,10 +1399,16 @@
     if (mantraMalaKicker) mantraMalaKicker.textContent = t('mantraMalaKicker');
     const mantraMalaTitleEl = document.getElementById('mantraMalaTitle');
     if (mantraMalaTitleEl) mantraMalaTitleEl.textContent = t('mantraMalaTitle');
-    const mantraMalaCenterLabel = document.querySelector('.mantra-mala-center-label');
-    if (mantraMalaCenterLabel) mantraMalaCenterLabel.textContent = t('mantraMalaCenterLabel');
-    const mantraMalaIncrementBtn = document.getElementById('mantraMalaIncrementBtn');
-    if (mantraMalaIncrementBtn) mantraMalaIncrementBtn.textContent = t('mantraMalaIncrement');
+    const mantraMalaCenterLabel = document.querySelector(
+      '.mantra-mala-center-label',
+    );
+    if (mantraMalaCenterLabel)
+      mantraMalaCenterLabel.textContent = t('mantraMalaCenterLabel');
+    const mantraMalaIncrementBtn = document.getElementById(
+      'mantraMalaIncrementBtn',
+    );
+    if (mantraMalaIncrementBtn)
+      mantraMalaIncrementBtn.textContent = t('mantraMalaIncrement');
 
     // ── Reading mode close button ──
     const readingModeClose = document.querySelector('.reading-mode-close');
@@ -1279,36 +1443,57 @@
     if (templeViewTableBtn) templeViewTableBtn.textContent = t('viewTable');
 
     // ── Temple page static text ──
-    const templesHeader = document.querySelector('#page-temples .section-title');
+    const templesHeader = document.querySelector(
+      '#page-temples .section-title',
+    );
     if (templesHeader) {
       const iconEl = templesHeader.querySelector('.diya');
-      const iconHtml = iconEl ? iconEl.outerHTML : '<span class="diya">🛕</span>';
+      const iconHtml = iconEl
+        ? iconEl.outerHTML
+        : '<span class="diya">🛕</span>';
       templesHeader.innerHTML = `${iconHtml} ${t('templesPageTitle')}`;
     }
-    const templesSubtitle = document.querySelector('#page-temples .section-subtitle');
+    const templesSubtitle = document.querySelector(
+      '#page-temples .section-subtitle',
+    );
     if (templesSubtitle) templesSubtitle.textContent = t('templesPageSubtitle');
     const templeSearchInput = document.getElementById('templeSearchInput');
-    if (templeSearchInput) templeSearchInput.placeholder = t('templeSearchPlaceholder');
+    if (templeSearchInput)
+      templeSearchInput.placeholder = t('templeSearchPlaceholder');
 
     // ── Festivals page static text ──
-    const festivalsHeader = document.querySelector('#page-festivals .section-title');
+    const festivalsHeader = document.querySelector(
+      '#page-festivals .section-title',
+    );
     if (festivalsHeader) {
       const iconEl = festivalsHeader.querySelector('.diya');
-      const iconHtml = iconEl ? iconEl.outerHTML : '<span class="diya">🎉</span>';
+      const iconHtml = iconEl
+        ? iconEl.outerHTML
+        : '<span class="diya">🎉</span>';
       festivalsHeader.innerHTML = `${iconHtml} ${t('festivalsPageTitle')}`;
     }
-    const festivalsSubtitle = document.querySelector('#page-festivals .section-subtitle');
-    if (festivalsSubtitle) festivalsSubtitle.textContent = t('festivalsPageSubtitle');
+    const festivalsSubtitle = document.querySelector(
+      '#page-festivals .section-subtitle',
+    );
+    if (festivalsSubtitle)
+      festivalsSubtitle.textContent = t('festivalsPageSubtitle');
 
     // ── Scriptures page static text ──
-    const scripturesHeader = document.querySelector('#page-scriptures .section-title');
+    const scripturesHeader = document.querySelector(
+      '#page-scriptures .section-title',
+    );
     if (scripturesHeader) {
       const iconEl = scripturesHeader.querySelector('.diya');
-      const iconHtml = iconEl ? iconEl.outerHTML : '<span class="diya">📚</span>';
+      const iconHtml = iconEl
+        ? iconEl.outerHTML
+        : '<span class="diya">📚</span>';
       scripturesHeader.innerHTML = `${iconHtml} ${t('scripturesPageTitle')}`;
     }
-    const scripturesSubtitle = document.querySelector('#page-scriptures .section-subtitle');
-    if (scripturesSubtitle) scripturesSubtitle.textContent = t('scripturesPageSubtitle');
+    const scripturesSubtitle = document.querySelector(
+      '#page-scriptures .section-subtitle',
+    );
+    if (scripturesSubtitle)
+      scripturesSubtitle.textContent = t('scripturesPageSubtitle');
 
     // ── Home section header (re-render) ──
     if (typeof updateHomeSectionHeader === 'function') {
@@ -1331,7 +1516,8 @@
     if (rerender && typeof activeDeityKey !== 'undefined' && activeDeityKey) {
       if (typeof showDeityPage === 'function') {
         showDeityPage(activeDeityKey, {
-          initialTab: typeof activeDeityTab !== 'undefined' ? activeDeityTab : 'about',
+          initialTab:
+            typeof activeDeityTab !== 'undefined' ? activeDeityTab : 'about',
           skipUrl: true,
           fromAvatar: Boolean(
             typeof avatarParentDeityKey !== 'undefined' && avatarParentDeityKey,
@@ -1347,7 +1533,12 @@
       typeof activeHomeType !== 'undefined' &&
       !(typeof isHomeLandingView === 'function' && isHomeLandingView())
     ) {
-      renderHomeGrid(activeHomeType, typeof activeHomeSearchQuery !== 'undefined' ? activeHomeSearchQuery : '');
+      renderHomeGrid(
+        activeHomeType,
+        typeof activeHomeSearchQuery !== 'undefined'
+          ? activeHomeSearchQuery
+          : '',
+      );
     }
   }
 
@@ -1355,9 +1546,9 @@
   function getI18nSearchPlaceholder(typeId = 'all') {
     const map = {
       all: 'searchPlaceholderAll',
-      'देव': 'searchPlaceholderDev',
-      'देवी': 'searchPlaceholderDevi',
-      'अवतार': 'searchPlaceholderAvatar',
+      देव: 'searchPlaceholderDev',
+      देवी: 'searchPlaceholderDevi',
+      अवतार: 'searchPlaceholderAvatar',
       'ग्रह देव': 'searchPlaceholderGrahDev',
       'लोक देव': 'searchPlaceholderLokDev',
     };
@@ -1368,9 +1559,9 @@
   function getI18nSectionTitle(typeId = 'all') {
     const map = {
       all: 'homeTitleAll',
-      'देव': 'homeTitleDev',
-      'देवी': 'homeTitleDevi',
-      'अवतार': 'homeTitleAvatar',
+      देव: 'homeTitleDev',
+      देवी: 'homeTitleDevi',
+      अवतार: 'homeTitleAvatar',
       'ग्रह देव': 'homeTitleGrahDev',
       'लोक देव': 'homeTitleLokDev',
     };
@@ -1381,9 +1572,9 @@
   function getI18nSectionSubtitle(typeId = 'all') {
     const map = {
       all: 'homeSubtitleAll',
-      'देव': 'homeSubtitleDev',
-      'देवी': 'homeSubtitleDevi',
-      'अवतार': 'homeSubtitleAvatar',
+      देव: 'homeSubtitleDev',
+      देवी: 'homeSubtitleDevi',
+      अवतार: 'homeSubtitleAvatar',
       'ग्रह देव': 'homeSubtitleGrahDev',
       'लोक देव': 'homeSubtitleLokDev',
     };
@@ -1393,9 +1584,9 @@
   // ── Public helper: translate a deity type key ──
   function getI18nDeityType(typeValue = '') {
     const map = {
-      'देव': 'typeDev',
-      'देवी': 'typeDevi',
-      'अवतार': 'typeAvatar',
+      देव: 'typeDev',
+      देवी: 'typeDevi',
+      अवतार: 'typeAvatar',
       'ग्रह देव': 'typeGrahDev',
       'लोक देव': 'typeLokDev',
     };
@@ -1417,5 +1608,4 @@
 
   // Convenience global shortcut
   window.t = t;
-
 })();

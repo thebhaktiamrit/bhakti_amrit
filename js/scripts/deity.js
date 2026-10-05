@@ -275,7 +275,9 @@ function ensureAndRenderDeityTab(resolvedKey, tabId) {
 
   const i18n = window.BhaktiI18n;
   const tabLabels = {
-    about: i18n ? i18n.t('loadingAbout') || 'परिचय लोड हो रहा है...' : 'परिचय लोड हो रहा है...',
+    about: i18n
+      ? i18n.t('loadingAbout') || 'परिचय लोड हो रहा है...'
+      : 'परिचय लोड हो रहा है...',
     aarti: i18n ? i18n.t('loadingAarti') : 'आरती लोड हो रही है...',
     chalisa: i18n ? i18n.t('loadingChalisa') : 'चालीसा लोड हो रही है...',
     geeta: i18n ? i18n.t('loadingGeeta') : 'गीता लोड हो रही है...',
@@ -283,7 +285,9 @@ function ensureAndRenderDeityTab(resolvedKey, tabId) {
     bhajan: i18n ? i18n.t('loadingBhajan') : 'भजन लोड हो रहा है...',
     mantra: i18n ? i18n.t('loadingMantra') : 'मंत्र लोड हो रहे हैं...',
     extra: i18n ? i18n.t('loadingExtra') : 'स्तोत्र लोड हो रहा है...',
-    temples: i18n ? i18n.t('loadingTemples') : 'मंदिरों की सूची लोड हो रही है...',
+    temples: i18n
+      ? i18n.t('loadingTemples')
+      : 'मंदिरों की सूची लोड हो रही है...',
     avatar: i18n ? i18n.t('loadingAvatar') : 'अवतार लोड हो रहे हैं...',
   };
 
@@ -301,7 +305,8 @@ function ensureAndRenderDeityTab(resolvedKey, tabId) {
   };
 
   const hasDataModule =
-    typeof DATA_MODULE_FILES !== 'undefined' && Boolean(DATA_MODULE_FILES[tabId]);
+    typeof DATA_MODULE_FILES !== 'undefined' &&
+    Boolean(DATA_MODULE_FILES[tabId]);
   const isLoaded = !hasDataModule || isDataModuleLoaded(tabId);
   if (isLoaded) {
     tabEl.innerHTML = renderMap[tabId]();
@@ -529,8 +534,12 @@ function getSectionMetaHtml({
   const favoriteIcon = isFavorite ? '❤️' : '🤍';
   const _sm = window.BhaktiI18n;
   const favoriteLabel = isFavorite
-    ? (_sm ? _sm.t('removeFavorite') : 'पसंदीदा से हटाएं')
-    : (_sm ? _sm.t('addFavorite') : 'पसंदीदा में जोड़ें');
+    ? _sm
+      ? _sm.t('removeFavorite')
+      : 'पसंदीदा से हटाएं'
+    : _sm
+      ? _sm.t('addFavorite')
+      : 'पसंदीदा में जोड़ें';
   const meaningShowLabel = _sm ? _sm.t('meaningShow') : 'हिंदी में समझें';
   const meaningHideLabel = _sm ? _sm.t('meaningHide') : 'हिंदी अर्थ छुपाएं';
   const readingModeLabel = _sm ? _sm.t('readingMode') : 'पठन मोड';
@@ -1109,8 +1118,11 @@ function renderMantras(mantras, key) {
   return `<div class="mantra-merged">${items}</div>`;
 }
 
-function renderMantraMalaTrack(totalCount) {
-  const track = document.getElementById('mantraMalaTrack');
+function renderMantraMalaTrack(
+  totalCount,
+  targetTrack = document.getElementById('mantraMalaTrack'),
+) {
+  const track = targetTrack;
   if (!track) return;
 
   const beadsHtml = Array.from({ length: totalCount }, (_, index) => {
