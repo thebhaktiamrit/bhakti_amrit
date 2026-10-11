@@ -58,6 +58,15 @@ const deityTypeMap = {
   santoshi_maa: 'देवी',
   annapurna: 'देवी',
   parvati: 'देवी',
+  shailputri: 'देवी',
+  brahmacharini: 'देवी',
+  chandraghanta: 'देवी',
+  kushmanda: 'देवी',
+  skandamata: 'देवी',
+  katyayani: 'देवी',
+  kalaratri: 'देवी',
+  mahagauri: 'देवी',
+  siddhidatri: 'देवी',
   baglamukhi: 'देवी',
   ganga: 'देवी',
   narmada: 'देवी',
@@ -92,11 +101,15 @@ function getValidDeityImage(path) {
     filename = filename.slice(6);
   }
   if (!filename || !filename.toLowerCase().endsWith('.webp')) return '';
-  const mode = String(window.BHAKTI_AMRIT_DATA_SOURCE || 'cdn').trim().toLowerCase();
-  const base = mode === 'local' ? 'http://localhost:51584' : 'https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main';
+  const mode = String(window.BHAKTI_AMRIT_DATA_SOURCE || 'cdn')
+    .trim()
+    .toLowerCase();
+  const base =
+    mode === 'local'
+      ? 'http://localhost:51584'
+      : 'https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main';
   return `${base}/icons/${filename}`;
 }
-
 
 let activeHomeType = 'all';
 let activeHomeNavId = 'home';
@@ -311,9 +324,9 @@ function getHomeSearchPlaceholder(typeId = activeHomeType) {
   }
   const placeholders = {
     all: 'देव-देवी का नाम लिखें...',
-    'देव': 'देव का नाम लिखें...',
-    'देवी': 'देवी का नाम लिखें...',
-    'अवतार': 'अवतार का नाम लिखें...',
+    देव: 'देव का नाम लिखें...',
+    देवी: 'देवी का नाम लिखें...',
+    अवतार: 'अवतार का नाम लिखें...',
     'ग्रह देव': 'ग्रह देव का नाम लिखें...',
     'लोक देव': 'लोक देव का नाम लिखें...',
   };
@@ -326,9 +339,9 @@ function getHomeSectionMeta(typeId = activeHomeType) {
   if (window.BhaktiI18n) {
     const iconMap = {
       all: '🪔',
-      'देव': '🕉️',
-      'देवी': '🌺',
-      'अवतार': '🏹',
+      देव: '🕉️',
+      देवी: '🌺',
+      अवतार: '🏹',
       'ग्रह देव': '🪐',
       'लोक देव': '🎠',
     };
@@ -766,9 +779,14 @@ function getBhajanEntries(data = null, deityKey = '') {
   if (typeof data === 'object') {
     const entries = [];
     if (hasRenderableLyricsBody(data)) {
-      const primaryEntry = { slug: data.slug || 'bhajan', title: data.title || '' };
-      if (typeof data.content === 'string' && data.content.trim().length > 0) primaryEntry.content = data.content;
-      if (Array.isArray(data.lines) && data.lines.length > 0) primaryEntry.lines = data.lines;
+      const primaryEntry = {
+        slug: data.slug || 'bhajan',
+        title: data.title || '',
+      };
+      if (typeof data.content === 'string' && data.content.trim().length > 0)
+        primaryEntry.content = data.content;
+      if (Array.isArray(data.lines) && data.lines.length > 0)
+        primaryEntry.lines = data.lines;
       const primaryBlocks = getLyricsBlocks(data);
       if (primaryBlocks.length > 0) primaryEntry.blocks = primaryBlocks;
       entries.push(primaryEntry);
@@ -786,7 +804,12 @@ function getBhajanEntries(data = null, deityKey = '') {
   if (typeof data === 'string' && data.trim().length > 0) {
     return [{ slug: 'bhajan', title: '', content: data }];
   }
-  if (data && typeof data === 'object' && typeof data.content === 'string' && data.content.trim().length > 0) {
+  if (
+    data &&
+    typeof data === 'object' &&
+    typeof data.content === 'string' &&
+    data.content.trim().length > 0
+  ) {
     return [{ slug: 'bhajan', title: data.title || '', content: data.content }];
   }
   return [];
@@ -927,7 +950,8 @@ function updateUrlState({
   } else {
     url.pathname = '/';
     url.search = '';
-    if (safeType !== 'all') url.searchParams.set('type', getUrlParamByHomeType(safeType));
+    if (safeType !== 'all')
+      url.searchParams.set('type', getUrlParamByHomeType(safeType));
   }
 
   const method = replace ? 'replaceState' : 'pushState';
@@ -1054,7 +1078,10 @@ function loadFavoriteDeities() {
 
 function saveFavoriteDeities(favorites) {
   try {
-    localStorage.setItem(FAVORITE_DEITIES_STORAGE_KEY, JSON.stringify(favorites));
+    localStorage.setItem(
+      FAVORITE_DEITIES_STORAGE_KEY,
+      JSON.stringify(favorites),
+    );
   } catch (error) {
     // Ignore storage errors
   }
@@ -1092,7 +1119,10 @@ function loadFavoriteContent() {
 
 function saveFavoriteContent(favorites) {
   try {
-    localStorage.setItem(FAVORITE_CONTENT_STORAGE_KEY, JSON.stringify(favorites));
+    localStorage.setItem(
+      FAVORITE_CONTENT_STORAGE_KEY,
+      JSON.stringify(favorites),
+    );
   } catch (error) {
     // Ignore storage errors
   }
@@ -1101,18 +1131,25 @@ function saveFavoriteContent(favorites) {
 function isContentFavorite(deityKey, contentType, contentSlug = '') {
   const favorites = loadFavoriteContent();
   return favorites.some(
-    fav => fav.deityKey === deityKey &&
+    (fav) =>
+      fav.deityKey === deityKey &&
       fav.contentType === contentType &&
-      fav.contentSlug === contentSlug
+      fav.contentSlug === contentSlug,
   );
 }
 
-function toggleContentFavorite(deityKey, contentType, contentSlug = '', title = '') {
+function toggleContentFavorite(
+  deityKey,
+  contentType,
+  contentSlug = '',
+  title = '',
+) {
   const favorites = loadFavoriteContent();
   const existingIndex = favorites.findIndex(
-    fav => fav.deityKey === deityKey &&
+    (fav) =>
+      fav.deityKey === deityKey &&
       fav.contentType === contentType &&
-      fav.contentSlug === contentSlug
+      fav.contentSlug === contentSlug,
   );
 
   if (existingIndex > -1) {
@@ -1123,7 +1160,7 @@ function toggleContentFavorite(deityKey, contentType, contentSlug = '', title = 
       contentType,
       contentSlug,
       title,
-      addedAt: Date.now()
+      addedAt: Date.now(),
     });
   }
 

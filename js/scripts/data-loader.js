@@ -6,7 +6,8 @@ const LOCAL_DATA_PORT = 51584; // Change if you use a different port
 const DATA_CACHE_BUST =
   window.BHAKTI_AMRIT_DATA_CACHE_BUST || String(Date.now());
 
-const CDN_BASE = 'https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main';
+const CDN_BASE =
+  'https://cdn.jsdelivr.net/gh/thebhaktiamrit/bhakti_amrit_data@main';
 const LOCAL_BASE = `http://localhost:${LOCAL_DATA_PORT}`;
 const SUPPORTED_DATA_LANGS = new Set(['hi', 'mr', 'ta', 'te', 'kn', 'bn']);
 
@@ -37,9 +38,13 @@ function appendCacheBust(url) {
 }
 
 if (getActiveDataSourceMode() === 'local') {
-  console.warn(`[DEV] 🟡 DATA_SOURCE_MODE is LOCAL — loading data from ${LOCAL_BASE}`);
+  console.warn(
+    `[DEV] 🟡 DATA_SOURCE_MODE is LOCAL — loading data from ${LOCAL_BASE}`,
+  );
 } else if (getActiveDataSourceMode() === 'cdn-no-cache') {
-  console.warn('[DEV] 🟡 DATA_SOURCE_MODE is CDN-NO-CACHE — loading fresh assets from jsDelivr');
+  console.warn(
+    '[DEV] 🟡 DATA_SOURCE_MODE is CDN-NO-CACHE — loading fresh assets from jsDelivr',
+  );
 }
 
 function getCurrentDataLang() {
@@ -48,7 +53,9 @@ function getCurrentDataLang() {
     i18n && typeof i18n.getCurrentLang === 'function'
       ? i18n.getCurrentLang()
       : document.documentElement.getAttribute('lang') || 'hi';
-  const normalized = String(rawLang || 'hi').trim().toLowerCase();
+  const normalized = String(rawLang || 'hi')
+    .trim()
+    .toLowerCase();
   return SUPPORTED_DATA_LANGS.has(normalized) ? normalized : 'hi';
 }
 
@@ -84,10 +91,15 @@ function getDeityImageUrl(path) {
 window.getDeityAssetBaseUrl = getDeityAssetBaseUrl;
 window.getDeityImageUrl = getDeityImageUrl;
 
-
 // Compact manifest to enable instant homepage badges & tab discovery without downloading full content
 const DEITY_CONTENT_MANIFEST = {
-  ganesh: { aarti: true, chalisa: true, mantra: true, extra: true, extraTag: 'सुखकर्ता दुःखहर्ता', },
+  ganesh: {
+    aarti: true,
+    chalisa: true,
+    mantra: true,
+    extra: true,
+    extraTag: 'सुखकर्ता दुःखहर्ता',
+  },
   shiva: {
     aarti: true,
     chalisa: true,
@@ -152,7 +164,13 @@ const DEITY_CONTENT_MANIFEST = {
   },
   giriraj: { aarti: true, chalisa: true, mantra: true },
   gopal: { aarti: true, chalisa: true, mantra: true },
-  sheetla: { aarti: true, chalisa: true, mantra: true, katha: true, kathaCount: 1 },
+  sheetla: {
+    aarti: true,
+    chalisa: true,
+    mantra: true,
+    katha: true,
+    kathaCount: 1,
+  },
   parvati: { aarti: true, chalisa: true, mantra: true },
   balaji: { aarti: true, chalisa: true, mantra: true },
   pretraj_sarkar: { aarti: true, chalisa: true, mantra: true },
@@ -190,20 +208,119 @@ const DEITY_CONTENT_MANIFEST = {
 
 const DEITY_AVATARS = {
   shiva: [
-    'hanuman', 'kartikeya', 'ayyappa', 'bhairav', 'batuk_bhairav', 'veerabhadra', 'ardhanarishvara'
+    'hanuman',
+    'kartikeya',
+    'ayyappa',
+    'bhairav',
+    'batuk_bhairav',
+    'veerabhadra',
+    'ardhanarishvara',
   ],
-  parvati: ['durga', 'kali', 'mahakali', 'baglamukhi', 'mahalakshmi', 'vaishno_devi', 'sheetla', 'vindhyeshwari', 'shakambhari', 'lalita_shakambhari', 'annapurna', 'santoshi_maa', 'chhathi_maiya'],
+  parvati: [
+    'durga',
+    'kali',
+    'mahakali',
+    'baglamukhi',
+    'mahalakshmi',
+    'vaishno_devi',
+    'sheetla',
+    'vindhyeshwari',
+    'shakambhari',
+    'lalita_shakambhari',
+    'annapurna',
+    'santoshi_maa',
+    'chhathi_maiya',
+  ],
   vishnu: [
-    'krishna', 'ram', 'narasimha', 'vamana', 'varaha', 'matsya', 'kurma', 'parshuram', 'balarama', 'hayagriva', 'dhanvantari', 'jagannath', 'tirupati_balaji', 'gopal', 'giriraj', 'radha', 'tulsi', 'ganga', 'narmada'
+    'krishna',
+    'ram',
+    'narasimha',
+    'vamana',
+    'varaha',
+    'matsya',
+    'kurma',
+    'parshuram',
+    'balarama',
+    'hayagriva',
+    'dhanvantari',
+    'jagannath',
+    'tirupati_balaji',
+    'gopal',
+    'giriraj',
+    'radha',
+    'tulsi',
+    'ganga',
+    'narmada',
   ],
-  lakshmi: ['annapurna', 'santoshi_maa', 'sharda', 'shakambhari', 'lalita_shakambhari', 'rani_sati'],
+  lakshmi: [
+    'annapurna',
+    'santoshi_maa',
+    'sharda',
+    'shakambhari',
+    'lalita_shakambhari',
+    'rani_sati',
+  ],
   hanuman: ['balaji'],
-  durga: ['kali', 'mahakali', 'baglamukhi', 'mahalakshmi', 'vaishno_devi', 'sheetla', 'vindhyeshwari', 'shakambhari', 'lalita_shakambhari'],
-  kali: ['mahakali', 'baglamukhi', 'mahalakshmi', 'vaishno_devi', 'sheetla', 'vindhyeshwari', 'shakambhari', 'lalita_shakambhari'],
-  mahakali: ['baglamukhi', 'mahalakshmi', 'vaishno_devi', 'sheetla', 'vindhyeshwari', 'shakambhari', 'lalita_shakambhari'],
-  baglamukhi: ['mahalakshmi', 'vaishno_devi', 'sheetla', 'vindhyeshwari', 'shakambhari', 'lalita_shakambhari'],
-  mahalakshmi: ['vaishno_devi', 'sheetla', 'vindhyeshwari', 'shakambhari', 'lalita_shakambhari'],
-  vaishno_devi: ['sheetla', 'vindhyeshwari', 'shakambhari', 'lalita_shakambhari'],
+  durga: [
+    'kali',
+    'mahakali',
+    'baglamukhi',
+    'mahalakshmi',
+    'vaishno_devi',
+    'sheetla',
+    'vindhyeshwari',
+    'shakambhari',
+    'lalita_shakambhari',
+    'shailputri',
+    'brahmacharini',
+    'chandraghanta',
+    'kushmanda',
+    'skandamata',
+    'katyayani',
+    'kalaratri',
+    'mahagauri',
+    'siddhidatri',
+  ],
+  kali: [
+    'mahakali',
+    'baglamukhi',
+    'mahalakshmi',
+    'vaishno_devi',
+    'sheetla',
+    'vindhyeshwari',
+    'shakambhari',
+    'lalita_shakambhari',
+  ],
+  mahakali: [
+    'baglamukhi',
+    'mahalakshmi',
+    'vaishno_devi',
+    'sheetla',
+    'vindhyeshwari',
+    'shakambhari',
+    'lalita_shakambhari',
+  ],
+  baglamukhi: [
+    'mahalakshmi',
+    'vaishno_devi',
+    'sheetla',
+    'vindhyeshwari',
+    'shakambhari',
+    'lalita_shakambhari',
+  ],
+  mahalakshmi: [
+    'vaishno_devi',
+    'sheetla',
+    'vindhyeshwari',
+    'shakambhari',
+    'lalita_shakambhari',
+  ],
+  vaishno_devi: [
+    'sheetla',
+    'vindhyeshwari',
+    'shakambhari',
+    'lalita_shakambhari',
+  ],
   sheetla: ['vindhyeshwari', 'shakambhari', 'lalita_shakambhari'],
   vindhyeshwari: ['shakambhari', 'lalita_shakambhari'],
   shakambhari: ['lalita_shakambhari'],
