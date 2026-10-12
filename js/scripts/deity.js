@@ -342,6 +342,62 @@ function ensureAndRenderDeityTab(resolvedKey, tabId) {
     });
 }
 
+async function downloadDeityImage(event) {
+  event.preventDefault();
+  const link = event.currentTarget;
+  try {
+    const response = await fetch(link.href, { mode: 'cors' });
+    if (!response.ok) throw new Error('Image download failed');
+
+    const objectUrl = URL.createObjectURL(await response.blob());
+    const downloadLink = document.createElement('a');
+    downloadLink.href = objectUrl;
+    downloadLink.download = link.download;
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    downloadLink.remove();
+    window.setTimeout(() => URL.revokeObjectURL(objectUrl), 1000);
+  } catch (error) {
+    window.location.href = link.href;
+  }
+}
+
+function openDeityImage(image) {
+  const dialog = document.createElement('dialog');
+  dialog.className = 'deity-image-dialog';
+  dialog.setAttribute('aria-label', image.alt || 'Deity image');
+
+  const enlargedImage = document.createElement('img');
+  enlargedImage.src = image.src;
+  enlargedImage.alt = image.alt;
+
+  const downloadLink = document.createElement('a');
+  downloadLink.className = 'deity-image-dialog-download';
+  downloadLink.href = image.src;
+  downloadLink.download = image.dataset.downloadFilename || 'deity-image.webp';
+  downloadLink.setAttribute('aria-label', 'देवता की तस्वीर डाउनलोड करें');
+  downloadLink.title = 'तस्वीर डाउनलोड करें';
+  downloadLink.textContent = '↓';
+  downloadLink.addEventListener('click', downloadDeityImage);
+
+  const closeButton = document.createElement('button');
+  closeButton.className = 'deity-image-dialog-close';
+  closeButton.type = 'button';
+  closeButton.setAttribute('aria-label', 'Close image');
+  closeButton.title = 'Close image';
+  closeButton.textContent = '×';
+  closeButton.addEventListener('click', () => dialog.close());
+
+  dialog.addEventListener('click', (event) => {
+    if (event.target === dialog) dialog.close();
+  });
+  dialog.addEventListener('close', () => dialog.remove(), { once: true });
+  dialog.append(closeButton, downloadLink, enlargedImage);
+  document.body.appendChild(dialog);
+  dialog.showModal();
+  closeButton.focus();
+}
+
 function showDeityPage(key, options = {}) {
   const resolvedKey = resolveDeityKey(key);
   const deity = deities[resolvedKey];
@@ -403,8 +459,12 @@ function showDeityPage(key, options = {}) {
   // Build header
   const imgSrc = getValidDeityImage(deity.img);
   const imgHtml = imgSrc
-    ? `<img class="deity-portrait loading" src="${imgSrc}" alt="${deity.name}" loading="eager" fetchpriority="high" width="100" height="100" decoding="async" onload="this.classList.remove('loading'); this.classList.add('loaded');" onerror="this.nextElementSibling.style.display='flex'; this.style.display='none';">
-     <div class="deity-portrait-emoji" style="display:none">${deity.emoji}</div>`
+    ? `<div class="deity-portrait-wrap">
+        <button class="deity-portrait-view" type="button" onclick="openDeityImage(this.querySelector('img'))" aria-label="पूरी स्क्रीन में तस्वीर देखें" title="पूरी स्क्रीन में तस्वीर देखें">
+          <img class="deity-portrait loading" src="${imgSrc}" alt="${deity.name}" data-download-filename="${resolvedKey}.webp" loading="eager" fetchpriority="high" width="100" height="100" decoding="async" onload="this.classList.remove('loading'); this.classList.add('loaded');" onerror="this.closest('.deity-portrait-wrap').style.display='none'; this.closest('.deity-portrait-wrap').nextElementSibling.style.display='flex';">
+        </button>
+      </div>
+      <div class="deity-portrait-emoji" style="display:none">${deity.emoji}</div>`
     : `<div class="deity-portrait-emoji">${deity.emoji}</div>`;
 
   document.getElementById('deityHeader').innerHTML = `
