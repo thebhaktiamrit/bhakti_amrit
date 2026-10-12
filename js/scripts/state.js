@@ -469,16 +469,7 @@ function getDeityTabPathSegment(
     }
   }
   if (safeTab === 'geeta') {
-    const geetaData = getGeetaContentData(deityKey);
-    const entries = getGeetaEntries(geetaData);
-    if (entries.length) {
-      const safeSlug = getSafeGeetaSlug(deityKey, activeGeetaSlug);
-      const selectedIndex = entries.findIndex(
-        (item, idx) => getGeetaEntrySlug(item, idx) === safeSlug,
-      );
-      const safeIndex = selectedIndex >= 0 ? selectedIndex : 0;
-      return getGeetaEntrySlug(entries[safeIndex], safeIndex);
-    }
+    return 'geeta';
   }
   return safeTab;
 }
