@@ -342,23 +342,246 @@ function ensureAndRenderDeityTab(resolvedKey, tabId) {
     });
 }
 
-async function downloadDeityImage(event) {
-  event.preventDefault();
-  const link = event.currentTarget;
-  try {
-    const response = await fetch(link.href, { mode: 'cors' });
-    if (!response.ok) throw new Error('Image download failed');
+let deityBackgroundCatalog = null;
+let deityBackgroundCatalogFetchedAt = 0;
+let deityBackgroundCatalogRequest = null;
 
-    const objectUrl = URL.createObjectURL(await response.blob());
-    const downloadLink = document.createElement('a');
-    downloadLink.href = objectUrl;
-    downloadLink.download = link.download;
-    document.body.appendChild(downloadLink);
-    downloadLink.click();
-    downloadLink.remove();
-    window.setTimeout(() => URL.revokeObjectURL(objectUrl), 1000);
+function getDeityBackgroundCatalog() {
+  if (
+    deityBackgroundCatalog &&
+    Date.now() - deityBackgroundCatalogFetchedAt < 5 * 60 * 1000
+  ) {
+    return Promise.resolve(deityBackgroundCatalog);
+  }
+  if (deityBackgroundCatalogRequest) return deityBackgroundCatalogRequest;
+
+  const assetBase =
+    typeof window.getDeityAssetBaseUrl === 'function'
+      ? window.getDeityAssetBaseUrl()
+      : '';
+  if (!assetBase)
+    return Promise.reject(new Error('Data source is unavailable'));
+
+  const backgroundDirectoryUrl = `${assetBase.replace(/\/+$/, '')}/backgrounds/`;
+  const isLocalSource =
+    String(window.BHAKTI_AMRIT_DATA_SOURCE || '')
+      .trim()
+      .toLowerCase() === 'local';
+  const configuredCatalogUrl = String(
+    window.BHAKTI_AMRIT_BACKGROUND_CATALOG_URL || '',
+  ).trim();
+  const githubSource = assetBase.match(
+    /^https:\/\/cdn\.jsdelivr\.net\/gh\/([^/]+\/[^@/]+)@([^/]+)/i,
+  );
+  const catalogUrl = isLocalSource
+    ? backgroundDirectoryUrl
+    : configuredCatalogUrl ||
+      (githubSource
+        ? `https://api.github.com/repos/${githubSource[1]}/contents/backgrounds?ref=${encodeURIComponent(githubSource[2])}`
+        : '');
+  if (!catalogUrl) {
+    return Promise.reject(new Error('Background catalog is not configured'));
+  }
+
+  deityBackgroundCatalogRequest = fetch(catalogUrl, {
+    headers: isLocalSource
+      ? undefined
+      : { Accept: 'application/vnd.github+json' },
+    cache: 'no-cache',
+  })
+    .then((response) => {
+      if (!response.ok) throw new Error('Background list unavailable');
+      return isLocalSource ? response.text() : response.json();
+    })
+    .then((listing) => {
+      const files = isLocalSource
+        ? Array.from(
+            new DOMParser()
+              .parseFromString(listing, 'text/html')
+              .querySelectorAll('a[href]'),
+          )
+            .map((link) => {
+              const fileUrl = new URL(
+                link.getAttribute('href'),
+                backgroundDirectoryUrl,
+              );
+              return {
+                name: decodeURIComponent(
+                  fileUrl.pathname.split('/').filter(Boolean).pop() || '',
+                ),
+                src: fileUrl.href,
+              };
+            })
+            .filter((file) => file.src.startsWith(backgroundDirectoryUrl))
+        : listing
+            .filter((file) => file.type === 'file')
+            .map((file) => ({
+              name: file.name,
+              src: new URL(
+                encodeURIComponent(file.name),
+                backgroundDirectoryUrl,
+              ).href,
+            }));
+
+      deityBackgroundCatalog = files
+        .filter((file) => /\.(jpe?g|png|webp)$/i.test(file.name))
+        .sort((first, second) => first.name.localeCompare(second.name));
+      deityBackgroundCatalogFetchedAt = Date.now();
+      return deityBackgroundCatalog;
+    })
+    .finally(() => {
+      deityBackgroundCatalogRequest = null;
+    });
+
+  return deityBackgroundCatalogRequest;
+}
+
+function downloadCanvasAsPng(canvas, filename) {
+  return new Promise((resolve, reject) => {
+    try {
+      canvas.toBlob((blob) => {
+        if (!blob) {
+          reject(new Error('PNG encoding returned no file'));
+          return;
+        }
+
+        const objectUrl = URL.createObjectURL(blob);
+        const downloadLink = document.createElement('a');
+        downloadLink.href = objectUrl;
+        downloadLink.download = filename;
+        document.body.appendChild(downloadLink);
+        try {
+          downloadLink.click();
+          window.setTimeout(() => {
+            downloadLink.remove();
+            URL.revokeObjectURL(objectUrl);
+          }, 60_000);
+          resolve();
+        } catch (error) {
+          downloadLink.remove();
+          URL.revokeObjectURL(objectUrl);
+          reject(error);
+        }
+      }, 'image/png');
+    } catch (error) {
+      reject(error);
+    }
+  });
+}
+
+async function downloadComposedDeityImage({
+  image,
+  background,
+  stage,
+  zoomInput,
+  position,
+  status,
+  button,
+}) {
+  button.disabled = true;
+  status.innerHTML = '⏳ <strong>तस्वीर तैयार हो रही है...</strong> कृपया प्रतीक्षा करें';
+  try {
+    await Promise.all([
+      image.decode(),
+      background.src ? background.decode() : null,
+    ]);
+
+    const stageWidth = stage.clientWidth;
+    const stageHeight = stage.clientHeight;
+    if (!stageWidth || !stageHeight) {
+      throw new Error('The image preview has no drawable size');
+    }
+
+    // Use fixed dimensions based on orientation
+    const orientation = stage.dataset.orientation || '9x16';
+    const canvasWidth = orientation === '16x9' ? 1920 : 1080;
+    const canvasHeight = orientation === '16x9' ? 1080 : 1920;
+
+    console.log('Stage dimensions:', stageWidth, 'x', stageHeight);
+    console.log('Canvas dimensions:', canvasWidth, 'x', canvasHeight);
+    console.log('Orientation:', orientation);
+
+    const canvas = document.createElement('canvas');
+    canvas.width = canvasWidth;
+    canvas.height = canvasHeight;
+    const context = canvas.getContext('2d');
+    if (!context) throw new Error('Canvas context is unavailable');
+
+    console.log('Canvas actual size:', canvas.width, 'x', canvas.height);
+
+    // Fill background
+    context.fillStyle = getComputedStyle(stage).backgroundColor;
+    context.fillRect(0, 0, canvasWidth, canvasHeight);
+
+    // Calculate scale factor from preview to export
+    const scaleX = canvasWidth / stageWidth;
+    const scaleY = canvasHeight / stageHeight;
+
+    if (background.naturalWidth) {
+      const coverScale = Math.max(
+        stageWidth / background.naturalWidth,
+        stageHeight / background.naturalHeight,
+      );
+      const backgroundWidth = background.naturalWidth * coverScale;
+      const backgroundHeight = background.naturalHeight * coverScale;
+      context.drawImage(
+        background,
+        (stageWidth - backgroundWidth) / 2 * scaleX,
+        (stageHeight - backgroundHeight) / 2 * scaleY,
+        backgroundWidth * scaleX,
+        backgroundHeight * scaleY,
+      );
+    }
+
+    // Calculate image box dimensions based on orientation
+    const isLandscape = orientation === '16x9';
+    const imageBoxWidth = stageWidth * (isLandscape ? 0.6 : 0.74);
+    const imageBoxHeight = stageHeight * (isLandscape ? 0.7 : 0.8);
+
+    console.log('Image box dimensions:', imageBoxWidth, 'x', imageBoxHeight);
+    console.log('Image natural size:', image.naturalWidth, 'x', image.naturalHeight);
+
+    const imageScale =
+      Math.min(
+        imageBoxWidth / image.naturalWidth,
+        imageBoxHeight / image.naturalHeight,
+      ) *
+      (Number(zoomInput.value) / 100);
+
+    console.log('Image scale:', imageScale);
+    console.log('Zoom value:', zoomInput.value);
+
+    const imageWidth = image.naturalWidth * imageScale;
+    const imageHeight = image.naturalHeight * imageScale;
+    const imageX = stageWidth * (0.5 + position.x) - imageWidth / 2;
+    const imageY = stageHeight * (0.5 + position.y) - imageHeight / 2;
+
+    console.log('Final image dimensions:', imageWidth, 'x', imageHeight);
+    console.log('Image position:', imageX, 'x', imageY);
+    console.log('Scale factors:', scaleX, 'x', scaleY);
+
+    context.drawImage(
+      image,
+      imageX * scaleX,
+      imageY * scaleY,
+      imageWidth * scaleX,
+      imageHeight * scaleY,
+    );
+
+    const downloadFilename =
+      image.dataset.downloadFilename || 'deity-image.webp';
+    const baseName = downloadFilename.replace(/\.[^.]+$/, '');
+    await downloadCanvasAsPng(
+      canvas,
+      `${baseName}-${orientation === '16x9' ? 'landscape' : 'portrait'}-with-background.png`,
+    );
+    status.innerHTML = '✅ <strong>सफल!</strong> तस्वीर डाउनलोड हो गई।';
   } catch (error) {
-    window.location.href = link.href;
+    console.error('Failed to download the composed deity image:', error);
+    status.innerHTML =
+      '❌ <strong>त्रुटि:</strong> तस्वीर तैयार नहीं हो सकी। कृपया दूसरी पृष्ठभूमि चुनकर पुनः प्रयास करें।';
+  } finally {
+    button.disabled = false;
   }
 }
 
@@ -367,32 +590,289 @@ function openDeityImage(image) {
   dialog.className = 'deity-image-dialog';
   dialog.setAttribute('aria-label', image.alt || 'Deity image');
 
+  const editor = document.createElement('div');
+  editor.className = 'deity-image-editor';
+
+  const stage = document.createElement('div');
+  stage.className = 'deity-image-stage';
+  stage.dataset.orientation = '9x16';
+
+  const backgroundImage = document.createElement('img');
+  backgroundImage.className = 'deity-image-background';
+  backgroundImage.crossOrigin = 'anonymous';
+  backgroundImage.alt = '';
+  backgroundImage.hidden = true;
+
   const enlargedImage = document.createElement('img');
+  enlargedImage.className = 'deity-image-subject';
+  enlargedImage.crossOrigin = 'anonymous';
+  enlargedImage.draggable = false;
+  enlargedImage.tabIndex = 0;
   enlargedImage.src = image.src;
   enlargedImage.alt = image.alt;
+  enlargedImage.dataset.downloadFilename =
+    image.dataset.downloadFilename || 'deity-image.webp';
+  enlargedImage.setAttribute(
+    'aria-label',
+    `${image.alt}. तस्वीर को खींचें या तीर कुंजियों से रखें।`,
+  );
 
-  const downloadLink = document.createElement('a');
-  downloadLink.className = 'deity-image-dialog-download';
-  downloadLink.href = image.src;
-  downloadLink.download = image.dataset.downloadFilename || 'deity-image.webp';
-  downloadLink.setAttribute('aria-label', 'देवता की तस्वीर डाउनलोड करें');
-  downloadLink.title = 'तस्वीर डाउनलोड करें';
-  downloadLink.textContent = '↓';
-  downloadLink.addEventListener('click', downloadDeityImage);
+  const position = { x: 0, y: 0 };
+  const updateImagePosition = () => {
+    enlargedImage.style.left = `${(0.5 + position.x) * 100}%`;
+    enlargedImage.style.top = `${(0.5 + position.y) * 100}%`;
+  };
+  enlargedImage.addEventListener('keydown', (event) => {
+    const step = event.shiftKey ? 0.08 : 0.02;
+    if (
+      !['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.key)
+    ) {
+      return;
+    }
+    event.preventDefault();
+    if (event.key === 'ArrowLeft') position.x -= step;
+    if (event.key === 'ArrowRight') position.x += step;
+    if (event.key === 'ArrowUp') position.y -= step;
+    if (event.key === 'ArrowDown') position.y += step;
+    position.x = Math.max(-0.75, Math.min(0.75, position.x));
+    position.y = Math.max(-0.75, Math.min(0.75, position.y));
+    updateImagePosition();
+  });
+
+  let dragStart = null;
+  enlargedImage.addEventListener('pointerdown', (event) => {
+    event.preventDefault();
+    enlargedImage.setPointerCapture(event.pointerId);
+    dragStart = {
+      pointerX: event.clientX,
+      pointerY: event.clientY,
+      x: position.x,
+      y: position.y,
+    };
+    enlargedImage.classList.add('is-dragging');
+  });
+  enlargedImage.addEventListener('pointermove', (event) => {
+    if (!dragStart) return;
+    position.x = Math.max(
+      -0.75,
+      Math.min(
+        0.75,
+        dragStart.x + (event.clientX - dragStart.pointerX) / stage.clientWidth,
+      ),
+    );
+    position.y = Math.max(
+      -0.75,
+      Math.min(
+        0.75,
+        dragStart.y + (event.clientY - dragStart.pointerY) / stage.clientHeight,
+      ),
+    );
+    updateImagePosition();
+  });
+  const stopDragging = () => {
+    dragStart = null;
+    enlargedImage.classList.remove('is-dragging');
+  };
+  enlargedImage.addEventListener('pointerup', stopDragging);
+  enlargedImage.addEventListener('pointercancel', stopDragging);
+
+  stage.append(backgroundImage, enlargedImage);
+
+  const controls = document.createElement('div');
+  controls.className = 'deity-image-controls';
+
+  const backgroundLabel = document.createElement('div');
+  backgroundLabel.className = 'deity-image-background-control';
+  const backgroundTitle = document.createElement('span');
+  backgroundTitle.textContent = 'पृष्ठभूमि';
+  const backgroundOptions = document.createElement('div');
+  backgroundOptions.className = 'deity-image-background-options';
+  backgroundOptions.setAttribute('role', 'group');
+  backgroundOptions.setAttribute('aria-label', 'पृष्ठभूमि चुनें');
+  backgroundLabel.append(backgroundTitle, backgroundOptions);
+
+  const orientationControl = document.createElement('div');
+  orientationControl.className = 'deity-image-orientation-control';
+  const orientationLabel = document.createElement('span');
+  orientationLabel.textContent = 'दिशा';
+  const orientationOptions = document.createElement('div');
+  orientationOptions.className = 'deity-image-orientation-options';
+  orientationOptions.setAttribute('role', 'group');
+  orientationOptions.setAttribute('aria-label', 'तस्वीर की दिशा');
+  [
+    {
+      orientation: '9x16',
+      icon: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/></svg>`,
+    },
+    {
+      orientation: '16x9',
+      icon: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="10" rx="2"/></svg>`,
+    },
+  ].forEach(({ orientation, icon }) => {
+    const option = document.createElement('button');
+    option.className = 'deity-image-orientation-option';
+    option.type = 'button';
+    option.innerHTML = icon;
+    option.setAttribute(
+      'aria-label',
+      orientation === '9x16' ? 'ऊर्ध्वाधर (vertical)' : 'क्षैतिज (horizontal)',
+    );
+    option.setAttribute(
+      'aria-pressed',
+      String(orientation === stage.dataset.orientation),
+    );
+    option.addEventListener('click', () => {
+      stage.dataset.orientation = orientation;
+      orientationOptions
+        .querySelectorAll('.deity-image-orientation-option')
+        .forEach((button) => {
+          button.setAttribute('aria-pressed', String(button === option));
+        });
+    });
+    orientationOptions.append(option);
+  });
+  orientationControl.append(orientationLabel, orientationOptions);
+
+  const zoomLabel = document.createElement('label');
+  zoomLabel.className = 'deity-image-zoom-control';
+  zoomLabel.textContent = 'आकार';
+  const zoomInput = document.createElement('input');
+  zoomInput.type = 'range';
+  zoomInput.min = '50';
+  zoomInput.max = '200';
+  zoomInput.value = '100';
+  zoomInput.setAttribute('aria-label', 'तस्वीर का आकार');
+  const zoomValue = document.createElement('output');
+  zoomValue.textContent = '100%';
+  zoomInput.addEventListener('input', () => {
+    zoomValue.textContent = `${zoomInput.value}%`;
+    enlargedImage.style.setProperty(
+      '--deity-image-zoom',
+      zoomInput.value / 100,
+    );
+  });
+  zoomLabel.append(zoomInput, zoomValue);
+
+  const imageStatus = document.createElement('p');
+  imageStatus.className = 'deity-image-status';
+  imageStatus.setAttribute('aria-live', 'polite');
+  imageStatus.innerHTML = '💡 <strong>सुझाव:</strong> तस्वीर को खींचकर सही जगह रखें, फिर डाउनलोड करें';
+
+  controls.append(backgroundLabel, orientationControl, zoomLabel, imageStatus);
+
+  const selectBackground = (source, selectedButton) => {
+    backgroundImage.hidden = !source;
+    if (source) {
+      backgroundImage.src = source;
+      imageStatus.innerHTML = '✨ <strong>पृष्ठभूमि चुनी गई!</strong> अब तस्वीर को सही जगह रखें';
+    } else {
+      backgroundImage.removeAttribute('src');
+      imageStatus.innerHTML = '💡 <strong>सुझाव:</strong> तस्वीर को खींचकर सही जगह रखें, फिर डाउनलोड करें';
+    }
+    backgroundOptions
+      .querySelectorAll('.deity-image-background-option')
+      .forEach((option) => {
+        option.setAttribute('aria-pressed', String(option === selectedButton));
+      });
+  };
+
+  const noBackgroundButton = document.createElement('button');
+  noBackgroundButton.className =
+    'deity-image-background-option deity-image-background-option-none';
+  noBackgroundButton.type = 'button';
+  noBackgroundButton.setAttribute('aria-label', 'कोई पृष्ठभूमि नहीं');
+  noBackgroundButton.setAttribute('aria-pressed', 'true');
+  const noBackgroundSwatch = document.createElement('span');
+  noBackgroundSwatch.textContent = '×';
+  const noBackgroundName = document.createElement('span');
+  noBackgroundName.textContent = 'कोई नहीं';
+  noBackgroundButton.append(noBackgroundSwatch, noBackgroundName);
+  noBackgroundButton.addEventListener('click', () =>
+    selectBackground('', noBackgroundButton),
+  );
+  backgroundOptions.append(noBackgroundButton);
+
+  getDeityBackgroundCatalog()
+    .then((backgrounds) => {
+      backgrounds.forEach((background) => {
+        const option = document.createElement('button');
+        option.className = 'deity-image-background-option';
+        option.type = 'button';
+        option.setAttribute('aria-label', background.name);
+        option.setAttribute('aria-pressed', 'false');
+        option.title = background.name;
+        const thumbnail = document.createElement('img');
+        thumbnail.src = background.src;
+        thumbnail.alt = '';
+        thumbnail.crossOrigin = 'anonymous';
+        thumbnail.loading = 'lazy';
+        thumbnail.addEventListener('error', () =>
+          option.classList.add('failed'),
+        );
+        option.append(thumbnail);
+        option.addEventListener('click', () =>
+          selectBackground(background.src, option),
+        );
+        backgroundOptions.append(option);
+      });
+      imageStatus.innerHTML = backgrounds.length
+        ? '💡 <strong>सुझाव:</strong> तस्वीर को खींचकर सही जगह रखें, फिर डाउनलोड करें'
+        : '📭 <strong>कोई पृष्ठभूमि उपलब्ध नहीं है।</strong> बिना पृष्ठभूमि के भी डाउनलोड कर सकते हैं।';
+    })
+    .catch(() => {
+      imageStatus.innerHTML = '⚠️ <strong>त्रुटि:</strong> पृष्ठभूमि सूची लोड नहीं हो सकी।';
+    });
+
+  const downloadButton = document.createElement('button');
+  downloadButton.className = 'deity-image-dialog-download';
+  downloadButton.type = 'button';
+  downloadButton.setAttribute('aria-label', 'तैयार तस्वीर डाउनलोड करें');
+  downloadButton.title = 'तैयार तस्वीर डाउनलोड करें';
+  downloadButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> डाउनलोड`;
+  downloadButton.addEventListener('click', () =>
+    downloadComposedDeityImage({
+      image: enlargedImage,
+      background: backgroundImage,
+      stage,
+      zoomInput,
+      position,
+      status: imageStatus,
+      button: downloadButton,
+    }),
+  );
 
   const closeButton = document.createElement('button');
   closeButton.className = 'deity-image-dialog-close';
   closeButton.type = 'button';
-  closeButton.setAttribute('aria-label', 'Close image');
-  closeButton.title = 'Close image';
-  closeButton.textContent = '×';
+  closeButton.setAttribute('aria-label', 'चित्र बंद करें');
+  closeButton.title = 'चित्र बंद करें';
+  closeButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`;
   closeButton.addEventListener('click', () => dialog.close());
+
+  const editorHeader = document.createElement('header');
+  editorHeader.className = 'deity-image-editor-header';
+  const editorTitle = document.createElement('div');
+  editorTitle.className = 'deity-image-editor-title';
+  const title = document.createElement('h2');
+  title.textContent = 'तस्वीर बनाएं';
+  const subtitle = document.createElement('p');
+  subtitle.textContent = image.alt;
+  editorTitle.append(title, subtitle);
+  const editorActions = document.createElement('div');
+  editorActions.className = 'deity-image-editor-actions';
+  editorActions.append(downloadButton, closeButton);
+  editorHeader.append(editorTitle, editorActions);
+
+  const workspace = document.createElement('div');
+  workspace.className = 'deity-image-workspace';
+  workspace.append(stage, controls);
+  editor.append(editorHeader, workspace);
 
   dialog.addEventListener('click', (event) => {
     if (event.target === dialog) dialog.close();
   });
   dialog.addEventListener('close', () => dialog.remove(), { once: true });
-  dialog.append(closeButton, downloadLink, enlargedImage);
+  dialog.append(editor);
   document.body.appendChild(dialog);
   dialog.showModal();
   closeButton.focus();

@@ -4517,11 +4517,16 @@ body.reduced-effects .deity-card:hover {
 .content-header-site .deity-portrait-emoji {
   width: 88px;
   height: 88px;
+  border-radius: 50%;
 }
 
 .deity-portrait-wrap {
   position: relative;
   flex: 0 0 auto;
+}
+
+.deity-portrait-wrap img {
+  border-radius: 50%;
 }
 
 .deity-portrait-view {
@@ -4534,6 +4539,10 @@ body.reduced-effects .deity-card:hover {
   cursor: zoom-in;
 }
 
+.deity-portrait-view img {
+  border-radius: 50%;
+}
+
 .deity-portrait-view:focus-visible {
   outline: 2px solid var(--cream);
   outline-offset: 4px;
@@ -4541,55 +4550,514 @@ body.reduced-effects .deity-card:hover {
 
 .deity-image-dialog {
   box-sizing: border-box;
-  width: 100vw;
-  height: 100vh;
-  height: 100dvh;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: min(1100px, 100vw);
+  height: min(850px, 100dvh);
   max-width: none;
   max-height: none;
   margin: 0;
-  padding: 56px 24px 24px;
-  border: 0;
+  padding: 0;
+  border: 2px solid rgba(var(--gold-rgb), 0.5);
+  border-radius: 24px;
   overflow: hidden;
-  background: rgba(var(--dark-rgb), 0.97);
+  background: linear-gradient(
+    160deg,
+    rgba(var(--dark-rgb), 0.96) 0%,
+    rgba(var(--maroon-rgb), 0.88) 100%
+  );
+  color: var(--cream);
+  transform: translate(-50%, -50%);
+  box-shadow:
+    0 40px 100px rgba(var(--shadow-rgb), 0.7),
+    0 20px 50px rgba(var(--gold-rgb), 0.2),
+    0 0 0 1px rgba(var(--gold-rgb), 0.1),
+    inset 0 1px 0 rgba(var(--gold-rgb), 0.15);
+  animation: dialogFadeIn 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@keyframes dialogFadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -52%) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
 }
 
 .deity-image-dialog[open] {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: block;
 }
 
 .deity-image-dialog::backdrop {
-  background: rgba(0, 0, 0, 0.86);
+  background:
+    radial-gradient(
+      ellipse 80% 60% at 50% 0%,
+      rgba(var(--gold-rgb), 0.12) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse 60% 40% at 80% 80%,
+      rgba(var(--saffron-rgb), 0.08) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse 40% 60% at 10% 60%,
+      rgba(var(--crimson-rgb), 0.1) 0%,
+      transparent 50%
+    ),
+    rgba(var(--dark-rgb), 0.92);
+  backdrop-filter: blur(8px);
 }
 
-.deity-image-dialog img {
-  display: block;
-  max-width: calc(100vw - 48px);
-  max-height: calc(100dvh - 80px);
+.deity-image-editor {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.deity-image-editor-header {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 72px;
+  padding: 16px 32px;
+  border-bottom: 1px solid rgba(var(--gold-rgb), 0.2);
+  background: linear-gradient(
+    180deg,
+    rgba(var(--gold-rgb), 0.06) 0%,
+    transparent 100%
+  );
+  backdrop-filter: blur(10px);
+}
+
+.deity-image-editor-title h2 {
+  margin: 0;
+  color: var(--gold);
+  font-family: 'Cinzel Decorative', cursive;
+  font-size: 1.5rem;
+  line-height: 1.2;
+  background: var(--title-gradient);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 4s linear infinite;
+}
+
+.deity-image-editor-title p {
+  margin: 4px 0 0;
+  color: rgba(var(--cream-rgb), 0.65);
+  font-family: 'Tiro Devanagari Hindi', serif;
+  font-size: 0.88rem;
+  font-weight: 400;
+}
+
+.deity-image-editor-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.deity-image-workspace {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  min-height: 0;
+  padding: 0;
+  gap: 0;
+  background: radial-gradient(
+    ellipse at 50% 40%,
+    rgba(var(--gold-rgb), 0.04) 0%,
+    transparent 50%
+  );
+}
+
+.deity-image-workspace > .deity-image-stage {
+  flex: 1 1 auto;
+}
+
+.deity-image-stage {
+  position: relative;
+  flex: 1 1 auto;
+  align-self: center;
+  justify-self: center;
+  width: min(100%, 520px);
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  min-height: 200px;
+  aspect-ratio: 9 / 16;
+  overflow: hidden;
+  border: 3px solid rgba(var(--gold-rgb), 0.5);
+  border-radius: 16px;
+  background: rgba(var(--dark-rgb), 0.98);
+  box-shadow:
+    0 20px 60px rgba(var(--shadow-rgb), 0.5),
+    0 0 0 1px rgba(var(--gold-rgb), 0.15),
+    inset 0 1px 0 rgba(var(--white-rgb), 0.12);
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.3s ease,
+    aspect-ratio 0.4s ease,
+    width 0.4s ease,
+    max-width 0.4s ease;
+}
+
+.deity-image-stage:hover {
+  border-color: rgba(var(--gold-rgb), 0.7);
+  box-shadow:
+    0 24px 70px rgba(var(--shadow-rgb), 0.6),
+    0 0 0 1px rgba(var(--gold-rgb), 0.25),
+    inset 0 1px 0 rgba(var(--white-rgb), 0.18);
+  transform: scale(1.02);
+}
+
+.deity-image-stage[data-orientation='16x9'] {
+  aspect-ratio: 16 / 9;
+  width: min(100%, 700px);
+  max-width: 700px;
+}
+
+.deity-image-stage[data-orientation='16x9'] .deity-image-subject {
+  width: 60%;
+  height: 70%;
+}
+
+.deity-image-stage img {
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+}
+
+.deity-image-background {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.deity-image-subject {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 74%;
+  height: 80%;
   object-fit: contain;
+  transform: translate(-50%, -50%) scale(var(--deity-image-zoom, 1));
+  transform-origin: center;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+
+.deity-image-subject.is-dragging {
+  cursor: grabbing;
+}
+
+.deity-image-controls {
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: row;
+  align-items: center;
+  gap: 32px;
+  min-width: 0;
+  padding: 24px 32px;
+  border-top: 1px solid rgba(var(--gold-rgb), 0.25);
+  background: transparent;
+  color: var(--cream);
+}
+
+.deity-image-background-control,
+.deity-image-zoom-control,
+.deity-image-orientation-control {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  min-width: 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--gold);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.deity-image-background-options {
+  display: flex;
+  gap: 10px;
+  min-width: 0;
+  padding: 4px 0 0;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-color: rgba(var(--gold-rgb), 0.7) transparent;
+  scrollbar-width: thin;
+  scroll-snap-type: x mandatory;
+}
+
+.deity-image-background-option {
+  display: flex;
+  flex: 0 0 64px;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: rgba(var(--cream-rgb), 0.8);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-align: center;
+  cursor: pointer;
+  scroll-snap-align: start;
+  transition: transform 0.2s ease;
+}
+
+.deity-image-background-option img,
+.deity-image-background-option-none > span:first-child {
+  box-sizing: border-box;
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  object-fit: cover;
+  background: rgba(var(--cream-rgb), 0.1);
+  color: var(--cream);
+  font-size: 1.3rem;
+  transition:
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.deity-image-background-option > span:last-child {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.deity-image-background-option[aria-pressed='true'] img,
+.deity-image-background-option[aria-pressed='true'] > span:first-child {
+  border-color: var(--gold);
+  box-shadow:
+    0 0 0 3px rgba(var(--gold-rgb), 0.25),
+    0 4px 12px rgba(var(--gold-rgb), 0.3);
+}
+
+.deity-image-background-option:hover img,
+.deity-image-background-option:hover > span:first-child {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(var(--shadow-rgb), 0.3);
+}
+
+.deity-image-background-option:focus-visible {
+  outline: 2px solid var(--cream);
+  outline-offset: 3px;
+}
+
+.deity-image-background-option.failed img {
+  display: none;
+}
+
+.deity-image-background-option.failed::before {
+  content: 'चित्र अनुपलब्ध';
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border: 1px solid rgba(var(--cream-rgb), 0.2);
+  border-radius: 8px;
+  background: rgba(var(--cream-rgb), 0.08);
+  color: rgba(var(--cream-rgb), 0.55);
+  font-size: 0.6rem;
+}
+
+.deity-image-background-option-none > span:first-child {
+  border: 1px dashed rgba(var(--cream-rgb), 0.35);
+  background:
+    linear-gradient(45deg, rgba(var(--cream-rgb), 0.07) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(var(--cream-rgb), 0.07) 25%, transparent 25%),
+    rgba(var(--cream-rgb), 0.025);
+}
+
+.deity-image-orientation-options {
+  display: inline-flex;
+  min-width: 0;
+  border: 1px solid rgba(var(--gold-rgb), 0.5);
+  border-radius: 8px;
+  overflow: hidden;
+  background: rgba(var(--dark-rgb), 0.6);
+}
+
+.deity-image-orientation-option {
+  min-height: 36px;
+  padding: 6px 12px;
+  border: 0;
+  background: transparent;
+  color: rgba(var(--cream-rgb), 0.85);
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+}
+
+.deity-image-orientation-option + .deity-image-orientation-option {
+  border-left: 1px solid rgba(var(--gold-rgb), 0.5);
+}
+
+.deity-image-orientation-option[aria-pressed='true'] {
+  background: linear-gradient(135deg, var(--saffron), var(--gold));
+  color: var(--dark);
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(var(--saffron-rgb), 0.3);
+}
+
+.deity-image-orientation-option:hover:not([aria-pressed='true']) {
+  background: rgba(var(--cream-rgb), 0.08);
+  color: var(--cream);
+}
+
+.deity-image-orientation-option:focus-visible {
+  position: relative;
+  outline: 2px solid var(--cream);
+  outline-offset: -3px;
+}
+
+.deity-image-zoom-control {
+  align-items: center;
+  flex-direction: row;
+  gap: 12px;
+}
+
+.deity-image-zoom-control input {
+  min-width: 140px;
+  flex: 0 0 auto;
+  accent-color: var(--gold);
+  height: 5px;
+  border-radius: 3px;
+  background: rgba(var(--cream-rgb), 0.15);
+  cursor: pointer;
+}
+
+.deity-image-zoom-control input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), var(--saffron));
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(var(--gold-rgb), 0.4);
+  transition: transform 0.2s ease;
+}
+
+.deity-image-zoom-control input::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+
+.deity-image-zoom-control input::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), var(--saffron));
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 2px 8px rgba(var(--gold-rgb), 0.4);
+  transition: transform 0.2s ease;
+}
+
+.deity-image-zoom-control input::-moz-range-thumb:hover {
+  transform: scale(1.15);
+}
+
+.deity-image-zoom-control output {
+  min-width: 44px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  color: var(--gold);
+  font-size: 0.9rem;
+}
+
+.deity-image-status {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 0 0 0 20px;
+  border-left: 1px solid rgba(var(--gold-rgb), 0.2);
+  color: rgba(var(--cream-rgb), 0.7);
+  font-size: 0.82rem;
+  font-weight: 500;
+  line-height: 1.4;
+  display: flex;
+  align-items: center;
 }
 
 .deity-image-dialog-download {
-  position: absolute;
-  top: 12px;
-  right: 68px;
-  display: grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  border: 1px solid rgba(var(--gold-rgb), 0.7);
-  border-radius: 50%;
-  background: var(--dark);
-  color: var(--gold);
-  font-size: 1.4rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 46px;
+  padding: 0 20px;
+  border: 1px solid rgba(var(--gold-rgb), 0.8);
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--saffron), var(--gold));
+  color: var(--dark);
+  font-size: 0.98rem;
+  font-weight: 700;
   line-height: 1;
-  text-decoration: none;
+  cursor: pointer;
+  box-shadow:
+    0 4px 12px rgba(var(--saffron-rgb), 0.35),
+    inset 0 1px 0 rgba(var(--white-rgb), 0.3);
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
 }
 
-.deity-image-dialog-download:hover {
-  background: var(--gold);
-  color: var(--dark);
+.deity-image-dialog-download::before {
+  content: '';
+  position: absolute;
+  inset: -50%;
+  background: linear-gradient(
+    120deg,
+    transparent 25%,
+    rgba(var(--white-rgb), 0.2) 48%,
+    transparent 72%
+  );
+  transform: translateX(-70%);
+  transition: transform 0.45s ease;
+}
+
+.deity-image-dialog-download:hover:not(:disabled) {
+  background: linear-gradient(135deg, var(--gold), var(--saffron-light));
+  border-color: var(--cream);
+  transform: translateY(-2px);
+  box-shadow:
+    0 6px 20px rgba(var(--saffron-rgb), 0.45),
+    inset 0 1px 0 rgba(var(--white-rgb), 0.4);
+}
+
+.deity-image-dialog-download:hover:not(:disabled)::before {
+  transform: translateX(70%);
+}
+
+.deity-image-dialog-download:disabled {
+  cursor: wait;
+  opacity: 0.6;
+  transform: none;
 }
 
 .deity-image-dialog-download:focus-visible {
@@ -4597,32 +5065,175 @@ body.reduced-effects .deity-card:hover {
   outline-offset: 3px;
 }
 
+.deity-image-dialog img:not([hidden]) {
+  display: block;
+}
+
+.deity-image-subject:focus-visible {
+  outline: 2px solid var(--cream);
+  outline-offset: 3px;
+}
+
 .deity-image-dialog-close {
-  position: absolute;
-  top: 12px;
-  right: 12px;
   display: grid;
   place-items: center;
-  width: 44px;
-  height: 44px;
+  width: 46px;
+  height: 46px;
   padding: 0;
-  border: 1px solid rgba(var(--gold-rgb), 0.7);
-  border-radius: 50%;
-  background: var(--dark);
-  color: var(--gold);
-  font-size: 1.8rem;
+  border: 1px solid rgba(var(--cream-rgb), 0.3);
+  border-radius: 10px;
+  background: rgba(var(--cream-rgb), 0.08);
+  color: var(--cream);
+  font-size: 1.7rem;
   line-height: 1;
   cursor: pointer;
+  transition: all 0.25s ease;
 }
 
 .deity-image-dialog-close:hover {
-  background: var(--gold);
-  color: var(--dark);
+  border-color: rgba(var(--cream-rgb), 0.6);
+  background: rgba(var(--cream-rgb), 0.15);
+  transform: rotate(90deg);
 }
 
 .deity-image-dialog-close:focus-visible {
   outline: 2px solid var(--cream);
   outline-offset: 3px;
+}
+
+@media (max-width: 600px) {
+  .deity-image-dialog {
+    width: 100vw;
+    height: 100dvh;
+    border: 0;
+    border-radius: 0;
+    transform: none;
+    top: 0;
+    left: 0;
+  }
+
+  .deity-image-editor {
+    height: 100dvh;
+  }
+
+  .deity-image-editor-header {
+    min-height: 60px;
+    padding: 10px 14px;
+  }
+
+  .deity-image-editor-title h2 {
+    font-size: 1.1rem;
+  }
+
+  .deity-image-editor-title p {
+    max-width: 35vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 0.8rem;
+  }
+
+  .deity-image-editor-actions {
+    gap: 6px;
+  }
+
+  .deity-image-dialog-download {
+    min-height: 36px;
+    padding: 0 10px;
+    font-size: 0.8rem;
+  }
+
+  .deity-image-dialog-download svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .deity-image-dialog-close {
+    width: 36px;
+    height: 36px;
+  }
+
+  .deity-image-dialog-close svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .deity-image-workspace {
+    padding: 0;
+    gap: 0;
+    flex: 1 1 auto;
+  }
+
+  .deity-image-workspace > .deity-image-stage {
+    width: min(100%, 260px);
+    max-height: calc(100% - 240px);
+    min-height: 150px;
+  }
+
+  .deity-image-stage[data-orientation='16x9'] {
+    width: min(100%, 320px);
+  }
+
+  .deity-image-controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+    padding: 16px 14px;
+    max-height: 240px;
+    overflow-y: auto;
+  }
+
+  .deity-image-background-control,
+  .deity-image-zoom-control,
+  .deity-image-orientation-control {
+    align-items: stretch;
+    font-size: 0.75rem;
+  }
+
+  .deity-image-orientation-options {
+    width: 100%;
+  }
+
+  .deity-image-orientation-option {
+    flex: 1;
+    min-height: 32px;
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
+
+  .deity-image-zoom-control {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .deity-image-zoom-control input {
+    min-width: 0;
+    flex: 1;
+  }
+
+  .deity-image-status {
+    border-left: 0;
+    border-top: 1px solid rgba(var(--gold-rgb), 0.15);
+    padding: 10px 0 0 0;
+    min-width: 0;
+    font-size: 0.75rem;
+  }
+
+  .deity-image-background-options {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .deity-image-background-option {
+    flex: 0 0 52px;
+  }
+
+  .deity-image-background-option img,
+  .deity-image-background-option-none > span:first-child {
+    width: 44px;
+    height: 44px;
+    font-size: 1.1rem;
+  }
 }
 
 .deity-portrait {

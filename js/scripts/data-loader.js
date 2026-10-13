@@ -61,7 +61,9 @@ function getCurrentDataLang() {
 
 function getDeityAssetBaseUrl() {
   const mode = getActiveDataSourceMode();
-  return mode === 'local' ? LOCAL_BASE : CDN_BASE;
+  const configuredBase = String(window.BHAKTI_AMRIT_DATA_BASE_URL || '').trim();
+  const base = mode === 'local' ? LOCAL_BASE : configuredBase || CDN_BASE;
+  return base.replace(/\/+$/, '');
 }
 
 function getDataBaseUrl(lang = getCurrentDataLang()) {
