@@ -1161,7 +1161,26 @@ function renderLyricsLineMeaning(line) {
   const hindiText = getLyricsLineHindiText(line);
   if (!hindiText) return '';
 
-  return `<div class="lyrics-line-meaning">${decorateContentHtml(hindiText)}</div>`;
+  const meaningId = 'meaning-' + Math.random().toString(36).substr(2, 9);
+  const _sm = window.BhaktiI18n;
+  const showLabel = _sm ? _sm.t('meaningShow') : 'हिंदी में समझें';
+  const hideLabel = _sm ? _sm.t('meaningHide') : 'हिंदी अर्थ छुपाएं';
+
+  return `
+    <button
+      class="line-meaning-toggle-btn"
+      type="button"
+      onclick="toggleLineMeaning('${meaningId}', this)"
+      data-show-label="${showLabel}"
+      data-hide-label="${hideLabel}"
+      aria-expanded="false"
+      aria-controls="${meaningId}"
+      title="${showLabel}"
+    >
+      <span class="line-meaning-toggle-icon">📖</span>
+    </button>
+    <div id="${meaningId}" class="lyrics-line-meaning">${decorateContentHtml(hindiText)}</div>
+  `;
 }
 
 function getChalisaStepSourceText(line) {
@@ -1210,6 +1229,18 @@ function toggleLyricsMeanings(trigger) {
   if (labelEl) {
     labelEl.textContent = isExpanded ? expandedLabel : collapsedLabel;
   }
+}
+
+function toggleLineMeaning(meaningId, trigger) {
+  const meaningEl = document.getElementById(meaningId);
+  if (!meaningEl) return;
+
+  const isExpanded = meaningEl.classList.toggle('line-meaning-expanded');
+  const expandedLabel = trigger.dataset.hideLabel || 'हिंदी अर्थ छुपाएं';
+  const collapsedLabel = trigger.dataset.showLabel || 'हिंदी में समझें';
+
+  trigger.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+  trigger.setAttribute('title', isExpanded ? expandedLabel : collapsedLabel);
 }
 
 function renderLyricsLine(line, options = {}) {

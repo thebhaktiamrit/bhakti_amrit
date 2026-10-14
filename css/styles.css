@@ -5518,6 +5518,10 @@ body.reduced-effects .deity-card:hover {
   margin-bottom: 0;
 }
 
+.lyrics-box .lyrics-line-item {
+  position: relative;
+}
+
 .lyrics-box .lyrics-line-meaning {
   display: none;
   width: min(100%, 760px);
@@ -5532,6 +5536,61 @@ body.reduced-effects .deity-card:hover {
 
 .lyrics-box.lyrics-meanings-expanded .lyrics-line-meaning {
   display: block;
+}
+
+.lyrics-box.lyrics-meanings-expanded .line-meaning-toggle-btn {
+  display: none;
+}
+
+.lyrics-line-meaning-wrapper {
+  margin-top: 8px;
+  position: relative;
+}
+
+.line-meaning-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: rgba(var(--gold-rgb), 0.12);
+  border: 1px solid rgba(var(--gold-rgb), 0.25);
+  color: rgba(var(--cream-rgb), 0.9);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  min-width: 28px;
+  min-height: 28px;
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  z-index: 10;
+}
+
+.line-meaning-toggle-btn:hover {
+  background: rgba(var(--gold-rgb), 0.18);
+  border-color: rgba(var(--gold-rgb), 0.35);
+}
+
+.line-meaning-toggle-btn:active {
+  transform: scale(0.95);
+}
+
+.line-meaning-toggle-btn[aria-expanded="true"] {
+  background: rgba(var(--gold-rgb), 0.22);
+  border-color: rgba(var(--gold-rgb), 0.4);
+}
+
+.line-meaning-toggle-icon {
+  font-size: 0.85rem;
+  line-height: 1;
+}
+
+.lyrics-line-meaning.line-meaning-expanded {
+  display: block;
+  margin-top: 8px;
 }
 
 .lyrics-box .lyrics-flow {
@@ -6184,6 +6243,17 @@ footer {
     padding: 12px 14px;
     font-size: 0.95rem;
     line-height: 1.75;
+  }
+
+  .line-meaning-toggle-btn {
+    font-size: 0.8rem;
+    padding: 3px 6px;
+    min-width: 24px;
+    min-height: 24px;
+  }
+
+  .line-meaning-toggle-icon {
+    font-size: 0.75rem;
   }
 
   .lyrics-box .katha-figure {
