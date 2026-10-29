@@ -4,6 +4,17 @@ const deityTypeMap = {
   shiva: 'देव',
   vishnu: 'देव',
   agni_dev: 'देव',
+  chandra_dev: 'देव',
+  dharma_shasta: 'देव',
+  garuda: 'देव',
+  indra_dev: 'देव',
+  kamadhenu: 'देव',
+  kubera: 'देव',
+  nandi: 'देव',
+  shesha_ananta: 'देव',
+  varuna_dev: 'देव',
+  vayu_dev: 'देव',
+  yama: 'देव',
   // Gods and divine forms
   hanuman: 'देव',
   kartikeya: 'देव',
@@ -13,7 +24,7 @@ const deityTypeMap = {
   batuk_bhairav: 'देव',
   veerabhadra: 'देव',
   vishwakarma: 'देव',
-  giriraj: 'देव',
+  ranganatha: 'देव',
   // Ancestors
   pitar: 'देव',
 
@@ -30,7 +41,6 @@ const deityTypeMap = {
   // Vishnu forms and manifestations
   hayagriva: 'अवतार',
   vitthal: 'अवतार',
-  ranganatha: 'अवतार',
   dhanvantari: 'अवतार',
   gopal: 'अवतार',
   tirupati_balaji: 'अवतार',
@@ -42,6 +52,7 @@ const deityTypeMap = {
   navgrah: 'ग्रह देव',
 
   // Folk and regional deities
+  giriraj: 'लोक देव',
   khatu_shyam: 'लोक देव',
   jaharveer: 'लोक देव',
   pretraj_sarkar: 'लोक देव',
@@ -54,6 +65,10 @@ const deityTypeMap = {
   gorakh_nath: 'संत',
   sai: 'संत',
   neem_karoli_baba: 'संत',
+  ramakrishna_paramahamsa: 'संत',
+  ramana_maharshi: 'संत',
+  sant_kabir: 'संत',
+  swami_vivekananda: 'संत',
 
   // Goddesses
   durga: 'देवी',
@@ -71,6 +86,7 @@ const deityTypeMap = {
   santoshi_maa: 'देवी',
   annapurna: 'देवी',
   parvati: 'देवी',
+  garbarakshambigai: 'देवी',
   // Navadurga
   shailputri: 'देवी',
   brahmacharini: 'देवी',
