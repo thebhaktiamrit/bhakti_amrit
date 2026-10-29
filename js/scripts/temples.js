@@ -30,7 +30,6 @@ const deityTempleMap = {
   tirupati_balaji: ['तिरुपति बालाजी', 'वेंकटेश्वर'],
   sai: ['साईं'],
   giriraj: ['गिरिराज', 'गोवर्धन'],
-  mahavir: ['महावीर'],
   parshuram: ['परशुराम'],
   ramdev: ['रामदेव'],
   pitar: ['पितर'],
@@ -329,7 +328,10 @@ function getTempleTypeLabel(type = '') {
 function buildTemplesPage() {
   if (typeof templesData === 'undefined') {
     const grid = document.getElementById('templesGrid');
-    if (grid) grid.innerHTML = getContentLoadingHtml('मंदिरों की जानकारी लोड हो रही है...');
+    if (grid)
+      grid.innerHTML = getContentLoadingHtml(
+        'मंदिरों की जानकारी लोड हो रही है...',
+      );
     ensureDataModule('temples').then(() => {
       buildTemplesPage();
     });

@@ -2,51 +2,64 @@
 const deityTypeMap = {
   ganesh: 'देव',
   shiva: 'देव',
-  durga: 'देवी',
-  lakshmi: 'देवी',
-  saraswati: 'देवी',
   vishnu: 'देव',
+  agni_dev: 'देव',
+  // Gods and divine forms
+  hanuman: 'देव',
+  kartikeya: 'देव',
+  ayyappa: 'देव',
+  brahma: 'देव',
+  bhairav: 'देव',
+  batuk_bhairav: 'देव',
+  veerabhadra: 'देव',
+  vishwakarma: 'देव',
+  giriraj: 'देव',
+  // Ancestors
+  pitar: 'देव',
+
+  // Avatars of Vishnu
   ram: 'अवतार',
   krishna: 'अवतार',
-  hanuman: 'देव',
   balarama: 'अवतार',
   narasimha: 'अवतार',
   vamana: 'अवतार',
   varaha: 'अवतार',
   matsya: 'अवतार',
   kurma: 'अवतार',
+  parshuram: 'अवतार',
+  // Vishnu forms and manifestations
   hayagriva: 'अवतार',
   vitthal: 'अवतार',
   ranganatha: 'अवतार',
   dhanvantari: 'अवतार',
-  kartikeya: 'देव',
-  ayyappa: 'देव',
+  gopal: 'अवतार',
+  tirupati_balaji: 'अवतार',
+
+  // Planetary deities
   surya: 'ग्रह देव',
-  kali: 'देवी',
-  khatu_shyam: 'लोक देव',
   shani: 'ग्रह देव',
   brihaspati: 'ग्रह देव',
-  gopal: 'अवतार',
-  brahma: 'देव',
-  bhairav: 'देव',
-  batuk_bhairav: 'देव',
-  veerabhadra: 'देव',
   navgrah: 'ग्रह देव',
-  vishwakarma: 'देव',
-  ravidas: 'लोक देव',
-  gorakh_nath: 'लोक देव',
+
+  // Folk and regional deities
+  khatu_shyam: 'लोक देव',
   jaharveer: 'लोक देव',
   pretraj_sarkar: 'लोक देव',
   balaji: 'लोक देव',
-  tirupati_balaji: 'देव',
-  sai: 'लोक देव',
-  giriraj: 'लोक देव',
-  mahavir: 'लोक देव',
-  parshuram: 'अवतार',
   ramdev: 'लोक देव',
-  pitar: 'लोक देव',
-  neem_karoli_baba: 'लोक देव',
   baba_gangaram: 'लोक देव',
+
+  // Saints and spiritual masters
+  ravidas: 'संत',
+  gorakh_nath: 'संत',
+  sai: 'संत',
+  neem_karoli_baba: 'संत',
+
+  // Goddesses
+  durga: 'देवी',
+  lakshmi: 'देवी',
+  saraswati: 'देवी',
+  kali: 'देवी',
   vindhyeshwari: 'देवी',
   mahalakshmi: 'देवी',
   gayatri: 'देवी',
@@ -58,6 +71,7 @@ const deityTypeMap = {
   santoshi_maa: 'देवी',
   annapurna: 'देवी',
   parvati: 'देवी',
+  // Navadurga
   shailputri: 'देवी',
   brahmacharini: 'देवी',
   chandraghanta: 'देवी',
@@ -67,6 +81,7 @@ const deityTypeMap = {
   kalaratri: 'देवी',
   mahagauri: 'देवी',
   siddhidatri: 'देवी',
+  // Other goddesses
   baglamukhi: 'देवी',
   ganga: 'देवी',
   narmada: 'देवी',
@@ -265,6 +280,7 @@ const homeTypeToNavId = {
   अवतार: 'type-avatar',
   'ग्रह देव': 'type-grah-dev',
   'लोक देव': 'type-lok-dev',
+  संत: 'type-sant',
 };
 
 const homeTypeToUrlParam = {
@@ -273,6 +289,7 @@ const homeTypeToUrlParam = {
   अवतार: 'avatar',
   'ग्रह देव': 'grah-dev',
   'लोक देव': 'lok-dev',
+  संत: 'sant',
 };
 
 function getNavIdByHomeType(typeId = 'all') {
@@ -311,6 +328,8 @@ function getSafeHomeType(typeId = 'all') {
     dev: 'देव',
     devi: 'देवी',
     avatar: 'अवतार',
+    sant: 'संत',
+    saints: 'संत',
     ग्रहदेव: 'ग्रह देव',
     लोकदेव: 'लोक देव',
   };
@@ -329,6 +348,7 @@ function getHomeSearchPlaceholder(typeId = activeHomeType) {
     अवतार: 'अवतार का नाम लिखें...',
     'ग्रह देव': 'ग्रह देव का नाम लिखें...',
     'लोक देव': 'लोक देव का नाम लिखें...',
+    संत: 'संत का नाम लिखें...',
   };
   const safeType = getSafeHomeType(typeId);
   return placeholders[safeType] || placeholders.all;
@@ -344,6 +364,7 @@ function getHomeSectionMeta(typeId = activeHomeType) {
       अवतार: '🏹',
       'ग्रह देव': '🪐',
       'लोक देव': '🎠',
+      संत: '🙏',
     };
     return {
       icon: iconMap[safeType] || '🪔',
@@ -384,6 +405,11 @@ function getHomeSectionMeta(typeId = activeHomeType) {
       title: 'लोक देव संग्रह',
       subtitle:
         'किसी भी लोक देव का नाम चुनें और उनकी आरती, चालीसा व मंत्र पढ़ें',
+    },
+    संत: {
+      icon: '🙏',
+      title: 'संत संग्रह',
+      subtitle: 'किसी भी संत का नाम चुनें और उनकी आरती, चालीसा व मंत्र पढ़ें',
     },
   };
   return sectionMeta[safeType] || sectionMeta.all;

@@ -244,6 +244,14 @@
               ><span class="nav-label">लोक देव</span>
             </button>
             <button
+              class="nav-btn"
+              onclick="showHomeByType('sant', 'type-sant')"
+              data-page="type-sant"
+            >
+              <span class="nav-icon-emoji">🙏</span
+              ><span class="nav-label">संत</span>
+            </button>
+            <button
               id="navFavoritesBtn"
               class="nav-btn"
               onclick="toggleFavoritesView()"
@@ -282,7 +290,7 @@
               data-page="kathas"
             >
               <span class="nav-icon-emoji">📖</span
-              ><span class="nav-label">प्रसिद्ध कथाए</span>
+              ><span class="nav-label">प्रसिद्ध कथाएँ</span>
             </button>
           </div>
         </div>
@@ -2118,7 +2126,7 @@
     </div>
     <script>
       window.BHAKTI_AMRIT_DATA_SOURCE =
-        window.BHAKTI_AMRIT_DATA_SOURCE || 'cdn-no-cache'; // 'cdn' | 'local' | 'cdn-no-cache'
+        window.BHAKTI_AMRIT_DATA_SOURCE || 'local'; // 'cdn' | 'local' | 'cdn-no-cache'
       window.BHAKTI_AMRIT_DATA_CACHE_BUST =
         window.BHAKTI_AMRIT_DATA_CACHE_BUST || String(Date.now());
     </script>

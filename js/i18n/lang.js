@@ -29,10 +29,12 @@
       navAvatar: 'अवतार',
       navGrahDev: 'ग्रह देव',
       navLokDev: 'लोक देव',
+      navSant: 'संत',
       navFavorites: 'पसंदीदा',
       navTemples: 'प्रसिद्ध मंदिर',
       navFestivals: 'प्रसिद्ध त्योहार',
       navScriptures: 'प्रसिद्ध धर्मग्रन्थ',
+      navKathas: 'प्रसिद्ध कथाएँ',
       navBack: 'वापस जाएं',
 
       // Deity type badges
@@ -41,6 +43,7 @@
       typeAvatar: 'अवतार',
       typeGrahDev: 'ग्रह देव',
       typeLokDev: 'लोक देव',
+      typeSant: 'संत',
 
       // Home section — all filter types
       homeTitleAll: 'देव-देवी संग्रह',
@@ -61,6 +64,9 @@
       homeTitleLokDev: 'लोक देव संग्रह',
       homeSubtitleLokDev:
         'किसी भी लोक देव का नाम चुनें और उनकी आरती, चालीसा व मंत्र पढ़ें',
+      homeTitleSant: 'संत संग्रह',
+      homeSubtitleSant:
+        'किसी भी संत का नाम चुनें और उनकी आरती, चालीसा व मंत्र पढ़ें',
 
       // Search placeholders
       searchPlaceholderAll: 'देव-देवी का नाम लिखें...',
@@ -69,6 +75,7 @@
       searchPlaceholderAvatar: 'अवतार का नाम लिखें...',
       searchPlaceholderGrahDev: 'ग्रह देव का नाम लिखें...',
       searchPlaceholderLokDev: 'लोक देव का नाम लिखें...',
+      searchPlaceholderSant: 'संत का नाम लिखें...',
 
       // View mode
       viewCard: 'कार्ड',
@@ -335,10 +342,12 @@
       navAvatar: 'अवतार',
       navGrahDev: 'ग्रह देव',
       navLokDev: 'लोक देव',
+      navSant: 'संत',
       navFavorites: 'आवडते',
       navTemples: 'प्रसिद्ध मंदिरे',
       navFestivals: 'प्रसिद्ध सण',
       navScriptures: 'प्रसिद्ध धर्मग्रंथ',
+      navKathas: 'प्रसिद्ध कथा',
       navBack: 'मागे जा',
 
       typeDev: 'देव',
@@ -346,6 +355,7 @@
       typeAvatar: 'अवतार',
       typeGrahDev: 'ग्रह देव',
       typeLokDev: 'लोक देव',
+      typeSant: 'संत',
 
       homeTitleAll: 'देव-देवी संग्रह',
       homeSubtitleAll:
@@ -365,6 +375,9 @@
       homeTitleLokDev: 'लोक देव संग्रह',
       homeSubtitleLokDev:
         'कोणत्याही लोक देवाचे नाव निवडा आणि त्यांची आरती, चाळीसा व मंत्र वाचा',
+      homeTitleSant: 'संत संग्रह',
+      homeSubtitleSant:
+        'कोणत्याही संताचे नाव निवडा आणि त्यांची आरती, चाळीसा व मंत्र वाचा',
 
       searchPlaceholderAll: 'देव-देवीचे नाव लिहा...',
       searchPlaceholderDev: 'देवाचे नाव लिहा...',
@@ -372,6 +385,7 @@
       searchPlaceholderAvatar: 'अवताराचे नाव लिहा...',
       searchPlaceholderGrahDev: 'ग्रह देवाचे नाव लिहा...',
       searchPlaceholderLokDev: 'लोक देवाचे नाव लिहा...',
+      searchPlaceholderSant: 'संताचे नाव लिहा...',
 
       viewCard: 'कार्ड',
       viewTable: 'तक्ता',
@@ -522,10 +536,12 @@
       navAvatar: 'அவதாரம்',
       navGrahDev: 'கிரக தேவன்',
       navLokDev: 'லோக தேவன்',
+      navSant: 'புனிதர்கள்',
       navFavorites: 'பிடித்தவை',
       navTemples: 'புகழ்பெற்ற கோயில்கள்',
       navFestivals: 'புகழ்பெற்ற திருவிழாக்கள்',
       navScriptures: 'புகழ்பெற்ற மறைநூல்கள்',
+      navKathas: 'புகழ்பெற்ற கதைகள்',
       navBack: 'திரும்பு',
 
       typeDev: 'தேவன்',
@@ -533,6 +549,7 @@
       typeAvatar: 'அவதாரம்',
       typeGrahDev: 'கிரக தேவன்',
       typeLokDev: 'லோக தேவன்',
+      typeSant: 'புனிதர்கள்',
 
       homeTitleAll: 'தேவர்கள் தொகுப்பு',
       homeSubtitleAll:
@@ -552,6 +569,9 @@
       homeTitleLokDev: 'லோக தேவன் தொகுப்பு',
       homeSubtitleLokDev:
         'எந்த லோக தேவரின் பெயரையும் தேர்ந்தெடுத்து ஆரத்தி மற்றும் மந்திரம் படியுங்கள்',
+      homeTitleSant: 'புனிதர்கள் தொகுப்பு',
+      homeSubtitleSant:
+        'எந்த புனிதரின் பெயரையும் தேர்ந்தெடுத்து ஆரத்தி, சாலீசா மற்றும் மந்திரம் படியுங்கள்',
 
       searchPlaceholderAll: 'தேவர் பெயர் தேடுங்கள்...',
       searchPlaceholderDev: 'தேவர் பெயர் தேடுங்கள்...',
@@ -559,6 +579,7 @@
       searchPlaceholderAvatar: 'அவதார பெயர் தேடுங்கள்...',
       searchPlaceholderGrahDev: 'கிரக தேவர் பெயர் தேடுங்கள்...',
       searchPlaceholderLokDev: 'லோக தேவர் பெயர் தேடுங்கள்...',
+      searchPlaceholderSant: 'புனிதர் பெயர் தேடுங்கள்...',
 
       viewCard: 'அட்டை',
       viewTable: 'அட்டவணை',
@@ -719,10 +740,12 @@
       navAvatar: 'అవతారం',
       navGrahDev: 'గ్రహ దేవుడు',
       navLokDev: 'లోక దేవుడు',
+      navSant: 'సంతులు',
       navFavorites: 'ఇష్టమైనవి',
       navTemples: 'ప్రసిద్ధ దేవాలయాలు',
       navFestivals: 'ప్రసిద్ధ పండుగలు',
       navScriptures: 'ప్రసిద్ధ గ్రంథాలు',
+      navKathas: 'ప్రసిద్ధ కథలు',
       navBack: 'వెనక్కి వెళ్ళు',
 
       typeDev: 'దేవుడు',
@@ -730,6 +753,7 @@
       typeAvatar: 'అవతారం',
       typeGrahDev: 'గ్రహ దేవుడు',
       typeLokDev: 'లోక దేవుడు',
+      typeSant: 'సంతులు',
 
       homeTitleAll: 'దేవతల సంగ్రహం',
       homeSubtitleAll:
@@ -749,6 +773,9 @@
       homeTitleLokDev: 'లోక దేవుల సంగ్రహం',
       homeSubtitleLokDev:
         'ఏ లోక దేవుని పేరైనా ఎంచుకుని వారి ఆరతి మరియు మంత్రాలు చదవండి',
+      homeTitleSant: 'సంతుల సంగ్రహం',
+      homeSubtitleSant:
+        'ఏ సంత్ పేరునైనా ఎంచుకుని వారి ఆరతి, చాలీసా మరియు మంత్రాలు చదవండి',
 
       searchPlaceholderAll: 'దేవుని పేరు వెతకండి...',
       searchPlaceholderDev: 'దేవుని పేరు వెతకండి...',
@@ -756,6 +783,7 @@
       searchPlaceholderAvatar: 'అవతారం పేరు వెతకండి...',
       searchPlaceholderGrahDev: 'గ్రహ దేవుని పేరు వెతకండి...',
       searchPlaceholderLokDev: 'లోక దేవుని పేరు వెతకండి...',
+      searchPlaceholderSant: 'సంత్ పేరు వెతకండి...',
 
       viewCard: 'కార్డ్',
       viewTable: 'పట్టిక',
@@ -912,10 +940,12 @@
       navAvatar: 'ಅವತಾರ',
       navGrahDev: 'ಗ್ರಹ ದೇವ',
       navLokDev: 'ಲೋಕ ದೇವ',
+      navSant: 'ಸಂತರು',
       navFavorites: 'ಮೆಚ್ಚಿನವು',
       navTemples: 'ಪ್ರಸಿದ್ಧ ದೇವಾಲಯಗಳು',
       navFestivals: 'ಪ್ರಸಿದ್ಧ ಹಬ್ಬಗಳು',
       navScriptures: 'ಪ್ರಸಿದ್ಧ ಧರ್ಮಗ್ರಂಥಗಳು',
+      navKathas: 'ಪ್ರಸಿದ್ಧ ಕಥೆಗಳು',
       navBack: 'ಹಿಂತಿರುಗಿ',
 
       typeDev: 'ದೇವ',
@@ -923,6 +953,7 @@
       typeAvatar: 'ಅವತಾರ',
       typeGrahDev: 'ಗ್ರಹ ದೇವ',
       typeLokDev: 'ಲೋಕ ದೇವ',
+      typeSant: 'ಸಂತರು',
 
       homeTitleAll: 'ದೇವ-ದೇವಿ ಸಂಗ್ರಹ',
       homeSubtitleAll:
@@ -942,6 +973,9 @@
       homeTitleLokDev: 'ಲೋಕ ದೇವ ಸಂಗ್ರಹ',
       homeSubtitleLokDev:
         'ಯಾವುದೇ ಲೋಕ ದೇವರ ಹೆಸರನ್ನು ಆಯ್ಕೆ ಮಾಡಿ ಮತ್ತು ಅವರ ಆರತಿ ಮತ್ತು ಮಂತ್ರ ಓದಿ',
+      homeTitleSant: 'ಸಂತರ ಸಂಗ್ರಹ',
+      homeSubtitleSant:
+        'ಯಾವುದೇ ಸಂತರ ಹೆಸರನ್ನು ಆಯ್ಕೆ ಮಾಡಿ ಮತ್ತು ಅವರ ಆರತಿ, ಚಾಲೀಸಾ ಮತ್ತು ಮಂತ್ರ ಓದಿ',
 
       searchPlaceholderAll: 'ದೇವ-ದೇವಿ ಹೆಸರು ಹುಡುಕಿ...',
       searchPlaceholderDev: 'ದೇವ ಹೆಸರು ಹುಡುಕಿ...',
@@ -949,6 +983,7 @@
       searchPlaceholderAvatar: 'ಅವತಾರ ಹೆಸರು ಹುಡುಕಿ...',
       searchPlaceholderGrahDev: 'ಗ್ರಹ ದೇವ ಹೆಸರು ಹುಡುಕಿ...',
       searchPlaceholderLokDev: 'ಲೋಕ ದೇವ ಹೆಸರು ಹುಡುಕಿ...',
+      searchPlaceholderSant: 'ಸಂತರ ಹೆಸರು ಹುಡುಕಿ...',
 
       viewCard: 'ಕಾರ್ಡ್',
       viewTable: 'ಕೋಷ್ಟಕ',
@@ -1101,10 +1136,12 @@
       navAvatar: 'অবতার',
       navGrahDev: 'গ্রহ দেব',
       navLokDev: 'লোক দেব',
+      navSant: 'সন্ত',
       navFavorites: 'পছন্দের',
       navTemples: 'প্রসিদ্ধ মন্দির',
       navFestivals: 'প্রসিদ্ধ উৎসব',
       navScriptures: 'প্রসিদ্ধ ধর্মগ্রন্থ',
+      navKathas: 'প্রসিদ্ধ কথা',
       navBack: 'ফিরে যান',
 
       typeDev: 'দেব',
@@ -1112,6 +1149,7 @@
       typeAvatar: 'অবতার',
       typeGrahDev: 'গ্রহ দেব',
       typeLokDev: 'লোক দেব',
+      typeSant: 'সন্ত',
 
       homeTitleAll: 'দেব-দেবী সংগ্রহ',
       homeSubtitleAll:
@@ -1131,6 +1169,9 @@
       homeTitleLokDev: 'লোক দেব সংগ্রহ',
       homeSubtitleLokDev:
         'যেকোনো লোক দেবের নাম বেছে নিন এবং তাঁদের আরতি ও মন্ত্র পড়ুন',
+      homeTitleSant: 'সন্ত সংগ্রহ',
+      homeSubtitleSant:
+        'যে কোনো সন্তের নাম বেছে নিয়ে তাঁদের আরতি, চালিসা ও মন্ত্র পড়ুন',
 
       searchPlaceholderAll: 'দেব-দেবীর নাম লিখুন...',
       searchPlaceholderDev: 'দেবের নাম লিখুন...',
@@ -1138,6 +1179,7 @@
       searchPlaceholderAvatar: 'অবতারের নাম লিখুন...',
       searchPlaceholderGrahDev: 'গ্রহ দেবের নাম লিখুন...',
       searchPlaceholderLokDev: 'লোক দেবের নাম লিখুন...',
+      searchPlaceholderSant: 'সন্তের নাম লিখুন...',
 
       viewCard: 'কার্ড',
       viewTable: 'তালিকা',
@@ -1336,10 +1378,12 @@
       'type-avatar': { emoji: '🏹', key: 'navAvatar' },
       'type-grah-dev': { emoji: '🪐', key: 'navGrahDev' },
       'type-lok-dev': { emoji: '🎠', key: 'navLokDev' },
+      'type-sant': { emoji: '🙏', key: 'navSant' },
       favorites: { emoji: null, key: 'navFavorites' },
       temples: { emoji: '🛕', key: 'navTemples' },
       festivals: { emoji: '🎉', key: 'navFestivals' },
       scriptures: { emoji: '📚', key: 'navScriptures' },
+      kathas: { emoji: '📖', key: 'navKathas' },
     };
 
     document.querySelectorAll('.nav-btn[data-page]').forEach((btn) => {
@@ -1554,6 +1598,7 @@
       अवतार: 'searchPlaceholderAvatar',
       'ग्रह देव': 'searchPlaceholderGrahDev',
       'लोक देव': 'searchPlaceholderLokDev',
+      संत: 'searchPlaceholderSant',
     };
     return t(map[typeId] || 'searchPlaceholderAll');
   }
@@ -1567,6 +1612,7 @@
       अवतार: 'homeTitleAvatar',
       'ग्रह देव': 'homeTitleGrahDev',
       'लोक देव': 'homeTitleLokDev',
+      संत: 'homeTitleSant',
     };
     return t(map[typeId] || 'homeTitleAll');
   }
@@ -1580,6 +1626,7 @@
       अवतार: 'homeSubtitleAvatar',
       'ग्रह देव': 'homeSubtitleGrahDev',
       'लोक देव': 'homeSubtitleLokDev',
+      संत: 'homeSubtitleSant',
     };
     return t(map[typeId] || 'homeSubtitleAll');
   }
@@ -1592,6 +1639,7 @@
       अवतार: 'typeAvatar',
       'ग्रह देव': 'typeGrahDev',
       'लोक देव': 'typeLokDev',
+      संत: 'typeSant',
     };
     return t(map[typeValue] || 'typeDev');
   }

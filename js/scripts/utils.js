@@ -591,7 +591,7 @@ function getDeityAvatarKeys(key) {
 
 function getAvailableDeityTabs(key) {
   const deity = deities[key];
-  if (!deity) return ['about', 'temples'];
+  if (!deity) return ['about'];
 
   const manifest =
     typeof DEITY_CONTENT_MANIFEST !== 'undefined'
@@ -607,6 +607,11 @@ function getAvailableDeityTabs(key) {
   if (hasMantrasContent(deity.mantras) || manifest?.mantra) tabs.push('mantra');
   if (hasLyricsContent(extraData) || manifest?.extra) tabs.push('extra');
   if (getDeityAvatarKeys(key).length > 0) tabs.push('avatar');
-  tabs.push('temples');
+  if (
+    typeof templesData !== 'undefined' &&
+    getRelatedTemples(key).length > 0
+  ) {
+    tabs.push('temples');
+  }
   return tabs;
 }

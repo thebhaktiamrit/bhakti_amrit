@@ -184,7 +184,6 @@ const DEITY_CONTENT_MANIFEST = {
   gorakh_nath: { aarti: true, mantra: true },
   jaharveer: { aarti: true, mantra: true },
   sai: { aarti: true, mantra: true },
-  mahavir: { aarti: true, mantra: true },
   ramdev: { aarti: true, mantra: true },
   pitar: { aarti: true, mantra: true },
   baba_gangaram: { aarti: true, mantra: true },

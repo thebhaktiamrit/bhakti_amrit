@@ -219,6 +219,30 @@ function getDeityTabTemplesHtml(resolvedKey) {
   `;
 }
 
+function getDeityTempleTabButtonHtml(isActive = false) {
+  const i18n = window.BhaktiI18n;
+  const label = i18n ? i18n.t('tabTemples') : '🛕 मंदिर';
+  return `<button class="tab-btn${isActive ? ' active' : ''}" type="button" data-deity-tab="temples" onclick="showTab('temples', this)">${label}</button>`;
+}
+
+function loadDeityTempleTab(resolvedKey) {
+  if (typeof templesData !== 'undefined') return;
+
+  ensureDataModule('temples')
+    .then(() => {
+      homeTempleCountCache.clear();
+      if (activeDeityKey !== resolvedKey) return;
+      if (getRelatedTemples(resolvedKey).length === 0) return;
+
+      const tabs = document.getElementById('deityTabs');
+      if (!tabs || tabs.querySelector('[data-deity-tab="temples"]')) return;
+      tabs.insertAdjacentHTML('beforeend', getDeityTempleTabButtonHtml());
+    })
+    .catch(() => {
+      // Leave the optional temple tab hidden when its data cannot be loaded.
+    });
+}
+
 function getDeityTabAvatarHtml(resolvedKey) {
   const avatarKeys = getDeityAvatarKeys(resolvedKey);
   if (!avatarKeys.length) {
@@ -983,7 +1007,9 @@ function showDeityPage(key, options = {}) {
     getDeityAvatarKeys(resolvedKey).length > 0
       ? `<button class="tab-btn ${activeDeityTab === 'avatar' ? 'active' : ''}" onclick="showTab('avatar', this)">${_i18n ? _i18n.t('tabAvatar') : '🔱 अवतार'}</button>`
       : '',
-    `<button class="tab-btn ${activeDeityTab === 'temples' ? 'active' : ''}" onclick="showTab('temples', this)">${_i18n ? _i18n.t('tabTemples') : '🛕 मंदिर'}</button>`,
+    availableTabs.includes('temples')
+      ? getDeityTempleTabButtonHtml(activeDeityTab === 'temples')
+      : '',
   ].join('');
   tabs.innerHTML = `
   ${tabButtons}`;
@@ -1005,6 +1031,8 @@ function showDeityPage(key, options = {}) {
   <div id="tab-extra" class="text-content ${activeDeityTab === 'extra' ? 'active' : ''}"></div>
   <div id="tab-avatar" class="text-content ${activeDeityTab === 'avatar' ? 'active' : ''}"></div>
   <div id="tab-temples" class="text-content ${activeDeityTab === 'temples' ? 'active' : ''}"></div>`;
+
+  loadDeityTempleTab(resolvedKey);
 
   // Render active tab content
   ensureAndRenderDeityTab(resolvedKey, activeDeityTab);
